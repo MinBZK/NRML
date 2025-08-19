@@ -1,0 +1,885 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/regelspraak-schema.json",
+  "title": "Regelspraak Model Schema",
+  "description": "JSON Schema voor Regelspraak modellen met objecttypen, feiten, parameters en regels",
+  "type": "object",
+  "required": ["$schema", "metadata", "objectTypes", "ruleGroups"],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Verwijzing naar dit schema"
+    },
+    "metadata": {
+      "type": "object",
+      "required": ["version", "language"],
+      "properties": {
+        "version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$"
+        },
+        "language": {
+          "type": "string",
+          "enum": ["nl", "en"]
+        },
+        "created": {
+          "type": "string",
+          "format": "date"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "testScenarios": {
+      "type": "object",
+      "properties": {
+        "features": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/feature"
+          }
+        },
+        "testSuites": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/testSuite"
+          }
+        },
+        "traceability": {
+          "$ref": "#/$defs/traceability"
+        }
+      }
+    },
+    "feature": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "background": {
+          "$ref": "#/$defs/background"
+        },
+        "scenarios": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/scenario"
+          }
+        }
+      }
+    },
+    "background": {
+      "type": "object",
+      "required": ["given"],
+      "properties": {
+        "given": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/step"
+          }
+        }
+      }
+    },
+    "scenario": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^@[a-zA-Z0-9-_]+$"
+          }
+        },
+        "scenarioOutline": {
+          "type": "boolean"
+        },
+        "given": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/step"
+          }
+        },
+        "when": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/step"
+          }
+        },
+        "then": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/step"
+          }
+        },
+        "examples": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/examples"
+          }
+        }
+      }
+    },
+    "step": {
+      "type": "object",
+      "required": ["text"],
+      "properties": {
+        "text": {
+          "type": "string"
+        },
+        "dataTable": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "docString": {
+          "type": "object",
+          "properties": {
+            "contentType": {
+              "type": "string"
+            },
+            "content": {
+              "type": "string"
+            }
+          }
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "objectType": {
+              "$ref": "#/$defs/jsonPointer"
+            },
+            "values": {
+              "type": "object"
+            }
+          }
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/jsonPointer"
+          }
+        },
+        "triggeredRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/jsonPointer"
+          }
+        },
+        "assertions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/assertion"
+          }
+        }
+      }
+    },
+    "assertion": {
+      "type": "object",
+      "required": ["expectedValue"],
+      "properties": {
+        "attribute": {
+          "$ref": "#/$defs/jsonPointer"
+        },
+        "property": {
+          "$ref": "#/$defs/jsonPointer"
+        },
+        "expectedValue": {},
+        "explanation": {
+          "type": "string"
+        }
+      }
+    },
+    "examples": {
+      "type": "object",
+      "required": ["dataTable"],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "dataTable": {
+          "type": "array",
+          "items": {
+            "type": "array"
+          }
+        }
+      }
+    },
+    "testSuite": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "includedScenarios": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "feature": {
+                "$ref": "#/$defs/jsonPointer"
+              },
+              "scenarios": {
+                "oneOf": [
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    }
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "const": "*"
+                    }
+                  }
+                ]
+              },
+              "scenarioTags": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "traceability": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "coverage": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "rule": {
+                "$ref": "#/$defs/jsonPointer"
+              },
+              "coveredBy": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/jsonPointer"
+                }
+              }
+            }
+          }
+        },
+        "requirementsCoverage": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "requirement": {
+                "type": "string"
+              },
+              "implementedBy": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/jsonPointer"
+                }
+              },
+              "testedBy": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/jsonPointer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "versionDate": {
+      "oneOf": [
+        {
+          "type": "string",
+          "pattern": "^\\d{4}$",
+          "description": "Jaar (bijv. 2018)"
+        },
+        {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}$",
+          "description": "Jaar-maand (bijv. 2018-03)"
+        },
+        {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+          "description": "Jaar-maand-dag (bijv. 2018-03-15)"
+        }
+      ]
+    },
+    "domains": {
+      "type": "object",
+      "description": "Domein definities",
+      "patternProperties": {
+        "^[A-Za-z][A-Za-z0-9]*$": {
+          "$ref": "#/$defs/domain"
+        }
+      }
+    },
+    "objectTypes": {
+      "type": "object",
+      "description": "Object type definities",
+      "patternProperties": {
+        "^[a-z][a-zA-Z0-9]*$": {
+          "$ref": "#/$defs/objectType"
+        }
+      }
+    },
+    "factTypes": {
+      "type": "object",
+      "description": "Feittype definities",
+      "patternProperties": {
+        "^[a-z][a-zA-Z0-9]*$": {
+          "$ref": "#/$defs/factType"
+        }
+      }
+    },
+    "parameters": {
+      "type": "object",
+      "description": "Parameter definities",
+      "patternProperties": {
+        "^[A-Z][A-Z0-9_]*$": {
+          "$ref": "#/$defs/parameter"
+        }
+      }
+    },
+    "ruleGroups": {
+      "type": "array",
+      "description": "Regelgroepen",
+      "items": {
+        "$ref": "#/$defs/ruleGroup"
+      }
+    }
+  },
+  "$defs": {
+    "jsonPointer": {
+      "type": "object",
+      "required": ["$ref"],
+      "properties": {
+        "$ref": {
+          "type": "string",
+          "pattern": "^#(/[^/]+)+$"
+        }
+      }
+    },
+    "article": {
+      "type": "string",
+      "enum": ["de", "het", "een"]
+    },
+    "domain": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "numeric",
+            "text",
+            "boolean",
+            "date",
+            "enumeration",
+            "percentage"
+          ]
+        },
+        "precision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unit": {
+          "type": "string"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "datatype": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/jsonPointer"
+        },
+        {
+          "type": "object",
+          "required": ["type"],
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["numeric", "text", "boolean", "date", "percentage"]
+            },
+            "subtype": {
+              "type": "string",
+              "enum": ["integer", "decimal"]
+            },
+            "precision": {
+              "type": "string",
+              "enum": ["days", "milliseconds"]
+            },
+            "unit": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "property": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["kenmerk", "attribute"]
+        },
+        "subtype": {
+          "type": "string",
+          "enum": ["bezittelijk", "bijvoeglijk"]
+        },
+        "article": {
+          "$ref": "#/$defs/article"
+        },
+        "prefix": {
+          "type": "string"
+        },
+        "plural": {
+          "type": "string"
+        },
+        "datatype": {
+          "$ref": "#/$defs/datatype"
+        }
+      }
+    },
+    "objectType": {
+      "type": "object",
+      "required": ["properties"],
+      "properties": {
+        "article": {
+          "$ref": "#/$defs/article"
+        },
+        "animated": {
+          "type": "boolean"
+        },
+        "properties": {
+          "type": "object",
+          "patternProperties": {
+            "^[a-z][a-zA-Z0-9]*$": {
+              "$ref": "#/$defs/property"
+            }
+          }
+        }
+      }
+    },
+    "role": {
+      "type": "object",
+      "required": ["name", "objectType", "cardinality"],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "article": {
+          "$ref": "#/$defs/article"
+        },
+        "plural": {
+          "type": "string"
+        },
+        "objectType": {
+          "$ref": "#/$defs/jsonPointer"
+        },
+        "cardinality": {
+          "type": "string",
+          "enum": ["one", "many"]
+        }
+      }
+    },
+    "factType": {
+      "type": "object",
+      "required": ["roles", "relation"],
+      "properties": {
+        "roles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/role"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "relation": {
+          "type": "string"
+        }
+      }
+    },
+    "parameter": {
+      "type": "object",
+      "required": ["datatype"],
+      "properties": {
+        "article": {
+          "$ref": "#/$defs/article"
+        },
+        "datatype": {
+          "$ref": "#/$defs/datatype"
+        }
+      }
+    },
+    "ruleGroup": {
+      "type": "object",
+      "required": ["name", "rules"],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/rule"
+          }
+        }
+      }
+    },
+    "rule": {
+      "type": "object",
+      "required": ["id", "name", "versions"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9-]+$"
+        },
+        "name": {
+          "type": "string"
+        },
+        "versions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ruleVersion"
+          }
+        }
+      }
+    },
+    "ruleVersion": {
+      "type": "object",
+      "required": ["validFrom"],
+      "properties": {
+        "validFrom": {
+          "$ref": "#/$defs/versionDate"
+        },
+        "validTo": {
+          "$ref": "#/$defs/versionDate"
+        },
+        "target": {
+          "$ref": "#/$defs/targetReference"
+        },
+        "subject": {
+          "$ref": "#/$defs/subjectReference"
+        },
+        "property": {
+          "$ref": "#/$defs/jsonPointer"
+        },
+        "value": {
+          "$ref": "#/$defs/expression"
+        },
+        "expression": {
+          "$ref": "#/$defs/expression"
+        },
+        "condition": {
+          "$ref": "#/$defs/condition"
+        },
+        "source": {
+          "$ref": "#/$defs/targetReference"
+        },
+        "distribution": {
+          "$ref": "#/$defs/distributionConfig"
+        }
+      }
+    },
+    "targetReference": {
+      "type": "object",
+      "required": ["attribute", "subject"],
+      "properties": {
+        "attribute": {
+          "$ref": "#/$defs/jsonPointer"
+        },
+        "subject": {
+          "$ref": "#/$defs/subjectReference"
+        },
+        "subjects": {
+          "$ref": "#/$defs/subjectReference"
+        }
+      }
+    },
+    "subjectReference": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "objectType",
+            "role",
+            "pronoun",
+            "allRoles",
+            "objectTypeWithProperty"
+          ]
+        },
+        "ref": {
+          "$ref": "#/$defs/jsonPointer"
+        },
+        "objectType": {
+          "$ref": "#/$defs/jsonPointer"
+        },
+        "property": {
+          "$ref": "#/$defs/jsonPointer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "pronoun": {
+          "type": "string",
+          "enum": ["hij", "zijn", "het", "de"]
+        },
+        "refers": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        },
+        "ofSubject": {
+          "$ref": "#/$defs/subjectReference"
+        }
+      }
+    },
+    "expression": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "numeric",
+            "text",
+            "boolean",
+            "date",
+            "arithmetic",
+            "aggregation",
+            "function",
+            "attributeReference",
+            "parameterReference",
+            "roleReference",
+            "propertyReference",
+            "rounding",
+            "bounded"
+          ]
+        },
+        "value": {},
+        "unit": {
+          "type": "string"
+        },
+        "operator": {
+          "type": "string",
+          "enum": ["plus", "minus", "multiply", "divide", "modulo"]
+        },
+        "left": {
+          "$ref": "#/$defs/expression"
+        },
+        "right": {
+          "$ref": "#/$defs/expression"
+        },
+        "function": {
+          "type": "string",
+          "enum": ["count", "sum", "min", "max", "avg", "timeDuration"]
+        },
+        "expression": {
+          "$ref": "#/$defs/expression"
+        },
+        "default": {
+          "$ref": "#/$defs/expression"
+        },
+        "attribute": {
+          "$ref": "#/$defs/jsonPointer"
+        },
+        "property": {
+          "$ref": "#/$defs/jsonPointer"
+        },
+        "parameter": {
+          "$ref": "#/$defs/jsonPointer"
+        },
+        "subject": {
+          "$ref": "#/$defs/subjectReference"
+        },
+        "role": {
+          "type": "string"
+        },
+        "from": {
+          "$ref": "#/$defs/expression"
+        },
+        "to": {
+          "$ref": "#/$defs/expression"
+        },
+        "whole": {
+          "type": "boolean"
+        },
+        "decimals": {
+          "type": "integer"
+        },
+        "direction": {
+          "type": "string",
+          "enum": ["up", "down", "nearest", "towardsZero", "awayFromZero"]
+        },
+        "minimum": {
+          "$ref": "#/$defs/expression"
+        },
+        "maximum": {
+          "$ref": "#/$defs/expression"
+        }
+      }
+    },
+    "condition": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "comparison",
+            "allOf",
+            "anyOf",
+            "exactlyOneOf",
+            "not",
+            "propertyReference",
+            "empty",
+            "filled"
+          ]
+        },
+        "operator": {
+          "type": "string",
+          "enum": [
+            "equals",
+            "notEquals",
+            "lessThan",
+            "lessThanOrEquals",
+            "greaterThan",
+            "greaterThanOrEquals"
+          ]
+        },
+        "left": {
+          "$ref": "#/$defs/expression"
+        },
+        "right": {
+          "$ref": "#/$defs/expression"
+        },
+        "conditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/condition"
+          }
+        },
+        "condition": {
+          "$ref": "#/$defs/condition"
+        },
+        "property": {
+          "$ref": "#/$defs/jsonPointer"
+        },
+        "subject": {
+          "$ref": "#/$defs/subjectReference"
+        }
+      }
+    },
+    "distributionConfig": {
+      "type": "object",
+      "required": ["method"],
+      "properties": {
+        "method": {
+          "type": "string",
+          "enum": ["equal", "proportional", "ordered"]
+        },
+        "orderBy": {
+          "type": "object",
+          "properties": {
+            "attribute": {
+              "$ref": "#/$defs/jsonPointer"
+            },
+            "direction": {
+              "type": "string",
+              "enum": ["ascending", "descending"]
+            }
+          }
+        },
+        "tieBreaker": {
+          "type": "object",
+          "properties": {
+            "method": {
+              "type": "string",
+              "enum": ["equal", "proportional"]
+            },
+            "attribute": {
+              "$ref": "#/$defs/jsonPointer"
+            }
+          }
+        },
+        "maximum": {
+          "type": "object",
+          "properties": {
+            "attribute": {
+              "$ref": "#/$defs/jsonPointer"
+            }
+          }
+        },
+        "rounding": {
+          "type": "object",
+          "properties": {
+            "decimals": {
+              "type": "integer"
+            },
+            "direction": {
+              "type": "string",
+              "enum": ["up", "down"]
+            }
+          }
+        },
+        "remainder": {
+          "type": "object",
+          "properties": {
+            "attribute": {
+              "$ref": "#/$defs/jsonPointer"
+            },
+            "subject": {
+              "$ref": "#/$defs/subjectReference"
+            }
+          }
+        }
+      }
+    }
+  }
+}
