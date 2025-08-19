@@ -201,4 +201,4 @@ de    belaste reis    kenmerk
 
 NRML is een levende standaard die zich ontwikkelt samen met de behoeften van de Nederlandse overheid voor machine-leesbare wetgeving. Bijdragen en feedback zijn welkom via GitHub issues.
 
-Voor een uitgebreide analyse van hoe NRML zich verhoudt tot bestaande standaarden, zie [NRML Standards Analysis](./NRML_Standards_Analysis.md).
+Voor een uitgebreide analyse van hoe NRML zich verhoudt tot bestaande standaarden, zie [NRML Standards Analysis](doc/comparison.md).
