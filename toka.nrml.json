@@ -52,7 +52,7 @@
             "nl": "de"
           },
           "type": {
-            "$ref": "#/b20b40f4-76ca-4887-afe4-cf98fc77ff66"
+            "$ref": "#/domains/b20b40f4-76ca-4887-afe4-cf98fc77ff66"
           }
         },
         "07783713-6df0-4810-bc44-4206050cb19d": {
@@ -63,7 +63,7 @@
             "nl": "de"
           },
           "type": {
-            "$ref": "#/b20b40f4-76ca-4887-afe4-cf98fc77ff66"
+            "$ref": "#/domains/b20b40f4-76ca-4887-afe4-cf98fc77ff66"
           }
         },
         "bf4947b1-acc6-4857-ba8b-881360e83b36": {
@@ -125,7 +125,7 @@
             "nl": "de"
           },
           "type": {
-            "$ref": "#/1ffc339e-47cf-4f17-8985-22628dddb49a"
+            "$ref": "#/domains/1ffc339e-47cf-4f17-8985-22628dddb49a"
           }
         },
         "b09702d7-a7d4-4308-976c-da0b5903eac9": {
@@ -136,7 +136,7 @@
             "nl": "de"
           },
           "type": {
-            "$ref": "#/1ffc339e-47cf-4f17-8985-22628dddb49a"
+            "$ref": "#/domains/1ffc339e-47cf-4f17-8985-22628dddb49a"
           }
         },
         "cbc050ae-0471-4a39-add4-6b3b8fc3e9a5": {
@@ -147,7 +147,7 @@
             "nl": "de"
           },
           "type": {
-            "$ref": "#/1ffc339e-47cf-4f17-8985-22628dddb49a"
+            "$ref": "#/domains/1ffc339e-47cf-4f17-8985-22628dddb49a"
           }
         }
       }
@@ -234,7 +234,7 @@
             "nl": "belastingen op basis van afstand"
           },
           "type": {
-            "$ref": "#/1ffc339e-47cf-4f17-8985-22628dddb49a"
+            "$ref": "#/domains/1ffc339e-47cf-4f17-8985-22628dddb49a"
           }
         },
         "b802e897-8854-4ad3-97b4-3ed4b04f9b16": {
@@ -248,7 +248,7 @@
             "nl": "belastingen op basis van reisduur"
           },
           "type": {
-            "$ref": "#/1ffc339e-47cf-4f17-8985-22628dddb49a"
+            "$ref": "#/domains/1ffc339e-47cf-4f17-8985-22628dddb49a"
           }
         },
         "ab9cc7dc-7be7-412d-ae46-0224ceef3153": {
@@ -259,7 +259,7 @@
             "nl": "de"
           },
           "type": {
-            "$ref": "#/1ffc339e-47cf-4f17-8985-22628dddb49a"
+            "$ref": "#/domains/1ffc339e-47cf-4f17-8985-22628dddb49a"
           }
         },
         "5c6df479-4620-4487-baaf-3c7f7581e56f": {
@@ -270,7 +270,7 @@
             "nl": "de"
           },
           "type": {
-            "$ref": "#/2430730a-0f8f-48ff-9a54-166e651ff340"
+            "$ref": "#/domains/2430730a-0f8f-48ff-9a54-166e651ff340"
           }
         },
         "85a409f3-4f30-4032-ae35-6c49a434a45d": {
@@ -364,7 +364,7 @@
             "nl": "het"
           },
           "type": {
-            "$ref": "#/61b9f36b-d866-4b5d-aa61-7451e6aee5c0"
+            "$ref": "#/domains/61b9f36b-d866-4b5d-aa61-7451e6aee5c0"
           }
         },
         "8db131d3-ffc5-4ec6-8618-447f394d2ce6": {
@@ -395,7 +395,7 @@
           },
           "cardinality": "one",
           "objectType": {
-            "$ref": "#/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
+            "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
           }
         },
         "0cc7c4b4-2855-4c8b-93f0-5403cf286af0": {
@@ -410,7 +410,7 @@
           },
           "cardinality": "many",
           "objectType": {
-            "$ref": "#/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"
+            "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"
           }
         }
       }
@@ -430,7 +430,7 @@
           },
           "cardinality": "one",
           "objectType": {
-            "$ref": "#/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
+            "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
           }
         },
         "5fc57818-441b-4e76-bd4e-344fe83ac2cd": {
@@ -442,7 +442,7 @@
           },
           "cardinality": "one",
           "objectType": {
-            "$ref": "#/bea88ba3-ec79-4bd2-8f8e-f6e11a08c431"
+            "$ref": "#/objectTypes/bea88ba3-ec79-4bd2-8f8e-f6e11a08c431"
           }
         }
       }
@@ -462,7 +462,7 @@
           },
           "cardinality": "one",
           "objectType": {
-            "$ref": "#/bea88ba3-ec79-4bd2-8f8e-f6e11a08c431"
+            "$ref": "#/objectTypes/bea88ba3-ec79-4bd2-8f8e-f6e11a08c431"
           }
         },
         "e709d431-1b9a-4718-97a0-da07a21798be": {
@@ -477,7 +477,7 @@
           },
           "cardinality": "many",
           "objectType": {
-            "$ref": "#/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"
+            "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"
           }
         }
       }
@@ -497,7 +497,7 @@
           },
           "cardinality": "one",
           "objectType": {
-            "$ref": "#/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
+            "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
           }
         },
         "385f3ef8-1c94-415f-bd23-03b2a4d90016": {
@@ -512,7 +512,7 @@
           },
           "cardinality": "many",
           "objectType": {
-            "$ref": "#/dd04dbff-736a-4703-94a2-bbba4588fcc0"
+            "$ref": "#/objectTypes/dd04dbff-736a-4703-94a2-bbba4588fcc0"
           }
         }
       }
@@ -601,7 +601,7 @@
         "nl": "het"
       },
       "type": {
-        "$ref": "#/1ffc339e-47cf-4f17-8985-22628dddb49a"
+        "$ref": "#/domains/1ffc339e-47cf-4f17-8985-22628dddb49a"
       }
     },
     "155c3536-cb1c-49a0-bd14-84fdf2dda9e8": {
@@ -612,7 +612,7 @@
         "nl": "het"
       },
       "type": {
-        "$ref": "#/1ffc339e-47cf-4f17-8985-22628dddb49a"
+        "$ref": "#/domains/1ffc339e-47cf-4f17-8985-22628dddb49a"
       }
     },
     "0d4f3025-5c31-465a-b08f-983a19507c2b": {
@@ -623,7 +623,7 @@
         "nl": "het"
       },
       "type": {
-        "$ref": "#/1ffc339e-47cf-4f17-8985-22628dddb49a"
+        "$ref": "#/domains/1ffc339e-47cf-4f17-8985-22628dddb49a"
       }
     },
     "0a7246e7-b7d0-44e1-a928-75c92b3d2638": {
@@ -634,7 +634,7 @@
         "nl": "het"
       },
       "type": {
-        "$ref": "#/1ffc339e-47cf-4f17-8985-22628dddb49a"
+        "$ref": "#/domains/1ffc339e-47cf-4f17-8985-22628dddb49a"
       }
     },
     "d74f5c2d-5538-4347-81be-cfb3ebe6e06c": {
@@ -645,7 +645,7 @@
         "nl": "het"
       },
       "type": {
-        "$ref": "#/7c22f541-e76e-453e-8887-c350d9b0d8a0"
+        "$ref": "#/domains/7c22f541-e76e-453e-8887-c350d9b0d8a0"
       }
     },
     "70fbe842-7ba3-48df-958a-9a22db065aa3": {
@@ -656,7 +656,7 @@
         "nl": "het"
       },
       "type": {
-        "$ref": "#/7c22f541-e76e-453e-8887-c350d9b0d8a0"
+        "$ref": "#/domains/7c22f541-e76e-453e-8887-c350d9b0d8a0"
       }
     },
     "4eda445b-32b0-4732-8a7c-753c5df1b33a": {
@@ -667,7 +667,7 @@
         "nl": "het"
       },
       "type": {
-        "$ref": "#/7c22f541-e76e-453e-8887-c350d9b0d8a0"
+        "$ref": "#/domains/7c22f541-e76e-453e-8887-c350d9b0d8a0"
       }
     },
     "082debac-4e28-4346-b133-254f418e174f": {
@@ -678,7 +678,7 @@
         "nl": "het"
       },
       "type": {
-        "$ref": "#/7c22f541-e76e-453e-8887-c350d9b0d8a0"
+        "$ref": "#/domains/7c22f541-e76e-453e-8887-c350d9b0d8a0"
       }
     },
     "32bc28ba-1065-4c59-bbfb-d844b3cd1c0f": {
@@ -729,7 +729,7 @@
         "nl": "de"
       },
       "type": {
-        "$ref": "#/1ffc339e-47cf-4f17-8985-22628dddb49a"
+        "$ref": "#/domains/1ffc339e-47cf-4f17-8985-22628dddb49a"
       }
     }
   },
@@ -797,22 +797,25 @@
   },
   "ruleGroups": [
     {
-      "name": "Initialisatie",
-      "rules": [
-        {
-          "id": "afstand-tot-bestemming-01",
-          "name": "afstand tot bestemming 01",
+      "name": {
+        "nl": "Initialisatie"
+      },
+      "rules": {
+        "2082041e-f916-49ce-833e-840437395f6a": {
+          "name": {
+            "nl": "afstand tot bestemming 01"
+          },
           "versions": [
             {
               "validFrom": "2018",
               "target": {
                 "attribute": {
-                  "$ref": "#/objectTypes/vlucht/properties/afstandTotBestemming"
+                  "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
                 },
                 "subject": {
                   "type": "objectType",
                   "ref": {
-                    "$ref": "#/objectTypes/vlucht"
+                    "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
                   }
                 }
               },
@@ -824,24 +827,27 @@
             }
           ]
         }
-      ]
+      }
     },
     {
-      "name": "Kenmerktoekenning vlucht",
-      "rules": [
-        {
-          "id": "belaste-reis-01",
-          "name": "belaste reis 01",
+      "name": {
+        "nl": "Kenmerktoekenning vlucht"
+      },
+      "rules": {
+        "8629e30c-cb03-49c2-b70e-0191e133adfd": {
+          "name": {
+            "nl": "belaste reis 01"
+          },
           "versions": [
             {
               "validFrom": "2018",
               "property": {
-                "$ref": "#/objectTypes/vlucht/properties/belasteReis"
+                "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/d72ead33-2e0c-450a-ba71-b83940c8e926"
               },
               "subject": {
                 "type": "objectType",
                 "ref": {
-                  "$ref": "#/objectTypes/vlucht"
+                  "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
                 }
               },
               "value": {
@@ -854,12 +860,12 @@
                 "left": {
                   "type": "attributeReference",
                   "attribute": {
-                    "$ref": "#/objectTypes/vlucht/properties/bereikbaarPerTrein"
+                    "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea5d01e3-af40-437f-bc0f-d29b26718148"
                   },
                   "subject": {
                     "type": "objectType",
                     "ref": {
-                      "$ref": "#/objectTypes/vlucht"
+                      "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
                     }
                   }
                 },
@@ -871,19 +877,20 @@
             }
           ]
         },
-        {
-          "id": "onbelaste-reis-01",
-          "name": "onbelaste reis 01",
+        "fb679dad-276e-4667-be61-3af6f20670dd": {
+          "name": {
+            "nl": "onbelaste reis 01"
+          },
           "versions": [
             {
               "validFrom": "2018",
               "property": {
-                "$ref": "#/objectTypes/vlucht/properties/onbelasteReis"
+                "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/2330a40c-76e0-41d3-877c-43337b73c025"
               },
               "subject": {
                 "type": "objectType",
                 "ref": {
-                  "$ref": "#/objectTypes/vlucht"
+                  "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
                 }
               },
               "value": {
@@ -896,12 +903,12 @@
                 "left": {
                   "type": "attributeReference",
                   "attribute": {
-                    "$ref": "#/objectTypes/vlucht/properties/bereikbaarPerTrein"
+                    "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea5d01e3-af40-437f-bc0f-d29b26718148"
                   },
                   "subject": {
                     "type": "objectType",
                     "ref": {
-                      "$ref": "#/objectTypes/vlucht"
+                      "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
                     }
                   }
                 },
@@ -913,19 +920,20 @@
             }
           ]
         },
-        {
-          "id": "rondvlucht-01",
-          "name": "rondvlucht 01",
+        "daa86148-a092-4d19-907f-76dc5de676b9": {
+          "name": {
+            "nl": "rondvlucht 01"
+          },
           "versions": [
             {
               "validFrom": "2018",
               "property": {
-                "$ref": "#/objectTypes/vlucht/properties/rondvlucht"
+                "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/cbe15f31-ce60-440c-8e72-0861a5089457"
               },
               "subject": {
                 "type": "objectType",
                 "ref": {
-                  "$ref": "#/objectTypes/vlucht"
+                  "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
                 }
               },
               "value": {
@@ -938,24 +946,24 @@
                 "left": {
                   "type": "attributeReference",
                   "attribute": {
-                    "$ref": "#/objectTypes/vlucht/properties/luchthavenVanBestemming"
+                    "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/07783713-6df0-4810-bc44-4206050cb19d"
                   },
                   "subject": {
                     "type": "objectType",
                     "ref": {
-                      "$ref": "#/objectTypes/vlucht"
+                      "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
                     }
                   }
                 },
                 "right": {
                   "type": "attributeReference",
                   "attribute": {
-                    "$ref": "#/objectTypes/vlucht/properties/luchthavenVanVertrek"
+                    "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/fe752ef2-19ba-4b5c-9e6e-ad86df5d3d59"
                   },
                   "subject": {
                     "type": "objectType",
                     "ref": {
-                      "$ref": "#/objectTypes/vlucht"
+                      "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
                     }
                   }
                 }
@@ -963,25 +971,28 @@
             }
           ]
         }
-      ]
+      }
     },
     {
-      "name": "Vluchtinformatie",
-      "rules": [
-        {
-          "id": "aantal-passagiers-01",
-          "name": "aantal passagiers 01",
+      "name": {
+        "nl": "Vluchtinformatie"
+      },
+      "rules": {
+        "4b3e1650-07e8-43c4-9dd2-76dc951ffd8e": {
+          "name": {
+            "nl": "aantal passagiers 01"
+          },
           "versions": [
             {
               "validFrom": "2018",
               "target": {
                 "attribute": {
-                  "$ref": "#/objectTypes/vlucht/properties/aantalPassagiers"
+                  "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/89cdc694-7fae-4577-a289-08442a662d26"
                 },
                 "subject": {
                   "type": "objectType",
                   "ref": {
-                    "$ref": "#/objectTypes/vlucht"
+                    "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
                   }
                 }
               },
@@ -994,7 +1005,7 @@
                   "subject": {
                     "type": "objectType",
                     "ref": {
-                      "$ref": "#/objectTypes/vlucht"
+                      "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
                     }
                   }
                 }
@@ -1002,20 +1013,21 @@
             }
           ]
         },
-        {
-          "id": "totaal-te-betalen-belasting-01",
-          "name": "totaal te betalen belasting 01",
+        "8a844d17-6b43-41ba-8d34-99257dec975d": {
+          "name": {
+            "nl": "totaal te betalen belasting 01"
+          },
           "versions": [
             {
               "validFrom": "2018",
               "target": {
                 "attribute": {
-                  "$ref": "#/objectTypes/vlucht/properties/totaalTeBetalenBelasting"
+                  "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/cbc050ae-0471-4a39-add4-6b3b8fc3e9a5"
                 },
                 "subject": {
                   "type": "objectType",
                   "ref": {
-                    "$ref": "#/objectTypes/vlucht"
+                    "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
                   }
                 }
               },
@@ -1025,7 +1037,7 @@
                 "expression": {
                   "type": "attributeReference",
                   "attribute": {
-                    "$ref": "#/objectTypes/natuurlijkPersoon/properties/teBetalenBelasting"
+                    "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/ab9cc7dc-7be7-412d-ae46-0224ceef3153"
                   },
                   "subject": {
                     "type": "role",
@@ -1033,7 +1045,7 @@
                     "ofSubject": {
                       "type": "objectType",
                       "ref": {
-                        "$ref": "#/objectTypes/vlucht"
+                        "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
                       }
                     }
                   }
@@ -1047,20 +1059,21 @@
             }
           ]
         },
-        {
-          "id": "totale-belasting-op-basis-van-afstand-01",
-          "name": "totale belasting op basis van afstand 01",
+        "1c428bb7-18b7-4a6a-8cb4-f5715f1be7e0": {
+          "name": {
+            "nl": "totale belasting op basis van afstand 01"
+          },
           "versions": [
             {
               "validFrom": "2018",
               "target": {
                 "attribute": {
-                  "$ref": "#/objectTypes/vlucht/properties/totaleBelastingOpBasisVanAfstand"
+                  "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/339243f4-dee5-474f-ab62-c7df39e69788"
                 },
                 "subject": {
                   "type": "objectType",
                   "ref": {
-                    "$ref": "#/objectTypes/vlucht"
+                    "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
                   }
                 }
               },
@@ -1070,7 +1083,7 @@
                 "expression": {
                   "type": "attributeReference",
                   "attribute": {
-                    "$ref": "#/objectTypes/natuurlijkPersoon/properties/belastingOpBasisVanAfstand"
+                    "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/199d696e-a168-4584-8f80-35d737e5e1ba"
                   },
                   "subject": {
                     "type": "role",
@@ -1078,7 +1091,7 @@
                     "ofSubject": {
                       "type": "objectType",
                       "ref": {
-                        "$ref": "#/objectTypes/vlucht"
+                        "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
                       }
                     }
                   }
@@ -1092,20 +1105,21 @@
             }
           ]
         },
-        {
-          "id": "totale-belasting-op-basis-van-reisduur-01",
-          "name": "totale belasting op basis van reisduur 01",
+        "a6be59ec-db43-4fa7-935a-55ac84e15b00": {
+          "name": {
+            "nl": "totale belasting op basis van reisduur 01"
+          },
           "versions": [
             {
               "validFrom": "2018",
               "target": {
                 "attribute": {
-                  "$ref": "#/objectTypes/vlucht/properties/totaleBelastingOpBasisVanReisduur"
+                  "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/b09702d7-a7d4-4308-976c-da0b5903eac9"
                 },
                 "subject": {
                   "type": "objectType",
                   "ref": {
-                    "$ref": "#/objectTypes/vlucht"
+                    "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
                   }
                 }
               },
@@ -1115,7 +1129,7 @@
                 "expression": {
                   "type": "attributeReference",
                   "attribute": {
-                    "$ref": "#/objectTypes/natuurlijkPersoon/properties/belastingOpBasisVanReisduur"
+                    "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/b802e897-8854-4ad3-97b4-3ed4b04f9b16"
                   },
                   "subject": {
                     "type": "role",
@@ -1123,7 +1137,7 @@
                     "ofSubject": {
                       "type": "objectType",
                       "ref": {
-                        "$ref": "#/objectTypes/vlucht"
+                        "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
                       }
                     }
                   }
@@ -1137,25 +1151,28 @@
             }
           ]
         }
-      ]
+      }
     },
     {
-      "name": "Belasting op basis van afstand",
-      "rules": [
-        {
-          "id": "belasting-op-basis-van-afstand-01",
-          "name": "belasting op basis van afstand 01",
+      "name": {
+        "nl": "Belasting op basis van afstand"
+      },
+      "rules": {
+        "83b5b907-2f49-4b63-9654-3978d782aa24": {
+          "name": {
+            "nl": "belasting op basis van afstand 01"
+          },
           "versions": [
             {
               "validFrom": "2018",
               "target": {
                 "attribute": {
-                  "$ref": "#/objectTypes/natuurlijkPersoon/properties/belastingOpBasisVanAfstand"
+                  "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/199d696e-a168-4584-8f80-35d737e5e1ba"
                 },
                 "subject": {
                   "type": "objectType",
                   "ref": {
-                    "$ref": "#/objectTypes/natuurlijkPersoon"
+                    "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"
                   }
                 }
               },
@@ -1170,7 +1187,7 @@
                   {
                     "type": "propertyReference",
                     "property": {
-                      "$ref": "#/objectTypes/vlucht/properties/onbelasteReis"
+                      "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/2330a40c-76e0-41d3-877c-43337b73c025"
                     },
                     "subject": {
                       "type": "role",
@@ -1184,7 +1201,7 @@
                   {
                     "type": "propertyReference",
                     "property": {
-                      "$ref": "#/objectTypes/vlucht/properties/rondvlucht"
+                      "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/cbe15f31-ce60-440c-8e72-0861a5089457"
                     },
                     "subject": {
                       "type": "role",
@@ -1201,7 +1218,7 @@
                     "left": {
                       "type": "attributeReference",
                       "attribute": {
-                        "$ref": "#/objectTypes/vlucht/properties/afstandTotBestemming"
+                        "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
                       },
                       "subject": {
                         "type": "role",
@@ -1215,7 +1232,7 @@
                     "right": {
                       "type": "parameterReference",
                       "parameter": {
-                        "$ref": "#/parameters/BOVENGRENS_AFSTAND_TWEEDE_SCHIJF"
+                        "$ref": "#/parameters/4773bc34-a04d-4361-b984-85e6eba67374"
                       }
                     }
                   }
@@ -1224,23 +1241,24 @@
             }
           ]
         },
-        {
-          "id": "belasting-op-basis-van-afstand-02",
-          "name": "belasting op basis van afstand 02",
+        "54a6841c-3845-4402-9f9c-5ba31bc53975": {
+          "name": {
+            "nl": "belasting op basis van afstand 02"
+          },
           "versions": [
             {
               "validFrom": "2018",
               "target": {
                 "attribute": {
-                  "$ref": "#/objectTypes/natuurlijkPersoon/properties/belastingOpBasisVanAfstand"
+                  "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/199d696e-a168-4584-8f80-35d737e5e1ba"
                 },
                 "subject": {
                   "type": "objectTypeWithProperty",
                   "objectType": {
-                    "$ref": "#/objectTypes/natuurlijkPersoon"
+                    "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"
                   },
                   "property": {
-                    "$ref": "#/objectTypes/natuurlijkPersoon/properties/passagierWaarvoorHetLageTariefVoorBelastingOpBasisVanAfstandVanToepassingIs"
+                    "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/ef64a2f2-6dd5-46cb-bd4e-6708e70021dc"
                   }
                 }
               },
@@ -1250,7 +1268,7 @@
                 "left": {
                   "type": "parameterReference",
                   "parameter": {
-                    "$ref": "#/parameters/LAGE_BASISTARIEF_EERSTE_SCHIJF"
+                    "$ref": "#/parameters/dc7826fa-37c0-499d-8d59-96a0c40b3fcd"
                   }
                 },
                 "right": {
@@ -1259,13 +1277,13 @@
                   "left": {
                     "type": "parameterReference",
                     "parameter": {
-                      "$ref": "#/parameters/LAGE_TARIEF_VERMINDERING_EERSTE_SCHIJF"
+                      "$ref": "#/parameters/d74f5c2d-5538-4347-81be-cfb3ebe6e06c"
                     }
                   },
                   "right": {
                     "type": "attributeReference",
                     "attribute": {
-                      "$ref": "#/objectTypes/vlucht/properties/afstandTotBestemming"
+                      "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
                     },
                     "subject": {
                       "type": "role",
@@ -1284,7 +1302,7 @@
                   {
                     "type": "propertyReference",
                     "property": {
-                      "$ref": "#/objectTypes/vlucht/properties/belasteReis"
+                      "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/d72ead33-2e0c-450a-ba71-b83940c8e926"
                     },
                     "subject": {
                       "type": "role",
@@ -1300,7 +1318,7 @@
                     "condition": {
                       "type": "propertyReference",
                       "property": {
-                        "$ref": "#/objectTypes/vlucht/properties/rondvlucht"
+                        "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/cbe15f31-ce60-440c-8e72-0861a5089457"
                       },
                       "subject": {
                         "type": "role",
@@ -1318,7 +1336,7 @@
                     "left": {
                       "type": "attributeReference",
                       "attribute": {
-                        "$ref": "#/objectTypes/vlucht/properties/afstandTotBestemming"
+                        "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
                       },
                       "subject": {
                         "type": "role",
@@ -1341,7 +1359,7 @@
                     "left": {
                       "type": "attributeReference",
                       "attribute": {
-                        "$ref": "#/objectTypes/vlucht/properties/afstandTotBestemming"
+                        "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
                       },
                       "subject": {
                         "type": "role",
@@ -1355,7 +1373,7 @@
                     "right": {
                       "type": "parameterReference",
                       "parameter": {
-                        "$ref": "#/parameters/BOVENGRENS_AFSTAND_EERSTE_SCHIJF"
+                        "$ref": "#/parameters/70fbc167-01ca-4ef6-a1dd-78d05eaf99ab"
                       }
                     }
                   }
@@ -1364,23 +1382,24 @@
             }
           ]
         },
-        {
-          "id": "belasting-op-basis-van-afstand-03",
-          "name": "belasting op basis van afstand 03",
+        "098458ba-47bd-4db2-b8df-a591be61fae8": {
+          "name": {
+            "nl": "belasting op basis van afstand 03"
+          },
           "versions": [
             {
               "validFrom": "2018",
               "target": {
                 "attribute": {
-                  "$ref": "#/objectTypes/natuurlijkPersoon/properties/belastingOpBasisVanAfstand"
+                  "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/199d696e-a168-4584-8f80-35d737e5e1ba"
                 },
                 "subject": {
                   "type": "objectTypeWithProperty",
                   "objectType": {
-                    "$ref": "#/objectTypes/natuurlijkPersoon"
+                    "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"
                   },
                   "property": {
-                    "$ref": "#/objectTypes/natuurlijkPersoon/properties/passagierWaarvoorHetLageTariefVoorBelastingOpBasisVanAfstandVanToepassingIs"
+                    "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/ef64a2f2-6dd5-46cb-bd4e-6708e70021dc"
                   }
                 }
               },
@@ -1390,7 +1409,7 @@
                 "left": {
                   "type": "parameterReference",
                   "parameter": {
-                    "$ref": "#/parameters/LAGE_BASISTARIEF_TWEEDE_SCHIJF"
+                    "$ref": "#/parameters/155c3536-cb1c-49a0-bd14-84fdf2dda9e8"
                   }
                 },
                 "right": {
@@ -1399,7 +1418,7 @@
                   "left": {
                     "type": "parameterReference",
                     "parameter": {
-                      "$ref": "#/parameters/LAGE_TARIEF_VERMINDERING_TWEEDE_SCHIJF"
+                      "$ref": "#/parameters/70fbe842-7ba3-48df-958a-9a22db065aa3"
                     }
                   },
                   "right": {
@@ -1408,7 +1427,7 @@
                     "left": {
                       "type": "attributeReference",
                       "attribute": {
-                        "$ref": "#/objectTypes/vlucht/properties/afstandTotBestemming"
+                        "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
                       },
                       "subject": {
                         "type": "role",
@@ -1422,7 +1441,7 @@
                     "right": {
                       "type": "parameterReference",
                       "parameter": {
-                        "$ref": "#/parameters/BOVENGRENS_AFSTAND_EERSTE_SCHIJF"
+                        "$ref": "#/parameters/70fbc167-01ca-4ef6-a1dd-78d05eaf99ab"
                       }
                     }
                   }
@@ -1434,7 +1453,7 @@
                   {
                     "type": "propertyReference",
                     "property": {
-                      "$ref": "#/objectTypes/vlucht/properties/belasteReis"
+                      "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/d72ead33-2e0c-450a-ba71-b83940c8e926"
                     },
                     "subject": {
                       "type": "role",
@@ -1450,7 +1469,7 @@
                     "condition": {
                       "type": "propertyReference",
                       "property": {
-                        "$ref": "#/objectTypes/vlucht/properties/rondvlucht"
+                        "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/cbe15f31-ce60-440c-8e72-0861a5089457"
                       },
                       "subject": {
                         "type": "role",
@@ -1468,7 +1487,7 @@
                     "left": {
                       "type": "attributeReference",
                       "attribute": {
-                        "$ref": "#/objectTypes/vlucht/properties/afstandTotBestemming"
+                        "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
                       },
                       "subject": {
                         "type": "role",
@@ -1482,7 +1501,7 @@
                     "right": {
                       "type": "parameterReference",
                       "parameter": {
-                        "$ref": "#/parameters/BOVENGRENS_AFSTAND_EERSTE_SCHIJF"
+                        "$ref": "#/parameters/70fbc167-01ca-4ef6-a1dd-78d05eaf99ab"
                       }
                     }
                   },
@@ -1492,7 +1511,7 @@
                     "left": {
                       "type": "attributeReference",
                       "attribute": {
-                        "$ref": "#/objectTypes/vlucht/properties/afstandTotBestemming"
+                        "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
                       },
                       "subject": {
                         "type": "role",
@@ -1506,7 +1525,7 @@
                     "right": {
                       "type": "parameterReference",
                       "parameter": {
-                        "$ref": "#/parameters/BOVENGRENS_AFSTAND_TWEEDE_SCHIJF"
+                        "$ref": "#/parameters/4773bc34-a04d-4361-b984-85e6eba67374"
                       }
                     }
                   }
@@ -1515,23 +1534,24 @@
             }
           ]
         },
-        {
-          "id": "belasting-op-basis-van-afstand-04",
-          "name": "belasting op basis van afstand 04",
+        "fad3394e-89ba-4434-855f-7d3c88f6ba13": {
+          "name": {
+            "nl": "belasting op basis van afstand 04"
+          },
           "versions": [
             {
               "validFrom": "2018",
               "target": {
                 "attribute": {
-                  "$ref": "#/objectTypes/natuurlijkPersoon/properties/belastingOpBasisVanAfstand"
+                  "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/199d696e-a168-4584-8f80-35d737e5e1ba"
                 },
                 "subject": {
                   "type": "objectTypeWithProperty",
                   "objectType": {
-                    "$ref": "#/objectTypes/natuurlijkPersoon"
+                    "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"
                   },
                   "property": {
-                    "$ref": "#/objectTypes/natuurlijkPersoon/properties/passagierWaarvoorHetHogeTariefVoorBelastingOpBasisVanAfstandVanToepassingIs"
+                    "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/37ddb128-913a-41b2-b5fd-ed8c05b813b2"
                   }
                 }
               },
@@ -1541,7 +1561,7 @@
                 "left": {
                   "type": "parameterReference",
                   "parameter": {
-                    "$ref": "#/parameters/HOGE_BASISTARIEF_EERSTE_SCHIJF"
+                    "$ref": "#/parameters/0d4f3025-5c31-465a-b08f-983a19507c2b"
                   }
                 },
                 "right": {
@@ -1550,13 +1570,13 @@
                   "left": {
                     "type": "parameterReference",
                     "parameter": {
-                      "$ref": "#/parameters/HOGE_TARIEF_VERMINDERING_EERSTE_SCHIJF"
+                      "$ref": "#/parameters/4eda445b-32b0-4732-8a7c-753c5df1b33a"
                     }
                   },
                   "right": {
                     "type": "attributeReference",
                     "attribute": {
-                      "$ref": "#/objectTypes/vlucht/properties/afstandTotBestemming"
+                      "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
                     },
                     "subject": {
                       "type": "role",
@@ -1575,7 +1595,7 @@
                   {
                     "type": "propertyReference",
                     "property": {
-                      "$ref": "#/objectTypes/vlucht/properties/belasteReis"
+                      "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/d72ead33-2e0c-450a-ba71-b83940c8e926"
                     },
                     "subject": {
                       "type": "role",
@@ -1591,7 +1611,7 @@
                     "condition": {
                       "type": "propertyReference",
                       "property": {
-                        "$ref": "#/objectTypes/vlucht/properties/rondvlucht"
+                        "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/cbe15f31-ce60-440c-8e72-0861a5089457"
                       },
                       "subject": {
                         "type": "role",
@@ -1609,7 +1629,7 @@
                     "left": {
                       "type": "attributeReference",
                       "attribute": {
-                        "$ref": "#/objectTypes/vlucht/properties/afstandTotBestemming"
+                        "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
                       },
                       "subject": {
                         "type": "role",
@@ -1632,7 +1652,7 @@
                     "left": {
                       "type": "attributeReference",
                       "attribute": {
-                        "$ref": "#/objectTypes/vlucht/properties/afstandTotBestemming"
+                        "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
                       },
                       "subject": {
                         "type": "role",
@@ -1646,7 +1666,7 @@
                     "right": {
                       "type": "parameterReference",
                       "parameter": {
-                        "$ref": "#/parameters/BOVENGRENS_AFSTAND_EERSTE_SCHIJF"
+                        "$ref": "#/parameters/70fbc167-01ca-4ef6-a1dd-78d05eaf99ab"
                       }
                     }
                   }
@@ -1655,23 +1675,24 @@
             }
           ]
         },
-        {
-          "id": "belasting-op-basis-van-afstand-05",
-          "name": "belasting op basis van afstand 05",
+        "12e532e7-0fdd-40b3-9c26-1a92ef5bbee1": {
+          "name": {
+            "nl": "belasting op basis van afstand 05"
+          },
           "versions": [
             {
               "validFrom": "2018",
               "target": {
                 "attribute": {
-                  "$ref": "#/objectTypes/natuurlijkPersoon/properties/belastingOpBasisVanAfstand"
+                  "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/199d696e-a168-4584-8f80-35d737e5e1ba"
                 },
                 "subject": {
                   "type": "objectTypeWithProperty",
                   "objectType": {
-                    "$ref": "#/objectTypes/natuurlijkPersoon"
+                    "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"
                   },
                   "property": {
-                    "$ref": "#/objectTypes/natuurlijkPersoon/properties/passagierWaarvoorHetHogeTariefVoorBelastingOpBasisVanAfstandVanToepassingIs"
+                    "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/37ddb128-913a-41b2-b5fd-ed8c05b813b2"
                   }
                 }
               },
@@ -1681,7 +1702,7 @@
                 "left": {
                   "type": "parameterReference",
                   "parameter": {
-                    "$ref": "#/parameters/HOGE_BASISTARIEF_TWEEDE_SCHIJF"
+                    "$ref": "#/parameters/0a7246e7-b7d0-44e1-a928-75c92b3d2638"
                   }
                 },
                 "right": {
@@ -1690,7 +1711,7 @@
                   "left": {
                     "type": "parameterReference",
                     "parameter": {
-                      "$ref": "#/parameters/HOGE_TARIEF_VERMINDERING_TWEEDE_SCHIJF"
+                      "$ref": "#/parameters/082debac-4e28-4346-b133-254f418e174f"
                     }
                   },
                   "right": {
@@ -1699,7 +1720,7 @@
                     "left": {
                       "type": "attributeReference",
                       "attribute": {
-                        "$ref": "#/objectTypes/vlucht/properties/afstandTotBestemming"
+                        "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
                       },
                       "subject": {
                         "type": "role",
@@ -1713,7 +1734,7 @@
                     "right": {
                       "type": "parameterReference",
                       "parameter": {
-                        "$ref": "#/parameters/BOVENGRENS_AFSTAND_EERSTE_SCHIJF"
+                        "$ref": "#/parameters/70fbc167-01ca-4ef6-a1dd-78d05eaf99ab"
                       }
                     }
                   }
@@ -1725,7 +1746,7 @@
                   {
                     "type": "propertyReference",
                     "property": {
-                      "$ref": "#/objectTypes/vlucht/properties/belasteReis"
+                      "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/d72ead33-2e0c-450a-ba71-b83940c8e926"
                     },
                     "subject": {
                       "type": "role",
@@ -1741,7 +1762,7 @@
                     "condition": {
                       "type": "propertyReference",
                       "property": {
-                        "$ref": "#/objectTypes/vlucht/properties/rondvlucht"
+                        "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/cbe15f31-ce60-440c-8e72-0861a5089457"
                       },
                       "subject": {
                         "type": "role",
@@ -1759,7 +1780,7 @@
                     "left": {
                       "type": "attributeReference",
                       "attribute": {
-                        "$ref": "#/objectTypes/vlucht/properties/afstandTotBestemming"
+                        "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
                       },
                       "subject": {
                         "type": "role",
@@ -1773,7 +1794,7 @@
                     "right": {
                       "type": "parameterReference",
                       "parameter": {
-                        "$ref": "#/parameters/BOVENGRENS_AFSTAND_EERSTE_SCHIJF"
+                        "$ref": "#/parameters/70fbc167-01ca-4ef6-a1dd-78d05eaf99ab"
                       }
                     }
                   },
@@ -1783,7 +1804,7 @@
                     "left": {
                       "type": "attributeReference",
                       "attribute": {
-                        "$ref": "#/objectTypes/vlucht/properties/afstandTotBestemming"
+                        "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
                       },
                       "subject": {
                         "type": "role",
@@ -1797,7 +1818,7 @@
                     "right": {
                       "type": "parameterReference",
                       "parameter": {
-                        "$ref": "#/parameters/BOVENGRENS_AFSTAND_TWEEDE_SCHIJF"
+                        "$ref": "#/parameters/4773bc34-a04d-4361-b984-85e6eba67374"
                       }
                     }
                   }
@@ -1806,24 +1827,27 @@
             }
           ]
         }
-      ]
+      }
     },
     {
-      "name": "Kenmerktoekenning natuurlijk persoon",
-      "rules": [
-        {
-          "id": "passagier-waarvoor-het-lage-tarief-voor-belasting-op-basis-van-afstand-van-toepassing-is-01",
-          "name": "passagier waarvoor het lage tarief voor belasting op basis van afstand van toepassing is 01",
+      "name": {
+        "nl": "Kenmerktoekenning natuurlijk persoon"
+      },
+      "rules": {
+        "9f38fcdc-84c9-4459-90c3-33c02aafeabc": {
+          "name": {
+            "nl": "passagier waarvoor het lage tarief voor belasting op basis van afstand van toepassing is 01"
+          },
           "versions": [
             {
               "validFrom": "2018",
               "property": {
-                "$ref": "#/objectTypes/natuurlijkPersoon/properties/passagierWaarvoorHetLageTariefVoorBelastingOpBasisVanAfstandVanToepassingIs"
+                "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/ef64a2f2-6dd5-46cb-bd4e-6708e70021dc"
               },
               "subject": {
                 "type": "objectType",
                 "ref": {
-                  "$ref": "#/objectTypes/natuurlijkPersoon"
+                  "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"
                 }
               },
               "value": {
@@ -1839,7 +1863,7 @@
                     "left": {
                       "type": "attributeReference",
                       "attribute": {
-                        "$ref": "#/objectTypes/natuurlijkPersoon/properties/leeftijd"
+                        "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
                       },
                       "subject": {
                         "type": "pronoun",
@@ -1861,7 +1885,7 @@
                         "left": {
                           "type": "attributeReference",
                           "attribute": {
-                            "$ref": "#/objectTypes/natuurlijkPersoon/properties/leeftijd"
+                            "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
                           },
                           "subject": {
                             "type": "pronoun",
@@ -1880,7 +1904,7 @@
                         "left": {
                           "type": "attributeReference",
                           "attribute": {
-                            "$ref": "#/objectTypes/natuurlijkPersoon/properties/leeftijd"
+                            "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
                           },
                           "subject": {
                             "type": "pronoun",
@@ -1900,19 +1924,20 @@
             }
           ]
         },
-        {
-          "id": "passagier-waarvoor-het-hoge-tarief-voor-belasting-op-basis-van-afstand-van-toepassing-is-01",
-          "name": "passagier waarvoor het hoge tarief voor belasting op basis van afstand van toepassing is 01",
+        "b68f6a5a-80bc-4c27-9a0c-449af6b8e546": {
+          "name": {
+            "nl": "passagier waarvoor het hoge tarief voor belasting op basis van afstand van toepassing is 01"
+          },
           "versions": [
             {
               "validFrom": "2018",
               "property": {
-                "$ref": "#/objectTypes/natuurlijkPersoon/properties/passagierWaarvoorHetHogeTariefVoorBelastingOpBasisVanAfstandVanToepassingIs"
+                "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/37ddb128-913a-41b2-b5fd-ed8c05b813b2"
               },
               "subject": {
                 "type": "objectType",
                 "ref": {
-                  "$ref": "#/objectTypes/natuurlijkPersoon"
+                  "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"
                 }
               },
               "value": {
@@ -1931,7 +1956,7 @@
                         "left": {
                           "type": "attributeReference",
                           "attribute": {
-                            "$ref": "#/objectTypes/natuurlijkPersoon/properties/leeftijd"
+                            "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
                           },
                           "subject": {
                             "type": "pronoun",
@@ -1950,7 +1975,7 @@
                         "left": {
                           "type": "attributeReference",
                           "attribute": {
-                            "$ref": "#/objectTypes/natuurlijkPersoon/properties/leeftijd"
+                            "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
                           },
                           "subject": {
                             "type": "pronoun",
@@ -1971,7 +1996,7 @@
                     "left": {
                       "type": "attributeReference",
                       "attribute": {
-                        "$ref": "#/objectTypes/natuurlijkPersoon/properties/leeftijd"
+                        "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
                       },
                       "subject": {
                         "type": "pronoun",
@@ -1989,19 +2014,20 @@
             }
           ]
         },
-        {
-          "id": "recht-op-duurzaamheidskorting-01",
-          "name": "recht op duurzaamheidskorting 01",
+        "bf0406fe-e7b0-4c04-aa6d-debf822d5ba8": {
+          "name": {
+            "nl": "recht op duurzaamheidskorting 01"
+          },
           "versions": [
             {
               "validFrom": "2018",
               "property": {
-                "$ref": "#/objectTypes/natuurlijkPersoon/properties/rechtOpDuurzaamheidskorting"
+                "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/4b9bd5f1-311a-4b59-8dd9-ee3139de153e"
               },
               "subject": {
                 "type": "objectType",
                 "ref": {
-                  "$ref": "#/objectTypes/natuurlijkPersoon"
+                  "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"
                 }
               },
               "value": {
@@ -2017,7 +2043,7 @@
                     "left": {
                       "type": "attributeReference",
                       "attribute": {
-                        "$ref": "#/objectTypes/natuurlijkPersoon/properties/leeftijd"
+                        "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
                       },
                       "subject": {
                         "type": "pronoun",
@@ -2036,7 +2062,7 @@
                     "left": {
                       "type": "attributeReference",
                       "attribute": {
-                        "$ref": "#/objectTypes/vlucht/properties/afstandTotBestemming"
+                        "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
                       },
                       "subject": {
                         "type": "role",
@@ -2050,7 +2076,7 @@
                     "right": {
                       "type": "parameterReference",
                       "parameter": {
-                        "$ref": "#/parameters/BOVENGRENS_AFSTAND_EERSTE_SCHIJF"
+                        "$ref": "#/parameters/70fbc167-01ca-4ef6-a1dd-78d05eaf99ab"
                       }
                     }
                   }
@@ -2059,25 +2085,28 @@
             }
           ]
         }
-      ]
+      }
     },
     {
-      "name": "Leeftijd",
-      "rules": [
-        {
-          "id": "leeftijd-01",
-          "name": "leeftijd 01",
+      "name": {
+        "nl": "Leeftijd"
+      },
+      "rules": {
+        "98baf8ea-2530-4f3b-88cd-429a2b7ff2a7": {
+          "name": {
+            "nl": "leeftijd 01"
+          },
           "versions": [
             {
               "validFrom": "2018",
               "target": {
                 "attribute": {
-                  "$ref": "#/objectTypes/natuurlijkPersoon/properties/leeftijd"
+                  "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
                 },
                 "subject": {
                   "type": "objectType",
                   "ref": {
-                    "$ref": "#/objectTypes/natuurlijkPersoon"
+                    "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"
                   }
                 }
               },
@@ -2087,7 +2116,7 @@
                 "from": {
                   "type": "attributeReference",
                   "attribute": {
-                    "$ref": "#/objectTypes/natuurlijkPersoon/properties/geboortedatum"
+                    "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/b5200359-418f-40db-bdd2-cf9f7f77b4d4"
                   },
                   "subject": {
                     "type": "pronoun",
@@ -2097,7 +2126,7 @@
                 "to": {
                   "type": "attributeReference",
                   "attribute": {
-                    "$ref": "#/objectTypes/vlucht/properties/datumVanDeVlucht"
+                    "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/bf4947b1-acc6-4857-ba8b-881360e83b36"
                   },
                   "subject": {
                     "type": "role",
@@ -2114,32 +2143,35 @@
             }
           ]
         }
-      ]
+      }
     },
     {
-      "name": "Maximum aantal treinmiles",
-      "rules": [
-        {
-          "id": "maximaal-aantal-te-ontvangen-treinmiles-01",
-          "name": "maximaal aantal te ontvangen treinmiles 01",
+      "name": {
+        "nl": "Maximum aantal treinmiles"
+      },
+      "rules": {
+        "5c9e3e4a-d3d8-4574-9706-4c3cf988659b": {
+          "name": {
+            "nl": "maximaal aantal te ontvangen treinmiles 01"
+          },
           "versions": [
             {
               "validFrom": "2019",
               "target": {
                 "attribute": {
-                  "$ref": "#/objectTypes/natuurlijkPersoon/properties/maximaalAantalTeOntvangenTreinmiles"
+                  "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/661f7a45-78a0-4c8f-85bc-8a27748420f5"
                 },
                 "subject": {
                   "type": "objectType",
                   "ref": {
-                    "$ref": "#/objectTypes/natuurlijkPersoon"
+                    "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"
                   }
                 }
               },
               "value": {
                 "type": "parameterReference",
                 "parameter": {
-                  "$ref": "#/parameters/MAXIMUM_AANTAL_TREINMILES_VOOR_PASSAGIERS_JONGER_DAN_65"
+                  "$ref": "#/parameters/4c6de8d0-46a5-41c6-af10-05e87931285f"
                 }
               },
               "condition": {
@@ -2148,7 +2180,7 @@
                 "left": {
                   "type": "attributeReference",
                   "attribute": {
-                    "$ref": "#/objectTypes/natuurlijkPersoon/properties/leeftijd"
+                    "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
                   },
                   "subject": {
                     "type": "pronoun",
@@ -2164,27 +2196,28 @@
             }
           ]
         },
-        {
-          "id": "maximaal-aantal-te-ontvangen-treinmiles-02",
-          "name": "maximaal aantal te ontvangen treinmiles 02",
+        "98d1244c-3538-4acd-a324-399d572d3c02": {
+          "name": {
+            "nl": "maximaal aantal te ontvangen treinmiles 02"
+          },
           "versions": [
             {
               "validFrom": "2019",
               "target": {
                 "attribute": {
-                  "$ref": "#/objectTypes/natuurlijkPersoon/properties/maximaalAantalTeOntvangenTreinmiles"
+                  "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/661f7a45-78a0-4c8f-85bc-8a27748420f5"
                 },
                 "subject": {
                   "type": "objectType",
                   "ref": {
-                    "$ref": "#/objectTypes/natuurlijkPersoon"
+                    "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"
                   }
                 }
               },
               "value": {
                 "type": "parameterReference",
                 "parameter": {
-                  "$ref": "#/parameters/MAXIMUM_AANTAL_TREINMILES_VOOR_PASSAGIERS_VAN_65_JAAR_OF_OUDER"
+                  "$ref": "#/parameters/2aba030a-5d4d-4286-94d9-4f92e5b633a4"
                 }
               },
               "condition": {
@@ -2193,7 +2226,7 @@
                 "left": {
                   "type": "attributeReference",
                   "attribute": {
-                    "$ref": "#/objectTypes/natuurlijkPersoon/properties/leeftijd"
+                    "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
                   },
                   "subject": {
                     "type": "pronoun",
@@ -2209,25 +2242,28 @@
             }
           ]
         }
-      ]
+      }
     },
     {
-      "name": "Te betalen belasting",
-      "rules": [
-        {
-          "id": "te-betalen-belasting-01",
-          "name": "te betalen belasting 01",
+      "name": {
+        "nl": "Te betalen belasting"
+      },
+      "rules": {
+        "47bc8e5d-3b37-4442-8396-eb8c655960fc": {
+          "name": {
+            "nl": "te betalen belasting 01"
+          },
           "versions": [
             {
               "validFrom": "2018",
               "target": {
                 "attribute": {
-                  "$ref": "#/objectTypes/natuurlijkPersoon/properties/teBetalenBelasting"
+                  "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/ab9cc7dc-7be7-412d-ae46-0224ceef3153"
                 },
                 "subject": {
                   "type": "objectType",
                   "ref": {
-                    "$ref": "#/objectTypes/natuurlijkPersoon"
+                    "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"
                   }
                 }
               },
@@ -2239,7 +2275,7 @@
                   "left": {
                     "type": "attributeReference",
                     "attribute": {
-                      "$ref": "#/objectTypes/natuurlijkPersoon/properties/belastingOpBasisVanAfstand"
+                      "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/199d696e-a168-4584-8f80-35d737e5e1ba"
                     },
                     "subject": {
                       "type": "pronoun",
@@ -2249,7 +2285,7 @@
                   "right": {
                     "type": "attributeReference",
                     "attribute": {
-                      "$ref": "#/objectTypes/natuurlijkPersoon/properties/belastingOpBasisVanReisduur"
+                      "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/b802e897-8854-4ad3-97b4-3ed4b04f9b16"
                     },
                     "subject": {
                       "type": "pronoun",
@@ -2268,7 +2304,7 @@
                     "condition": {
                       "type": "propertyReference",
                       "property": {
-                        "$ref": "#/objectTypes/natuurlijkPersoon/properties/rechtOpDuurzaamheidskorting"
+                        "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/4b9bd5f1-311a-4b59-8dd9-ee3139de153e"
                       },
                       "subject": {
                         "type": "pronoun",
@@ -2281,7 +2317,7 @@
                     "condition": {
                       "type": "propertyReference",
                       "property": {
-                        "$ref": "#/objectTypes/vlucht/properties/klimaatneutraal"
+                        "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/866a85c0-b305-4ce3-af5b-2baf449cdfeb"
                       },
                       "subject": {
                         "type": "role",
@@ -2298,20 +2334,21 @@
             }
           ]
         },
-        {
-          "id": "te-betalen-belasting-02a",
-          "name": "te betalen belasting 02a",
+        "f95898ad-2cfc-4e28-8011-72429f5ae717": {
+          "name": {
+            "nl": "te betalen belasting 02a"
+          },
           "versions": [
             {
               "validFrom": "2018",
               "target": {
                 "attribute": {
-                  "$ref": "#/objectTypes/natuurlijkPersoon/properties/teBetalenBelasting"
+                  "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/ab9cc7dc-7be7-412d-ae46-0224ceef3153"
                 },
                 "subject": {
                   "type": "objectType",
                   "ref": {
-                    "$ref": "#/objectTypes/natuurlijkPersoon"
+                    "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"
                   }
                 }
               },
@@ -2328,7 +2365,7 @@
                       "left": {
                         "type": "attributeReference",
                         "attribute": {
-                          "$ref": "#/objectTypes/natuurlijkPersoon/properties/belastingOpBasisVanAfstand"
+                          "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/199d696e-a168-4584-8f80-35d737e5e1ba"
                         },
                         "subject": {
                           "type": "pronoun",
@@ -2338,7 +2375,7 @@
                       "right": {
                         "type": "attributeReference",
                         "attribute": {
-                          "$ref": "#/objectTypes/natuurlijkPersoon/properties/belastingOpBasisVanReisduur"
+                          "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/b802e897-8854-4ad3-97b4-3ed4b04f9b16"
                         },
                         "subject": {
                           "type": "pronoun",
@@ -2349,7 +2386,7 @@
                     "right": {
                       "type": "parameterReference",
                       "parameter": {
-                        "$ref": "#/parameters/KORTING_VOOR_KLIMAATNEUTRALE_VLUCHT"
+                        "$ref": "#/parameters/447763d6-bb4c-4d6c-bf1e-20ef7e967bd4"
                       }
                     }
                   },
@@ -2368,7 +2405,7 @@
                   {
                     "type": "propertyReference",
                     "property": {
-                      "$ref": "#/objectTypes/natuurlijkPersoon/properties/rechtOpDuurzaamheidskorting"
+                      "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/4b9bd5f1-311a-4b59-8dd9-ee3139de153e"
                     },
                     "subject": {
                       "type": "pronoun",
@@ -2378,7 +2415,7 @@
                   {
                     "type": "propertyReference",
                     "property": {
-                      "$ref": "#/objectTypes/vlucht/properties/klimaatneutraal"
+                      "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/866a85c0-b305-4ce3-af5b-2baf449cdfeb"
                     },
                     "subject": {
                       "type": "role",
@@ -2394,37 +2431,44 @@
             }
           ]
         }
-      ]
+      }
     },
     {
-      "name": "Toewijzen treinmiles",
-      "rules": [
-        {
-          "id": "treinmiles-01",
-          "name": "treinmiles 01",
+      "name": {
+        "nl": "Toewijzen treinmiles"
+      },
+      "rules": {
+        "0342341e-101c-4bf2-aa8d-d29928c3c7fa": {
+          "name": {
+            "nl": "treinmiles 01"
+          },
           "versions": [
             {
               "validFrom": "2018",
               "validTo": "2018",
               "source": {
                 "attribute": {
-                  "$ref": "#/objectTypes/contingentTreinmiles/properties/totaalAantalTreinmiles"
+                  "$ref": "#/objectTypes/bea88ba3-ec79-4bd2-8f8e-f6e11a08c431/properties/f2aa806f-f1f1-4212-aba8-b01334172317"
                 },
                 "subject": {
                   "type": "role",
-                  "ref": "#/factTypes/verdelingContingentTreinmilesOverPassagiers/roles/0"
+                  "ref": {
+        "$ref": "#/factTypes/da5cc365-024d-4c43-8fce-75ae4a4d461f/roles/5d45c715-f041-453c-9386-8c97fa592ea7"
+      }
                 }
               },
               "target": {
                 "attribute": {
-                  "$ref": "#/objectTypes/natuurlijkPersoon/properties/treinmiles"
+                  "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/11d155f3-d6bd-4792-94bb-e20c0c885101"
                 },
                 "subjects": {
                   "type": "allRoles",
                   "role": "passagiers met recht op treinmiles",
                   "ofSubject": {
                     "type": "role",
-                    "ref": "#/factTypes/verdelingContingentTreinmilesOverPassagiers/roles/0"
+                    "ref": {
+        "$ref": "#/factTypes/da5cc365-024d-4c43-8fce-75ae4a4d461f/roles/5d45c715-f041-453c-9386-8c97fa592ea7"
+      }
                   }
                 }
               },
@@ -2436,11 +2480,13 @@
                 },
                 "remainder": {
                   "attribute": {
-                    "$ref": "#/objectTypes/contingentTreinmiles/properties/restantNaVerdeling"
+                    "$ref": "#/objectTypes/bea88ba3-ec79-4bd2-8f8e-f6e11a08c431/properties/8f5423a5-cc51-4f78-b66e-720540da5bf8"
                   },
                   "subject": {
                     "type": "role",
-                    "ref": "#/factTypes/verdelingContingentTreinmilesOverPassagiers/roles/0"
+                    "ref": {
+        "$ref": "#/factTypes/da5cc365-024d-4c43-8fce-75ae4a4d461f/roles/5d45c715-f041-453c-9386-8c97fa592ea7"
+      }
                   }
                 }
               }
@@ -2449,23 +2495,27 @@
               "validFrom": "2019",
               "source": {
                 "attribute": {
-                  "$ref": "#/objectTypes/contingentTreinmiles/properties/totaalAantalTreinmiles"
+                  "$ref": "#/objectTypes/bea88ba3-ec79-4bd2-8f8e-f6e11a08c431/properties/f2aa806f-f1f1-4212-aba8-b01334172317"
                 },
                 "subject": {
                   "type": "role",
-                  "ref": "#/factTypes/verdelingContingentTreinmilesOverPassagiers/roles/0"
+                  "ref": {
+        "$ref": "#/factTypes/da5cc365-024d-4c43-8fce-75ae4a4d461f/roles/5d45c715-f041-453c-9386-8c97fa592ea7"
+      }
                 }
               },
               "target": {
                 "attribute": {
-                  "$ref": "#/objectTypes/natuurlijkPersoon/properties/treinmiles"
+                  "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/11d155f3-d6bd-4792-94bb-e20c0c885101"
                 },
                 "subjects": {
                   "type": "allRoles",
                   "role": "passagiers met recht op treinmiles",
                   "ofSubject": {
                     "type": "role",
-                    "ref": "#/factTypes/verdelingContingentTreinmilesOverPassagiers/roles/0"
+                    "ref": {
+        "$ref": "#/factTypes/da5cc365-024d-4c43-8fce-75ae4a4d461f/roles/5d45c715-f041-453c-9386-8c97fa592ea7"
+      }
                   }
                 }
               },
@@ -2473,19 +2523,19 @@
                 "method": "ordered",
                 "orderBy": {
                   "attribute": {
-                    "$ref": "#/objectTypes/natuurlijkPersoon/properties/leeftijd"
+                    "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
                   },
                   "direction": "ascending"
                 },
                 "tieBreaker": {
                   "method": "proportional",
                   "attribute": {
-                    "$ref": "#/objectTypes/natuurlijkPersoon/properties/woonregiofactor"
+                    "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/85a409f3-4f30-4032-ae35-6c49a434a45d"
                   }
                 },
                 "maximum": {
                   "attribute": {
-                    "$ref": "#/objectTypes/natuurlijkPersoon/properties/maximaalAantalTeOntvangenTreinmiles"
+                    "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/661f7a45-78a0-4c8f-85bc-8a27748420f5"
                   }
                 },
                 "rounding": {
@@ -2494,18 +2544,20 @@
                 },
                 "remainder": {
                   "attribute": {
-                    "$ref": "#/objectTypes/contingentTreinmiles/properties/restantNaVerdeling"
+                    "$ref": "#/objectTypes/bea88ba3-ec79-4bd2-8f8e-f6e11a08c431/properties/8f5423a5-cc51-4f78-b66e-720540da5bf8"
                   },
                   "subject": {
                     "type": "role",
-                    "ref": "#/factTypes/verdelingContingentTreinmilesOverPassagiers/roles/0"
+                    "ref": {
+        "$ref": "#/factTypes/da5cc365-024d-4c43-8fce-75ae4a4d461f/roles/5d45c715-f041-453c-9386-8c97fa592ea7"
+      }
                   }
                 }
               }
             }
           ]
         }
-      ]
+      }
     }
   ]
 }

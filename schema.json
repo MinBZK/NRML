@@ -73,6 +73,13 @@
           "$ref": "#/$defs/parameter"
         }
       }
+    },
+    "ruleGroups": {
+      "type": "array",
+      "description": "Rule group definities",
+      "items": {
+        "$ref": "#/$defs/ruleGroup"
+      }
     }
   },
   "$defs": {
@@ -97,7 +104,8 @@
       "properties": {
         "$ref": {
           "type": "string",
-          "pattern": "^#/[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$"
+          "pattern": "^#/(objectTypes|factTypes|parameters|domains)/[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}(/properties/[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12})?(/roles/[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12})?$",
+          "description": "Full path UUID reference format only"
         }
       }
     },
@@ -193,7 +201,7 @@
               "properties": {
                 "$ref": {
                   "type": "string",
-                  "pattern": "^#/[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$"
+                  "pattern": "^#/(objectTypes|factTypes|parameters|domains)/[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}.*$"
                 }
               }
             }
@@ -317,7 +325,7 @@
               "properties": {
                 "$ref": {
                   "type": "string",
-                  "pattern": "^#/[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$"
+                  "pattern": "^#/(objectTypes|factTypes|parameters|domains)/[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}.*$"
                 }
               }
             }
@@ -341,6 +349,376 @@
         },
         "unit": {
           "type": "string"
+        }
+      }
+    },
+    "ruleGroup": {
+      "type": "object",
+      "required": ["name", "rules"],
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/languageObject"
+        },
+        "rules": {
+          "type": "object",
+          "description": "Rules met UUID keys",
+          "patternProperties": {
+            "^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$": {
+              "$ref": "#/$defs/rule"
+            }
+          },
+          "additionalProperties": false
+        }
+      }
+    },
+    "rule": {
+      "type": "object",
+      "required": ["name", "versions"],
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/languageObject"
+        },
+        "versions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ruleVersion"
+          },
+          "minItems": 1
+        }
+      }
+    },
+    "ruleVersion": {
+      "type": "object",
+      "required": ["validFrom"],
+      "properties": {
+        "validFrom": {
+          "type": "string"
+        },
+        "validTo": {
+          "type": "string"
+        },
+        "target": {
+          "$ref": "#/$defs/ruleTarget"
+        },
+        "property": {
+          "$ref": "#/$defs/jsonPointer"
+        },
+        "subject": {
+          "$ref": "#/$defs/ruleSubject"
+        },
+        "value": {
+          "$ref": "#/$defs/ruleValue"
+        },
+        "expression": {
+          "$ref": "#/$defs/ruleExpression"
+        },
+        "condition": {
+          "$ref": "#/$defs/ruleCondition"
+        },
+        "source": {
+          "$ref": "#/$defs/ruleTarget"
+        },
+        "distribution": {
+          "$ref": "#/$defs/ruleDistribution"
+        }
+      }
+    },
+    "ruleTarget": {
+      "type": "object",
+      "properties": {
+        "attribute": {
+          "$ref": "#/$defs/jsonPointer"
+        },
+        "subject": {
+          "$ref": "#/$defs/ruleSubject"
+        },
+        "subjects": {
+          "$ref": "#/$defs/ruleSubjects"
+        }
+      }
+    },
+    "ruleSubject": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["objectType", "role", "pronoun", "objectTypeWithProperty"]
+        },
+        "ref": {
+          "$ref": "#/$defs/jsonPointer"
+        },
+        "role": {
+          "type": "string"
+        },
+        "pronoun": {
+          "type": "string"
+        },
+        "objectType": {
+          "$ref": "#/$defs/jsonPointer"
+        },
+        "property": {
+          "$ref": "#/$defs/jsonPointer"
+        },
+        "ofSubject": {
+          "$ref": "#/$defs/ruleSubject"
+        }
+      }
+    },
+    "ruleSubjects": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["allRoles"]
+        },
+        "role": {
+          "type": "string"
+        },
+        "ofSubject": {
+          "$ref": "#/$defs/ruleSubject"
+        }
+      }
+    },
+    "ruleValue": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": ["type", "value"],
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["numeric", "boolean", "text"]
+            },
+            "value": {
+              "oneOf": [
+                {"type": "number"},
+                {"type": "boolean"},
+                {"type": "string"}
+              ]
+            },
+            "unit": {
+              "type": "string"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["type", "parameter"],
+          "properties": {
+            "type": {
+              "type": "string",
+              "const": "parameterReference"
+            },
+            "parameter": {
+              "$ref": "#/$defs/jsonPointer"
+            }
+          }
+        }
+      ]
+    },
+    "ruleExpression": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["aggregation", "arithmetic", "function", "attributeReference", "parameterReference", "roleReference", "rounding", "bounded"]
+        },
+        "function": {
+          "type": "string"
+        },
+        "operator": {
+          "type": "string"
+        },
+        "left": {
+          "$ref": "#/$defs/ruleExpression"
+        },
+        "right": {
+          "$ref": "#/$defs/ruleExpression"
+        },
+        "expression": {
+          "$ref": "#/$defs/ruleExpression"
+        },
+        "attribute": {
+          "$ref": "#/$defs/jsonPointer"
+        },
+        "parameter": {
+          "$ref": "#/$defs/jsonPointer"
+        },
+        "subject": {
+          "$ref": "#/$defs/ruleSubject"
+        },
+        "role": {
+          "type": "string"
+        },
+        "from": {
+          "$ref": "#/$defs/ruleExpression"
+        },
+        "to": {
+          "$ref": "#/$defs/ruleExpression"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "whole": {
+          "type": "boolean"
+        },
+        "decimals": {
+          "type": "integer"
+        },
+        "direction": {
+          "type": "string",
+          "enum": ["up", "down"]
+        },
+        "minimum": {
+          "$ref": "#/$defs/ruleValue"
+        },
+        "maximum": {
+          "$ref": "#/$defs/ruleValue"
+        },
+        "default": {
+          "$ref": "#/$defs/ruleValue"
+        }
+      }
+    },
+    "ruleCondition": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": ["type", "conditions"],
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["allOf", "anyOf", "exactlyOneOf"]
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/ruleCondition"
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["type", "condition"],
+          "properties": {
+            "type": {
+              "type": "string",
+              "const": "not"
+            },
+            "condition": {
+              "$ref": "#/$defs/ruleCondition"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["type", "operator", "left", "right"],
+          "properties": {
+            "type": {
+              "type": "string",
+              "const": "comparison"
+            },
+            "operator": {
+              "type": "string",
+              "enum": ["equals", "notEquals", "lessThan", "lessThanOrEquals", "greaterThan", "greaterThanOrEquals"]
+            },
+            "left": {
+              "anyOf": [
+                {"$ref": "#/$defs/ruleExpression"},
+                {"$ref": "#/$defs/ruleValue"}
+              ]
+            },
+            "right": {
+              "anyOf": [
+                {"$ref": "#/$defs/ruleExpression"},
+                {"$ref": "#/$defs/ruleValue"}
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["type", "property", "subject"],
+          "properties": {
+            "type": {
+              "type": "string",
+              "const": "propertyReference"
+            },
+            "property": {
+              "$ref": "#/$defs/jsonPointer"
+            },
+            "subject": {
+              "$ref": "#/$defs/ruleSubject"
+            }
+          }
+        }
+      ]
+    },
+    "ruleDistribution": {
+      "type": "object",
+      "required": ["method"],
+      "properties": {
+        "method": {
+          "type": "string",
+          "enum": ["equal", "ordered", "proportional"]
+        },
+        "orderBy": {
+          "type": "object",
+          "properties": {
+            "attribute": {
+              "$ref": "#/$defs/jsonPointer"
+            },
+            "direction": {
+              "type": "string",
+              "enum": ["ascending", "descending"]
+            }
+          }
+        },
+        "tieBreaker": {
+          "type": "object",
+          "properties": {
+            "method": {
+              "type": "string",
+              "enum": ["proportional"]
+            },
+            "attribute": {
+              "$ref": "#/$defs/jsonPointer"
+            }
+          }
+        },
+        "maximum": {
+          "type": "object",
+          "properties": {
+            "attribute": {
+              "$ref": "#/$defs/jsonPointer"
+            }
+          }
+        },
+        "rounding": {
+          "type": "object",
+          "properties": {
+            "decimals": {
+              "type": "integer"
+            },
+            "direction": {
+              "type": "string",
+              "enum": ["up", "down"]
+            }
+          }
+        },
+        "remainder": {
+          "type": "object",
+          "properties": {
+            "attribute": {
+              "$ref": "#/$defs/jsonPointer"
+            },
+            "subject": {
+              "$ref": "#/$defs/ruleSubject"
+            }
+          }
         }
       }
     }
