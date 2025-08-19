@@ -94,7 +94,19 @@ Het `schema.json` bestand definieert de formele structuur van NRML documenten en
 
 ### 1. Schema Validatie
 
-Valideer NRML documenten tegen het schema:
+NRML documenten kunnen gevalideerd worden tegen het JSON Schema voor structurele correctheid.
+
+**Met de ingebouwde validator:**
+
+```bash
+# Valideer het standaard bestand
+uv run scripts/validate.py
+
+# Valideer specifieke bestanden
+uv run scripts/validate.py schema.json mijn-model.nrml.json
+```
+
+**Handmatig met Python:**
 
 ```python
 import json
@@ -108,6 +120,12 @@ with open('toka.nrml.json') as f:
 
 jsonschema.validate(document, schema)
 ```
+
+De validator controleert:
+- UUID-formaat voor alle keys
+- Vereiste velden per object type  
+- Taalcode formaat (ISO 639-1)
+- JSON Schema compliance
 
 ### 2. Referentie Integriteit
 

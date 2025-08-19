@@ -1,0 +1,108 @@
+#!/usr/bin/env uv run python
+
+"""
+NRML Schema Validator
+====================
+
+Validates NRML JSON files against the JSON Schema.
+
+Usage:
+    uv run scripts/validate.py [schema.json] [file.json]
+    
+Arguments:
+    schema.json  JSON Schema file (default: schema.json)
+    file.json    NRML file to validate (default: toka.nrml.json)
+
+Examples:
+    uv run scripts/validate.py
+    uv run scripts/validate.py schema.json toka-v2-nested-type.nrml.json
+"""
+
+import json
+import sys
+import os
+
+try:
+    import jsonschema
+    from jsonschema import validate, ValidationError
+except ImportError:
+    print("❌ jsonschema library not found. Install with:")
+    print("   uv add jsonschema")
+    sys.exit(1)
+
+def validate_nrml(schema_file, data_file):
+    """Validate NRML file against schema"""
+    
+    # Check files exist
+    if not os.path.exists(schema_file):
+        print(f"❌ Schema file not found: {schema_file}")
+        return False
+        
+    if not os.path.exists(data_file):
+        print(f"❌ Data file not found: {data_file}")
+        return False
+    
+    try:
+        # Load schema
+        print(f"📖 Loading schema: {schema_file}")
+        with open(schema_file, 'r', encoding='utf-8') as f:
+            schema = json.load(f)
+        
+        # Load data
+        print(f"📖 Loading data: {data_file}")
+        with open(data_file, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        
+        # Validate
+        print("🔍 Validating against schema...")
+        validate(instance=data, schema=schema)
+        
+        print("✅ Validation successful!")
+        print(f"✅ {data_file} is valid according to {schema_file}")
+        return True
+        
+    except json.JSONDecodeError as e:
+        print(f"❌ JSON parsing error: {e}")
+        return False
+        
+    except ValidationError as e:
+        print("❌ Schema validation failed!")
+        print(f"❌ Error: {e.message}")
+        if e.absolute_path:
+            print(f"📍 Path: {' -> '.join(str(p) for p in e.absolute_path)}")
+        if e.schema_path:
+            print(f"🔧 Schema path: {' -> '.join(str(p) for p in e.schema_path)}")
+        return False
+        
+    except Exception as e:
+        print(f"❌ Unexpected error: {e}")
+        return False
+
+def main():
+    """Main CLI interface"""
+    
+    # Default paths (relative to project root)
+    default_schema = "schema.json"
+    default_data = "toka.nrml.json"
+    
+    # Parse arguments
+    if len(sys.argv) == 1:
+        schema_file = str(default_schema)
+        data_file = str(default_data)
+    elif len(sys.argv) == 3:
+        schema_file = sys.argv[1]
+        data_file = sys.argv[2]
+    else:
+        print(__doc__)
+        sys.exit(1)
+    
+    print("🚀 NRML Schema Validator")
+    print("=" * 40)
+    
+    success = validate_nrml(schema_file, data_file)
+    
+    if not success:
+        sys.exit(1)
+
+if __name__ == "__main__":
+    main()
