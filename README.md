@@ -145,13 +145,13 @@ Controleer of alle JSON Pointer referenties (`$ref`) correct verwijzen naar best
 
 ## XSLT Transformatie
 
-NRML documenten kunnen worden getransformeerd naar Nederlandse gegevensspraak voor menselijke leesbaarheid.
+NRML documenten kunnen worden getransformeerd, bijvoorbeeld naar Nederlandse gegevensspraak voor menselijke leesbaarheid.
 
 ### Quick Start
 
 ```bash
 # Installeer dependencies (eenmalig)
-cd scripts && npm install
+npm install
 
 # Basis transformatie
 ./scripts/transform
