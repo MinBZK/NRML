@@ -79,7 +79,7 @@
         <xsl:when test="$property-type = 'kenmerk'">
           <xsl:choose>
             <xsl:when test="$subtype = 'bezittelijk'">
-              <xsl:value-of select="$property-article"/>
+              <xsl:value-of select="if ($property-article) then $property-article else 'het'"/>
               <xsl:text>&#9;</xsl:text>
               <xsl:value-of select="replace($property-name, '_', ' ')"/>
               <xsl:text>&#9;kenmerk (bezittelijk)&#10;</xsl:text>
@@ -90,7 +90,7 @@
               <xsl:text>&#9;kenmerk (bijvoeglijk)&#10;</xsl:text>
             </xsl:when>
             <xsl:otherwise>
-              <xsl:value-of select="$property-article"/>
+              <xsl:value-of select="if ($property-article) then $property-article else 'de'"/>
               <xsl:text>&#9;</xsl:text>
               <xsl:value-of select="replace($property-name, '_', ' ')"/>
               <xsl:text>&#9;kenmerk&#10;</xsl:text>
