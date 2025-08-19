@@ -12,27 +12,30 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
 
 # Default waarden
-XSLT_FILE="${1:-$SCRIPT_DIR/gegevensspraak-transformatie.xsl}"
+XSLT_FILE="${1:-$PROJECT_ROOT/transformations/gegevensspraak.xsl}"
 INPUT_FILE="${2:-$PROJECT_ROOT/toka.nrml.json}"
 OUTPUT_FILE="${3:-$PROJECT_ROOT/objectmodel_xslt_output.txt}"
+LANGUAGE="${4:-nl}"
 
 function print_usage() {
     cat << EOF
 🚀 NRML XSLT 3.0 Transformatie (Saxon-JS)
 
 GEBRUIK:
-    $0 [stylesheet.xsl] [input.json] [output.txt]
+    $0 [stylesheet.xsl] [input.json] [output.txt] [language]
 
 ARGUMENTEN:
-    stylesheet.xsl  XSLT transformatie bestand (default: gegevensspraak-transformatie.xsl)
-    input.json      NRML JSON bestand (default: toka.nrml.json)
-    output.txt      Output bestand (default: objectmodel_xslt_output.txt)
+    stylesheet.xsl  XSLT transformatie bestand (default: ../transformations/gegevensspraak.xsl)
+    input.json      NRML JSON bestand (default: ../toka.nrml.json)
+    output.txt      Output bestand (default: ../objectmodel_xslt_output.txt)
+    language        Taal code voor meertalige ondersteuning (default: nl)
 
 VOORBEELDEN:
-    $0                                              # Gebruik alle defaults
-    $0 my-transform.xsl                             # Custom XSLT, default input/output
+    $0                                              # Gebruik alle defaults (nl)
+    $0 my-transform.xsl                             # Custom XSLT, default input/output/language
     $0 my-transform.xsl model.json                  # Custom XSLT en input
-    $0 my-transform.xsl model.json output.txt       # Volledige custom parameters
+    $0 my-transform.xsl model.json output.txt       # Custom XSLT, input en output
+    $0 my-transform.xsl model.json output.txt en    # Volledige custom met Engels
 
 FEATURES:
     ✅ XSLT 3.0 declaratieve templates
@@ -41,6 +44,9 @@ FEATURES:
     ✅ Template inheritance
     ✅ Fast Saxon-JS engine
     ✅ Geen Java dependencies
+    ✅ Meertalige ondersteuning (nl, en, etc)
+    ✅ UUID-based v2 formaat support
+    ✅ Backward compatible met v1 formaat
 
 EOF
 }
@@ -84,6 +90,7 @@ function validate_files() {
     echo "🔄 XSLT transformatie: $XSLT_FILE"
     echo "📄 Input bestand: $INPUT_FILE"
     echo "📝 Output bestand: $OUTPUT_FILE"
+    echo "🌍 Taal: $LANGUAGE"
 }
 
 function update_xslt_path() {
@@ -94,7 +101,10 @@ function update_xslt_path() {
     
     # Temporary XSLT met correct path
     local temp_xslt="$SCRIPT_DIR/temp_gegevensspraak.xsl"
-    sed "s|unparsed-text('../toka.nrml.json')|unparsed-text('$relative_path')|g" "$XSLT_FILE" > "$temp_xslt"
+    # Update both old and new XSLT template formats
+    sed -e "s|unparsed-text('../toka.nrml.json')|unparsed-text('$relative_path')|g" \
+        -e "s|unparsed-text(\$input-file)|unparsed-text('$relative_path')|g" \
+        "$XSLT_FILE" > "$temp_xslt"
     echo "$temp_xslt"
 }
 
@@ -113,7 +123,7 @@ function run_xslt_transformation() {
     
     # Voer XSLT transformatie uit met Saxon-JS
     cd "$SCRIPT_DIR"
-    if npx xslt3 -it:main -xsl:"$(basename "$temp_xslt")" -o:"$OUTPUT_FILE" 2>/dev/null; then
+    if npx xslt3 -it:main -xsl:"$(basename "$temp_xslt")" -o:"$OUTPUT_FILE" language="$LANGUAGE" input-file="$(python3 -c "import os; print(os.path.relpath('$INPUT_FILE', '$SCRIPT_DIR'))")" 2>/dev/null; then
         # Cleanup
         rm -f "$temp_xslt"
         

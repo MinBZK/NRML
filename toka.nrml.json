@@ -1,26 +1,759 @@
 {
   "$schema": "./schema.json",
+  "version": "2.0",
+  "language": "nl",
   "metadata": {
     "version": "1.0.0",
     "language": "nl",
     "created": "2025-01-15",
-    "description": "TOKA vliegbelasting model - Nederlandse regeling voor belasting op vliegverkeer"
+    "description": "TOKA vliegbelasting model - Nederlandse regeling voor belasting op vliegverkeer",
+    "migrated_at": "2025-08-19T11:45:24.303Z",
+    "format_version": "uuid-multilingual"
+  },
+  "objectTypes": {
+    "48c6ed9c-0911-43d8-b6ef-47d2b406ea35": {
+      "name": {
+        "nl": "vlucht"
+      },
+      "definite_article": {
+        "nl": "de"
+      },
+      "properties": {
+        "d72ead33-2e0c-450a-ba71-b83940c8e926": {
+          "name": {
+            "nl": "belaste reis"
+          },
+          "type": "characteristic"
+        },
+        "2330a40c-76e0-41d3-877c-43337b73c025": {
+          "name": {
+            "nl": "onbelaste reis"
+          },
+          "type": "characteristic"
+        },
+        "cbe15f31-ce60-440c-8e72-0861a5089457": {
+          "name": {
+            "nl": "rondvlucht"
+          },
+          "type": "characteristic"
+        },
+        "866a85c0-b305-4ce3-af5b-2baf449cdfeb": {
+          "name": {
+            "nl": "klimaatneutraal"
+          },
+          "type": "characteristic",
+          "subtype": "adjective"
+        },
+        "fe752ef2-19ba-4b5c-9e6e-ad86df5d3d59": {
+          "name": {
+            "nl": "luchthaven van vertrek"
+          },
+          "article": {
+            "nl": "de"
+          },
+          "type": {
+            "$ref": "#/b20b40f4-76ca-4887-afe4-cf98fc77ff66"
+          }
+        },
+        "07783713-6df0-4810-bc44-4206050cb19d": {
+          "name": {
+            "nl": "luchthaven van bestemming"
+          },
+          "article": {
+            "nl": "de"
+          },
+          "type": {
+            "$ref": "#/b20b40f4-76ca-4887-afe4-cf98fc77ff66"
+          }
+        },
+        "bf4947b1-acc6-4857-ba8b-881360e83b36": {
+          "name": {
+            "nl": "datum van de vlucht"
+          },
+          "article": {
+            "nl": "de"
+          },
+          "type": "date",
+          "precision": "days"
+        },
+        "ea7d8d81-5ce2-4d79-b69f-a982cb90f35d": {
+          "name": {
+            "nl": "afstand tot bestemming"
+          },
+          "article": {
+            "nl": "de"
+          },
+          "type": "numeric",
+          "subtype": "integer",
+          "unit": "km"
+        },
+        "ea5d01e3-af40-437f-bc0f-d29b26718148": {
+          "name": {
+            "nl": "bereikbaar per trein"
+          },
+          "article": {
+            "nl": "de"
+          },
+          "type": "boolean"
+        },
+        "2c4ed887-d1fa-4aa3-b0c4-6c0f0acc7a76": {
+          "name": {
+            "nl": "reisduur per trein"
+          },
+          "article": {
+            "nl": "de"
+          },
+          "type": "numeric",
+          "subtype": "integer",
+          "unit": "minuut"
+        },
+        "89cdc694-7fae-4577-a289-08442a662d26": {
+          "name": {
+            "nl": "aantal passagiers"
+          },
+          "article": {
+            "nl": "het"
+          },
+          "type": "numeric",
+          "subtype": "integer"
+        },
+        "339243f4-dee5-474f-ab62-c7df39e69788": {
+          "name": {
+            "nl": "totale belasting op basis van afstand"
+          },
+          "article": {
+            "nl": "de"
+          },
+          "type": {
+            "$ref": "#/1ffc339e-47cf-4f17-8985-22628dddb49a"
+          }
+        },
+        "b09702d7-a7d4-4308-976c-da0b5903eac9": {
+          "name": {
+            "nl": "totale belasting op basis van reisduur"
+          },
+          "article": {
+            "nl": "de"
+          },
+          "type": {
+            "$ref": "#/1ffc339e-47cf-4f17-8985-22628dddb49a"
+          }
+        },
+        "cbc050ae-0471-4a39-add4-6b3b8fc3e9a5": {
+          "name": {
+            "nl": "totaal te betalen belasting"
+          },
+          "article": {
+            "nl": "de"
+          },
+          "type": {
+            "$ref": "#/1ffc339e-47cf-4f17-8985-22628dddb49a"
+          }
+        }
+      }
+    },
+    "4c72dc9d-78d4-4f0b-a0cd-6037944f26ce": {
+      "name": {
+        "nl": "natuurlijk persoon"
+      },
+      "definite_article": {
+        "nl": "de"
+      },
+      "animated": true,
+      "properties": {
+        "ef64a2f2-6dd5-46cb-bd4e-6708e70021dc": {
+          "name": {
+            "nl": "passagier waarvoor het lage tarief voor belasting op basis van afstand van toepassing is"
+          },
+          "type": "characteristic"
+        },
+        "37ddb128-913a-41b2-b5fd-ed8c05b813b2": {
+          "name": {
+            "nl": "passagier waarvoor het hoge tarief voor belasting op basis van afstand van toepassing is"
+          },
+          "type": "characteristic"
+        },
+        "4b9bd5f1-311a-4b59-8dd9-ee3139de153e": {
+          "name": {
+            "nl": "recht op duurzaamheidskorting"
+          },
+          "type": "characteristic",
+          "subtype": "possessive",
+          "article": {
+            "nl": "het"
+          }
+        },
+        "856cf722-8ecc-4b2c-aeaa-d0f5e99f3fff": {
+          "name": {
+            "nl": "identificatienummer"
+          },
+          "article": {
+            "nl": "het"
+          },
+          "type": "numeric",
+          "subtype": "integer"
+        },
+        "b5200359-418f-40db-bdd2-cf9f7f77b4d4": {
+          "name": {
+            "nl": "geboortedatum"
+          },
+          "article": {
+            "nl": "de"
+          },
+          "type": "date",
+          "precision": "days"
+        },
+        "9ffef501-48f3-4c4c-827a-52478ea82ab8": {
+          "name": {
+            "nl": "leeftijd"
+          },
+          "article": {
+            "nl": "de"
+          },
+          "type": "numeric",
+          "subtype": "integer",
+          "unit": "jr"
+        },
+        "a94e2c0f-2cd1-4562-86dc-321c79d73d4b": {
+          "name": {
+            "nl": "burgerservicenummer"
+          },
+          "article": {
+            "nl": "het"
+          },
+          "type": "text"
+        },
+        "199d696e-a168-4584-8f80-35d737e5e1ba": {
+          "name": {
+            "nl": "belasting op basis van afstand"
+          },
+          "article": {
+            "nl": "de"
+          },
+          "plural": {
+            "nl": "belastingen op basis van afstand"
+          },
+          "type": {
+            "$ref": "#/1ffc339e-47cf-4f17-8985-22628dddb49a"
+          }
+        },
+        "b802e897-8854-4ad3-97b4-3ed4b04f9b16": {
+          "name": {
+            "nl": "belasting op basis van reisduur"
+          },
+          "article": {
+            "nl": "de"
+          },
+          "plural": {
+            "nl": "belastingen op basis van reisduur"
+          },
+          "type": {
+            "$ref": "#/1ffc339e-47cf-4f17-8985-22628dddb49a"
+          }
+        },
+        "ab9cc7dc-7be7-412d-ae46-0224ceef3153": {
+          "name": {
+            "nl": "te betalen belasting"
+          },
+          "article": {
+            "nl": "de"
+          },
+          "type": {
+            "$ref": "#/1ffc339e-47cf-4f17-8985-22628dddb49a"
+          }
+        },
+        "5c6df479-4620-4487-baaf-3c7f7581e56f": {
+          "name": {
+            "nl": "provincie"
+          },
+          "article": {
+            "nl": "de"
+          },
+          "type": {
+            "$ref": "#/2430730a-0f8f-48ff-9a54-166e651ff340"
+          }
+        },
+        "85a409f3-4f30-4032-ae35-6c49a434a45d": {
+          "name": {
+            "nl": "woonregiofactor"
+          },
+          "article": {
+            "nl": "de"
+          },
+          "type": "numeric",
+          "subtype": "integer"
+        },
+        "11d155f3-d6bd-4792-94bb-e20c0c885101": {
+          "name": {
+            "nl": "treinmiles"
+          },
+          "article": {
+            "nl": "de"
+          },
+          "plural": {
+            "nl": "treinmiles"
+          },
+          "type": "numeric",
+          "subtype": "integer"
+        },
+        "661f7a45-78a0-4c8f-85bc-8a27748420f5": {
+          "name": {
+            "nl": "maximaal aantal te ontvangen treinmiles"
+          },
+          "article": {
+            "nl": "het"
+          },
+          "type": "numeric",
+          "subtype": "integer"
+        }
+      }
+    },
+    "bea88ba3-ec79-4bd2-8f8e-f6e11a08c431": {
+      "name": {
+        "nl": "contingent treinmiles"
+      },
+      "definite_article": {
+        "nl": "het"
+      },
+      "properties": {
+        "f2aa806f-f1f1-4212-aba8-b01334172317": {
+          "name": {
+            "nl": "totaal aantal treinmiles"
+          },
+          "article": {
+            "nl": "het"
+          },
+          "type": "numeric",
+          "subtype": "integer"
+        },
+        "1f6b885a-6382-4fe8-9d56-f925bf82af37": {
+          "name": {
+            "nl": "aantal treinmiles op basis van aantal passagiers"
+          },
+          "article": {
+            "nl": "het"
+          },
+          "type": "numeric",
+          "subtype": "integer"
+        },
+        "8f5423a5-cc51-4f78-b66e-720540da5bf8": {
+          "name": {
+            "nl": "restant na verdeling"
+          },
+          "article": {
+            "nl": "het"
+          },
+          "type": "numeric",
+          "subtype": "integer"
+        }
+      }
+    },
+    "dd04dbff-736a-4703-94a2-bbba4588fcc0": {
+      "name": {
+        "nl": "uitworpmelding"
+      },
+      "definite_article": {
+        "nl": "de"
+      },
+      "properties": {
+        "8f8ebcae-17e9-451d-ab21-9cb1f7924f1c": {
+          "name": {
+            "nl": "type"
+          },
+          "article": {
+            "nl": "het"
+          },
+          "type": {
+            "$ref": "#/61b9f36b-d866-4b5d-aa61-7451e6aee5c0"
+          }
+        },
+        "8db131d3-ffc5-4ec6-8618-447f394d2ce6": {
+          "name": {
+            "nl": "toelichting"
+          },
+          "article": {
+            "nl": "de"
+          },
+          "type": "text"
+        }
+      }
+    }
+  },
+  "factTypes": {
+    "ef9e731c-4f81-4905-a902-2a533e1eebc5": {
+      "name": {
+        "nl": "Vlucht van natuurlijke personen"
+      },
+      "relation": "betreft de verplaatsing van",
+      "roles": {
+        "5ce3e026-293e-4405-a22d-4ea222deef79": {
+          "name": {
+            "nl": "reis"
+          },
+          "article": {
+            "nl": "de"
+          },
+          "cardinality": "one",
+          "objectType": {
+            "$ref": "#/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
+          }
+        },
+        "0cc7c4b4-2855-4c8b-93f0-5403cf286af0": {
+          "name": {
+            "nl": "passagier"
+          },
+          "article": {
+            "nl": "de"
+          },
+          "plural": {
+            "nl": "passagiers"
+          },
+          "cardinality": "many",
+          "objectType": {
+            "$ref": "#/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"
+          }
+        }
+      }
+    },
+    "b154aa02-c821-45f0-b76a-745c24460606": {
+      "name": {
+        "nl": "reis met contingent treinmiles"
+      },
+      "relation": "heeft",
+      "roles": {
+        "7bdaad70-7449-4cdb-97f1-75f699fff5db": {
+          "name": {
+            "nl": "reis met treinmiles"
+          },
+          "article": {
+            "nl": "de"
+          },
+          "cardinality": "one",
+          "objectType": {
+            "$ref": "#/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
+          }
+        },
+        "5fc57818-441b-4e76-bd4e-344fe83ac2cd": {
+          "name": {
+            "nl": "vastgesteld contingent treinmiles"
+          },
+          "article": {
+            "nl": "het"
+          },
+          "cardinality": "one",
+          "objectType": {
+            "$ref": "#/bea88ba3-ec79-4bd2-8f8e-f6e11a08c431"
+          }
+        }
+      }
+    },
+    "da5cc365-024d-4c43-8fce-75ae4a4d461f": {
+      "name": {
+        "nl": "verdeling contingent treinmiles over passagiers"
+      },
+      "relation": "wordt verdeeld over",
+      "roles": {
+        "5d45c715-f041-453c-9386-8c97fa592ea7": {
+          "name": {
+            "nl": "te verdelen contingent treinmiles"
+          },
+          "article": {
+            "nl": "het"
+          },
+          "cardinality": "one",
+          "objectType": {
+            "$ref": "#/bea88ba3-ec79-4bd2-8f8e-f6e11a08c431"
+          }
+        },
+        "e709d431-1b9a-4718-97a0-da07a21798be": {
+          "name": {
+            "nl": "passagier met recht op treinmiles"
+          },
+          "article": {
+            "nl": "de"
+          },
+          "plural": {
+            "nl": "passagiers met recht op treinmiles"
+          },
+          "cardinality": "many",
+          "objectType": {
+            "$ref": "#/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"
+          }
+        }
+      }
+    },
+    "c5ad7825-bff8-4ca8-b513-e8665978a69c": {
+      "name": {
+        "nl": "redenen uitworp van vlucht"
+      },
+      "relation": "heeft",
+      "roles": {
+        "190b9cb7-6fde-4a57-a213-81ea35f87740": {
+          "name": {
+            "nl": "vlucht met gegevens"
+          },
+          "article": {
+            "nl": "de"
+          },
+          "cardinality": "one",
+          "objectType": {
+            "$ref": "#/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
+          }
+        },
+        "385f3ef8-1c94-415f-bd23-03b2a4d90016": {
+          "name": {
+            "nl": "reden uitworp"
+          },
+          "article": {
+            "nl": "de"
+          },
+          "plural": {
+            "nl": "redenen uitworp"
+          },
+          "cardinality": "many",
+          "objectType": {
+            "$ref": "#/dd04dbff-736a-4703-94a2-bbba4588fcc0"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "7150c34b-934b-4c19-82da-5bd774766be1": {
+      "name": {
+        "nl": "PERCENTAGE REISDUUR EERSTE SCHIJF"
+      },
+      "article": {
+        "nl": "het"
+      },
+      "type": "percentage",
+      "subtype": "integer"
+    },
+    "18a11d63-329f-4440-928c-15662d9a786f": {
+      "name": {
+        "nl": "PERCENTAGE REISDUUR TWEEDE SCHIJF"
+      },
+      "article": {
+        "nl": "het"
+      },
+      "type": "percentage",
+      "subtype": "integer"
+    },
+    "7ffa48de-338d-4ddb-aa69-af571c28dac9": {
+      "name": {
+        "nl": "PERCENTAGE REISDUUR DERDE SCHIJF"
+      },
+      "article": {
+        "nl": "het"
+      },
+      "type": "percentage",
+      "subtype": "integer"
+    },
+    "b0973116-a02a-4982-bc3b-f485eecc4bd0": {
+      "name": {
+        "nl": "BOVENGRENS REISDUUR EERSTE SCHIJF"
+      },
+      "article": {
+        "nl": "de"
+      },
+      "type": "numeric",
+      "subtype": "integer",
+      "unit": "u"
+    },
+    "ad1a1925-d6c1-4560-b09c-6f316c38cc55": {
+      "name": {
+        "nl": "BOVENGRENS REISDUUR TWEEDE SCHIJF"
+      },
+      "article": {
+        "nl": "de"
+      },
+      "type": "numeric",
+      "subtype": "integer",
+      "unit": "u"
+    },
+    "70fbc167-01ca-4ef6-a1dd-78d05eaf99ab": {
+      "name": {
+        "nl": "BOVENGRENS AFSTAND EERSTE SCHIJF"
+      },
+      "article": {
+        "nl": "de"
+      },
+      "type": "numeric",
+      "subtype": "integer",
+      "unit": "km"
+    },
+    "4773bc34-a04d-4361-b984-85e6eba67374": {
+      "name": {
+        "nl": "BOVENGRENS AFSTAND TWEEDE SCHIJF"
+      },
+      "article": {
+        "nl": "de"
+      },
+      "type": "numeric",
+      "subtype": "integer",
+      "unit": "km"
+    },
+    "dc7826fa-37c0-499d-8d59-96a0c40b3fcd": {
+      "name": {
+        "nl": "LAGE BASISTARIEF EERSTE SCHIJF"
+      },
+      "article": {
+        "nl": "het"
+      },
+      "type": {
+        "$ref": "#/1ffc339e-47cf-4f17-8985-22628dddb49a"
+      }
+    },
+    "155c3536-cb1c-49a0-bd14-84fdf2dda9e8": {
+      "name": {
+        "nl": "LAGE BASISTARIEF TWEEDE SCHIJF"
+      },
+      "article": {
+        "nl": "het"
+      },
+      "type": {
+        "$ref": "#/1ffc339e-47cf-4f17-8985-22628dddb49a"
+      }
+    },
+    "0d4f3025-5c31-465a-b08f-983a19507c2b": {
+      "name": {
+        "nl": "HOGE BASISTARIEF EERSTE SCHIJF"
+      },
+      "article": {
+        "nl": "het"
+      },
+      "type": {
+        "$ref": "#/1ffc339e-47cf-4f17-8985-22628dddb49a"
+      }
+    },
+    "0a7246e7-b7d0-44e1-a928-75c92b3d2638": {
+      "name": {
+        "nl": "HOGE BASISTARIEF TWEEDE SCHIJF"
+      },
+      "article": {
+        "nl": "het"
+      },
+      "type": {
+        "$ref": "#/1ffc339e-47cf-4f17-8985-22628dddb49a"
+      }
+    },
+    "d74f5c2d-5538-4347-81be-cfb3ebe6e06c": {
+      "name": {
+        "nl": "LAGE TARIEF VERMINDERING EERSTE SCHIJF"
+      },
+      "article": {
+        "nl": "het"
+      },
+      "type": {
+        "$ref": "#/7c22f541-e76e-453e-8887-c350d9b0d8a0"
+      }
+    },
+    "70fbe842-7ba3-48df-958a-9a22db065aa3": {
+      "name": {
+        "nl": "LAGE TARIEF VERMINDERING TWEEDE SCHIJF"
+      },
+      "article": {
+        "nl": "het"
+      },
+      "type": {
+        "$ref": "#/7c22f541-e76e-453e-8887-c350d9b0d8a0"
+      }
+    },
+    "4eda445b-32b0-4732-8a7c-753c5df1b33a": {
+      "name": {
+        "nl": "HOGE TARIEF VERMINDERING EERSTE SCHIJF"
+      },
+      "article": {
+        "nl": "het"
+      },
+      "type": {
+        "$ref": "#/7c22f541-e76e-453e-8887-c350d9b0d8a0"
+      }
+    },
+    "082debac-4e28-4346-b133-254f418e174f": {
+      "name": {
+        "nl": "HOGE TARIEF VERMINDERING TWEEDE SCHIJF"
+      },
+      "article": {
+        "nl": "het"
+      },
+      "type": {
+        "$ref": "#/7c22f541-e76e-453e-8887-c350d9b0d8a0"
+      }
+    },
+    "32bc28ba-1065-4c59-bbfb-d844b3cd1c0f": {
+      "name": {
+        "nl": "AANTAL TREINMILES PER PASSAGIER VOOR CONTINGENT"
+      },
+      "article": {
+        "nl": "het"
+      },
+      "type": "numeric",
+      "subtype": "integer"
+    },
+    "90e1eff7-daf0-45e2-a263-8769645e7c03": {
+      "name": {
+        "nl": "BASISCONTINGENT TREINMILES PER VLUCHT"
+      },
+      "article": {
+        "nl": "het"
+      },
+      "type": "numeric",
+      "subtype": "integer"
+    },
+    "4c6de8d0-46a5-41c6-af10-05e87931285f": {
+      "name": {
+        "nl": "MAXIMUM AANTAL TREINMILES VOOR PASSAGIERS JONGER DAN 65"
+      },
+      "article": {
+        "nl": "het"
+      },
+      "type": "numeric",
+      "subtype": "integer"
+    },
+    "2aba030a-5d4d-4286-94d9-4f92e5b633a4": {
+      "name": {
+        "nl": "MAXIMUM AANTAL TREINMILES VOOR PASSAGIERS VAN 65 JAAR OF OUDER"
+      },
+      "article": {
+        "nl": "het"
+      },
+      "type": "numeric",
+      "subtype": "integer"
+    },
+    "447763d6-bb4c-4d6c-bf1e-20ef7e967bd4": {
+      "name": {
+        "nl": "KORTING VOOR KLIMAATNEUTRALE VLUCHT"
+      },
+      "article": {
+        "nl": "de"
+      },
+      "type": {
+        "$ref": "#/1ffc339e-47cf-4f17-8985-22628dddb49a"
+      }
+    }
   },
   "domains": {
-    "Bedrag": {
+    "1ffc339e-47cf-4f17-8985-22628dddb49a": {
+      "name": {
+        "nl": "Bedrag"
+      },
       "type": "numeric",
       "precision": 2,
       "unit": "€"
     },
-    "BedragPerKilometer": {
+    "7c22f541-e76e-453e-8887-c350d9b0d8a0": {
+      "name": {
+        "nl": "Bedrag per kilometer"
+      },
       "type": "numeric",
       "precision": 2,
       "unit": "€/km"
     },
-    "Percentage": {
-      "type": "percentage"
-    },
-    "Luchthavens": {
+    "b20b40f4-76ca-4887-afe4-cf98fc77ff66": {
+      "name": {
+        "nl": "Luchthavens"
+      },
       "type": "enumeration",
       "values": [
         "Schiphol",
@@ -31,7 +764,10 @@
         "Lelystad"
       ]
     },
-    "Provincies": {
+    "2430730a-0f8f-48ff-9a54-166e651ff340": {
+      "name": {
+        "nl": "Provincies"
+      },
       "type": "enumeration",
       "values": [
         "Noord-Holland",
@@ -48,2219 +784,15 @@
         "Zeeland"
       ]
     },
-    "TypeUitworp": {
+    "61b9f36b-d866-4b5d-aa61-7451e6aee5c0": {
+      "name": {
+        "nl": "Type uitworp"
+      },
       "type": "enumeration",
       "values": [
-        "geen_afstand",
-        "geen_passagiers",
-        "geen_vertrekdatum",
-        "geen_bestemming"
+        "Gegevens inconsistent",
+        "Gegevens onvolledig"
       ]
     }
-  },
-  "objectTypes": {
-    "vlucht": {
-      "article": "de",
-      "properties": {
-        "belasteReis": {
-          "type": "kenmerk",
-          "datatype": {
-            "type": "boolean"
-          }
-        },
-        "onbelasteReis": {
-          "type": "kenmerk",
-          "datatype": {
-            "type": "boolean"
-          }
-        },
-        "rondvlucht": {
-          "type": "kenmerk",
-          "datatype": {
-            "type": "boolean"
-          }
-        },
-        "klimaatneutraal": {
-          "type": "kenmerk",
-          "subtype": "bijvoeglijk",
-          "datatype": {
-            "type": "boolean"
-          }
-        },
-        "luchthavenVanVertrek": {
-          "type": "attribute",
-          "article": "de",
-          "datatype": {
-            "$ref": "#/domains/Luchthavens"
-          }
-        },
-        "luchthavenVanBestemming": {
-          "type": "attribute",
-          "article": "de",
-          "datatype": {
-            "$ref": "#/domains/Luchthavens"
-          }
-        },
-        "datumVanDeVlucht": {
-          "type": "attribute",
-          "article": "de",
-          "datatype": {
-            "type": "date",
-            "precision": "days"
-          }
-        },
-        "afstandTotBestemming": {
-          "type": "attribute",
-          "article": "de",
-          "datatype": {
-            "type": "numeric",
-            "subtype": "integer",
-            "unit": "km"
-          }
-        },
-        "bereikbaarPerTrein": {
-          "type": "attribute",
-          "article": "de",
-          "datatype": {
-            "type": "boolean"
-          }
-        },
-        "reisduurPerTrein": {
-          "type": "attribute",
-          "article": "de",
-          "datatype": {
-            "type": "numeric",
-            "subtype": "integer",
-            "unit": "minuut"
-          }
-        },
-        "aantalPassagiers": {
-          "type": "attribute",
-          "article": "het",
-          "datatype": {
-            "type": "numeric",
-            "subtype": "integer"
-          }
-        },
-        "totaleBelastingOpBasisVanAfstand": {
-          "type": "attribute",
-          "article": "de",
-          "datatype": {
-            "$ref": "#/domains/Bedrag"
-          }
-        },
-        "totaleBelastingOpBasisVanReisduur": {
-          "type": "attribute",
-          "article": "de",
-          "datatype": {
-            "$ref": "#/domains/Bedrag"
-          }
-        },
-        "totaalTeBetalenBelasting": {
-          "type": "attribute",
-          "article": "de",
-          "datatype": {
-            "$ref": "#/domains/Bedrag"
-          }
-        }
-      }
-    },
-    "natuurlijkPersoon": {
-      "article": "de",
-      "animated": true,
-      "properties": {
-        "passagierWaarvoorHetLageTariefVoorBelastingOpBasisVanAfstandVanToepassingIs": {
-          "type": "kenmerk",
-          "datatype": {
-            "type": "boolean"
-          }
-        },
-        "passagierWaarvoorHetHogeTariefVoorBelastingOpBasisVanAfstandVanToepassingIs": {
-          "type": "kenmerk",
-          "datatype": {
-            "type": "boolean"
-          }
-        },
-        "rechtOpDuurzaamheidskorting": {
-          "type": "kenmerk",
-          "subtype": "bezittelijk",
-          "article": "het",
-          "datatype": {
-            "type": "boolean"
-          }
-        },
-        "identificatienummer": {
-          "type": "attribute",
-          "article": "het",
-          "datatype": {
-            "type": "numeric",
-            "subtype": "integer"
-          }
-        },
-        "geboortedatum": {
-          "type": "attribute",
-          "article": "de",
-          "datatype": {
-            "type": "date",
-            "precision": "days"
-          }
-        },
-        "leeftijd": {
-          "type": "attribute",
-          "article": "de",
-          "datatype": {
-            "type": "numeric",
-            "subtype": "integer",
-            "unit": "jr"
-          }
-        },
-        "burgerservicenummer": {
-          "type": "attribute",
-          "article": "het",
-          "datatype": {
-            "type": "text"
-          }
-        },
-        "belastingOpBasisVanAfstand": {
-          "type": "attribute",
-          "article": "de",
-          "plural": "belastingen op basis van afstand",
-          "datatype": {
-            "$ref": "#/domains/Bedrag"
-          }
-        },
-        "belastingOpBasisVanReisduur": {
-          "type": "attribute",
-          "article": "de",
-          "plural": "belastingen op basis van reisduur",
-          "datatype": {
-            "$ref": "#/domains/Bedrag"
-          }
-        },
-        "teBetalenBelasting": {
-          "type": "attribute",
-          "article": "de",
-          "datatype": {
-            "$ref": "#/domains/Bedrag"
-          }
-        },
-        "provincie": {
-          "type": "attribute",
-          "article": "de",
-          "datatype": {
-            "$ref": "#/domains/Provincies"
-          }
-        },
-        "woonregiofactor": {
-          "type": "attribute",
-          "article": "de",
-          "datatype": {
-            "type": "numeric",
-            "subtype": "integer"
-          }
-        },
-        "treinmiles": {
-          "type": "attribute",
-          "article": "de",
-          "plural": "treinmiles",
-          "datatype": {
-            "type": "numeric",
-            "subtype": "integer"
-          }
-        },
-        "maximaalAantalTeOntvangenTreinmiles": {
-          "type": "attribute",
-          "article": "het",
-          "datatype": {
-            "type": "numeric",
-            "subtype": "integer"
-          }
-        }
-      }
-    },
-    "contingentTreinmiles": {
-      "article": "het",
-      "properties": {
-        "totaalAantalTreinmiles": {
-          "type": "attribute",
-          "article": "het",
-          "datatype": {
-            "type": "numeric",
-            "subtype": "integer"
-          }
-        },
-        "aantalTreinmilesOpBasisVanAantalPassagiers": {
-          "type": "attribute",
-          "article": "het",
-          "datatype": {
-            "type": "numeric",
-            "subtype": "integer"
-          }
-        },
-        "restantNaVerdeling": {
-          "type": "attribute",
-          "article": "het",
-          "datatype": {
-            "type": "numeric",
-            "subtype": "integer"
-          }
-        }
-      }
-    },
-    "uitworpmelding": {
-      "article": "de",
-      "properties": {
-        "type": {
-          "type": "attribute",
-          "article": "het",
-          "datatype": {
-            "$ref": "#/domains/TypeUitworp"
-          }
-        },
-        "toelichting": {
-          "type": "attribute",
-          "article": "de",
-          "datatype": {
-            "type": "text"
-          }
-        }
-      }
-    }
-  },
-  "factTypes": {
-    "vluchtVanNatuurlijkePersonen": {
-      "roles": [
-        {
-          "name": "reis",
-          "article": "de",
-          "objectType": {
-            "$ref": "#/objectTypes/vlucht"
-          },
-          "cardinality": "one"
-        },
-        {
-          "name": "passagier",
-          "article": "de",
-          "plural": "passagiers",
-          "objectType": {
-            "$ref": "#/objectTypes/natuurlijkPersoon"
-          },
-          "cardinality": "many"
-        }
-      ],
-      "relation": "betreft de verplaatsing van"
-    },
-    "reisMetContingentTreinmiles": {
-      "roles": [
-        {
-          "name": "reis met treinmiles",
-          "article": "de",
-          "objectType": {
-            "$ref": "#/objectTypes/vlucht"
-          },
-          "cardinality": "one"
-        },
-        {
-          "name": "vastgesteld contingent treinmiles",
-          "article": "het",
-          "objectType": {
-            "$ref": "#/objectTypes/contingentTreinmiles"
-          },
-          "cardinality": "one"
-        }
-      ],
-      "relation": "heeft"
-    },
-    "verdelingContingentTreinmilesOverPassagiers": {
-      "roles": [
-        {
-          "name": "te verdelen contingent treinmiles",
-          "article": "het",
-          "objectType": {
-            "$ref": "#/objectTypes/contingentTreinmiles"
-          },
-          "cardinality": "one"
-        },
-        {
-          "name": "passagier met recht op treinmiles",
-          "article": "de",
-          "plural": "passagiers met recht op treinmiles",
-          "objectType": {
-            "$ref": "#/objectTypes/natuurlijkPersoon"
-          },
-          "cardinality": "many"
-        }
-      ],
-      "relation": "wordt verdeeld over"
-    },
-    "redenenUitworpVanVlucht": {
-      "roles": [
-        {
-          "name": "vlucht met gegevens",
-          "article": "de",
-          "objectType": {
-            "$ref": "#/objectTypes/vlucht"
-          },
-          "cardinality": "one"
-        },
-        {
-          "name": "reden uitworp",
-          "article": "de",
-          "plural": "redenen uitworp",
-          "objectType": {
-            "$ref": "#/objectTypes/uitworpmelding"
-          },
-          "cardinality": "many"
-        }
-      ],
-      "relation": "heeft"
-    }
-  },
-  "parameters": {
-    "PERCENTAGE_REISDUUR_EERSTE_SCHIJF": {
-      "article": "het",
-      "datatype": {
-        "$ref": "#/domains/Percentage"
-      }
-    },
-    "PERCENTAGE_REISDUUR_TWEEDE_SCHIJF": {
-      "article": "het",
-      "datatype": {
-        "$ref": "#/domains/Percentage"
-      }
-    },
-    "PERCENTAGE_REISDUUR_DERDE_SCHIJF": {
-      "article": "het",
-      "datatype": {
-        "$ref": "#/domains/Percentage"
-      }
-    },
-    "BOVENGRENS_REISDUUR_EERSTE_SCHIJF": {
-      "article": "de",
-      "datatype": {
-        "type": "numeric",
-        "subtype": "integer",
-        "unit": "u"
-      }
-    },
-    "BOVENGRENS_REISDUUR_TWEEDE_SCHIJF": {
-      "article": "de",
-      "datatype": {
-        "type": "numeric",
-        "subtype": "integer",
-        "unit": "u"
-      }
-    },
-    "BOVENGRENS_AFSTAND_EERSTE_SCHIJF": {
-      "article": "de",
-      "datatype": {
-        "type": "numeric",
-        "subtype": "integer",
-        "unit": "km"
-      }
-    },
-    "BOVENGRENS_AFSTAND_TWEEDE_SCHIJF": {
-      "article": "de",
-      "datatype": {
-        "type": "numeric",
-        "subtype": "integer",
-        "unit": "km"
-      }
-    },
-    "LAGE_BASISTARIEF_EERSTE_SCHIJF": {
-      "article": "het",
-      "datatype": {
-        "$ref": "#/domains/Bedrag"
-      }
-    },
-    "LAGE_BASISTARIEF_TWEEDE_SCHIJF": {
-      "article": "het",
-      "datatype": {
-        "$ref": "#/domains/Bedrag"
-      }
-    },
-    "HOGE_BASISTARIEF_EERSTE_SCHIJF": {
-      "article": "het",
-      "datatype": {
-        "$ref": "#/domains/Bedrag"
-      }
-    },
-    "HOGE_BASISTARIEF_TWEEDE_SCHIJF": {
-      "article": "het",
-      "datatype": {
-        "$ref": "#/domains/Bedrag"
-      }
-    },
-    "LAGE_TARIEF_VERMINDERING_EERSTE_SCHIJF": {
-      "article": "het",
-      "datatype": {
-        "$ref": "#/domains/BedragPerKilometer"
-      }
-    },
-    "LAGE_TARIEF_VERMINDERING_TWEEDE_SCHIJF": {
-      "article": "het",
-      "datatype": {
-        "$ref": "#/domains/BedragPerKilometer"
-      }
-    },
-    "HOGE_TARIEF_VERMINDERING_EERSTE_SCHIJF": {
-      "article": "het",
-      "datatype": {
-        "$ref": "#/domains/BedragPerKilometer"
-      }
-    },
-    "HOGE_TARIEF_VERMINDERING_TWEEDE_SCHIJF": {
-      "article": "het",
-      "datatype": {
-        "$ref": "#/domains/BedragPerKilometer"
-      }
-    },
-    "AANTAL_TREINMILES_PER_PASSAGIER_VOOR_CONTINGENT": {
-      "article": "het",
-      "datatype": {
-        "type": "numeric",
-        "subtype": "integer"
-      }
-    },
-    "BASISCONTINGENT_TREINMILES_PER_VLUCHT": {
-      "article": "het",
-      "datatype": {
-        "type": "numeric",
-        "subtype": "integer"
-      }
-    },
-    "MAXIMUM_AANTAL_TREINMILES_VOOR_PASSAGIERS_JONGER_DAN_65": {
-      "article": "het",
-      "datatype": {
-        "type": "numeric",
-        "subtype": "integer"
-      }
-    },
-    "MAXIMUM_AANTAL_TREINMILES_VOOR_PASSAGIERS_VAN_65_JAAR_OF_OUDER": {
-      "article": "het",
-      "datatype": {
-        "type": "numeric",
-        "subtype": "integer"
-      }
-    },
-    "KORTING_VOOR_KLIMAATNEUTRALE_VLUCHT": {
-      "article": "de",
-      "datatype": {
-        "$ref": "#/domains/Bedrag"
-      }
-    }
-  },
-  "ruleGroups": [
-    {
-      "name": "Initialisatie",
-      "rules": [
-        {
-          "id": "afstand-tot-bestemming-01",
-          "name": "afstand tot bestemming 01",
-          "versions": [
-            {
-              "validFrom": "2018",
-              "target": {
-                "attribute": {
-                  "$ref": "#/objectTypes/vlucht/properties/afstandTotBestemming"
-                },
-                "subject": {
-                  "type": "objectType",
-                  "ref": {
-                    "$ref": "#/objectTypes/vlucht"
-                  }
-                }
-              },
-              "value": {
-                "type": "numeric",
-                "value": 0,
-                "unit": "km"
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Kenmerktoekenning vlucht",
-      "rules": [
-        {
-          "id": "belaste-reis-01",
-          "name": "belaste reis 01",
-          "versions": [
-            {
-              "validFrom": "2018",
-              "property": {
-                "$ref": "#/objectTypes/vlucht/properties/belasteReis"
-              },
-              "subject": {
-                "type": "objectType",
-                "ref": {
-                  "$ref": "#/objectTypes/vlucht"
-                }
-              },
-              "value": {
-                "type": "boolean",
-                "value": true
-              },
-              "condition": {
-                "type": "comparison",
-                "operator": "equals",
-                "left": {
-                  "type": "attributeReference",
-                  "attribute": {
-                    "$ref": "#/objectTypes/vlucht/properties/bereikbaarPerTrein"
-                  },
-                  "subject": {
-                    "type": "objectType",
-                    "ref": {
-                      "$ref": "#/objectTypes/vlucht"
-                    }
-                  }
-                },
-                "right": {
-                  "type": "boolean",
-                  "value": true
-                }
-              }
-            }
-          ]
-        },
-        {
-          "id": "onbelaste-reis-01",
-          "name": "onbelaste reis 01",
-          "versions": [
-            {
-              "validFrom": "2018",
-              "property": {
-                "$ref": "#/objectTypes/vlucht/properties/onbelasteReis"
-              },
-              "subject": {
-                "type": "objectType",
-                "ref": {
-                  "$ref": "#/objectTypes/vlucht"
-                }
-              },
-              "value": {
-                "type": "boolean",
-                "value": true
-              },
-              "condition": {
-                "type": "comparison",
-                "operator": "notEquals",
-                "left": {
-                  "type": "attributeReference",
-                  "attribute": {
-                    "$ref": "#/objectTypes/vlucht/properties/bereikbaarPerTrein"
-                  },
-                  "subject": {
-                    "type": "objectType",
-                    "ref": {
-                      "$ref": "#/objectTypes/vlucht"
-                    }
-                  }
-                },
-                "right": {
-                  "type": "boolean",
-                  "value": true
-                }
-              }
-            }
-          ]
-        },
-        {
-          "id": "rondvlucht-01",
-          "name": "rondvlucht 01",
-          "versions": [
-            {
-              "validFrom": "2018",
-              "property": {
-                "$ref": "#/objectTypes/vlucht/properties/rondvlucht"
-              },
-              "subject": {
-                "type": "objectType",
-                "ref": {
-                  "$ref": "#/objectTypes/vlucht"
-                }
-              },
-              "value": {
-                "type": "boolean",
-                "value": true
-              },
-              "condition": {
-                "type": "comparison",
-                "operator": "equals",
-                "left": {
-                  "type": "attributeReference",
-                  "attribute": {
-                    "$ref": "#/objectTypes/vlucht/properties/luchthavenVanBestemming"
-                  },
-                  "subject": {
-                    "type": "objectType",
-                    "ref": {
-                      "$ref": "#/objectTypes/vlucht"
-                    }
-                  }
-                },
-                "right": {
-                  "type": "attributeReference",
-                  "attribute": {
-                    "$ref": "#/objectTypes/vlucht/properties/luchthavenVanVertrek"
-                  },
-                  "subject": {
-                    "type": "objectType",
-                    "ref": {
-                      "$ref": "#/objectTypes/vlucht"
-                    }
-                  }
-                }
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Vluchtinformatie",
-      "rules": [
-        {
-          "id": "aantal-passagiers-01",
-          "name": "aantal passagiers 01",
-          "versions": [
-            {
-              "validFrom": "2018",
-              "target": {
-                "attribute": {
-                  "$ref": "#/objectTypes/vlucht/properties/aantalPassagiers"
-                },
-                "subject": {
-                  "type": "objectType",
-                  "ref": {
-                    "$ref": "#/objectTypes/vlucht"
-                  }
-                }
-              },
-              "expression": {
-                "type": "aggregation",
-                "function": "count",
-                "expression": {
-                  "type": "roleReference",
-                  "role": "passagier",
-                  "subject": {
-                    "type": "objectType",
-                    "ref": {
-                      "$ref": "#/objectTypes/vlucht"
-                    }
-                  }
-                }
-              }
-            }
-          ]
-        },
-        {
-          "id": "totaal-te-betalen-belasting-01",
-          "name": "totaal te betalen belasting 01",
-          "versions": [
-            {
-              "validFrom": "2018",
-              "target": {
-                "attribute": {
-                  "$ref": "#/objectTypes/vlucht/properties/totaalTeBetalenBelasting"
-                },
-                "subject": {
-                  "type": "objectType",
-                  "ref": {
-                    "$ref": "#/objectTypes/vlucht"
-                  }
-                }
-              },
-              "expression": {
-                "type": "aggregation",
-                "function": "sum",
-                "expression": {
-                  "type": "attributeReference",
-                  "attribute": {
-                    "$ref": "#/objectTypes/natuurlijkPersoon/properties/teBetalenBelasting"
-                  },
-                  "subject": {
-                    "type": "role",
-                    "role": "passagier",
-                    "ofSubject": {
-                      "type": "objectType",
-                      "ref": {
-                        "$ref": "#/objectTypes/vlucht"
-                      }
-                    }
-                  }
-                },
-                "default": {
-                  "type": "numeric",
-                  "value": 0,
-                  "unit": "€"
-                }
-              }
-            }
-          ]
-        },
-        {
-          "id": "totale-belasting-op-basis-van-afstand-01",
-          "name": "totale belasting op basis van afstand 01",
-          "versions": [
-            {
-              "validFrom": "2018",
-              "target": {
-                "attribute": {
-                  "$ref": "#/objectTypes/vlucht/properties/totaleBelastingOpBasisVanAfstand"
-                },
-                "subject": {
-                  "type": "objectType",
-                  "ref": {
-                    "$ref": "#/objectTypes/vlucht"
-                  }
-                }
-              },
-              "expression": {
-                "type": "aggregation",
-                "function": "sum",
-                "expression": {
-                  "type": "attributeReference",
-                  "attribute": {
-                    "$ref": "#/objectTypes/natuurlijkPersoon/properties/belastingOpBasisVanAfstand"
-                  },
-                  "subject": {
-                    "type": "role",
-                    "role": "passagier",
-                    "ofSubject": {
-                      "type": "objectType",
-                      "ref": {
-                        "$ref": "#/objectTypes/vlucht"
-                      }
-                    }
-                  }
-                },
-                "default": {
-                  "type": "numeric",
-                  "value": 0,
-                  "unit": "€"
-                }
-              }
-            }
-          ]
-        },
-        {
-          "id": "totale-belasting-op-basis-van-reisduur-01",
-          "name": "totale belasting op basis van reisduur 01",
-          "versions": [
-            {
-              "validFrom": "2018",
-              "target": {
-                "attribute": {
-                  "$ref": "#/objectTypes/vlucht/properties/totaleBelastingOpBasisVanReisduur"
-                },
-                "subject": {
-                  "type": "objectType",
-                  "ref": {
-                    "$ref": "#/objectTypes/vlucht"
-                  }
-                }
-              },
-              "expression": {
-                "type": "aggregation",
-                "function": "sum",
-                "expression": {
-                  "type": "attributeReference",
-                  "attribute": {
-                    "$ref": "#/objectTypes/natuurlijkPersoon/properties/belastingOpBasisVanReisduur"
-                  },
-                  "subject": {
-                    "type": "role",
-                    "role": "passagier",
-                    "ofSubject": {
-                      "type": "objectType",
-                      "ref": {
-                        "$ref": "#/objectTypes/vlucht"
-                      }
-                    }
-                  }
-                },
-                "default": {
-                  "type": "numeric",
-                  "value": 0,
-                  "unit": "€"
-                }
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Belasting op basis van afstand",
-      "rules": [
-        {
-          "id": "belasting-op-basis-van-afstand-01",
-          "name": "belasting op basis van afstand 01",
-          "versions": [
-            {
-              "validFrom": "2018",
-              "target": {
-                "attribute": {
-                  "$ref": "#/objectTypes/natuurlijkPersoon/properties/belastingOpBasisVanAfstand"
-                },
-                "subject": {
-                  "type": "objectType",
-                  "ref": {
-                    "$ref": "#/objectTypes/natuurlijkPersoon"
-                  }
-                }
-              },
-              "value": {
-                "type": "numeric",
-                "value": 0,
-                "unit": "€"
-              },
-              "condition": {
-                "type": "anyOf",
-                "conditions": [
-                  {
-                    "type": "propertyReference",
-                    "property": {
-                      "$ref": "#/objectTypes/vlucht/properties/onbelasteReis"
-                    },
-                    "subject": {
-                      "type": "role",
-                      "role": "reis",
-                      "ofSubject": {
-                        "type": "pronoun",
-                        "pronoun": "zijn"
-                      }
-                    }
-                  },
-                  {
-                    "type": "propertyReference",
-                    "property": {
-                      "$ref": "#/objectTypes/vlucht/properties/rondvlucht"
-                    },
-                    "subject": {
-                      "type": "role",
-                      "role": "reis",
-                      "ofSubject": {
-                        "type": "pronoun",
-                        "pronoun": "zijn"
-                      }
-                    }
-                  },
-                  {
-                    "type": "comparison",
-                    "operator": "greaterThan",
-                    "left": {
-                      "type": "attributeReference",
-                      "attribute": {
-                        "$ref": "#/objectTypes/vlucht/properties/afstandTotBestemming"
-                      },
-                      "subject": {
-                        "type": "role",
-                        "role": "reis",
-                        "ofSubject": {
-                          "type": "pronoun",
-                          "pronoun": "zijn"
-                        }
-                      }
-                    },
-                    "right": {
-                      "type": "parameterReference",
-                      "parameter": {
-                        "$ref": "#/parameters/BOVENGRENS_AFSTAND_TWEEDE_SCHIJF"
-                      }
-                    }
-                  }
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "id": "belasting-op-basis-van-afstand-02",
-          "name": "belasting op basis van afstand 02",
-          "versions": [
-            {
-              "validFrom": "2018",
-              "target": {
-                "attribute": {
-                  "$ref": "#/objectTypes/natuurlijkPersoon/properties/belastingOpBasisVanAfstand"
-                },
-                "subject": {
-                  "type": "objectTypeWithProperty",
-                  "objectType": {
-                    "$ref": "#/objectTypes/natuurlijkPersoon"
-                  },
-                  "property": {
-                    "$ref": "#/objectTypes/natuurlijkPersoon/properties/passagierWaarvoorHetLageTariefVoorBelastingOpBasisVanAfstandVanToepassingIs"
-                  }
-                }
-              },
-              "expression": {
-                "type": "arithmetic",
-                "operator": "minus",
-                "left": {
-                  "type": "parameterReference",
-                  "parameter": {
-                    "$ref": "#/parameters/LAGE_BASISTARIEF_EERSTE_SCHIJF"
-                  }
-                },
-                "right": {
-                  "type": "arithmetic",
-                  "operator": "multiply",
-                  "left": {
-                    "type": "parameterReference",
-                    "parameter": {
-                      "$ref": "#/parameters/LAGE_TARIEF_VERMINDERING_EERSTE_SCHIJF"
-                    }
-                  },
-                  "right": {
-                    "type": "attributeReference",
-                    "attribute": {
-                      "$ref": "#/objectTypes/vlucht/properties/afstandTotBestemming"
-                    },
-                    "subject": {
-                      "type": "role",
-                      "role": "reis",
-                      "ofSubject": {
-                        "type": "pronoun",
-                        "pronoun": "zijn"
-                      }
-                    }
-                  }
-                }
-              },
-              "condition": {
-                "type": "allOf",
-                "conditions": [
-                  {
-                    "type": "propertyReference",
-                    "property": {
-                      "$ref": "#/objectTypes/vlucht/properties/belasteReis"
-                    },
-                    "subject": {
-                      "type": "role",
-                      "role": "reis",
-                      "ofSubject": {
-                        "type": "pronoun",
-                        "pronoun": "zijn"
-                      }
-                    }
-                  },
-                  {
-                    "type": "not",
-                    "condition": {
-                      "type": "propertyReference",
-                      "property": {
-                        "$ref": "#/objectTypes/vlucht/properties/rondvlucht"
-                      },
-                      "subject": {
-                        "type": "role",
-                        "role": "reis",
-                        "ofSubject": {
-                          "type": "pronoun",
-                          "pronoun": "zijn"
-                        }
-                      }
-                    }
-                  },
-                  {
-                    "type": "comparison",
-                    "operator": "greaterThan",
-                    "left": {
-                      "type": "attributeReference",
-                      "attribute": {
-                        "$ref": "#/objectTypes/vlucht/properties/afstandTotBestemming"
-                      },
-                      "subject": {
-                        "type": "role",
-                        "role": "reis",
-                        "ofSubject": {
-                          "type": "pronoun",
-                          "pronoun": "zijn"
-                        }
-                      }
-                    },
-                    "right": {
-                      "type": "numeric",
-                      "value": 0,
-                      "unit": "km"
-                    }
-                  },
-                  {
-                    "type": "comparison",
-                    "operator": "lessThanOrEquals",
-                    "left": {
-                      "type": "attributeReference",
-                      "attribute": {
-                        "$ref": "#/objectTypes/vlucht/properties/afstandTotBestemming"
-                      },
-                      "subject": {
-                        "type": "role",
-                        "role": "reis",
-                        "ofSubject": {
-                          "type": "pronoun",
-                          "pronoun": "zijn"
-                        }
-                      }
-                    },
-                    "right": {
-                      "type": "parameterReference",
-                      "parameter": {
-                        "$ref": "#/parameters/BOVENGRENS_AFSTAND_EERSTE_SCHIJF"
-                      }
-                    }
-                  }
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "id": "belasting-op-basis-van-afstand-03",
-          "name": "belasting op basis van afstand 03",
-          "versions": [
-            {
-              "validFrom": "2018",
-              "target": {
-                "attribute": {
-                  "$ref": "#/objectTypes/natuurlijkPersoon/properties/belastingOpBasisVanAfstand"
-                },
-                "subject": {
-                  "type": "objectTypeWithProperty",
-                  "objectType": {
-                    "$ref": "#/objectTypes/natuurlijkPersoon"
-                  },
-                  "property": {
-                    "$ref": "#/objectTypes/natuurlijkPersoon/properties/passagierWaarvoorHetLageTariefVoorBelastingOpBasisVanAfstandVanToepassingIs"
-                  }
-                }
-              },
-              "expression": {
-                "type": "arithmetic",
-                "operator": "minus",
-                "left": {
-                  "type": "parameterReference",
-                  "parameter": {
-                    "$ref": "#/parameters/LAGE_BASISTARIEF_TWEEDE_SCHIJF"
-                  }
-                },
-                "right": {
-                  "type": "arithmetic",
-                  "operator": "multiply",
-                  "left": {
-                    "type": "parameterReference",
-                    "parameter": {
-                      "$ref": "#/parameters/LAGE_TARIEF_VERMINDERING_TWEEDE_SCHIJF"
-                    }
-                  },
-                  "right": {
-                    "type": "arithmetic",
-                    "operator": "minus",
-                    "left": {
-                      "type": "attributeReference",
-                      "attribute": {
-                        "$ref": "#/objectTypes/vlucht/properties/afstandTotBestemming"
-                      },
-                      "subject": {
-                        "type": "role",
-                        "role": "reis",
-                        "ofSubject": {
-                          "type": "pronoun",
-                          "pronoun": "zijn"
-                        }
-                      }
-                    },
-                    "right": {
-                      "type": "parameterReference",
-                      "parameter": {
-                        "$ref": "#/parameters/BOVENGRENS_AFSTAND_EERSTE_SCHIJF"
-                      }
-                    }
-                  }
-                }
-              },
-              "condition": {
-                "type": "allOf",
-                "conditions": [
-                  {
-                    "type": "propertyReference",
-                    "property": {
-                      "$ref": "#/objectTypes/vlucht/properties/belasteReis"
-                    },
-                    "subject": {
-                      "type": "role",
-                      "role": "reis",
-                      "ofSubject": {
-                        "type": "pronoun",
-                        "pronoun": "zijn"
-                      }
-                    }
-                  },
-                  {
-                    "type": "not",
-                    "condition": {
-                      "type": "propertyReference",
-                      "property": {
-                        "$ref": "#/objectTypes/vlucht/properties/rondvlucht"
-                      },
-                      "subject": {
-                        "type": "role",
-                        "role": "reis",
-                        "ofSubject": {
-                          "type": "pronoun",
-                          "pronoun": "zijn"
-                        }
-                      }
-                    }
-                  },
-                  {
-                    "type": "comparison",
-                    "operator": "greaterThan",
-                    "left": {
-                      "type": "attributeReference",
-                      "attribute": {
-                        "$ref": "#/objectTypes/vlucht/properties/afstandTotBestemming"
-                      },
-                      "subject": {
-                        "type": "role",
-                        "role": "reis",
-                        "ofSubject": {
-                          "type": "pronoun",
-                          "pronoun": "zijn"
-                        }
-                      }
-                    },
-                    "right": {
-                      "type": "parameterReference",
-                      "parameter": {
-                        "$ref": "#/parameters/BOVENGRENS_AFSTAND_EERSTE_SCHIJF"
-                      }
-                    }
-                  },
-                  {
-                    "type": "comparison",
-                    "operator": "lessThanOrEquals",
-                    "left": {
-                      "type": "attributeReference",
-                      "attribute": {
-                        "$ref": "#/objectTypes/vlucht/properties/afstandTotBestemming"
-                      },
-                      "subject": {
-                        "type": "role",
-                        "role": "reis",
-                        "ofSubject": {
-                          "type": "pronoun",
-                          "pronoun": "zijn"
-                        }
-                      }
-                    },
-                    "right": {
-                      "type": "parameterReference",
-                      "parameter": {
-                        "$ref": "#/parameters/BOVENGRENS_AFSTAND_TWEEDE_SCHIJF"
-                      }
-                    }
-                  }
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "id": "belasting-op-basis-van-afstand-04",
-          "name": "belasting op basis van afstand 04",
-          "versions": [
-            {
-              "validFrom": "2018",
-              "target": {
-                "attribute": {
-                  "$ref": "#/objectTypes/natuurlijkPersoon/properties/belastingOpBasisVanAfstand"
-                },
-                "subject": {
-                  "type": "objectTypeWithProperty",
-                  "objectType": {
-                    "$ref": "#/objectTypes/natuurlijkPersoon"
-                  },
-                  "property": {
-                    "$ref": "#/objectTypes/natuurlijkPersoon/properties/passagierWaarvoorHetHogeTariefVoorBelastingOpBasisVanAfstandVanToepassingIs"
-                  }
-                }
-              },
-              "expression": {
-                "type": "arithmetic",
-                "operator": "minus",
-                "left": {
-                  "type": "parameterReference",
-                  "parameter": {
-                    "$ref": "#/parameters/HOGE_BASISTARIEF_EERSTE_SCHIJF"
-                  }
-                },
-                "right": {
-                  "type": "arithmetic",
-                  "operator": "multiply",
-                  "left": {
-                    "type": "parameterReference",
-                    "parameter": {
-                      "$ref": "#/parameters/HOGE_TARIEF_VERMINDERING_EERSTE_SCHIJF"
-                    }
-                  },
-                  "right": {
-                    "type": "attributeReference",
-                    "attribute": {
-                      "$ref": "#/objectTypes/vlucht/properties/afstandTotBestemming"
-                    },
-                    "subject": {
-                      "type": "role",
-                      "role": "reis",
-                      "ofSubject": {
-                        "type": "pronoun",
-                        "pronoun": "zijn"
-                      }
-                    }
-                  }
-                }
-              },
-              "condition": {
-                "type": "allOf",
-                "conditions": [
-                  {
-                    "type": "propertyReference",
-                    "property": {
-                      "$ref": "#/objectTypes/vlucht/properties/belasteReis"
-                    },
-                    "subject": {
-                      "type": "role",
-                      "role": "reis",
-                      "ofSubject": {
-                        "type": "pronoun",
-                        "pronoun": "zijn"
-                      }
-                    }
-                  },
-                  {
-                    "type": "not",
-                    "condition": {
-                      "type": "propertyReference",
-                      "property": {
-                        "$ref": "#/objectTypes/vlucht/properties/rondvlucht"
-                      },
-                      "subject": {
-                        "type": "role",
-                        "role": "reis",
-                        "ofSubject": {
-                          "type": "pronoun",
-                          "pronoun": "zijn"
-                        }
-                      }
-                    }
-                  },
-                  {
-                    "type": "comparison",
-                    "operator": "greaterThan",
-                    "left": {
-                      "type": "attributeReference",
-                      "attribute": {
-                        "$ref": "#/objectTypes/vlucht/properties/afstandTotBestemming"
-                      },
-                      "subject": {
-                        "type": "role",
-                        "role": "reis",
-                        "ofSubject": {
-                          "type": "pronoun",
-                          "pronoun": "zijn"
-                        }
-                      }
-                    },
-                    "right": {
-                      "type": "numeric",
-                      "value": 0,
-                      "unit": "km"
-                    }
-                  },
-                  {
-                    "type": "comparison",
-                    "operator": "lessThanOrEquals",
-                    "left": {
-                      "type": "attributeReference",
-                      "attribute": {
-                        "$ref": "#/objectTypes/vlucht/properties/afstandTotBestemming"
-                      },
-                      "subject": {
-                        "type": "role",
-                        "role": "reis",
-                        "ofSubject": {
-                          "type": "pronoun",
-                          "pronoun": "zijn"
-                        }
-                      }
-                    },
-                    "right": {
-                      "type": "parameterReference",
-                      "parameter": {
-                        "$ref": "#/parameters/BOVENGRENS_AFSTAND_EERSTE_SCHIJF"
-                      }
-                    }
-                  }
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "id": "belasting-op-basis-van-afstand-05",
-          "name": "belasting op basis van afstand 05",
-          "versions": [
-            {
-              "validFrom": "2018",
-              "target": {
-                "attribute": {
-                  "$ref": "#/objectTypes/natuurlijkPersoon/properties/belastingOpBasisVanAfstand"
-                },
-                "subject": {
-                  "type": "objectTypeWithProperty",
-                  "objectType": {
-                    "$ref": "#/objectTypes/natuurlijkPersoon"
-                  },
-                  "property": {
-                    "$ref": "#/objectTypes/natuurlijkPersoon/properties/passagierWaarvoorHetHogeTariefVoorBelastingOpBasisVanAfstandVanToepassingIs"
-                  }
-                }
-              },
-              "expression": {
-                "type": "arithmetic",
-                "operator": "minus",
-                "left": {
-                  "type": "parameterReference",
-                  "parameter": {
-                    "$ref": "#/parameters/HOGE_BASISTARIEF_TWEEDE_SCHIJF"
-                  }
-                },
-                "right": {
-                  "type": "arithmetic",
-                  "operator": "multiply",
-                  "left": {
-                    "type": "parameterReference",
-                    "parameter": {
-                      "$ref": "#/parameters/HOGE_TARIEF_VERMINDERING_TWEEDE_SCHIJF"
-                    }
-                  },
-                  "right": {
-                    "type": "arithmetic",
-                    "operator": "minus",
-                    "left": {
-                      "type": "attributeReference",
-                      "attribute": {
-                        "$ref": "#/objectTypes/vlucht/properties/afstandTotBestemming"
-                      },
-                      "subject": {
-                        "type": "role",
-                        "role": "reis",
-                        "ofSubject": {
-                          "type": "pronoun",
-                          "pronoun": "zijn"
-                        }
-                      }
-                    },
-                    "right": {
-                      "type": "parameterReference",
-                      "parameter": {
-                        "$ref": "#/parameters/BOVENGRENS_AFSTAND_EERSTE_SCHIJF"
-                      }
-                    }
-                  }
-                }
-              },
-              "condition": {
-                "type": "allOf",
-                "conditions": [
-                  {
-                    "type": "propertyReference",
-                    "property": {
-                      "$ref": "#/objectTypes/vlucht/properties/belasteReis"
-                    },
-                    "subject": {
-                      "type": "role",
-                      "role": "reis",
-                      "ofSubject": {
-                        "type": "pronoun",
-                        "pronoun": "zijn"
-                      }
-                    }
-                  },
-                  {
-                    "type": "not",
-                    "condition": {
-                      "type": "propertyReference",
-                      "property": {
-                        "$ref": "#/objectTypes/vlucht/properties/rondvlucht"
-                      },
-                      "subject": {
-                        "type": "role",
-                        "role": "reis",
-                        "ofSubject": {
-                          "type": "pronoun",
-                          "pronoun": "zijn"
-                        }
-                      }
-                    }
-                  },
-                  {
-                    "type": "comparison",
-                    "operator": "greaterThan",
-                    "left": {
-                      "type": "attributeReference",
-                      "attribute": {
-                        "$ref": "#/objectTypes/vlucht/properties/afstandTotBestemming"
-                      },
-                      "subject": {
-                        "type": "role",
-                        "role": "reis",
-                        "ofSubject": {
-                          "type": "pronoun",
-                          "pronoun": "zijn"
-                        }
-                      }
-                    },
-                    "right": {
-                      "type": "parameterReference",
-                      "parameter": {
-                        "$ref": "#/parameters/BOVENGRENS_AFSTAND_EERSTE_SCHIJF"
-                      }
-                    }
-                  },
-                  {
-                    "type": "comparison",
-                    "operator": "lessThanOrEquals",
-                    "left": {
-                      "type": "attributeReference",
-                      "attribute": {
-                        "$ref": "#/objectTypes/vlucht/properties/afstandTotBestemming"
-                      },
-                      "subject": {
-                        "type": "role",
-                        "role": "reis",
-                        "ofSubject": {
-                          "type": "pronoun",
-                          "pronoun": "zijn"
-                        }
-                      }
-                    },
-                    "right": {
-                      "type": "parameterReference",
-                      "parameter": {
-                        "$ref": "#/parameters/BOVENGRENS_AFSTAND_TWEEDE_SCHIJF"
-                      }
-                    }
-                  }
-                ]
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Kenmerktoekenning natuurlijk persoon",
-      "rules": [
-        {
-          "id": "passagier-waarvoor-het-lage-tarief-voor-belasting-op-basis-van-afstand-van-toepassing-is-01",
-          "name": "passagier waarvoor het lage tarief voor belasting op basis van afstand van toepassing is 01",
-          "versions": [
-            {
-              "validFrom": "2018",
-              "property": {
-                "$ref": "#/objectTypes/natuurlijkPersoon/properties/passagierWaarvoorHetLageTariefVoorBelastingOpBasisVanAfstandVanToepassingIs"
-              },
-              "subject": {
-                "type": "objectType",
-                "ref": {
-                  "$ref": "#/objectTypes/natuurlijkPersoon"
-                }
-              },
-              "value": {
-                "type": "boolean",
-                "value": true
-              },
-              "condition": {
-                "type": "exactlyOneOf",
-                "conditions": [
-                  {
-                    "type": "comparison",
-                    "operator": "lessThan",
-                    "left": {
-                      "type": "attributeReference",
-                      "attribute": {
-                        "$ref": "#/objectTypes/natuurlijkPersoon/properties/leeftijd"
-                      },
-                      "subject": {
-                        "type": "pronoun",
-                        "pronoun": "zijn"
-                      }
-                    },
-                    "right": {
-                      "type": "numeric",
-                      "value": 18,
-                      "unit": "jr"
-                    }
-                  },
-                  {
-                    "type": "allOf",
-                    "conditions": [
-                      {
-                        "type": "comparison",
-                        "operator": "greaterThanOrEquals",
-                        "left": {
-                          "type": "attributeReference",
-                          "attribute": {
-                            "$ref": "#/objectTypes/natuurlijkPersoon/properties/leeftijd"
-                          },
-                          "subject": {
-                            "type": "pronoun",
-                            "pronoun": "zijn"
-                          }
-                        },
-                        "right": {
-                          "type": "numeric",
-                          "value": 25,
-                          "unit": "jr"
-                        }
-                      },
-                      {
-                        "type": "comparison",
-                        "operator": "lessThan",
-                        "left": {
-                          "type": "attributeReference",
-                          "attribute": {
-                            "$ref": "#/objectTypes/natuurlijkPersoon/properties/leeftijd"
-                          },
-                          "subject": {
-                            "type": "pronoun",
-                            "pronoun": "zijn"
-                          }
-                        },
-                        "right": {
-                          "type": "numeric",
-                          "value": 65,
-                          "unit": "jr"
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "id": "passagier-waarvoor-het-hoge-tarief-voor-belasting-op-basis-van-afstand-van-toepassing-is-01",
-          "name": "passagier waarvoor het hoge tarief voor belasting op basis van afstand van toepassing is 01",
-          "versions": [
-            {
-              "validFrom": "2018",
-              "property": {
-                "$ref": "#/objectTypes/natuurlijkPersoon/properties/passagierWaarvoorHetHogeTariefVoorBelastingOpBasisVanAfstandVanToepassingIs"
-              },
-              "subject": {
-                "type": "objectType",
-                "ref": {
-                  "$ref": "#/objectTypes/natuurlijkPersoon"
-                }
-              },
-              "value": {
-                "type": "boolean",
-                "value": true
-              },
-              "condition": {
-                "type": "exactlyOneOf",
-                "conditions": [
-                  {
-                    "type": "allOf",
-                    "conditions": [
-                      {
-                        "type": "comparison",
-                        "operator": "greaterThanOrEquals",
-                        "left": {
-                          "type": "attributeReference",
-                          "attribute": {
-                            "$ref": "#/objectTypes/natuurlijkPersoon/properties/leeftijd"
-                          },
-                          "subject": {
-                            "type": "pronoun",
-                            "pronoun": "zijn"
-                          }
-                        },
-                        "right": {
-                          "type": "numeric",
-                          "value": 18,
-                          "unit": "jr"
-                        }
-                      },
-                      {
-                        "type": "comparison",
-                        "operator": "lessThan",
-                        "left": {
-                          "type": "attributeReference",
-                          "attribute": {
-                            "$ref": "#/objectTypes/natuurlijkPersoon/properties/leeftijd"
-                          },
-                          "subject": {
-                            "type": "pronoun",
-                            "pronoun": "zijn"
-                          }
-                        },
-                        "right": {
-                          "type": "numeric",
-                          "value": 25,
-                          "unit": "jr"
-                        }
-                      }
-                    ]
-                  },
-                  {
-                    "type": "comparison",
-                    "operator": "greaterThanOrEquals",
-                    "left": {
-                      "type": "attributeReference",
-                      "attribute": {
-                        "$ref": "#/objectTypes/natuurlijkPersoon/properties/leeftijd"
-                      },
-                      "subject": {
-                        "type": "pronoun",
-                        "pronoun": "zijn"
-                      }
-                    },
-                    "right": {
-                      "type": "numeric",
-                      "value": 65,
-                      "unit": "jr"
-                    }
-                  }
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "id": "recht-op-duurzaamheidskorting-01",
-          "name": "recht op duurzaamheidskorting 01",
-          "versions": [
-            {
-              "validFrom": "2018",
-              "property": {
-                "$ref": "#/objectTypes/natuurlijkPersoon/properties/rechtOpDuurzaamheidskorting"
-              },
-              "subject": {
-                "type": "objectType",
-                "ref": {
-                  "$ref": "#/objectTypes/natuurlijkPersoon"
-                }
-              },
-              "value": {
-                "type": "boolean",
-                "value": true
-              },
-              "condition": {
-                "type": "allOf",
-                "conditions": [
-                  {
-                    "type": "comparison",
-                    "operator": "greaterThanOrEquals",
-                    "left": {
-                      "type": "attributeReference",
-                      "attribute": {
-                        "$ref": "#/objectTypes/natuurlijkPersoon/properties/leeftijd"
-                      },
-                      "subject": {
-                        "type": "pronoun",
-                        "pronoun": "zijn"
-                      }
-                    },
-                    "right": {
-                      "type": "numeric",
-                      "value": 65,
-                      "unit": "jr"
-                    }
-                  },
-                  {
-                    "type": "comparison",
-                    "operator": "greaterThanOrEquals",
-                    "left": {
-                      "type": "attributeReference",
-                      "attribute": {
-                        "$ref": "#/objectTypes/vlucht/properties/afstandTotBestemming"
-                      },
-                      "subject": {
-                        "type": "role",
-                        "role": "reis",
-                        "ofSubject": {
-                          "type": "pronoun",
-                          "pronoun": "zijn"
-                        }
-                      }
-                    },
-                    "right": {
-                      "type": "parameterReference",
-                      "parameter": {
-                        "$ref": "#/parameters/BOVENGRENS_AFSTAND_EERSTE_SCHIJF"
-                      }
-                    }
-                  }
-                ]
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Leeftijd",
-      "rules": [
-        {
-          "id": "leeftijd-01",
-          "name": "leeftijd 01",
-          "versions": [
-            {
-              "validFrom": "2018",
-              "target": {
-                "attribute": {
-                  "$ref": "#/objectTypes/natuurlijkPersoon/properties/leeftijd"
-                },
-                "subject": {
-                  "type": "objectType",
-                  "ref": {
-                    "$ref": "#/objectTypes/natuurlijkPersoon"
-                  }
-                }
-              },
-              "expression": {
-                "type": "function",
-                "function": "timeDuration",
-                "from": {
-                  "type": "attributeReference",
-                  "attribute": {
-                    "$ref": "#/objectTypes/natuurlijkPersoon/properties/geboortedatum"
-                  },
-                  "subject": {
-                    "type": "pronoun",
-                    "pronoun": "zijn"
-                  }
-                },
-                "to": {
-                  "type": "attributeReference",
-                  "attribute": {
-                    "$ref": "#/objectTypes/vlucht/properties/datumVanDeVlucht"
-                  },
-                  "subject": {
-                    "type": "role",
-                    "role": "reis",
-                    "ofSubject": {
-                      "type": "pronoun",
-                      "pronoun": "zijn"
-                    }
-                  }
-                },
-                "unit": "jr",
-                "whole": true
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Maximum aantal treinmiles",
-      "rules": [
-        {
-          "id": "maximaal-aantal-te-ontvangen-treinmiles-01",
-          "name": "maximaal aantal te ontvangen treinmiles 01",
-          "versions": [
-            {
-              "validFrom": "2019",
-              "target": {
-                "attribute": {
-                  "$ref": "#/objectTypes/natuurlijkPersoon/properties/maximaalAantalTeOntvangenTreinmiles"
-                },
-                "subject": {
-                  "type": "objectType",
-                  "ref": {
-                    "$ref": "#/objectTypes/natuurlijkPersoon"
-                  }
-                }
-              },
-              "value": {
-                "type": "parameterReference",
-                "parameter": {
-                  "$ref": "#/parameters/MAXIMUM_AANTAL_TREINMILES_VOOR_PASSAGIERS_JONGER_DAN_65"
-                }
-              },
-              "condition": {
-                "type": "comparison",
-                "operator": "lessThan",
-                "left": {
-                  "type": "attributeReference",
-                  "attribute": {
-                    "$ref": "#/objectTypes/natuurlijkPersoon/properties/leeftijd"
-                  },
-                  "subject": {
-                    "type": "pronoun",
-                    "pronoun": "zijn"
-                  }
-                },
-                "right": {
-                  "type": "numeric",
-                  "value": 65,
-                  "unit": "jr"
-                }
-              }
-            }
-          ]
-        },
-        {
-          "id": "maximaal-aantal-te-ontvangen-treinmiles-02",
-          "name": "maximaal aantal te ontvangen treinmiles 02",
-          "versions": [
-            {
-              "validFrom": "2019",
-              "target": {
-                "attribute": {
-                  "$ref": "#/objectTypes/natuurlijkPersoon/properties/maximaalAantalTeOntvangenTreinmiles"
-                },
-                "subject": {
-                  "type": "objectType",
-                  "ref": {
-                    "$ref": "#/objectTypes/natuurlijkPersoon"
-                  }
-                }
-              },
-              "value": {
-                "type": "parameterReference",
-                "parameter": {
-                  "$ref": "#/parameters/MAXIMUM_AANTAL_TREINMILES_VOOR_PASSAGIERS_VAN_65_JAAR_OF_OUDER"
-                }
-              },
-              "condition": {
-                "type": "comparison",
-                "operator": "greaterThanOrEquals",
-                "left": {
-                  "type": "attributeReference",
-                  "attribute": {
-                    "$ref": "#/objectTypes/natuurlijkPersoon/properties/leeftijd"
-                  },
-                  "subject": {
-                    "type": "pronoun",
-                    "pronoun": "zijn"
-                  }
-                },
-                "right": {
-                  "type": "numeric",
-                  "value": 65,
-                  "unit": "jr"
-                }
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Te betalen belasting",
-      "rules": [
-        {
-          "id": "te-betalen-belasting-01",
-          "name": "te betalen belasting 01",
-          "versions": [
-            {
-              "validFrom": "2018",
-              "target": {
-                "attribute": {
-                  "$ref": "#/objectTypes/natuurlijkPersoon/properties/teBetalenBelasting"
-                },
-                "subject": {
-                  "type": "objectType",
-                  "ref": {
-                    "$ref": "#/objectTypes/natuurlijkPersoon"
-                  }
-                }
-              },
-              "expression": {
-                "type": "rounding",
-                "expression": {
-                  "type": "arithmetic",
-                  "operator": "plus",
-                  "left": {
-                    "type": "attributeReference",
-                    "attribute": {
-                      "$ref": "#/objectTypes/natuurlijkPersoon/properties/belastingOpBasisVanAfstand"
-                    },
-                    "subject": {
-                      "type": "pronoun",
-                      "pronoun": "zijn"
-                    }
-                  },
-                  "right": {
-                    "type": "attributeReference",
-                    "attribute": {
-                      "$ref": "#/objectTypes/natuurlijkPersoon/properties/belastingOpBasisVanReisduur"
-                    },
-                    "subject": {
-                      "type": "pronoun",
-                      "pronoun": "zijn"
-                    }
-                  }
-                },
-                "decimals": 0,
-                "direction": "down"
-              },
-              "condition": {
-                "type": "anyOf",
-                "conditions": [
-                  {
-                    "type": "not",
-                    "condition": {
-                      "type": "propertyReference",
-                      "property": {
-                        "$ref": "#/objectTypes/natuurlijkPersoon/properties/rechtOpDuurzaamheidskorting"
-                      },
-                      "subject": {
-                        "type": "pronoun",
-                        "pronoun": "hij"
-                      }
-                    }
-                  },
-                  {
-                    "type": "not",
-                    "condition": {
-                      "type": "propertyReference",
-                      "property": {
-                        "$ref": "#/objectTypes/vlucht/properties/klimaatneutraal"
-                      },
-                      "subject": {
-                        "type": "role",
-                        "role": "reis",
-                        "ofSubject": {
-                          "type": "pronoun",
-                          "pronoun": "zijn"
-                        }
-                      }
-                    }
-                  }
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "id": "te-betalen-belasting-02a",
-          "name": "te betalen belasting 02a",
-          "versions": [
-            {
-              "validFrom": "2018",
-              "target": {
-                "attribute": {
-                  "$ref": "#/objectTypes/natuurlijkPersoon/properties/teBetalenBelasting"
-                },
-                "subject": {
-                  "type": "objectType",
-                  "ref": {
-                    "$ref": "#/objectTypes/natuurlijkPersoon"
-                  }
-                }
-              },
-              "expression": {
-                "type": "bounded",
-                "expression": {
-                  "type": "rounding",
-                  "expression": {
-                    "type": "arithmetic",
-                    "operator": "minus",
-                    "left": {
-                      "type": "arithmetic",
-                      "operator": "plus",
-                      "left": {
-                        "type": "attributeReference",
-                        "attribute": {
-                          "$ref": "#/objectTypes/natuurlijkPersoon/properties/belastingOpBasisVanAfstand"
-                        },
-                        "subject": {
-                          "type": "pronoun",
-                          "pronoun": "zijn"
-                        }
-                      },
-                      "right": {
-                        "type": "attributeReference",
-                        "attribute": {
-                          "$ref": "#/objectTypes/natuurlijkPersoon/properties/belastingOpBasisVanReisduur"
-                        },
-                        "subject": {
-                          "type": "pronoun",
-                          "pronoun": "zijn"
-                        }
-                      }
-                    },
-                    "right": {
-                      "type": "parameterReference",
-                      "parameter": {
-                        "$ref": "#/parameters/KORTING_VOOR_KLIMAATNEUTRALE_VLUCHT"
-                      }
-                    }
-                  },
-                  "decimals": 0,
-                  "direction": "down"
-                },
-                "minimum": {
-                  "type": "numeric",
-                  "value": 0,
-                  "unit": "€"
-                }
-              },
-              "condition": {
-                "type": "allOf",
-                "conditions": [
-                  {
-                    "type": "propertyReference",
-                    "property": {
-                      "$ref": "#/objectTypes/natuurlijkPersoon/properties/rechtOpDuurzaamheidskorting"
-                    },
-                    "subject": {
-                      "type": "pronoun",
-                      "pronoun": "hij"
-                    }
-                  },
-                  {
-                    "type": "propertyReference",
-                    "property": {
-                      "$ref": "#/objectTypes/vlucht/properties/klimaatneutraal"
-                    },
-                    "subject": {
-                      "type": "role",
-                      "role": "reis",
-                      "ofSubject": {
-                        "type": "pronoun",
-                        "pronoun": "zijn"
-                      }
-                    }
-                  }
-                ]
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Toewijzen treinmiles",
-      "rules": [
-        {
-          "id": "treinmiles-01",
-          "name": "treinmiles 01",
-          "versions": [
-            {
-              "validFrom": "2018",
-              "validTo": "2018",
-              "source": {
-                "attribute": {
-                  "$ref": "#/objectTypes/contingentTreinmiles/properties/totaalAantalTreinmiles"
-                },
-                "subject": {
-                  "type": "role",
-                  "ref": "#/factTypes/verdelingContingentTreinmilesOverPassagiers/roles/0"
-                }
-              },
-              "target": {
-                "attribute": {
-                  "$ref": "#/objectTypes/natuurlijkPersoon/properties/treinmiles"
-                },
-                "subjects": {
-                  "type": "allRoles",
-                  "role": "passagiers met recht op treinmiles",
-                  "ofSubject": {
-                    "type": "role",
-                    "ref": "#/factTypes/verdelingContingentTreinmilesOverPassagiers/roles/0"
-                  }
-                }
-              },
-              "distribution": {
-                "method": "equal",
-                "rounding": {
-                  "decimals": 0,
-                  "direction": "down"
-                },
-                "remainder": {
-                  "attribute": {
-                    "$ref": "#/objectTypes/contingentTreinmiles/properties/restantNaVerdeling"
-                  },
-                  "subject": {
-                    "type": "role",
-                    "ref": "#/factTypes/verdelingContingentTreinmilesOverPassagiers/roles/0"
-                  }
-                }
-              }
-            },
-            {
-              "validFrom": "2019",
-              "source": {
-                "attribute": {
-                  "$ref": "#/objectTypes/contingentTreinmiles/properties/totaalAantalTreinmiles"
-                },
-                "subject": {
-                  "type": "role",
-                  "ref": "#/factTypes/verdelingContingentTreinmilesOverPassagiers/roles/0"
-                }
-              },
-              "target": {
-                "attribute": {
-                  "$ref": "#/objectTypes/natuurlijkPersoon/properties/treinmiles"
-                },
-                "subjects": {
-                  "type": "allRoles",
-                  "role": "passagiers met recht op treinmiles",
-                  "ofSubject": {
-                    "type": "role",
-                    "ref": "#/factTypes/verdelingContingentTreinmilesOverPassagiers/roles/0"
-                  }
-                }
-              },
-              "distribution": {
-                "method": "ordered",
-                "orderBy": {
-                  "attribute": {
-                    "$ref": "#/objectTypes/natuurlijkPersoon/properties/leeftijd"
-                  },
-                  "direction": "ascending"
-                },
-                "tieBreaker": {
-                  "method": "proportional",
-                  "attribute": {
-                    "$ref": "#/objectTypes/natuurlijkPersoon/properties/woonregiofactor"
-                  }
-                },
-                "maximum": {
-                  "attribute": {
-                    "$ref": "#/objectTypes/natuurlijkPersoon/properties/maximaalAantalTeOntvangenTreinmiles"
-                  }
-                },
-                "rounding": {
-                  "decimals": 0,
-                  "direction": "down"
-                },
-                "remainder": {
-                  "attribute": {
-                    "$ref": "#/objectTypes/contingentTreinmiles/properties/restantNaVerdeling"
-                  },
-                  "subject": {
-                    "type": "role",
-                    "ref": "#/factTypes/verdelingContingentTreinmilesOverPassagiers/roles/0"
-                  }
-                }
-              }
-            }
-          ]
-        }
-      ]
-    }
-  ]
+  }
 }
