@@ -438,32 +438,40 @@
       }
     },
     "ruleSubject": {
-      "type": "object",
-      "required": ["type"],
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": ["objectType", "role", "pronoun", "objectTypeWithProperty"]
+      "oneOf": [
+        {
+          "type": "object",
+          "required": ["type"],
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["objectType", "role", "pronoun", "objectTypeWithProperty"]
+            },
+            "ref": {
+              "$ref": "#/$defs/jsonPointer"
+            },
+            "role": {
+              "type": "string"
+            },
+            "pronoun": {
+              "type": "string"
+            },
+            "objectType": {
+              "$ref": "#/$defs/jsonPointer"
+            },
+            "property": {
+              "$ref": "#/$defs/jsonPointer"
+            },
+            "ofSubject": {
+              "$ref": "#/$defs/ruleSubject"
+            }
+          }
         },
-        "ref": {
-          "$ref": "#/$defs/jsonPointer"
-        },
-        "role": {
-          "type": "string"
-        },
-        "pronoun": {
-          "type": "string"
-        },
-        "objectType": {
-          "$ref": "#/$defs/jsonPointer"
-        },
-        "property": {
-          "$ref": "#/$defs/jsonPointer"
-        },
-        "ofSubject": {
-          "$ref": "#/$defs/ruleSubject"
+        {
+          "$ref": "#/$defs/jsonPointer",
+          "description": "Direct role reference (simplified form)"
         }
-      }
+      ]
     },
     "ruleSubjects": {
       "type": "object",

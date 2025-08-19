@@ -813,10 +813,7 @@
                   "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
                 },
                 "subject": {
-                  "type": "objectType",
-                  "ref": {
-                    "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
-                  }
+                  "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                 }
               },
               "value": {
@@ -990,10 +987,7 @@
                   "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/89cdc694-7fae-4577-a289-08442a662d26"
                 },
                 "subject": {
-                  "type": "objectType",
-                  "ref": {
-                    "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
-                  }
+                  "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                 }
               },
               "expression": {
@@ -1025,10 +1019,7 @@
                   "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/cbc050ae-0471-4a39-add4-6b3b8fc3e9a5"
                 },
                 "subject": {
-                  "type": "objectType",
-                  "ref": {
-                    "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
-                  }
+                  "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                 }
               },
               "expression": {
@@ -1071,10 +1062,7 @@
                   "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/339243f4-dee5-474f-ab62-c7df39e69788"
                 },
                 "subject": {
-                  "type": "objectType",
-                  "ref": {
-                    "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
-                  }
+                  "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                 }
               },
               "expression": {
@@ -1117,10 +1105,7 @@
                   "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/b09702d7-a7d4-4308-976c-da0b5903eac9"
                 },
                 "subject": {
-                  "type": "objectType",
-                  "ref": {
-                    "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
-                  }
+                  "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                 }
               },
               "expression": {
@@ -1170,10 +1155,7 @@
                   "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/199d696e-a168-4584-8f80-35d737e5e1ba"
                 },
                 "subject": {
-                  "type": "objectType",
-                  "ref": {
-                    "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"
-                  }
+                  "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
                 }
               },
               "value": {
@@ -1190,12 +1172,7 @@
                       "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/2330a40c-76e0-41d3-877c-43337b73c025"
                     },
                     "subject": {
-                      "type": "role",
-                      "role": "reis",
-                      "ofSubject": {
-                        "type": "pronoun",
-                        "pronoun": "zijn"
-                      }
+                      "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                     }
                   },
                   {
@@ -1204,12 +1181,7 @@
                       "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/cbe15f31-ce60-440c-8e72-0861a5089457"
                     },
                     "subject": {
-                      "type": "role",
-                      "role": "reis",
-                      "ofSubject": {
-                        "type": "pronoun",
-                        "pronoun": "zijn"
-                      }
+                      "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                     }
                   },
                   {
@@ -1221,12 +1193,7 @@
                         "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
                       },
                       "subject": {
-                        "type": "role",
-                        "role": "reis",
-                        "ofSubject": {
-                          "type": "pronoun",
-                          "pronoun": "zijn"
-                        }
+                        "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                       }
                     },
                     "right": {
@@ -1286,12 +1253,7 @@
                       "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
                     },
                     "subject": {
-                      "type": "role",
-                      "role": "reis",
-                      "ofSubject": {
-                        "type": "pronoun",
-                        "pronoun": "zijn"
-                      }
+                      "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                     }
                   }
                 }
@@ -1305,12 +1267,7 @@
                       "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/d72ead33-2e0c-450a-ba71-b83940c8e926"
                     },
                     "subject": {
-                      "type": "role",
-                      "role": "reis",
-                      "ofSubject": {
-                        "type": "pronoun",
-                        "pronoun": "zijn"
-                      }
+                      "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                     }
                   },
                   {
@@ -1321,12 +1278,7 @@
                         "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/cbe15f31-ce60-440c-8e72-0861a5089457"
                       },
                       "subject": {
-                        "type": "role",
-                        "role": "reis",
-                        "ofSubject": {
-                          "type": "pronoun",
-                          "pronoun": "zijn"
-                        }
+                        "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                       }
                     }
                   },
@@ -1339,12 +1291,7 @@
                         "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
                       },
                       "subject": {
-                        "type": "role",
-                        "role": "reis",
-                        "ofSubject": {
-                          "type": "pronoun",
-                          "pronoun": "zijn"
-                        }
+                        "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                       }
                     },
                     "right": {
@@ -1362,12 +1309,7 @@
                         "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
                       },
                       "subject": {
-                        "type": "role",
-                        "role": "reis",
-                        "ofSubject": {
-                          "type": "pronoun",
-                          "pronoun": "zijn"
-                        }
+                        "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                       }
                     },
                     "right": {
@@ -1430,12 +1372,7 @@
                         "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
                       },
                       "subject": {
-                        "type": "role",
-                        "role": "reis",
-                        "ofSubject": {
-                          "type": "pronoun",
-                          "pronoun": "zijn"
-                        }
+                        "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                       }
                     },
                     "right": {
@@ -1456,12 +1393,7 @@
                       "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/d72ead33-2e0c-450a-ba71-b83940c8e926"
                     },
                     "subject": {
-                      "type": "role",
-                      "role": "reis",
-                      "ofSubject": {
-                        "type": "pronoun",
-                        "pronoun": "zijn"
-                      }
+                      "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                     }
                   },
                   {
@@ -1472,12 +1404,7 @@
                         "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/cbe15f31-ce60-440c-8e72-0861a5089457"
                       },
                       "subject": {
-                        "type": "role",
-                        "role": "reis",
-                        "ofSubject": {
-                          "type": "pronoun",
-                          "pronoun": "zijn"
-                        }
+                        "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                       }
                     }
                   },
@@ -1490,12 +1417,7 @@
                         "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
                       },
                       "subject": {
-                        "type": "role",
-                        "role": "reis",
-                        "ofSubject": {
-                          "type": "pronoun",
-                          "pronoun": "zijn"
-                        }
+                        "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                       }
                     },
                     "right": {
@@ -1514,12 +1436,7 @@
                         "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
                       },
                       "subject": {
-                        "type": "role",
-                        "role": "reis",
-                        "ofSubject": {
-                          "type": "pronoun",
-                          "pronoun": "zijn"
-                        }
+                        "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                       }
                     },
                     "right": {
@@ -1579,12 +1496,7 @@
                       "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
                     },
                     "subject": {
-                      "type": "role",
-                      "role": "reis",
-                      "ofSubject": {
-                        "type": "pronoun",
-                        "pronoun": "zijn"
-                      }
+                      "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                     }
                   }
                 }
@@ -1598,12 +1510,7 @@
                       "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/d72ead33-2e0c-450a-ba71-b83940c8e926"
                     },
                     "subject": {
-                      "type": "role",
-                      "role": "reis",
-                      "ofSubject": {
-                        "type": "pronoun",
-                        "pronoun": "zijn"
-                      }
+                      "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                     }
                   },
                   {
@@ -1614,12 +1521,7 @@
                         "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/cbe15f31-ce60-440c-8e72-0861a5089457"
                       },
                       "subject": {
-                        "type": "role",
-                        "role": "reis",
-                        "ofSubject": {
-                          "type": "pronoun",
-                          "pronoun": "zijn"
-                        }
+                        "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                       }
                     }
                   },
@@ -1632,12 +1534,7 @@
                         "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
                       },
                       "subject": {
-                        "type": "role",
-                        "role": "reis",
-                        "ofSubject": {
-                          "type": "pronoun",
-                          "pronoun": "zijn"
-                        }
+                        "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                       }
                     },
                     "right": {
@@ -1655,12 +1552,7 @@
                         "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
                       },
                       "subject": {
-                        "type": "role",
-                        "role": "reis",
-                        "ofSubject": {
-                          "type": "pronoun",
-                          "pronoun": "zijn"
-                        }
+                        "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                       }
                     },
                     "right": {
@@ -1723,12 +1615,7 @@
                         "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
                       },
                       "subject": {
-                        "type": "role",
-                        "role": "reis",
-                        "ofSubject": {
-                          "type": "pronoun",
-                          "pronoun": "zijn"
-                        }
+                        "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                       }
                     },
                     "right": {
@@ -1749,12 +1636,7 @@
                       "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/d72ead33-2e0c-450a-ba71-b83940c8e926"
                     },
                     "subject": {
-                      "type": "role",
-                      "role": "reis",
-                      "ofSubject": {
-                        "type": "pronoun",
-                        "pronoun": "zijn"
-                      }
+                      "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                     }
                   },
                   {
@@ -1765,12 +1647,7 @@
                         "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/cbe15f31-ce60-440c-8e72-0861a5089457"
                       },
                       "subject": {
-                        "type": "role",
-                        "role": "reis",
-                        "ofSubject": {
-                          "type": "pronoun",
-                          "pronoun": "zijn"
-                        }
+                        "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                       }
                     }
                   },
@@ -1783,12 +1660,7 @@
                         "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
                       },
                       "subject": {
-                        "type": "role",
-                        "role": "reis",
-                        "ofSubject": {
-                          "type": "pronoun",
-                          "pronoun": "zijn"
-                        }
+                        "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                       }
                     },
                     "right": {
@@ -1807,12 +1679,7 @@
                         "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
                       },
                       "subject": {
-                        "type": "role",
-                        "role": "reis",
-                        "ofSubject": {
-                          "type": "pronoun",
-                          "pronoun": "zijn"
-                        }
+                        "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                       }
                     },
                     "right": {
@@ -2065,12 +1932,7 @@
                         "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
                       },
                       "subject": {
-                        "type": "role",
-                        "role": "reis",
-                        "ofSubject": {
-                          "type": "pronoun",
-                          "pronoun": "zijn"
-                        }
+                        "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                       }
                     },
                     "right": {
@@ -2104,10 +1966,7 @@
                   "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
                 },
                 "subject": {
-                  "type": "objectType",
-                  "ref": {
-                    "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"
-                  }
+                  "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
                 }
               },
               "expression": {
@@ -2129,12 +1988,7 @@
                     "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/bf4947b1-acc6-4857-ba8b-881360e83b36"
                   },
                   "subject": {
-                    "type": "role",
-                    "role": "reis",
-                    "ofSubject": {
-                      "type": "pronoun",
-                      "pronoun": "zijn"
-                    }
+                    "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                   }
                 },
                 "unit": "jr",
@@ -2162,10 +2016,7 @@
                   "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/661f7a45-78a0-4c8f-85bc-8a27748420f5"
                 },
                 "subject": {
-                  "type": "objectType",
-                  "ref": {
-                    "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"
-                  }
+                  "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
                 }
               },
               "value": {
@@ -2208,10 +2059,7 @@
                   "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/661f7a45-78a0-4c8f-85bc-8a27748420f5"
                 },
                 "subject": {
-                  "type": "objectType",
-                  "ref": {
-                    "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"
-                  }
+                  "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
                 }
               },
               "value": {
@@ -2261,10 +2109,7 @@
                   "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/ab9cc7dc-7be7-412d-ae46-0224ceef3153"
                 },
                 "subject": {
-                  "type": "objectType",
-                  "ref": {
-                    "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"
-                  }
+                  "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
                 }
               },
               "expression": {
@@ -2320,12 +2165,7 @@
                         "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/866a85c0-b305-4ce3-af5b-2baf449cdfeb"
                       },
                       "subject": {
-                        "type": "role",
-                        "role": "reis",
-                        "ofSubject": {
-                          "type": "pronoun",
-                          "pronoun": "zijn"
-                        }
+                        "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                       }
                     }
                   }
@@ -2346,10 +2186,7 @@
                   "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/ab9cc7dc-7be7-412d-ae46-0224ceef3153"
                 },
                 "subject": {
-                  "type": "objectType",
-                  "ref": {
-                    "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"
-                  }
+                  "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
                 }
               },
               "expression": {
@@ -2418,12 +2255,7 @@
                       "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/866a85c0-b305-4ce3-af5b-2baf449cdfeb"
                     },
                     "subject": {
-                      "type": "role",
-                      "role": "reis",
-                      "ofSubject": {
-                        "type": "pronoun",
-                        "pronoun": "zijn"
-                      }
+                      "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                     }
                   }
                 ]
@@ -2453,8 +2285,8 @@
                 "subject": {
                   "type": "role",
                   "ref": {
-        "$ref": "#/factTypes/da5cc365-024d-4c43-8fce-75ae4a4d461f/roles/5d45c715-f041-453c-9386-8c97fa592ea7"
-      }
+                    "$ref": "#/factTypes/da5cc365-024d-4c43-8fce-75ae4a4d461f/roles/5d45c715-f041-453c-9386-8c97fa592ea7"
+                  }
                 }
               },
               "target": {
@@ -2467,8 +2299,8 @@
                   "ofSubject": {
                     "type": "role",
                     "ref": {
-        "$ref": "#/factTypes/da5cc365-024d-4c43-8fce-75ae4a4d461f/roles/5d45c715-f041-453c-9386-8c97fa592ea7"
-      }
+                      "$ref": "#/factTypes/da5cc365-024d-4c43-8fce-75ae4a4d461f/roles/5d45c715-f041-453c-9386-8c97fa592ea7"
+                    }
                   }
                 }
               },
@@ -2485,8 +2317,8 @@
                   "subject": {
                     "type": "role",
                     "ref": {
-        "$ref": "#/factTypes/da5cc365-024d-4c43-8fce-75ae4a4d461f/roles/5d45c715-f041-453c-9386-8c97fa592ea7"
-      }
+                      "$ref": "#/factTypes/da5cc365-024d-4c43-8fce-75ae4a4d461f/roles/5d45c715-f041-453c-9386-8c97fa592ea7"
+                    }
                   }
                 }
               }
@@ -2500,8 +2332,8 @@
                 "subject": {
                   "type": "role",
                   "ref": {
-        "$ref": "#/factTypes/da5cc365-024d-4c43-8fce-75ae4a4d461f/roles/5d45c715-f041-453c-9386-8c97fa592ea7"
-      }
+                    "$ref": "#/factTypes/da5cc365-024d-4c43-8fce-75ae4a4d461f/roles/5d45c715-f041-453c-9386-8c97fa592ea7"
+                  }
                 }
               },
               "target": {
@@ -2514,8 +2346,8 @@
                   "ofSubject": {
                     "type": "role",
                     "ref": {
-        "$ref": "#/factTypes/da5cc365-024d-4c43-8fce-75ae4a4d461f/roles/5d45c715-f041-453c-9386-8c97fa592ea7"
-      }
+                      "$ref": "#/factTypes/da5cc365-024d-4c43-8fce-75ae4a4d461f/roles/5d45c715-f041-453c-9386-8c97fa592ea7"
+                    }
                   }
                 }
               },
@@ -2549,8 +2381,8 @@
                   "subject": {
                     "type": "role",
                     "ref": {
-        "$ref": "#/factTypes/da5cc365-024d-4c43-8fce-75ae4a4d461f/roles/5d45c715-f041-453c-9386-8c97fa592ea7"
-      }
+                      "$ref": "#/factTypes/da5cc365-024d-4c43-8fce-75ae4a4d461f/roles/5d45c715-f041-453c-9386-8c97fa592ea7"
+                    }
                   }
                 }
               }
