@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+
+# Simple XSLT transformation script
+
+set -e
+
+# Show help
+if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
+    cat << EOF
+🚀 NRML XSLT Transformation
+
+Usage: transform [xslt-file] [input-file] [output-file]
+
+Arguments:
+  xslt-file   XSLT stylesheet (default: transformations/gegevensspraak.xsl)
+  input-file  NRML JSON file (default: toka.nrml.json)
+  output-file Output file (default: output.txt)
+
+Examples:
+  transform                                # Use all defaults
+  transform my.xsl                         # Custom XSLT, default input/output
+  transform my.xsl input.json              # Custom XSLT and input
+  transform my.xsl input.json result.txt   # All custom
+
+EOF
+    exit 0
+fi
+
+# Default arguments
+XSLT_FILE="${1:-transformations/gegevensspraak.xsl}"
+INPUT_FILE="${2:-toka.nrml.json}"
+OUTPUT_FILE="${3:-output.txt}"
+
+# Check files exist
+if [[ ! -f "$XSLT_FILE" ]]; then
+    echo "❌ XSLT file not found: $XSLT_FILE"
+    exit 1
+fi
+
+if [[ ! -f "$INPUT_FILE" ]]; then
+    echo "❌ Input file not found: $INPUT_FILE"
+    exit 1
+fi
+
+echo "🔄 Transforming $INPUT_FILE → $OUTPUT_FILE using $XSLT_FILE"
+
+# Run transformation with Saxon (use absolute paths)
+npx xslt3 -it:main -xsl:"$XSLT_FILE" -o:"$OUTPUT_FILE" input-file="$(realpath "$INPUT_FILE")"
+
+if [[ -f "$OUTPUT_FILE" ]]; then
+    echo "✅ Transformation completed: $OUTPUT_FILE"
+    echo ""
+    echo "Preview:"
+    head -20 "$OUTPUT_FILE"
+else
+    echo "❌ Transformation failed"
+    exit 1
+fi

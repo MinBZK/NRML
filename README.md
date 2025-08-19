@@ -143,6 +143,60 @@ Controleer of alle JSON Pointer referenties (`$ref`) correct verwijzen naar best
 - Relaties moeten beide zijden correct definiëren
 - Parameters gebruikt in regels moeten bestaan
 
+## XSLT Transformatie
+
+NRML documenten kunnen worden getransformeerd naar Nederlandse gegevensspraak voor menselijke leesbaarheid.
+
+### Quick Start
+
+```bash
+# Installeer dependencies (eenmalig)
+cd scripts && npm install
+
+# Basis transformatie
+./scripts/transform
+
+# Custom bestanden
+./scripts/transform my.xsl input.json output.txt
+
+# Help
+./scripts/transform --help
+```
+
+### Voorbeeld Output
+
+**Input (NRML JSON):**
+```json
+{
+  "objectTypes": {
+    "48c6ed9c-0911-43d8-b6ef-47d2b406ea35": {
+      "name": {"nl": "vlucht"},
+      "definite_article": {"nl": "de"},
+      "properties": {
+        "d72ead33-2e0c-450a-ba71-b83940c8e926": {
+          "name": {"nl": "belaste reis"},
+          "type": "characteristic"
+        }
+      }
+    }
+  }
+}
+```
+
+**Output (Nederlandse Gegevensspraak):**
+```
+Objecttype de vlucht
+de    belaste reis    kenmerk
+```
+
+### Features
+
+- **XSLT 3.0** - Declaratieve templates met pattern matching
+- **JSON native** - Directe `json-to-xml()` support  
+- **SaxonJS** - XSLT 3.0 processor via Node.js (geen Java nodig)
+- **UUID support** - Volledig UUID-based multilingual NRML v2
+- **Role references** - Expliciete relationele modellering
+
 ## Toekomstige Ontwikkelingen
 
 NRML is een levende standaard die zich ontwikkelt samen met de behoeften van de Nederlandse overheid voor machine-leesbare wetgeving. Bijdragen en feedback zijn welkom via GitHub issues.

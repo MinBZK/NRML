@@ -1,16 +1,8 @@
 {
-  "name": "scripts",
+  "name": "nrml-scripts",
   "version": "1.0.0",
-  "description": "Deze directory bevat **generaliseerbare transformatie tools** voor het omzetten van NRML JSON specificaties naar verschillende output formaten.",
-  "main": "transform-nrml.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "description": "NRML transformation tools",
   "dependencies": {
-    "saxon-js": "^2.7.0",
     "xslt3": "^2.7.0"
   }
 }
