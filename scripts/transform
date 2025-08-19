@@ -9,18 +9,20 @@ if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
     cat << EOF
 🚀 NRML XSLT Transformation
 
-Usage: transform [xslt-file] [input-file] [output-file]
+Usage: transform [xslt-file] [input-file] [output-file] [language]
 
 Arguments:
   xslt-file   XSLT stylesheet (default: transformations/gegevensspraak.xsl)
   input-file  NRML JSON file (default: toka.nrml.json)
   output-file Output file (default: output.txt)
+  language    Language code (default: nl, options: nl, en)
 
 Examples:
-  transform                                # Use all defaults
-  transform my.xsl                         # Custom XSLT, default input/output
-  transform my.xsl input.json              # Custom XSLT and input
-  transform my.xsl input.json result.txt   # All custom
+  transform                                    # Use all defaults (Dutch)
+  transform my.xsl                             # Custom XSLT, default input/output/language
+  transform my.xsl input.json                  # Custom XSLT and input
+  transform my.xsl input.json result.txt       # All custom, Dutch
+  transform my.xsl input.json result.txt en    # All custom, English
 
 EOF
     exit 0
@@ -30,6 +32,7 @@ fi
 XSLT_FILE="${1:-transformations/gegevensspraak.xsl}"
 INPUT_FILE="${2:-toka.nrml.json}"
 OUTPUT_FILE="${3:-output.txt}"
+LANGUAGE="${4:-nl}"
 
 # Check files exist
 if [[ ! -f "$XSLT_FILE" ]]; then
@@ -42,10 +45,10 @@ if [[ ! -f "$INPUT_FILE" ]]; then
     exit 1
 fi
 
-echo "🔄 Transforming $INPUT_FILE → $OUTPUT_FILE using $XSLT_FILE"
+echo "🔄 Transforming $INPUT_FILE → $OUTPUT_FILE using $XSLT_FILE (language: $LANGUAGE)"
 
 # Run transformation with Saxon (use absolute paths)
-npx xslt3 -it:main -xsl:"$XSLT_FILE" -o:"$OUTPUT_FILE" input-file="$(realpath "$INPUT_FILE")"
+npx xslt3 -it:main -xsl:"$XSLT_FILE" -o:"$OUTPUT_FILE" input-file="$(realpath "$INPUT_FILE")" language="$LANGUAGE"
 
 if [[ -f "$OUTPUT_FILE" ]]; then
     echo "✅ Transformation completed: $OUTPUT_FILE"

@@ -13,43 +13,51 @@
   "objectTypes": {
     "48c6ed9c-0911-43d8-b6ef-47d2b406ea35": {
       "name": {
-        "nl": "vlucht"
+        "nl": "vlucht",
+        "en": "flight"
       },
       "definite_article": {
-        "nl": "de"
+        "nl": "de",
+        "en": "the"
       },
       "properties": {
         "d72ead33-2e0c-450a-ba71-b83940c8e926": {
           "name": {
-            "nl": "belaste reis"
+            "nl": "belaste reis",
+            "en": "taxable trip"
           },
           "type": "characteristic"
         },
         "2330a40c-76e0-41d3-877c-43337b73c025": {
           "name": {
-            "nl": "onbelaste reis"
+            "nl": "onbelaste reis",
+            "en": "non-taxable trip"
           },
           "type": "characteristic"
         },
         "cbe15f31-ce60-440c-8e72-0861a5089457": {
           "name": {
-            "nl": "rondvlucht"
+            "nl": "rondvlucht",
+            "en": "round trip"
           },
           "type": "characteristic"
         },
         "866a85c0-b305-4ce3-af5b-2baf449cdfeb": {
           "name": {
-            "nl": "klimaatneutraal"
+            "nl": "klimaatneutraal",
+            "en": "climate neutral"
           },
           "type": "characteristic",
           "subtype": "adjective"
         },
         "fe752ef2-19ba-4b5c-9e6e-ad86df5d3d59": {
           "name": {
-            "nl": "luchthaven van vertrek"
+            "nl": "luchthaven van vertrek",
+            "en": "departure airport"
           },
           "article": {
-            "nl": "de"
+            "nl": "de",
+            "en": "the"
           },
           "type": {
             "$ref": "#/domains/b20b40f4-76ca-4887-afe4-cf98fc77ff66"
@@ -57,10 +65,12 @@
         },
         "07783713-6df0-4810-bc44-4206050cb19d": {
           "name": {
-            "nl": "luchthaven van bestemming"
+            "nl": "luchthaven van bestemming",
+            "en": "destination airport"
           },
           "article": {
-            "nl": "de"
+            "nl": "de",
+            "en": "the"
           },
           "type": {
             "$ref": "#/domains/b20b40f4-76ca-4887-afe4-cf98fc77ff66"
@@ -68,20 +78,24 @@
         },
         "bf4947b1-acc6-4857-ba8b-881360e83b36": {
           "name": {
-            "nl": "datum van de vlucht"
+            "nl": "datum van de vlucht",
+            "en": "flight date"
           },
           "article": {
-            "nl": "de"
+            "nl": "de",
+            "en": "the"
           },
           "type": "date",
           "precision": "days"
         },
         "ea7d8d81-5ce2-4d79-b69f-a982cb90f35d": {
           "name": {
-            "nl": "afstand tot bestemming"
+            "nl": "afstand tot bestemming",
+            "en": "distance to destination"
           },
           "article": {
-            "nl": "de"
+            "nl": "de",
+            "en": "the"
           },
           "type": "numeric",
           "subtype": "integer",
@@ -89,19 +103,23 @@
         },
         "ea5d01e3-af40-437f-bc0f-d29b26718148": {
           "name": {
-            "nl": "bereikbaar per trein"
+            "nl": "bereikbaar per trein",
+            "en": "reachable by train"
           },
           "article": {
-            "nl": "de"
+            "nl": "de",
+            "en": "the"
           },
           "type": "boolean"
         },
         "2c4ed887-d1fa-4aa3-b0c4-6c0f0acc7a76": {
           "name": {
-            "nl": "reisduur per trein"
+            "nl": "reisduur per trein",
+            "en": "travel time by train"
           },
           "article": {
-            "nl": "de"
+            "nl": "de",
+            "en": "the"
           },
           "type": "numeric",
           "subtype": "integer",
@@ -109,20 +127,24 @@
         },
         "89cdc694-7fae-4577-a289-08442a662d26": {
           "name": {
-            "nl": "aantal passagiers"
+            "nl": "aantal passagiers",
+            "en": "number of passengers"
           },
           "article": {
-            "nl": "het"
+            "nl": "het",
+            "en": "the"
           },
           "type": "numeric",
           "subtype": "integer"
         },
         "339243f4-dee5-474f-ab62-c7df39e69788": {
           "name": {
-            "nl": "totale belasting op basis van afstand"
+            "nl": "totale belasting op basis van afstand",
+            "en": "total tax based on distance"
           },
           "article": {
-            "nl": "de"
+            "nl": "de",
+            "en": "the"
           },
           "type": {
             "$ref": "#/domains/1ffc339e-47cf-4f17-8985-22628dddb49a"
@@ -130,10 +152,12 @@
         },
         "b09702d7-a7d4-4308-976c-da0b5903eac9": {
           "name": {
-            "nl": "totale belasting op basis van reisduur"
+            "nl": "totale belasting op basis van reisduur",
+            "en": "total tax based on travel time"
           },
           "article": {
-            "nl": "de"
+            "nl": "de",
+            "en": "the"
           },
           "type": {
             "$ref": "#/domains/1ffc339e-47cf-4f17-8985-22628dddb49a"
@@ -141,10 +165,12 @@
         },
         "cbc050ae-0471-4a39-add4-6b3b8fc3e9a5": {
           "name": {
-            "nl": "totaal te betalen belasting"
+            "nl": "totaal te betalen belasting",
+            "en": "total tax payable"
           },
           "article": {
-            "nl": "de"
+            "nl": "de",
+            "en": "the"
           },
           "type": {
             "$ref": "#/domains/1ffc339e-47cf-4f17-8985-22628dddb49a"
@@ -154,61 +180,73 @@
     },
     "4c72dc9d-78d4-4f0b-a0cd-6037944f26ce": {
       "name": {
-        "nl": "natuurlijk persoon"
+        "nl": "natuurlijk persoon",
+        "en": "natural person"
       },
       "definite_article": {
-        "nl": "de"
+        "nl": "de",
+        "en": "the"
       },
       "animated": true,
       "properties": {
         "ef64a2f2-6dd5-46cb-bd4e-6708e70021dc": {
           "name": {
-            "nl": "passagier waarvoor het lage tarief voor belasting op basis van afstand van toepassing is"
+            "nl": "passagier waarvoor het lage tarief voor belasting op basis van afstand van toepassing is",
+            "en": "passenger eligible for low distance-based tax rate"
           },
           "type": "characteristic"
         },
         "37ddb128-913a-41b2-b5fd-ed8c05b813b2": {
           "name": {
-            "nl": "passagier waarvoor het hoge tarief voor belasting op basis van afstand van toepassing is"
+            "nl": "passagier waarvoor het hoge tarief voor belasting op basis van afstand van toepassing is",
+            "en": "passenger eligible for high distance-based tax rate"
           },
           "type": "characteristic"
         },
         "4b9bd5f1-311a-4b59-8dd9-ee3139de153e": {
           "name": {
-            "nl": "recht op duurzaamheidskorting"
+            "nl": "recht op duurzaamheidskorting",
+            "en": "entitled to sustainability discount"
           },
           "type": "characteristic",
           "subtype": "possessive",
           "article": {
-            "nl": "het"
+            "nl": "het",
+            "en": "the"
           }
         },
         "856cf722-8ecc-4b2c-aeaa-d0f5e99f3fff": {
           "name": {
-            "nl": "identificatienummer"
+            "nl": "identificatienummer",
+            "en": "identification number"
           },
           "article": {
-            "nl": "het"
+            "nl": "het",
+            "en": "the"
           },
           "type": "numeric",
           "subtype": "integer"
         },
         "b5200359-418f-40db-bdd2-cf9f7f77b4d4": {
           "name": {
-            "nl": "geboortedatum"
+            "nl": "geboortedatum",
+            "en": "date of birth"
           },
           "article": {
-            "nl": "de"
+            "nl": "de",
+            "en": "the"
           },
           "type": "date",
           "precision": "days"
         },
         "9ffef501-48f3-4c4c-827a-52478ea82ab8": {
           "name": {
-            "nl": "leeftijd"
+            "nl": "leeftijd",
+            "en": "age"
           },
           "article": {
-            "nl": "de"
+            "nl": "de",
+            "en": "the"
           },
           "type": "numeric",
           "subtype": "integer",
@@ -216,22 +254,27 @@
         },
         "a94e2c0f-2cd1-4562-86dc-321c79d73d4b": {
           "name": {
-            "nl": "burgerservicenummer"
+            "nl": "burgerservicenummer",
+            "en": "citizen service number"
           },
           "article": {
-            "nl": "het"
+            "nl": "het",
+            "en": "the"
           },
           "type": "text"
         },
         "199d696e-a168-4584-8f80-35d737e5e1ba": {
           "name": {
-            "nl": "belasting op basis van afstand"
+            "nl": "belasting op basis van afstand",
+            "en": "distance-based tax"
           },
           "article": {
-            "nl": "de"
+            "nl": "de",
+            "en": "the"
           },
           "plural": {
-            "nl": "belastingen op basis van afstand"
+            "nl": "belastingen op basis van afstand",
+            "en": "distance-based taxes"
           },
           "type": {
             "$ref": "#/domains/1ffc339e-47cf-4f17-8985-22628dddb49a"
@@ -239,13 +282,16 @@
         },
         "b802e897-8854-4ad3-97b4-3ed4b04f9b16": {
           "name": {
-            "nl": "belasting op basis van reisduur"
+            "nl": "belasting op basis van reisduur",
+            "en": "travel time-based tax"
           },
           "article": {
-            "nl": "de"
+            "nl": "de",
+            "en": "the"
           },
           "plural": {
-            "nl": "belastingen op basis van reisduur"
+            "nl": "belastingen op basis van reisduur",
+            "en": "travel time-based taxes"
           },
           "type": {
             "$ref": "#/domains/1ffc339e-47cf-4f17-8985-22628dddb49a"
@@ -253,10 +299,12 @@
         },
         "ab9cc7dc-7be7-412d-ae46-0224ceef3153": {
           "name": {
-            "nl": "te betalen belasting"
+            "nl": "te betalen belasting",
+            "en": "tax payable"
           },
           "article": {
-            "nl": "de"
+            "nl": "de",
+            "en": "the"
           },
           "type": {
             "$ref": "#/domains/1ffc339e-47cf-4f17-8985-22628dddb49a"
@@ -264,10 +312,12 @@
         },
         "5c6df479-4620-4487-baaf-3c7f7581e56f": {
           "name": {
-            "nl": "provincie"
+            "nl": "provincie",
+            "en": "province"
           },
           "article": {
-            "nl": "de"
+            "nl": "de",
+            "en": "the"
           },
           "type": {
             "$ref": "#/domains/2430730a-0f8f-48ff-9a54-166e651ff340"
@@ -275,33 +325,40 @@
         },
         "85a409f3-4f30-4032-ae35-6c49a434a45d": {
           "name": {
-            "nl": "woonregiofactor"
+            "nl": "woonregiofactor",
+            "en": "residential area factor"
           },
           "article": {
-            "nl": "de"
+            "nl": "de",
+            "en": "the"
           },
           "type": "numeric",
           "subtype": "integer"
         },
         "11d155f3-d6bd-4792-94bb-e20c0c885101": {
           "name": {
-            "nl": "treinmiles"
+            "nl": "treinmiles",
+            "en": "train miles"
           },
           "article": {
-            "nl": "de"
+            "nl": "de",
+            "en": "the"
           },
           "plural": {
-            "nl": "treinmiles"
+            "nl": "treinmiles",
+            "en": "train miles"
           },
           "type": "numeric",
           "subtype": "integer"
         },
         "661f7a45-78a0-4c8f-85bc-8a27748420f5": {
           "name": {
-            "nl": "maximaal aantal te ontvangen treinmiles"
+            "nl": "maximaal aantal te ontvangen treinmiles",
+            "en": "maximum number of train miles to receive"
           },
           "article": {
-            "nl": "het"
+            "nl": "het",
+            "en": "the"
           },
           "type": "numeric",
           "subtype": "integer"
@@ -310,38 +367,46 @@
     },
     "bea88ba3-ec79-4bd2-8f8e-f6e11a08c431": {
       "name": {
-        "nl": "contingent treinmiles"
+        "nl": "contingent treinmiles",
+        "en": "train miles quota"
       },
       "definite_article": {
-        "nl": "het"
+        "nl": "het",
+        "en": "the"
       },
       "properties": {
         "f2aa806f-f1f1-4212-aba8-b01334172317": {
           "name": {
-            "nl": "totaal aantal treinmiles"
+            "nl": "totaal aantal treinmiles",
+            "en": "total number of train miles"
           },
           "article": {
-            "nl": "het"
+            "nl": "het",
+            "en": "the"
           },
           "type": "numeric",
           "subtype": "integer"
         },
         "1f6b885a-6382-4fe8-9d56-f925bf82af37": {
           "name": {
-            "nl": "aantal treinmiles op basis van aantal passagiers"
+            "nl": "aantal treinmiles op basis van aantal passagiers",
+            "en": "number of train miles based on number of passengers"
           },
           "article": {
-            "nl": "het"
+            "nl": "het",
+            "en": "the"
           },
           "type": "numeric",
           "subtype": "integer"
         },
         "8f5423a5-cc51-4f78-b66e-720540da5bf8": {
           "name": {
-            "nl": "restant na verdeling"
+            "nl": "restant na verdeling",
+            "en": "remainder after distribution"
           },
           "article": {
-            "nl": "het"
+            "nl": "het",
+            "en": "the"
           },
           "type": "numeric",
           "subtype": "integer"
@@ -350,18 +415,22 @@
     },
     "dd04dbff-736a-4703-94a2-bbba4588fcc0": {
       "name": {
-        "nl": "uitworpmelding"
+        "nl": "uitworpmelding",
+        "en": "rejection message"
       },
       "definite_article": {
-        "nl": "de"
+        "nl": "de",
+        "en": "the"
       },
       "properties": {
         "8f8ebcae-17e9-451d-ab21-9cb1f7924f1c": {
           "name": {
-            "nl": "type"
+            "nl": "type",
+            "en": "type"
           },
           "article": {
-            "nl": "het"
+            "nl": "het",
+            "en": "the"
           },
           "type": {
             "$ref": "#/domains/61b9f36b-d866-4b5d-aa61-7451e6aee5c0"
@@ -369,10 +438,12 @@
         },
         "8db131d3-ffc5-4ec6-8618-447f394d2ce6": {
           "name": {
-            "nl": "toelichting"
+            "nl": "toelichting",
+            "en": "explanation"
           },
           "article": {
-            "nl": "de"
+            "nl": "de",
+            "en": "the"
           },
           "type": "text"
         }
@@ -382,16 +453,19 @@
   "factTypes": {
     "ef9e731c-4f81-4905-a902-2a533e1eebc5": {
       "name": {
-        "nl": "Vlucht van natuurlijke personen"
+        "nl": "Vlucht van natuurlijke personen",
+        "en": "Flight of natural persons"
       },
       "relation": "betreft de verplaatsing van",
       "roles": {
         "5ce3e026-293e-4405-a22d-4ea222deef79": {
           "name": {
-            "nl": "reis"
+            "nl": "reis",
+            "en": "trip"
           },
           "article": {
-            "nl": "de"
+            "nl": "de",
+            "en": "the"
           },
           "cardinality": "one",
           "objectType": {
@@ -400,13 +474,16 @@
         },
         "0cc7c4b4-2855-4c8b-93f0-5403cf286af0": {
           "name": {
-            "nl": "passagier"
+            "nl": "passagier",
+            "en": "passenger"
           },
           "article": {
-            "nl": "de"
+            "nl": "de",
+            "en": "the"
           },
           "plural": {
-            "nl": "passagiers"
+            "nl": "passagiers",
+            "en": "passengers"
           },
           "cardinality": "many",
           "objectType": {
@@ -417,16 +494,19 @@
     },
     "b154aa02-c821-45f0-b76a-745c24460606": {
       "name": {
-        "nl": "reis met contingent treinmiles"
+        "nl": "reis met contingent treinmiles",
+        "en": "trip with train miles quota"
       },
       "relation": "heeft",
       "roles": {
         "7bdaad70-7449-4cdb-97f1-75f699fff5db": {
           "name": {
-            "nl": "reis met treinmiles"
+            "nl": "reis met treinmiles",
+            "en": "trip with train miles"
           },
           "article": {
-            "nl": "de"
+            "nl": "de",
+            "en": "the"
           },
           "cardinality": "one",
           "objectType": {
@@ -435,10 +515,12 @@
         },
         "5fc57818-441b-4e76-bd4e-344fe83ac2cd": {
           "name": {
-            "nl": "vastgesteld contingent treinmiles"
+            "nl": "vastgesteld contingent treinmiles",
+            "en": "established train miles quota"
           },
           "article": {
-            "nl": "het"
+            "nl": "het",
+            "en": "the"
           },
           "cardinality": "one",
           "objectType": {
@@ -449,16 +531,19 @@
     },
     "da5cc365-024d-4c43-8fce-75ae4a4d461f": {
       "name": {
-        "nl": "verdeling contingent treinmiles over passagiers"
+        "nl": "verdeling contingent treinmiles over passagiers",
+        "en": "distribution of train miles quota among passengers"
       },
       "relation": "wordt verdeeld over",
       "roles": {
         "5d45c715-f041-453c-9386-8c97fa592ea7": {
           "name": {
-            "nl": "te verdelen contingent treinmiles"
+            "nl": "te verdelen contingent treinmiles",
+            "en": "train miles quota to distribute"
           },
           "article": {
-            "nl": "het"
+            "nl": "het",
+            "en": "the"
           },
           "cardinality": "one",
           "objectType": {
@@ -467,13 +552,16 @@
         },
         "e709d431-1b9a-4718-97a0-da07a21798be": {
           "name": {
-            "nl": "passagier met recht op treinmiles"
+            "nl": "passagier met recht op treinmiles",
+            "en": "passenger entitled to train miles"
           },
           "article": {
-            "nl": "de"
+            "nl": "de",
+            "en": "the"
           },
           "plural": {
-            "nl": "passagiers met recht op treinmiles"
+            "nl": "passagiers met recht op treinmiles",
+            "en": "passengers entitled to train miles"
           },
           "cardinality": "many",
           "objectType": {
@@ -484,16 +572,19 @@
     },
     "c5ad7825-bff8-4ca8-b513-e8665978a69c": {
       "name": {
-        "nl": "redenen uitworp van vlucht"
+        "nl": "redenen uitworp van vlucht",
+        "en": "flight rejection reasons"
       },
       "relation": "heeft",
       "roles": {
         "190b9cb7-6fde-4a57-a213-81ea35f87740": {
           "name": {
-            "nl": "vlucht met gegevens"
+            "nl": "vlucht met gegevens",
+            "en": "flight with data"
           },
           "article": {
-            "nl": "de"
+            "nl": "de",
+            "en": "the"
           },
           "cardinality": "one",
           "objectType": {
@@ -502,13 +593,16 @@
         },
         "385f3ef8-1c94-415f-bd23-03b2a4d90016": {
           "name": {
-            "nl": "reden uitworp"
+            "nl": "reden uitworp",
+            "en": "rejection reason"
           },
           "article": {
-            "nl": "de"
+            "nl": "de",
+            "en": "the"
           },
           "plural": {
-            "nl": "redenen uitworp"
+            "nl": "redenen uitworp",
+            "en": "rejection reasons"
           },
           "cardinality": "many",
           "objectType": {
@@ -521,40 +615,48 @@
   "parameters": {
     "7150c34b-934b-4c19-82da-5bd774766be1": {
       "name": {
-        "nl": "PERCENTAGE REISDUUR EERSTE SCHIJF"
+        "nl": "PERCENTAGE REISDUUR EERSTE SCHIJF",
+        "en": "TRAVEL TIME PERCENTAGE FIRST BRACKET"
       },
       "article": {
-        "nl": "het"
+        "nl": "het",
+        "en": "the"
       },
       "type": "percentage",
       "subtype": "integer"
     },
     "18a11d63-329f-4440-928c-15662d9a786f": {
       "name": {
-        "nl": "PERCENTAGE REISDUUR TWEEDE SCHIJF"
+        "nl": "PERCENTAGE REISDUUR TWEEDE SCHIJF",
+        "en": "TRAVEL TIME PERCENTAGE SECOND BRACKET"
       },
       "article": {
-        "nl": "het"
+        "nl": "het",
+        "en": "the"
       },
       "type": "percentage",
       "subtype": "integer"
     },
     "7ffa48de-338d-4ddb-aa69-af571c28dac9": {
       "name": {
-        "nl": "PERCENTAGE REISDUUR DERDE SCHIJF"
+        "nl": "PERCENTAGE REISDUUR DERDE SCHIJF",
+        "en": "TRAVEL TIME PERCENTAGE THIRD BRACKET"
       },
       "article": {
-        "nl": "het"
+        "nl": "het",
+        "en": "the"
       },
       "type": "percentage",
       "subtype": "integer"
     },
     "b0973116-a02a-4982-bc3b-f485eecc4bd0": {
       "name": {
-        "nl": "BOVENGRENS REISDUUR EERSTE SCHIJF"
+        "nl": "BOVENGRENS REISDUUR EERSTE SCHIJF",
+        "en": "TRAVEL TIME UPPER LIMIT FIRST BRACKET"
       },
       "article": {
-        "nl": "de"
+        "nl": "de",
+        "en": "the"
       },
       "type": "numeric",
       "subtype": "integer",
@@ -562,10 +664,12 @@
     },
     "ad1a1925-d6c1-4560-b09c-6f316c38cc55": {
       "name": {
-        "nl": "BOVENGRENS REISDUUR TWEEDE SCHIJF"
+        "nl": "BOVENGRENS REISDUUR TWEEDE SCHIJF",
+        "en": "TRAVEL TIME UPPER LIMIT SECOND BRACKET"
       },
       "article": {
-        "nl": "de"
+        "nl": "de",
+        "en": "the"
       },
       "type": "numeric",
       "subtype": "integer",
@@ -573,10 +677,12 @@
     },
     "70fbc167-01ca-4ef6-a1dd-78d05eaf99ab": {
       "name": {
-        "nl": "BOVENGRENS AFSTAND EERSTE SCHIJF"
+        "nl": "BOVENGRENS AFSTAND EERSTE SCHIJF",
+        "en": "DISTANCE UPPER LIMIT FIRST BRACKET"
       },
       "article": {
-        "nl": "de"
+        "nl": "de",
+        "en": "the"
       },
       "type": "numeric",
       "subtype": "integer",
@@ -584,10 +690,12 @@
     },
     "4773bc34-a04d-4361-b984-85e6eba67374": {
       "name": {
-        "nl": "BOVENGRENS AFSTAND TWEEDE SCHIJF"
+        "nl": "BOVENGRENS AFSTAND TWEEDE SCHIJF",
+        "en": "DISTANCE UPPER LIMIT SECOND BRACKET"
       },
       "article": {
-        "nl": "de"
+        "nl": "de",
+        "en": "the"
       },
       "type": "numeric",
       "subtype": "integer",
@@ -595,10 +703,12 @@
     },
     "dc7826fa-37c0-499d-8d59-96a0c40b3fcd": {
       "name": {
-        "nl": "LAGE BASISTARIEF EERSTE SCHIJF"
+        "nl": "LAGE BASISTARIEF EERSTE SCHIJF",
+        "en": "LOW BASE RATE FIRST BRACKET"
       },
       "article": {
-        "nl": "het"
+        "nl": "het",
+        "en": "the"
       },
       "type": {
         "$ref": "#/domains/1ffc339e-47cf-4f17-8985-22628dddb49a"
@@ -606,10 +716,12 @@
     },
     "155c3536-cb1c-49a0-bd14-84fdf2dda9e8": {
       "name": {
-        "nl": "LAGE BASISTARIEF TWEEDE SCHIJF"
+        "nl": "LAGE BASISTARIEF TWEEDE SCHIJF",
+        "en": "LOW BASE RATE SECOND BRACKET"
       },
       "article": {
-        "nl": "het"
+        "nl": "het",
+        "en": "the"
       },
       "type": {
         "$ref": "#/domains/1ffc339e-47cf-4f17-8985-22628dddb49a"
@@ -617,10 +729,12 @@
     },
     "0d4f3025-5c31-465a-b08f-983a19507c2b": {
       "name": {
-        "nl": "HOGE BASISTARIEF EERSTE SCHIJF"
+        "nl": "HOGE BASISTARIEF EERSTE SCHIJF",
+        "en": "HIGH BASE RATE FIRST BRACKET"
       },
       "article": {
-        "nl": "het"
+        "nl": "het",
+        "en": "the"
       },
       "type": {
         "$ref": "#/domains/1ffc339e-47cf-4f17-8985-22628dddb49a"
@@ -628,10 +742,12 @@
     },
     "0a7246e7-b7d0-44e1-a928-75c92b3d2638": {
       "name": {
-        "nl": "HOGE BASISTARIEF TWEEDE SCHIJF"
+        "nl": "HOGE BASISTARIEF TWEEDE SCHIJF",
+        "en": "HIGH BASE RATE SECOND BRACKET"
       },
       "article": {
-        "nl": "het"
+        "nl": "het",
+        "en": "the"
       },
       "type": {
         "$ref": "#/domains/1ffc339e-47cf-4f17-8985-22628dddb49a"
@@ -639,10 +755,12 @@
     },
     "d74f5c2d-5538-4347-81be-cfb3ebe6e06c": {
       "name": {
-        "nl": "LAGE TARIEF VERMINDERING EERSTE SCHIJF"
+        "nl": "LAGE TARIEF VERMINDERING EERSTE SCHIJF",
+        "en": "LOW RATE REDUCTION FIRST BRACKET"
       },
       "article": {
-        "nl": "het"
+        "nl": "het",
+        "en": "the"
       },
       "type": {
         "$ref": "#/domains/7c22f541-e76e-453e-8887-c350d9b0d8a0"
@@ -650,10 +768,12 @@
     },
     "70fbe842-7ba3-48df-958a-9a22db065aa3": {
       "name": {
-        "nl": "LAGE TARIEF VERMINDERING TWEEDE SCHIJF"
+        "nl": "LAGE TARIEF VERMINDERING TWEEDE SCHIJF",
+        "en": "LOW RATE REDUCTION SECOND BRACKET"
       },
       "article": {
-        "nl": "het"
+        "nl": "het",
+        "en": "the"
       },
       "type": {
         "$ref": "#/domains/7c22f541-e76e-453e-8887-c350d9b0d8a0"
@@ -661,10 +781,12 @@
     },
     "4eda445b-32b0-4732-8a7c-753c5df1b33a": {
       "name": {
-        "nl": "HOGE TARIEF VERMINDERING EERSTE SCHIJF"
+        "nl": "HOGE TARIEF VERMINDERING EERSTE SCHIJF",
+        "en": "HIGH RATE REDUCTION FIRST BRACKET"
       },
       "article": {
-        "nl": "het"
+        "nl": "het",
+        "en": "the"
       },
       "type": {
         "$ref": "#/domains/7c22f541-e76e-453e-8887-c350d9b0d8a0"
@@ -672,10 +794,12 @@
     },
     "082debac-4e28-4346-b133-254f418e174f": {
       "name": {
-        "nl": "HOGE TARIEF VERMINDERING TWEEDE SCHIJF"
+        "nl": "HOGE TARIEF VERMINDERING TWEEDE SCHIJF",
+        "en": "HIGH RATE REDUCTION SECOND BRACKET"
       },
       "article": {
-        "nl": "het"
+        "nl": "het",
+        "en": "the"
       },
       "type": {
         "$ref": "#/domains/7c22f541-e76e-453e-8887-c350d9b0d8a0"
@@ -683,50 +807,60 @@
     },
     "32bc28ba-1065-4c59-bbfb-d844b3cd1c0f": {
       "name": {
-        "nl": "AANTAL TREINMILES PER PASSAGIER VOOR CONTINGENT"
+        "nl": "AANTAL TREINMILES PER PASSAGIER VOOR CONTINGENT",
+        "en": "NUMBER OF TRAIN MILES PER PASSENGER FOR QUOTA"
       },
       "article": {
-        "nl": "het"
+        "nl": "het",
+        "en": "the"
       },
       "type": "numeric",
       "subtype": "integer"
     },
     "90e1eff7-daf0-45e2-a263-8769645e7c03": {
       "name": {
-        "nl": "BASISCONTINGENT TREINMILES PER VLUCHT"
+        "nl": "BASISCONTINGENT TREINMILES PER VLUCHT",
+        "en": "BASE QUOTA TRAIN MILES PER FLIGHT"
       },
       "article": {
-        "nl": "het"
+        "nl": "het",
+        "en": "the"
       },
       "type": "numeric",
       "subtype": "integer"
     },
     "4c6de8d0-46a5-41c6-af10-05e87931285f": {
       "name": {
-        "nl": "MAXIMUM AANTAL TREINMILES VOOR PASSAGIERS JONGER DAN 65"
+        "nl": "MAXIMUM AANTAL TREINMILES VOOR PASSAGIERS JONGER DAN 65",
+        "en": "MAXIMUM NUMBER OF TRAIN MILES FOR PASSENGERS UNDER 65"
       },
       "article": {
-        "nl": "het"
+        "nl": "het",
+        "en": "the"
       },
       "type": "numeric",
       "subtype": "integer"
     },
     "2aba030a-5d4d-4286-94d9-4f92e5b633a4": {
       "name": {
-        "nl": "MAXIMUM AANTAL TREINMILES VOOR PASSAGIERS VAN 65 JAAR OF OUDER"
+        "nl": "MAXIMUM AANTAL TREINMILES VOOR PASSAGIERS VAN 65 JAAR OF OUDER",
+        "en": "MAXIMUM NUMBER OF TRAIN MILES FOR PASSENGERS 65 YEARS OR OLDER"
       },
       "article": {
-        "nl": "het"
+        "nl": "het",
+        "en": "the"
       },
       "type": "numeric",
       "subtype": "integer"
     },
     "447763d6-bb4c-4d6c-bf1e-20ef7e967bd4": {
       "name": {
-        "nl": "KORTING VOOR KLIMAATNEUTRALE VLUCHT"
+        "nl": "KORTING VOOR KLIMAATNEUTRALE VLUCHT",
+        "en": "DISCOUNT FOR CLIMATE NEUTRAL FLIGHT"
       },
       "article": {
-        "nl": "de"
+        "nl": "de",
+        "en": "the"
       },
       "type": {
         "$ref": "#/domains/1ffc339e-47cf-4f17-8985-22628dddb49a"
@@ -736,7 +870,8 @@
   "domains": {
     "1ffc339e-47cf-4f17-8985-22628dddb49a": {
       "name": {
-        "nl": "Bedrag"
+        "nl": "Bedrag",
+        "en": "Amount"
       },
       "type": "numeric",
       "precision": 2,
@@ -744,7 +879,8 @@
     },
     "7c22f541-e76e-453e-8887-c350d9b0d8a0": {
       "name": {
-        "nl": "Bedrag per kilometer"
+        "nl": "Bedrag per kilometer",
+        "en": "Amount per kilometer"
       },
       "type": "numeric",
       "precision": 2,
@@ -752,7 +888,8 @@
     },
     "b20b40f4-76ca-4887-afe4-cf98fc77ff66": {
       "name": {
-        "nl": "Luchthavens"
+        "nl": "Luchthavens",
+        "en": "Airports"
       },
       "type": "enumeration",
       "values": [
@@ -766,7 +903,8 @@
     },
     "2430730a-0f8f-48ff-9a54-166e651ff340": {
       "name": {
-        "nl": "Provincies"
+        "nl": "Provincies",
+        "en": "Provinces"
       },
       "type": "enumeration",
       "values": [
@@ -786,7 +924,8 @@
     },
     "61b9f36b-d866-4b5d-aa61-7451e6aee5c0": {
       "name": {
-        "nl": "Type uitworp"
+        "nl": "Type uitworp",
+        "en": "Rejection type"
       },
       "type": "enumeration",
       "values": [
@@ -798,12 +937,14 @@
   "ruleGroups": [
     {
       "name": {
-        "nl": "Initialisatie"
+        "nl": "Initialisatie",
+        "en": "Initialization"
       },
       "rules": {
         "2082041e-f916-49ce-833e-840437395f6a": {
           "name": {
-            "nl": "afstand tot bestemming 01"
+            "nl": "afstand tot bestemming 01",
+            "en": "distance to destination 01"
           },
           "versions": [
             {
@@ -828,12 +969,14 @@
     },
     {
       "name": {
-        "nl": "Kenmerktoekenning vlucht"
+        "nl": "Kenmerktoekenning vlucht",
+        "en": "Flight characteristic assignment"
       },
       "rules": {
         "8629e30c-cb03-49c2-b70e-0191e133adfd": {
           "name": {
-            "nl": "belaste reis 01"
+            "nl": "belaste reis 01",
+            "en": "taxable trip 01"
           },
           "versions": [
             {
@@ -876,7 +1019,8 @@
         },
         "fb679dad-276e-4667-be61-3af6f20670dd": {
           "name": {
-            "nl": "onbelaste reis 01"
+            "nl": "onbelaste reis 01",
+            "en": "non-taxable trip 01"
           },
           "versions": [
             {
@@ -919,7 +1063,8 @@
         },
         "daa86148-a092-4d19-907f-76dc5de676b9": {
           "name": {
-            "nl": "rondvlucht 01"
+            "nl": "rondvlucht 01",
+            "en": "round trip 01"
           },
           "versions": [
             {
@@ -972,12 +1117,14 @@
     },
     {
       "name": {
-        "nl": "Vluchtinformatie"
+        "nl": "Vluchtinformatie",
+        "en": "Flight information"
       },
       "rules": {
         "4b3e1650-07e8-43c4-9dd2-76dc951ffd8e": {
           "name": {
-            "nl": "aantal passagiers 01"
+            "nl": "aantal passagiers 01",
+            "en": "number of passengers 01"
           },
           "versions": [
             {
@@ -1009,7 +1156,8 @@
         },
         "8a844d17-6b43-41ba-8d34-99257dec975d": {
           "name": {
-            "nl": "totaal te betalen belasting 01"
+            "nl": "totaal te betalen belasting 01",
+            "en": "total tax payable 01"
           },
           "versions": [
             {
@@ -1052,7 +1200,8 @@
         },
         "1c428bb7-18b7-4a6a-8cb4-f5715f1be7e0": {
           "name": {
-            "nl": "totale belasting op basis van afstand 01"
+            "nl": "totale belasting op basis van afstand 01",
+            "en": "total tax based on distance 01"
           },
           "versions": [
             {
@@ -1095,7 +1244,8 @@
         },
         "a6be59ec-db43-4fa7-935a-55ac84e15b00": {
           "name": {
-            "nl": "totale belasting op basis van reisduur 01"
+            "nl": "totale belasting op basis van reisduur 01",
+            "en": "total tax based on travel time 01"
           },
           "versions": [
             {
@@ -1140,12 +1290,14 @@
     },
     {
       "name": {
-        "nl": "Belasting op basis van afstand"
+        "nl": "Belasting op basis van afstand",
+        "en": "Distance-based tax"
       },
       "rules": {
         "83b5b907-2f49-4b63-9654-3978d782aa24": {
           "name": {
-            "nl": "belasting op basis van afstand 01"
+            "nl": "belasting op basis van afstand 01",
+            "en": "distance-based tax 01"
           },
           "versions": [
             {
@@ -1210,7 +1362,8 @@
         },
         "54a6841c-3845-4402-9f9c-5ba31bc53975": {
           "name": {
-            "nl": "belasting op basis van afstand 02"
+            "nl": "belasting op basis van afstand 02",
+            "en": "distance-based tax 02"
           },
           "versions": [
             {
@@ -1326,7 +1479,8 @@
         },
         "098458ba-47bd-4db2-b8df-a591be61fae8": {
           "name": {
-            "nl": "belasting op basis van afstand 03"
+            "nl": "belasting op basis van afstand 03",
+            "en": "distance-based tax 03"
           },
           "versions": [
             {
@@ -1453,7 +1607,8 @@
         },
         "fad3394e-89ba-4434-855f-7d3c88f6ba13": {
           "name": {
-            "nl": "belasting op basis van afstand 04"
+            "nl": "belasting op basis van afstand 04",
+            "en": "distance-based tax 04"
           },
           "versions": [
             {
@@ -1569,7 +1724,8 @@
         },
         "12e532e7-0fdd-40b3-9c26-1a92ef5bbee1": {
           "name": {
-            "nl": "belasting op basis van afstand 05"
+            "nl": "belasting op basis van afstand 05",
+            "en": "distance-based tax 05"
           },
           "versions": [
             {
@@ -1698,12 +1854,14 @@
     },
     {
       "name": {
-        "nl": "Kenmerktoekenning natuurlijk persoon"
+        "nl": "Kenmerktoekenning natuurlijk persoon",
+        "en": "Natural person characteristic assignment"
       },
       "rules": {
         "9f38fcdc-84c9-4459-90c3-33c02aafeabc": {
           "name": {
-            "nl": "passagier waarvoor het lage tarief voor belasting op basis van afstand van toepassing is 01"
+            "nl": "passagier waarvoor het lage tarief voor belasting op basis van afstand van toepassing is 01",
+            "en": "passenger eligible for low distance-based tax rate 01"
           },
           "versions": [
             {
@@ -1793,7 +1951,8 @@
         },
         "b68f6a5a-80bc-4c27-9a0c-449af6b8e546": {
           "name": {
-            "nl": "passagier waarvoor het hoge tarief voor belasting op basis van afstand van toepassing is 01"
+            "nl": "passagier waarvoor het hoge tarief voor belasting op basis van afstand van toepassing is 01",
+            "en": "passenger eligible for high distance-based tax rate 01"
           },
           "versions": [
             {
@@ -1883,7 +2042,8 @@
         },
         "bf0406fe-e7b0-4c04-aa6d-debf822d5ba8": {
           "name": {
-            "nl": "recht op duurzaamheidskorting 01"
+            "nl": "recht op duurzaamheidskorting 01",
+            "en": "entitled to sustainability discount 01"
           },
           "versions": [
             {
@@ -1951,12 +2111,14 @@
     },
     {
       "name": {
-        "nl": "Leeftijd"
+        "nl": "Leeftijd",
+        "en": "Age"
       },
       "rules": {
         "98baf8ea-2530-4f3b-88cd-429a2b7ff2a7": {
           "name": {
-            "nl": "leeftijd 01"
+            "nl": "leeftijd 01",
+            "en": "age 01"
           },
           "versions": [
             {
@@ -2001,12 +2163,14 @@
     },
     {
       "name": {
-        "nl": "Maximum aantal treinmiles"
+        "nl": "Maximum aantal treinmiles",
+        "en": "Maximum number of train miles"
       },
       "rules": {
         "5c9e3e4a-d3d8-4574-9706-4c3cf988659b": {
           "name": {
-            "nl": "maximaal aantal te ontvangen treinmiles 01"
+            "nl": "maximaal aantal te ontvangen treinmiles 01",
+            "en": "maximum number of train miles to receive 01"
           },
           "versions": [
             {
@@ -2049,7 +2213,8 @@
         },
         "98d1244c-3538-4acd-a324-399d572d3c02": {
           "name": {
-            "nl": "maximaal aantal te ontvangen treinmiles 02"
+            "nl": "maximaal aantal te ontvangen treinmiles 02",
+            "en": "maximum number of train miles to receive 02"
           },
           "versions": [
             {
@@ -2094,12 +2259,14 @@
     },
     {
       "name": {
-        "nl": "Te betalen belasting"
+        "nl": "Te betalen belasting",
+        "en": "Tax payable"
       },
       "rules": {
         "47bc8e5d-3b37-4442-8396-eb8c655960fc": {
           "name": {
-            "nl": "te betalen belasting 01"
+            "nl": "te betalen belasting 01",
+            "en": "tax payable 01"
           },
           "versions": [
             {
@@ -2176,7 +2343,8 @@
         },
         "f95898ad-2cfc-4e28-8011-72429f5ae717": {
           "name": {
-            "nl": "te betalen belasting 02a"
+            "nl": "te betalen belasting 02a",
+            "en": "tax payable 02a"
           },
           "versions": [
             {
@@ -2267,12 +2435,14 @@
     },
     {
       "name": {
-        "nl": "Toewijzen treinmiles"
+        "nl": "Toewijzen treinmiles",
+        "en": "Assign train miles"
       },
       "rules": {
         "0342341e-101c-4bf2-aa8d-d29928c3c7fa": {
           "name": {
-            "nl": "treinmiles 01"
+            "nl": "treinmiles 01",
+            "en": "train miles 01"
           },
           "versions": [
             {
