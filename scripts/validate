@@ -7,15 +7,15 @@ NRML Schema Validator
 Validates NRML JSON files against the JSON Schema.
 
 Usage:
-    uv run scripts/validate.py [schema.json] [file.json]
+    uv run scripts/validate [schema.json] [file.json]
     
 Arguments:
     schema.json  JSON Schema file (default: schema.json)
     file.json    NRML file to validate (default: toka.nrml.json)
 
 Examples:
-    uv run scripts/validate.py
-    uv run scripts/validate.py schema.json toka-v2-nested-type.nrml.json
+    uv run scripts/validate
+    uv run scripts/validate schema.json toka.nrml.json
 """
 
 import json

@@ -100,10 +100,10 @@ NRML documenten kunnen gevalideerd worden tegen het JSON Schema voor structurele
 
 ```bash
 # Valideer het standaard bestand
-uv run scripts/validate.py
+uv run scripts/validate
 
 # Valideer specifieke bestanden
-uv run scripts/validate.py schema.json mijn-model.nrml.json
+uv run scripts/validate schema.json mijn-model.nrml.json
 ```
 
 **Handmatig met Python:**
