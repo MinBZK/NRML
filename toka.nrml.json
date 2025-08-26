@@ -1,66 +1,209 @@
 {
-  "$schema": "./schema.json",
-  "version": "2.0",
+  "$schema": "https://example.com/nrml-facts-schema.json",
+  "version": "3.0",
   "language": "nl",
-  "metadata": {
-    "version": "1.0.0",
-    "language": "nl",
-    "created": "2025-01-15",
-    "description": "TOKA vliegbelasting model - Nederlandse regeling voor belasting op vliegverkeer",
-    "migrated_at": "2025-08-19T11:45:24.303Z",
-    "format_version": "uuid-multilingual"
-  },
-  "objectTypes": {
+  "facts": {
+    "1ffc339e-47cf-4f17-8985-22628dddb49a3r2r": {
+      "name": {
+        "nl": "Bedrag",
+        "en": "Amount"
+      },
+      "items": {
+        "0db21ee9-0f1f-4192-a524-0942a1bf6610": {
+          "name": {
+            "nl": "Bedrag definitie",
+            "en": "Amount definition"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "numeric",
+              "precision": "2",
+              "unit": "€"
+            }
+          ]
+        }
+      }
+    },
+    "7c22f541-e76e-453e-8887-c350d9b0d8a0": {
+      "name": {
+        "nl": "Bedrag per kilometer",
+        "en": "Amount per kilometer"
+      },
+      "items": {
+        "b8bd2c79-bd64-455c-b59e-146814de26e2": {
+          "name": {
+            "nl": "Bedrag per kilometer definitie",
+            "en": "Amount per kilometer definition"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "numeric",
+              "precision": 2,
+              "unit": "€/km"
+            }
+          ]
+        }
+      }
+    },
+    "b20b40f4-76ca-4887-afe4-cf98fc77ff66": {
+      "name": {
+        "nl": "Luchthavens",
+        "en": "Airports"
+      },
+      "items": {
+        "4874455c-ca49-4f6c-9f20-69dfc58252a5": {
+          "name": {
+            "nl": "Luchthavens definitie",
+            "en": "Airports definition"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "enumeration",
+              "values": [
+                "Schiphol",
+                "Eindhoven",
+                "Rotterdam",
+                "Maastricht",
+                "Groningen",
+                "Lelystad"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "2430730a-0f8f-48ff-9a54-166e651ff340": {
+      "name": {
+        "nl": "Provincies",
+        "en": "Provinces"
+      },
+      "items": {
+        "0af1fd70-5fb8-45aa-b7c4-4816ed186736": {
+          "name": {
+            "nl": "Provincies definitie",
+            "en": "Provinces definition"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "enumeration",
+              "values": [
+                "Noord-Holland",
+                "Zuid-Holland",
+                "Utrecht",
+                "Noord-Brabant",
+                "Limburg",
+                "Gelderland",
+                "Overijssel",
+                "Flevoland",
+                "Drenthe",
+                "Friesland",
+                "Groningen",
+                "Zeeland"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "61b9f36b-d866-4b5d-aa61-7451e6aee5c0": {
+      "name": {
+        "nl": "Type uitworp",
+        "en": "Rejection type"
+      },
+      "items": {
+        "2b06cc29-f73f-4218-ac8e-80d582f975e0": {
+          "name": {
+            "nl": "Type uitworp definitie",
+            "en": "Rejection type definition"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "enumeration",
+              "values": [
+                "Gegevens inconsistent",
+                "Gegevens onvolledig"
+              ]
+            }
+          ]
+        }
+      }
+    },
     "48c6ed9c-0911-43d8-b6ef-47d2b406ea35": {
       "name": {
         "nl": "vlucht",
         "en": "flight"
       },
-      "definite_article": {
-        "nl": "de",
-        "en": "the"
-      },
-      "properties": {
+      "items": {
         "d72ead33-2e0c-450a-ba71-b83940c8e926": {
           "name": {
             "nl": "belaste reis",
             "en": "taxable trip"
           },
-          "type": "characteristic"
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "characteristic"
+            }
+          ]
         },
         "2330a40c-76e0-41d3-877c-43337b73c025": {
           "name": {
             "nl": "onbelaste reis",
             "en": "non-taxable trip"
           },
-          "type": "characteristic"
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "characteristic"
+            }
+          ]
         },
         "cbe15f31-ce60-440c-8e72-0861a5089457": {
           "name": {
             "nl": "rondvlucht",
             "en": "round trip"
           },
-          "type": "characteristic"
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "characteristic"
+            }
+          ]
         },
         "866a85c0-b305-4ce3-af5b-2baf449cdfeb": {
           "name": {
             "nl": "klimaatneutraal",
             "en": "climate neutral"
           },
-          "type": "characteristic",
-          "subtype": "adjective"
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "characteristic",
+              "subtype": "adjective"
+            }
+          ]
         },
         "fe752ef2-19ba-4b5c-9e6e-ad86df5d3d59": {
           "name": {
             "nl": "luchthaven van vertrek",
             "en": "departure airport"
           },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": {
+                "$ref": "#/facts/b20b40f4-76ca-4887-afe4-cf98fc77ff66"
+              }
+            }
+          ],
           "article": {
             "nl": "de",
             "en": "the"
-          },
-          "type": {
-            "$ref": "#/domains/b20b40f4-76ca-4887-afe4-cf98fc77ff66"
           }
         },
         "07783713-6df0-4810-bc44-4206050cb19d": {
@@ -68,12 +211,17 @@
             "nl": "luchthaven van bestemming",
             "en": "destination airport"
           },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": {
+                "$ref": "#/facts/b20b40f4-76ca-4887-afe4-cf98fc77ff66"
+              }
+            }
+          ],
           "article": {
             "nl": "de",
             "en": "the"
-          },
-          "type": {
-            "$ref": "#/domains/b20b40f4-76ca-4887-afe4-cf98fc77ff66"
           }
         },
         "bf4947b1-acc6-4857-ba8b-881360e83b36": {
@@ -81,73 +229,103 @@
             "nl": "datum van de vlucht",
             "en": "flight date"
           },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "date",
+              "precision": "days"
+            }
+          ],
           "article": {
             "nl": "de",
             "en": "the"
-          },
-          "type": "date",
-          "precision": "days"
+          }
         },
         "ea7d8d81-5ce2-4d79-b69f-a982cb90f35d": {
           "name": {
             "nl": "afstand tot bestemming",
             "en": "distance to destination"
           },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "numeric",
+              "subtype": "integer",
+              "unit": "km"
+            }
+          ],
           "article": {
             "nl": "de",
             "en": "the"
-          },
-          "type": "numeric",
-          "subtype": "integer",
-          "unit": "km"
+          }
         },
         "ea5d01e3-af40-437f-bc0f-d29b26718148": {
           "name": {
             "nl": "bereikbaar per trein",
             "en": "reachable by train"
           },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "boolean"
+            }
+          ],
           "article": {
             "nl": "de",
             "en": "the"
-          },
-          "type": "boolean"
+          }
         },
         "2c4ed887-d1fa-4aa3-b0c4-6c0f0acc7a76": {
           "name": {
             "nl": "reisduur per trein",
             "en": "travel time by train"
           },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "numeric",
+              "subtype": "integer",
+              "unit": "minuut"
+            }
+          ],
           "article": {
             "nl": "de",
             "en": "the"
-          },
-          "type": "numeric",
-          "subtype": "integer",
-          "unit": "minuut"
+          }
         },
         "89cdc694-7fae-4577-a289-08442a662d26": {
           "name": {
             "nl": "aantal passagiers",
             "en": "number of passengers"
           },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "numeric",
+              "subtype": "integer"
+            }
+          ],
           "article": {
             "nl": "het",
             "en": "the"
-          },
-          "type": "numeric",
-          "subtype": "integer"
+          }
         },
         "339243f4-dee5-474f-ab62-c7df39e69788": {
           "name": {
             "nl": "totale belasting op basis van afstand",
             "en": "total tax based on distance"
           },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": {
+                "$ref": "#/facts/1ffc339e-47cf-4f17-8985-22628dddb49a"
+              }
+            }
+          ],
           "article": {
             "nl": "de",
             "en": "the"
-          },
-          "type": {
-            "$ref": "#/domains/1ffc339e-47cf-4f17-8985-22628dddb49a"
           }
         },
         "b09702d7-a7d4-4308-976c-da0b5903eac9": {
@@ -155,12 +333,17 @@
             "nl": "totale belasting op basis van reisduur",
             "en": "total tax based on travel time"
           },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": {
+                "$ref": "#/facts/1ffc339e-47cf-4f17-8985-22628dddb49a"
+              }
+            }
+          ],
           "article": {
             "nl": "de",
             "en": "the"
-          },
-          "type": {
-            "$ref": "#/domains/1ffc339e-47cf-4f17-8985-22628dddb49a"
           }
         },
         "cbc050ae-0471-4a39-add4-6b3b8fc3e9a5": {
@@ -168,14 +351,23 @@
             "nl": "totaal te betalen belasting",
             "en": "total tax payable"
           },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": {
+                "$ref": "#/facts/1ffc339e-47cf-4f17-8985-22628dddb49a"
+              }
+            }
+          ],
           "article": {
             "nl": "de",
             "en": "the"
-          },
-          "type": {
-            "$ref": "#/domains/1ffc339e-47cf-4f17-8985-22628dddb49a"
           }
         }
+      },
+      "definite_article": {
+        "nl": "de",
+        "en": "the"
       }
     },
     "4c72dc9d-78d4-4f0b-a0cd-6037944f26ce": {
@@ -183,33 +375,43 @@
         "nl": "natuurlijk persoon",
         "en": "natural person"
       },
-      "definite_article": {
-        "nl": "de",
-        "en": "the"
-      },
-      "animated": true,
-      "properties": {
+      "items": {
         "ef64a2f2-6dd5-46cb-bd4e-6708e70021dc": {
           "name": {
             "nl": "passagier waarvoor het lage tarief voor belasting op basis van afstand van toepassing is",
             "en": "passenger eligible for low distance-based tax rate"
           },
-          "type": "characteristic"
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "characteristic"
+            }
+          ]
         },
         "37ddb128-913a-41b2-b5fd-ed8c05b813b2": {
           "name": {
             "nl": "passagier waarvoor het hoge tarief voor belasting op basis van afstand van toepassing is",
             "en": "passenger eligible for high distance-based tax rate"
           },
-          "type": "characteristic"
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "characteristic"
+            }
+          ]
         },
         "4b9bd5f1-311a-4b59-8dd9-ee3139de153e": {
           "name": {
             "nl": "recht op duurzaamheidskorting",
             "en": "entitled to sustainability discount"
           },
-          "type": "characteristic",
-          "subtype": "possessive",
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "characteristic",
+              "subtype": "possessive"
+            }
+          ],
           "article": {
             "nl": "het",
             "en": "the"
@@ -220,54 +422,82 @@
             "nl": "identificatienummer",
             "en": "identification number"
           },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "numeric",
+              "subtype": "integer"
+            }
+          ],
           "article": {
             "nl": "het",
             "en": "the"
-          },
-          "type": "numeric",
-          "subtype": "integer"
+          }
         },
         "b5200359-418f-40db-bdd2-cf9f7f77b4d4": {
           "name": {
             "nl": "geboortedatum",
             "en": "date of birth"
           },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "date",
+              "precision": "days"
+            }
+          ],
           "article": {
             "nl": "de",
             "en": "the"
-          },
-          "type": "date",
-          "precision": "days"
+          }
         },
         "9ffef501-48f3-4c4c-827a-52478ea82ab8": {
           "name": {
             "nl": "leeftijd",
             "en": "age"
           },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "numeric",
+              "subtype": "integer",
+              "unit": "jr"
+            }
+          ],
           "article": {
             "nl": "de",
             "en": "the"
-          },
-          "type": "numeric",
-          "subtype": "integer",
-          "unit": "jr"
+          }
         },
         "a94e2c0f-2cd1-4562-86dc-321c79d73d4b": {
           "name": {
             "nl": "burgerservicenummer",
             "en": "citizen service number"
           },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "text"
+            }
+          ],
           "article": {
             "nl": "het",
             "en": "the"
-          },
-          "type": "text"
+          }
         },
         "199d696e-a168-4584-8f80-35d737e5e1ba": {
           "name": {
             "nl": "belasting op basis van afstand",
             "en": "distance-based tax"
           },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": {
+                "$ref": "#/facts/1ffc339e-47cf-4f17-8985-22628dddb49a"
+              }
+            }
+          ],
           "article": {
             "nl": "de",
             "en": "the"
@@ -275,9 +505,6 @@
           "plural": {
             "nl": "belastingen op basis van afstand",
             "en": "distance-based taxes"
-          },
-          "type": {
-            "$ref": "#/domains/1ffc339e-47cf-4f17-8985-22628dddb49a"
           }
         },
         "b802e897-8854-4ad3-97b4-3ed4b04f9b16": {
@@ -285,6 +512,14 @@
             "nl": "belasting op basis van reisduur",
             "en": "travel time-based tax"
           },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": {
+                "$ref": "#/facts/1ffc339e-47cf-4f17-8985-22628dddb49a"
+              }
+            }
+          ],
           "article": {
             "nl": "de",
             "en": "the"
@@ -292,9 +527,6 @@
           "plural": {
             "nl": "belastingen op basis van reisduur",
             "en": "travel time-based taxes"
-          },
-          "type": {
-            "$ref": "#/domains/1ffc339e-47cf-4f17-8985-22628dddb49a"
           }
         },
         "ab9cc7dc-7be7-412d-ae46-0224ceef3153": {
@@ -302,12 +534,17 @@
             "nl": "te betalen belasting",
             "en": "tax payable"
           },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": {
+                "$ref": "#/facts/1ffc339e-47cf-4f17-8985-22628dddb49a"
+              }
+            }
+          ],
           "article": {
             "nl": "de",
             "en": "the"
-          },
-          "type": {
-            "$ref": "#/domains/1ffc339e-47cf-4f17-8985-22628dddb49a"
           }
         },
         "5c6df479-4620-4487-baaf-3c7f7581e56f": {
@@ -315,12 +552,17 @@
             "nl": "provincie",
             "en": "province"
           },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": {
+                "$ref": "#/facts/2430730a-0f8f-48ff-9a54-166e651ff340"
+              }
+            }
+          ],
           "article": {
             "nl": "de",
             "en": "the"
-          },
-          "type": {
-            "$ref": "#/domains/2430730a-0f8f-48ff-9a54-166e651ff340"
           }
         },
         "85a409f3-4f30-4032-ae35-6c49a434a45d": {
@@ -328,18 +570,30 @@
             "nl": "woonregiofactor",
             "en": "residential area factor"
           },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "numeric",
+              "subtype": "integer"
+            }
+          ],
           "article": {
             "nl": "de",
             "en": "the"
-          },
-          "type": "numeric",
-          "subtype": "integer"
+          }
         },
         "11d155f3-d6bd-4792-94bb-e20c0c885101": {
           "name": {
             "nl": "treinmiles",
             "en": "train miles"
           },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "numeric",
+              "subtype": "integer"
+            }
+          ],
           "article": {
             "nl": "de",
             "en": "the"
@@ -347,70 +601,93 @@
           "plural": {
             "nl": "treinmiles",
             "en": "train miles"
-          },
-          "type": "numeric",
-          "subtype": "integer"
+          }
         },
         "661f7a45-78a0-4c8f-85bc-8a27748420f5": {
           "name": {
             "nl": "maximaal aantal te ontvangen treinmiles",
             "en": "maximum number of train miles to receive"
           },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "numeric",
+              "subtype": "integer"
+            }
+          ],
           "article": {
             "nl": "het",
             "en": "the"
-          },
-          "type": "numeric",
-          "subtype": "integer"
+          }
         }
-      }
+      },
+      "definite_article": {
+        "nl": "de",
+        "en": "the"
+      },
+      "animated": true
     },
     "bea88ba3-ec79-4bd2-8f8e-f6e11a08c431": {
       "name": {
         "nl": "contingent treinmiles",
         "en": "train miles quota"
       },
-      "definite_article": {
-        "nl": "het",
-        "en": "the"
-      },
-      "properties": {
+      "items": {
         "f2aa806f-f1f1-4212-aba8-b01334172317": {
           "name": {
             "nl": "totaal aantal treinmiles",
             "en": "total number of train miles"
           },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "numeric",
+              "subtype": "integer"
+            }
+          ],
           "article": {
             "nl": "het",
             "en": "the"
-          },
-          "type": "numeric",
-          "subtype": "integer"
+          }
         },
         "1f6b885a-6382-4fe8-9d56-f925bf82af37": {
           "name": {
             "nl": "aantal treinmiles op basis van aantal passagiers",
             "en": "number of train miles based on number of passengers"
           },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "numeric",
+              "subtype": "integer"
+            }
+          ],
           "article": {
             "nl": "het",
             "en": "the"
-          },
-          "type": "numeric",
-          "subtype": "integer"
+          }
         },
         "8f5423a5-cc51-4f78-b66e-720540da5bf8": {
           "name": {
             "nl": "restant na verdeling",
             "en": "remainder after distribution"
           },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "numeric",
+              "subtype": "integer"
+            }
+          ],
           "article": {
             "nl": "het",
             "en": "the"
-          },
-          "type": "numeric",
-          "subtype": "integer"
+          }
         }
+      },
+      "definite_article": {
+        "nl": "het",
+        "en": "the"
       }
     },
     "dd04dbff-736a-4703-94a2-bbba4588fcc0": {
@@ -418,22 +695,23 @@
         "nl": "uitworpmelding",
         "en": "rejection message"
       },
-      "definite_article": {
-        "nl": "de",
-        "en": "the"
-      },
-      "properties": {
+      "items": {
         "8f8ebcae-17e9-451d-ab21-9cb1f7924f1c": {
           "name": {
             "nl": "type",
             "en": "type"
           },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": {
+                "$ref": "#/facts/61b9f36b-d866-4b5d-aa61-7451e6aee5c0"
+              }
+            }
+          ],
           "article": {
             "nl": "het",
             "en": "the"
-          },
-          "type": {
-            "$ref": "#/domains/61b9f36b-d866-4b5d-aa61-7451e6aee5c0"
           }
         },
         "8db131d3-ffc5-4ec6-8618-447f394d2ce6": {
@@ -441,277 +719,430 @@
             "nl": "toelichting",
             "en": "explanation"
           },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "text"
+            }
+          ],
           "article": {
             "nl": "de",
             "en": "the"
-          },
-          "type": "text"
+          }
         }
+      },
+      "definite_article": {
+        "nl": "de",
+        "en": "the"
       }
-    }
-  },
-  "factTypes": {
+    },
     "ef9e731c-4f81-4905-a902-2a533e1eebc5": {
       "name": {
         "nl": "Vlucht van natuurlijke personen",
         "en": "Flight of natural persons"
       },
-      "relation": "betreft de verplaatsing van",
-      "roles": {
-        "5ce3e026-293e-4405-a22d-4ea222deef79": {
+      "items": {
+        "3f5ae63f-b5c1-4eef-abc6-1ed6d189d480": {
           "name": {
-            "nl": "reis",
-            "en": "trip"
+            "nl": "relatie definitie",
+            "en": "relation definition"
           },
-          "article": {
-            "nl": "de",
-            "en": "the"
-          },
-          "cardinality": "one",
-          "objectType": {
-            "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
-          }
-        },
-        "0cc7c4b4-2855-4c8b-93f0-5403cf286af0": {
-          "name": {
-            "nl": "passagier",
-            "en": "passenger"
-          },
-          "article": {
-            "nl": "de",
-            "en": "the"
-          },
-          "plural": {
-            "nl": "passagiers",
-            "en": "passengers"
-          },
-          "cardinality": "many",
-          "objectType": {
-            "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"
-          }
+          "versions": [
+            {
+              "validFrom": "2018",
+              "a": {
+                "name": {
+                  "nl": "reis",
+                  "en": "trip"
+                },
+                "cardinality": "one",
+                "article": {
+                  "nl": "de",
+                  "en": "the"
+                },
+                "objectType": {
+                  "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
+                }
+              },
+              "b": {
+                "name": {
+                  "nl": "passagier",
+                  "en": "passenger"
+                },
+                "cardinality": "many",
+                "article": {
+                  "nl": "de",
+                  "en": "the"
+                },
+                "plural": {
+                  "nl": "passagiers",
+                  "en": "passengers"
+                },
+                "objectType": {
+                  "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"
+                }
+              }
+            }
+          ]
         }
-      }
+      },
+      "relation": "betreft de verplaatsing van"
     },
     "b154aa02-c821-45f0-b76a-745c24460606": {
       "name": {
         "nl": "reis met contingent treinmiles",
         "en": "trip with train miles quota"
       },
-      "relation": "heeft",
-      "roles": {
-        "7bdaad70-7449-4cdb-97f1-75f699fff5db": {
+      "items": {
+        "c5bcb01b-da76-455c-83d9-7d58fd658c77": {
           "name": {
-            "nl": "reis met treinmiles",
-            "en": "trip with train miles"
+            "nl": "relatie definitie",
+            "en": "relation definition"
           },
-          "article": {
-            "nl": "de",
-            "en": "the"
-          },
-          "cardinality": "one",
-          "objectType": {
-            "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
-          }
-        },
-        "5fc57818-441b-4e76-bd4e-344fe83ac2cd": {
-          "name": {
-            "nl": "vastgesteld contingent treinmiles",
-            "en": "established train miles quota"
-          },
-          "article": {
-            "nl": "het",
-            "en": "the"
-          },
-          "cardinality": "one",
-          "objectType": {
-            "$ref": "#/objectTypes/bea88ba3-ec79-4bd2-8f8e-f6e11a08c431"
-          }
+          "versions": [
+            {
+              "validFrom": "2018",
+              "a": {
+                "name": {
+                  "nl": "reis met treinmiles",
+                  "en": "trip with train miles"
+                },
+                "cardinality": "one",
+                "article": {
+                  "nl": "de",
+                  "en": "the"
+                },
+                "objectType": {
+                  "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
+                }
+              },
+              "b": {
+                "name": {
+                  "nl": "vastgesteld contingent treinmiles",
+                  "en": "established train miles quota"
+                },
+                "cardinality": "one",
+                "article": {
+                  "nl": "het",
+                  "en": "the"
+                },
+                "objectType": {
+                  "$ref": "#/facts/bea88ba3-ec79-4bd2-8f8e-f6e11a08c431"
+                }
+              }
+            }
+          ]
         }
-      }
+      },
+      "relation": "heeft"
     },
     "da5cc365-024d-4c43-8fce-75ae4a4d461f": {
       "name": {
         "nl": "verdeling contingent treinmiles over passagiers",
         "en": "distribution of train miles quota among passengers"
       },
-      "relation": "wordt verdeeld over",
-      "roles": {
-        "5d45c715-f041-453c-9386-8c97fa592ea7": {
+      "items": {
+        "1db9c73f-5196-4d39-9196-34df66f960b5": {
           "name": {
-            "nl": "te verdelen contingent treinmiles",
-            "en": "train miles quota to distribute"
+            "nl": "relatie definitie",
+            "en": "relation definition"
           },
-          "article": {
-            "nl": "het",
-            "en": "the"
-          },
-          "cardinality": "one",
-          "objectType": {
-            "$ref": "#/objectTypes/bea88ba3-ec79-4bd2-8f8e-f6e11a08c431"
-          }
-        },
-        "e709d431-1b9a-4718-97a0-da07a21798be": {
-          "name": {
-            "nl": "passagier met recht op treinmiles",
-            "en": "passenger entitled to train miles"
-          },
-          "article": {
-            "nl": "de",
-            "en": "the"
-          },
-          "plural": {
-            "nl": "passagiers met recht op treinmiles",
-            "en": "passengers entitled to train miles"
-          },
-          "cardinality": "many",
-          "objectType": {
-            "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"
-          }
+          "versions": [
+            {
+              "validFrom": "2018",
+              "a": {
+                "name": {
+                  "nl": "te verdelen contingent treinmiles",
+                  "en": "train miles quota to distribute"
+                },
+                "cardinality": "one",
+                "article": {
+                  "nl": "het",
+                  "en": "the"
+                },
+                "objectType": {
+                  "$ref": "#/facts/bea88ba3-ec79-4bd2-8f8e-f6e11a08c431"
+                }
+              },
+              "b": {
+                "name": {
+                  "nl": "passagier met recht op treinmiles",
+                  "en": "passenger entitled to train miles"
+                },
+                "cardinality": "many",
+                "article": {
+                  "nl": "de",
+                  "en": "the"
+                },
+                "plural": {
+                  "nl": "passagiers met recht op treinmiles",
+                  "en": "passengers entitled to train miles"
+                },
+                "objectType": {
+                  "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"
+                }
+              }
+            }
+          ]
         }
-      }
+      },
+      "relation": "wordt verdeeld over"
     },
     "c5ad7825-bff8-4ca8-b513-e8665978a69c": {
       "name": {
         "nl": "redenen uitworp van vlucht",
         "en": "flight rejection reasons"
       },
-      "relation": "heeft",
-      "roles": {
-        "190b9cb7-6fde-4a57-a213-81ea35f87740": {
+      "items": {
+        "169a3de8-9e22-4df5-b15c-3c9dcf6fb758": {
           "name": {
-            "nl": "vlucht met gegevens",
-            "en": "flight with data"
+            "nl": "relatie definitie",
+            "en": "relation definition"
           },
-          "article": {
-            "nl": "de",
-            "en": "the"
-          },
-          "cardinality": "one",
-          "objectType": {
-            "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
-          }
-        },
-        "385f3ef8-1c94-415f-bd23-03b2a4d90016": {
-          "name": {
-            "nl": "reden uitworp",
-            "en": "rejection reason"
-          },
-          "article": {
-            "nl": "de",
-            "en": "the"
-          },
-          "plural": {
-            "nl": "redenen uitworp",
-            "en": "rejection reasons"
-          },
-          "cardinality": "many",
-          "objectType": {
-            "$ref": "#/objectTypes/dd04dbff-736a-4703-94a2-bbba4588fcc0"
-          }
+          "versions": [
+            {
+              "validFrom": "2018",
+              "a": {
+                "name": {
+                  "nl": "vlucht met gegevens",
+                  "en": "flight with data"
+                },
+                "cardinality": "one",
+                "article": {
+                  "nl": "de",
+                  "en": "the"
+                },
+                "objectType": {
+                  "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
+                }
+              },
+              "b": {
+                "name": {
+                  "nl": "reden uitworp",
+                  "en": "rejection reason"
+                },
+                "cardinality": "many",
+                "article": {
+                  "nl": "de",
+                  "en": "the"
+                },
+                "plural": {
+                  "nl": "redenen uitworp",
+                  "en": "rejection reasons"
+                },
+                "objectType": {
+                  "$ref": "#/facts/dd04dbff-736a-4703-94a2-bbba4588fcc0"
+                }
+              }
+            }
+          ]
         }
-      }
-    }
-  },
-  "parameters": {
+      },
+      "relation": "heeft"
+    },
     "7150c34b-934b-4c19-82da-5bd774766be1": {
       "name": {
         "nl": "PERCENTAGE REISDUUR EERSTE SCHIJF",
         "en": "TRAVEL TIME PERCENTAGE FIRST BRACKET"
       },
-      "article": {
-        "nl": "het",
-        "en": "the"
-      },
-      "type": "percentage",
-      "subtype": "integer"
+      "items": {
+        "7d30ffdc-3597-4d94-afe2-2a4ba0adc8f9": {
+          "name": {
+            "nl": "PERCENTAGE REISDUUR EERSTE SCHIJF definitie",
+            "en": "TRAVEL TIME PERCENTAGE FIRST BRACKET definition"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "percentage",
+              "subtype": "integer"
+            }
+          ],
+          "article": {
+            "nl": "het",
+            "en": "the"
+          }
+        }
+      }
     },
     "18a11d63-329f-4440-928c-15662d9a786f": {
       "name": {
         "nl": "PERCENTAGE REISDUUR TWEEDE SCHIJF",
         "en": "TRAVEL TIME PERCENTAGE SECOND BRACKET"
       },
-      "article": {
-        "nl": "het",
-        "en": "the"
-      },
-      "type": "percentage",
-      "subtype": "integer"
+      "items": {
+        "e9cc02b7-0d26-4bb9-b7e5-b766eda29a4c": {
+          "name": {
+            "nl": "PERCENTAGE REISDUUR TWEEDE SCHIJF definitie",
+            "en": "TRAVEL TIME PERCENTAGE SECOND BRACKET definition"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "percentage",
+              "subtype": "integer"
+            }
+          ],
+          "article": {
+            "nl": "het",
+            "en": "the"
+          }
+        }
+      }
     },
     "7ffa48de-338d-4ddb-aa69-af571c28dac9": {
       "name": {
         "nl": "PERCENTAGE REISDUUR DERDE SCHIJF",
         "en": "TRAVEL TIME PERCENTAGE THIRD BRACKET"
       },
-      "article": {
-        "nl": "het",
-        "en": "the"
-      },
-      "type": "percentage",
-      "subtype": "integer"
+      "items": {
+        "02804820-36c3-432e-88e6-23ab9bf77866": {
+          "name": {
+            "nl": "PERCENTAGE REISDUUR DERDE SCHIJF definitie",
+            "en": "TRAVEL TIME PERCENTAGE THIRD BRACKET definition"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "percentage",
+              "subtype": "integer"
+            }
+          ],
+          "article": {
+            "nl": "het",
+            "en": "the"
+          }
+        }
+      }
     },
     "b0973116-a02a-4982-bc3b-f485eecc4bd0": {
       "name": {
         "nl": "BOVENGRENS REISDUUR EERSTE SCHIJF",
         "en": "TRAVEL TIME UPPER LIMIT FIRST BRACKET"
       },
-      "article": {
-        "nl": "de",
-        "en": "the"
-      },
-      "type": "numeric",
-      "subtype": "integer",
-      "unit": "u"
+      "items": {
+        "2d631f85-43da-4cd6-8588-02c9cc84bde1": {
+          "name": {
+            "nl": "BOVENGRENS REISDUUR EERSTE SCHIJF definitie",
+            "en": "TRAVEL TIME UPPER LIMIT FIRST BRACKET definition"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "numeric",
+              "subtype": "integer",
+              "unit": "u"
+            }
+          ],
+          "article": {
+            "nl": "de",
+            "en": "the"
+          }
+        }
+      }
     },
     "ad1a1925-d6c1-4560-b09c-6f316c38cc55": {
       "name": {
         "nl": "BOVENGRENS REISDUUR TWEEDE SCHIJF",
         "en": "TRAVEL TIME UPPER LIMIT SECOND BRACKET"
       },
-      "article": {
-        "nl": "de",
-        "en": "the"
-      },
-      "type": "numeric",
-      "subtype": "integer",
-      "unit": "u"
+      "items": {
+        "939d7327-b962-447f-a798-30b72e90e239": {
+          "name": {
+            "nl": "BOVENGRENS REISDUUR TWEEDE SCHIJF definitie",
+            "en": "TRAVEL TIME UPPER LIMIT SECOND BRACKET definition"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "numeric",
+              "subtype": "integer",
+              "unit": "u"
+            }
+          ],
+          "article": {
+            "nl": "de",
+            "en": "the"
+          }
+        }
+      }
     },
     "70fbc167-01ca-4ef6-a1dd-78d05eaf99ab": {
       "name": {
         "nl": "BOVENGRENS AFSTAND EERSTE SCHIJF",
         "en": "DISTANCE UPPER LIMIT FIRST BRACKET"
       },
-      "article": {
-        "nl": "de",
-        "en": "the"
-      },
-      "type": "numeric",
-      "subtype": "integer",
-      "unit": "km"
+      "items": {
+        "57cde0cd-356c-4afc-b1a5-90c974bbc8ac": {
+          "name": {
+            "nl": "BOVENGRENS AFSTAND EERSTE SCHIJF definitie",
+            "en": "DISTANCE UPPER LIMIT FIRST BRACKET definition"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "numeric",
+              "subtype": "integer",
+              "unit": "km"
+            }
+          ],
+          "article": {
+            "nl": "de",
+            "en": "the"
+          }
+        }
+      }
     },
     "4773bc34-a04d-4361-b984-85e6eba67374": {
       "name": {
         "nl": "BOVENGRENS AFSTAND TWEEDE SCHIJF",
         "en": "DISTANCE UPPER LIMIT SECOND BRACKET"
       },
-      "article": {
-        "nl": "de",
-        "en": "the"
-      },
-      "type": "numeric",
-      "subtype": "integer",
-      "unit": "km"
+      "items": {
+        "73cd2885-76c3-4c19-99e2-ffbbd62f08cd": {
+          "name": {
+            "nl": "BOVENGRENS AFSTAND TWEEDE SCHIJF definitie",
+            "en": "DISTANCE UPPER LIMIT SECOND BRACKET definition"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "numeric",
+              "subtype": "integer",
+              "unit": "km"
+            }
+          ],
+          "article": {
+            "nl": "de",
+            "en": "the"
+          }
+        }
+      }
     },
     "dc7826fa-37c0-499d-8d59-96a0c40b3fcd": {
       "name": {
         "nl": "LAGE BASISTARIEF EERSTE SCHIJF",
         "en": "LOW BASE RATE FIRST BRACKET"
       },
-      "article": {
-        "nl": "het",
-        "en": "the"
-      },
-      "type": {
-        "$ref": "#/domains/1ffc339e-47cf-4f17-8985-22628dddb49a"
+      "items": {
+        "cb740e53-30ed-4673-bd2c-1eebcaf6ef7e": {
+          "name": {
+            "nl": "LAGE BASISTARIEF EERSTE SCHIJF definitie",
+            "en": "LOW BASE RATE FIRST BRACKET definition"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": {
+                "$ref": "#/facts/1ffc339e-47cf-4f17-8985-22628dddb49a"
+              }
+            }
+          ],
+          "article": {
+            "nl": "het",
+            "en": "the"
+          }
+        }
       }
     },
     "155c3536-cb1c-49a0-bd14-84fdf2dda9e8": {
@@ -719,12 +1150,25 @@
         "nl": "LAGE BASISTARIEF TWEEDE SCHIJF",
         "en": "LOW BASE RATE SECOND BRACKET"
       },
-      "article": {
-        "nl": "het",
-        "en": "the"
-      },
-      "type": {
-        "$ref": "#/domains/1ffc339e-47cf-4f17-8985-22628dddb49a"
+      "items": {
+        "01a65d79-3733-44b6-bc55-ef76cd497694": {
+          "name": {
+            "nl": "LAGE BASISTARIEF TWEEDE SCHIJF definitie",
+            "en": "LOW BASE RATE SECOND BRACKET definition"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": {
+                "$ref": "#/facts/1ffc339e-47cf-4f17-8985-22628dddb49a"
+              }
+            }
+          ],
+          "article": {
+            "nl": "het",
+            "en": "the"
+          }
+        }
       }
     },
     "0d4f3025-5c31-465a-b08f-983a19507c2b": {
@@ -732,12 +1176,25 @@
         "nl": "HOGE BASISTARIEF EERSTE SCHIJF",
         "en": "HIGH BASE RATE FIRST BRACKET"
       },
-      "article": {
-        "nl": "het",
-        "en": "the"
-      },
-      "type": {
-        "$ref": "#/domains/1ffc339e-47cf-4f17-8985-22628dddb49a"
+      "items": {
+        "a7bc5742-44be-45d0-b787-7a6d3993d569": {
+          "name": {
+            "nl": "HOGE BASISTARIEF EERSTE SCHIJF definitie",
+            "en": "HIGH BASE RATE FIRST BRACKET definition"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": {
+                "$ref": "#/facts/1ffc339e-47cf-4f17-8985-22628dddb49a"
+              }
+            }
+          ],
+          "article": {
+            "nl": "het",
+            "en": "the"
+          }
+        }
       }
     },
     "0a7246e7-b7d0-44e1-a928-75c92b3d2638": {
@@ -745,12 +1202,25 @@
         "nl": "HOGE BASISTARIEF TWEEDE SCHIJF",
         "en": "HIGH BASE RATE SECOND BRACKET"
       },
-      "article": {
-        "nl": "het",
-        "en": "the"
-      },
-      "type": {
-        "$ref": "#/domains/1ffc339e-47cf-4f17-8985-22628dddb49a"
+      "items": {
+        "f6a4a4c0-1117-4591-993a-c93260d30eb4": {
+          "name": {
+            "nl": "HOGE BASISTARIEF TWEEDE SCHIJF definitie",
+            "en": "HIGH BASE RATE SECOND BRACKET definition"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": {
+                "$ref": "#/facts/1ffc339e-47cf-4f17-8985-22628dddb49a"
+              }
+            }
+          ],
+          "article": {
+            "nl": "het",
+            "en": "the"
+          }
+        }
       }
     },
     "d74f5c2d-5538-4347-81be-cfb3ebe6e06c": {
@@ -758,12 +1228,25 @@
         "nl": "LAGE TARIEF VERMINDERING EERSTE SCHIJF",
         "en": "LOW RATE REDUCTION FIRST BRACKET"
       },
-      "article": {
-        "nl": "het",
-        "en": "the"
-      },
-      "type": {
-        "$ref": "#/domains/7c22f541-e76e-453e-8887-c350d9b0d8a0"
+      "items": {
+        "d5a25f86-2e85-44fc-b296-6dfbb901e2e7": {
+          "name": {
+            "nl": "LAGE TARIEF VERMINDERING EERSTE SCHIJF definitie",
+            "en": "LOW RATE REDUCTION FIRST BRACKET definition"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": {
+                "$ref": "#/facts/7c22f541-e76e-453e-8887-c350d9b0d8a0"
+              }
+            }
+          ],
+          "article": {
+            "nl": "het",
+            "en": "the"
+          }
+        }
       }
     },
     "70fbe842-7ba3-48df-958a-9a22db065aa3": {
@@ -771,12 +1254,25 @@
         "nl": "LAGE TARIEF VERMINDERING TWEEDE SCHIJF",
         "en": "LOW RATE REDUCTION SECOND BRACKET"
       },
-      "article": {
-        "nl": "het",
-        "en": "the"
-      },
-      "type": {
-        "$ref": "#/domains/7c22f541-e76e-453e-8887-c350d9b0d8a0"
+      "items": {
+        "4fafce5a-7ec9-483e-b725-5941314dc052": {
+          "name": {
+            "nl": "LAGE TARIEF VERMINDERING TWEEDE SCHIJF definitie",
+            "en": "LOW RATE REDUCTION SECOND BRACKET definition"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": {
+                "$ref": "#/facts/7c22f541-e76e-453e-8887-c350d9b0d8a0"
+              }
+            }
+          ],
+          "article": {
+            "nl": "het",
+            "en": "the"
+          }
+        }
       }
     },
     "4eda445b-32b0-4732-8a7c-753c5df1b33a": {
@@ -784,12 +1280,25 @@
         "nl": "HOGE TARIEF VERMINDERING EERSTE SCHIJF",
         "en": "HIGH RATE REDUCTION FIRST BRACKET"
       },
-      "article": {
-        "nl": "het",
-        "en": "the"
-      },
-      "type": {
-        "$ref": "#/domains/7c22f541-e76e-453e-8887-c350d9b0d8a0"
+      "items": {
+        "7c37819d-8f28-4cae-9dd0-dbed7a2c3fac": {
+          "name": {
+            "nl": "HOGE TARIEF VERMINDERING EERSTE SCHIJF definitie",
+            "en": "HIGH RATE REDUCTION FIRST BRACKET definition"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": {
+                "$ref": "#/facts/7c22f541-e76e-453e-8887-c350d9b0d8a0"
+              }
+            }
+          ],
+          "article": {
+            "nl": "het",
+            "en": "the"
+          }
+        }
       }
     },
     "082debac-4e28-4346-b133-254f418e174f": {
@@ -797,12 +1306,25 @@
         "nl": "HOGE TARIEF VERMINDERING TWEEDE SCHIJF",
         "en": "HIGH RATE REDUCTION SECOND BRACKET"
       },
-      "article": {
-        "nl": "het",
-        "en": "the"
-      },
-      "type": {
-        "$ref": "#/domains/7c22f541-e76e-453e-8887-c350d9b0d8a0"
+      "items": {
+        "c51a8165-90a4-43fb-8490-c2cdf1cffe43": {
+          "name": {
+            "nl": "HOGE TARIEF VERMINDERING TWEEDE SCHIJF definitie",
+            "en": "HIGH RATE REDUCTION SECOND BRACKET definition"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": {
+                "$ref": "#/facts/7c22f541-e76e-453e-8887-c350d9b0d8a0"
+              }
+            }
+          ],
+          "article": {
+            "nl": "het",
+            "en": "the"
+          }
+        }
       }
     },
     "32bc28ba-1065-4c59-bbfb-d844b3cd1c0f": {
@@ -810,137 +1332,133 @@
         "nl": "AANTAL TREINMILES PER PASSAGIER VOOR CONTINGENT",
         "en": "NUMBER OF TRAIN MILES PER PASSENGER FOR QUOTA"
       },
-      "article": {
-        "nl": "het",
-        "en": "the"
-      },
-      "type": "numeric",
-      "subtype": "integer"
+      "items": {
+        "ed0da8a7-45fe-4b49-b420-92f2f575480e": {
+          "name": {
+            "nl": "AANTAL TREINMILES PER PASSAGIER VOOR CONTINGENT definitie",
+            "en": "NUMBER OF TRAIN MILES PER PASSENGER FOR QUOTA definition"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "numeric",
+              "subtype": "integer"
+            }
+          ],
+          "article": {
+            "nl": "het",
+            "en": "the"
+          }
+        }
+      }
     },
     "90e1eff7-daf0-45e2-a263-8769645e7c03": {
       "name": {
         "nl": "BASISCONTINGENT TREINMILES PER VLUCHT",
         "en": "BASE QUOTA TRAIN MILES PER FLIGHT"
       },
-      "article": {
-        "nl": "het",
-        "en": "the"
-      },
-      "type": "numeric",
-      "subtype": "integer"
+      "items": {
+        "f11a4905-b473-45d2-8012-e0540a58919e": {
+          "name": {
+            "nl": "BASISCONTINGENT TREINMILES PER VLUCHT definitie",
+            "en": "BASE QUOTA TRAIN MILES PER FLIGHT definition"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "numeric",
+              "subtype": "integer"
+            }
+          ],
+          "article": {
+            "nl": "het",
+            "en": "the"
+          }
+        }
+      }
     },
     "4c6de8d0-46a5-41c6-af10-05e87931285f": {
       "name": {
         "nl": "MAXIMUM AANTAL TREINMILES VOOR PASSAGIERS JONGER DAN 65",
         "en": "MAXIMUM NUMBER OF TRAIN MILES FOR PASSENGERS UNDER 65"
       },
-      "article": {
-        "nl": "het",
-        "en": "the"
-      },
-      "type": "numeric",
-      "subtype": "integer"
+      "items": {
+        "28e19b1c-301d-4e8f-96a5-bd194b1d4298": {
+          "name": {
+            "nl": "MAXIMUM AANTAL TREINMILES VOOR PASSAGIERS JONGER DAN 65 definitie",
+            "en": "MAXIMUM NUMBER OF TRAIN MILES FOR PASSENGERS UNDER 65 definition"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "numeric",
+              "subtype": "integer"
+            }
+          ],
+          "article": {
+            "nl": "het",
+            "en": "the"
+          }
+        }
+      }
     },
     "2aba030a-5d4d-4286-94d9-4f92e5b633a4": {
       "name": {
         "nl": "MAXIMUM AANTAL TREINMILES VOOR PASSAGIERS VAN 65 JAAR OF OUDER",
         "en": "MAXIMUM NUMBER OF TRAIN MILES FOR PASSENGERS 65 YEARS OR OLDER"
       },
-      "article": {
-        "nl": "het",
-        "en": "the"
-      },
-      "type": "numeric",
-      "subtype": "integer"
+      "items": {
+        "66e5aa43-11ff-4330-ae8d-5559202e4e67": {
+          "name": {
+            "nl": "MAXIMUM AANTAL TREINMILES VOOR PASSAGIERS VAN 65 JAAR OF OUDER definitie",
+            "en": "MAXIMUM NUMBER OF TRAIN MILES FOR PASSENGERS 65 YEARS OR OLDER definition"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "numeric",
+              "subtype": "integer"
+            }
+          ],
+          "article": {
+            "nl": "het",
+            "en": "the"
+          }
+        }
+      }
     },
     "447763d6-bb4c-4d6c-bf1e-20ef7e967bd4": {
       "name": {
         "nl": "KORTING VOOR KLIMAATNEUTRALE VLUCHT",
         "en": "DISCOUNT FOR CLIMATE NEUTRAL FLIGHT"
       },
-      "article": {
-        "nl": "de",
-        "en": "the"
-      },
-      "type": {
-        "$ref": "#/domains/1ffc339e-47cf-4f17-8985-22628dddb49a"
+      "items": {
+        "bf5e91c7-6409-4cbf-942f-7718b9a601d2": {
+          "name": {
+            "nl": "KORTING VOOR KLIMAATNEUTRALE VLUCHT definitie",
+            "en": "DISCOUNT FOR CLIMATE NEUTRAL FLIGHT definition"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": {
+                "$ref": "#/facts/1ffc339e-47cf-4f17-8985-22628dddb49a"
+              }
+            }
+          ],
+          "article": {
+            "nl": "de",
+            "en": "the"
+          }
+        }
       }
-    }
-  },
-  "domains": {
-    "1ffc339e-47cf-4f17-8985-22628dddb49a": {
-      "name": {
-        "nl": "Bedrag",
-        "en": "Amount"
-      },
-      "type": "numeric",
-      "precision": 2,
-      "unit": "€"
     },
-    "7c22f541-e76e-453e-8887-c350d9b0d8a0": {
-      "name": {
-        "nl": "Bedrag per kilometer",
-        "en": "Amount per kilometer"
-      },
-      "type": "numeric",
-      "precision": 2,
-      "unit": "€/km"
-    },
-    "b20b40f4-76ca-4887-afe4-cf98fc77ff66": {
-      "name": {
-        "nl": "Luchthavens",
-        "en": "Airports"
-      },
-      "type": "enumeration",
-      "values": [
-        "Schiphol",
-        "Eindhoven",
-        "Rotterdam",
-        "Maastricht",
-        "Groningen",
-        "Lelystad"
-      ]
-    },
-    "2430730a-0f8f-48ff-9a54-166e651ff340": {
-      "name": {
-        "nl": "Provincies",
-        "en": "Provinces"
-      },
-      "type": "enumeration",
-      "values": [
-        "Noord-Holland",
-        "Zuid-Holland",
-        "Utrecht",
-        "Noord-Brabant",
-        "Limburg",
-        "Gelderland",
-        "Overijssel",
-        "Flevoland",
-        "Drenthe",
-        "Friesland",
-        "Groningen",
-        "Zeeland"
-      ]
-    },
-    "61b9f36b-d866-4b5d-aa61-7451e6aee5c0": {
-      "name": {
-        "nl": "Type uitworp",
-        "en": "Rejection type"
-      },
-      "type": "enumeration",
-      "values": [
-        "Gegevens inconsistent",
-        "Gegevens onvolledig"
-      ]
-    }
-  },
-  "ruleGroups": [
-    {
+    "488ecffd-8d68-404b-856f-2bda7874d556": {
       "name": {
         "nl": "Initialisatie",
         "en": "Initialization"
       },
-      "rules": {
+      "items": {
         "2082041e-f916-49ce-833e-840437395f6a": {
           "name": {
             "nl": "afstand tot bestemming 01",
@@ -951,10 +1469,10 @@
               "validFrom": "2018",
               "target": {
                 "attribute": {
-                  "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                  "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
                 },
                 "subject": {
-                  "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                  "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                 }
               },
               "value": {
@@ -967,12 +1485,12 @@
         }
       }
     },
-    {
+    "44db42b1-ab47-4348-bed0-31462920d823": {
       "name": {
         "nl": "Kenmerktoekenning vlucht",
         "en": "Flight characteristic assignment"
       },
-      "rules": {
+      "items": {
         "8629e30c-cb03-49c2-b70e-0191e133adfd": {
           "name": {
             "nl": "belaste reis 01",
@@ -981,14 +1499,14 @@
           "versions": [
             {
               "validFrom": "2018",
-              "property": {
-                "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/d72ead33-2e0c-450a-ba71-b83940c8e926"
-              },
               "subject": {
                 "type": "objectType",
                 "ref": {
-                  "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
+                  "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
                 }
+              },
+              "property": {
+                "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/d72ead33-2e0c-450a-ba71-b83940c8e926"
               },
               "value": {
                 "type": "boolean",
@@ -1000,12 +1518,12 @@
                 "left": {
                   "type": "attributeReference",
                   "attribute": {
-                    "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea5d01e3-af40-437f-bc0f-d29b26718148"
+                    "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea5d01e3-af40-437f-bc0f-d29b26718148"
                   },
                   "subject": {
                     "type": "objectType",
                     "ref": {
-                      "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
+                      "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
                     }
                   }
                 },
@@ -1025,14 +1543,14 @@
           "versions": [
             {
               "validFrom": "2018",
-              "property": {
-                "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/2330a40c-76e0-41d3-877c-43337b73c025"
-              },
               "subject": {
                 "type": "objectType",
                 "ref": {
-                  "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
+                  "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
                 }
+              },
+              "property": {
+                "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/2330a40c-76e0-41d3-877c-43337b73c025"
               },
               "value": {
                 "type": "boolean",
@@ -1044,12 +1562,12 @@
                 "left": {
                   "type": "attributeReference",
                   "attribute": {
-                    "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea5d01e3-af40-437f-bc0f-d29b26718148"
+                    "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea5d01e3-af40-437f-bc0f-d29b26718148"
                   },
                   "subject": {
                     "type": "objectType",
                     "ref": {
-                      "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
+                      "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
                     }
                   }
                 },
@@ -1069,14 +1587,14 @@
           "versions": [
             {
               "validFrom": "2018",
-              "property": {
-                "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/cbe15f31-ce60-440c-8e72-0861a5089457"
-              },
               "subject": {
                 "type": "objectType",
                 "ref": {
-                  "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
+                  "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
                 }
+              },
+              "property": {
+                "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/cbe15f31-ce60-440c-8e72-0861a5089457"
               },
               "value": {
                 "type": "boolean",
@@ -1088,24 +1606,24 @@
                 "left": {
                   "type": "attributeReference",
                   "attribute": {
-                    "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/07783713-6df0-4810-bc44-4206050cb19d"
+                    "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/07783713-6df0-4810-bc44-4206050cb19d"
                   },
                   "subject": {
                     "type": "objectType",
                     "ref": {
-                      "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
+                      "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
                     }
                   }
                 },
                 "right": {
                   "type": "attributeReference",
                   "attribute": {
-                    "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/fe752ef2-19ba-4b5c-9e6e-ad86df5d3d59"
+                    "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/fe752ef2-19ba-4b5c-9e6e-ad86df5d3d59"
                   },
                   "subject": {
                     "type": "objectType",
                     "ref": {
-                      "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
+                      "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
                     }
                   }
                 }
@@ -1115,12 +1633,12 @@
         }
       }
     },
-    {
+    "9d52791b-25b9-4852-92a3-41fc85cd9d4e": {
       "name": {
         "nl": "Vluchtinformatie",
         "en": "Flight information"
       },
-      "rules": {
+      "items": {
         "4b3e1650-07e8-43c4-9dd2-76dc951ffd8e": {
           "name": {
             "nl": "aantal passagiers 01",
@@ -1131,10 +1649,10 @@
               "validFrom": "2018",
               "target": {
                 "attribute": {
-                  "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/89cdc694-7fae-4577-a289-08442a662d26"
+                  "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/89cdc694-7fae-4577-a289-08442a662d26"
                 },
                 "subject": {
-                  "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                  "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                 }
               },
               "expression": {
@@ -1146,7 +1664,7 @@
                   "subject": {
                     "type": "objectType",
                     "ref": {
-                      "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
+                      "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
                     }
                   }
                 }
@@ -1164,10 +1682,10 @@
               "validFrom": "2018",
               "target": {
                 "attribute": {
-                  "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/cbc050ae-0471-4a39-add4-6b3b8fc3e9a5"
+                  "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/cbc050ae-0471-4a39-add4-6b3b8fc3e9a5"
                 },
                 "subject": {
-                  "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                  "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                 }
               },
               "expression": {
@@ -1176,7 +1694,7 @@
                 "expression": {
                   "type": "attributeReference",
                   "attribute": {
-                    "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/ab9cc7dc-7be7-412d-ae46-0224ceef3153"
+                    "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/ab9cc7dc-7be7-412d-ae46-0224ceef3153"
                   },
                   "subject": {
                     "type": "role",
@@ -1184,7 +1702,7 @@
                     "ofSubject": {
                       "type": "objectType",
                       "ref": {
-                        "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
+                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
                       }
                     }
                   }
@@ -1208,10 +1726,10 @@
               "validFrom": "2018",
               "target": {
                 "attribute": {
-                  "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/339243f4-dee5-474f-ab62-c7df39e69788"
+                  "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/339243f4-dee5-474f-ab62-c7df39e69788"
                 },
                 "subject": {
-                  "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                  "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                 }
               },
               "expression": {
@@ -1220,7 +1738,7 @@
                 "expression": {
                   "type": "attributeReference",
                   "attribute": {
-                    "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/199d696e-a168-4584-8f80-35d737e5e1ba"
+                    "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/199d696e-a168-4584-8f80-35d737e5e1ba"
                   },
                   "subject": {
                     "type": "role",
@@ -1228,7 +1746,7 @@
                     "ofSubject": {
                       "type": "objectType",
                       "ref": {
-                        "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
+                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
                       }
                     }
                   }
@@ -1252,10 +1770,10 @@
               "validFrom": "2018",
               "target": {
                 "attribute": {
-                  "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/b09702d7-a7d4-4308-976c-da0b5903eac9"
+                  "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/b09702d7-a7d4-4308-976c-da0b5903eac9"
                 },
                 "subject": {
-                  "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                  "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                 }
               },
               "expression": {
@@ -1264,7 +1782,7 @@
                 "expression": {
                   "type": "attributeReference",
                   "attribute": {
-                    "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/b802e897-8854-4ad3-97b4-3ed4b04f9b16"
+                    "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/b802e897-8854-4ad3-97b4-3ed4b04f9b16"
                   },
                   "subject": {
                     "type": "role",
@@ -1272,7 +1790,7 @@
                     "ofSubject": {
                       "type": "objectType",
                       "ref": {
-                        "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
+                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
                       }
                     }
                   }
@@ -1288,12 +1806,12 @@
         }
       }
     },
-    {
+    "da8e4952-612f-4da0-a94b-099717c35310": {
       "name": {
         "nl": "Belasting op basis van afstand",
         "en": "Distance-based tax"
       },
-      "rules": {
+      "items": {
         "83b5b907-2f49-4b63-9654-3978d782aa24": {
           "name": {
             "nl": "belasting op basis van afstand 01",
@@ -1304,10 +1822,10 @@
               "validFrom": "2018",
               "target": {
                 "attribute": {
-                  "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/199d696e-a168-4584-8f80-35d737e5e1ba"
+                  "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/199d696e-a168-4584-8f80-35d737e5e1ba"
                 },
                 "subject": {
-                  "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
+                  "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
                 }
               },
               "value": {
@@ -1321,19 +1839,19 @@
                   {
                     "type": "propertyReference",
                     "property": {
-                      "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/2330a40c-76e0-41d3-877c-43337b73c025"
+                      "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/2330a40c-76e0-41d3-877c-43337b73c025"
                     },
                     "subject": {
-                      "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                      "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                     }
                   },
                   {
                     "type": "propertyReference",
                     "property": {
-                      "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/cbe15f31-ce60-440c-8e72-0861a5089457"
+                      "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/cbe15f31-ce60-440c-8e72-0861a5089457"
                     },
                     "subject": {
-                      "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                      "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                     }
                   },
                   {
@@ -1342,16 +1860,16 @@
                     "left": {
                       "type": "attributeReference",
                       "attribute": {
-                        "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
                       },
                       "subject": {
-                        "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                        "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                       }
                     },
                     "right": {
                       "type": "parameterReference",
                       "parameter": {
-                        "$ref": "#/parameters/4773bc34-a04d-4361-b984-85e6eba67374"
+                        "$ref": "#/facts/4773bc34-a04d-4361-b984-85e6eba67374"
                       }
                     }
                   }
@@ -1370,15 +1888,15 @@
               "validFrom": "2018",
               "target": {
                 "attribute": {
-                  "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/199d696e-a168-4584-8f80-35d737e5e1ba"
+                  "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/199d696e-a168-4584-8f80-35d737e5e1ba"
                 },
                 "subject": {
                   "type": "objectTypeWithProperty",
                   "objectType": {
-                    "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"
+                    "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"
                   },
                   "property": {
-                    "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/ef64a2f2-6dd5-46cb-bd4e-6708e70021dc"
+                    "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/ef64a2f2-6dd5-46cb-bd4e-6708e70021dc"
                   }
                 }
               },
@@ -1388,7 +1906,7 @@
                 "left": {
                   "type": "parameterReference",
                   "parameter": {
-                    "$ref": "#/parameters/dc7826fa-37c0-499d-8d59-96a0c40b3fcd"
+                    "$ref": "#/facts/dc7826fa-37c0-499d-8d59-96a0c40b3fcd"
                   }
                 },
                 "right": {
@@ -1397,16 +1915,16 @@
                   "left": {
                     "type": "parameterReference",
                     "parameter": {
-                      "$ref": "#/parameters/d74f5c2d-5538-4347-81be-cfb3ebe6e06c"
+                      "$ref": "#/facts/d74f5c2d-5538-4347-81be-cfb3ebe6e06c"
                     }
                   },
                   "right": {
                     "type": "attributeReference",
                     "attribute": {
-                      "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                      "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
                     },
                     "subject": {
-                      "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                      "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                     }
                   }
                 }
@@ -1417,10 +1935,10 @@
                   {
                     "type": "propertyReference",
                     "property": {
-                      "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/d72ead33-2e0c-450a-ba71-b83940c8e926"
+                      "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/d72ead33-2e0c-450a-ba71-b83940c8e926"
                     },
                     "subject": {
-                      "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                      "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                     }
                   },
                   {
@@ -1428,10 +1946,10 @@
                     "condition": {
                       "type": "propertyReference",
                       "property": {
-                        "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/cbe15f31-ce60-440c-8e72-0861a5089457"
+                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/cbe15f31-ce60-440c-8e72-0861a5089457"
                       },
                       "subject": {
-                        "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                        "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                       }
                     }
                   },
@@ -1441,10 +1959,10 @@
                     "left": {
                       "type": "attributeReference",
                       "attribute": {
-                        "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
                       },
                       "subject": {
-                        "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                        "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                       }
                     },
                     "right": {
@@ -1459,16 +1977,16 @@
                     "left": {
                       "type": "attributeReference",
                       "attribute": {
-                        "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
                       },
                       "subject": {
-                        "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                        "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                       }
                     },
                     "right": {
                       "type": "parameterReference",
                       "parameter": {
-                        "$ref": "#/parameters/70fbc167-01ca-4ef6-a1dd-78d05eaf99ab"
+                        "$ref": "#/facts/70fbc167-01ca-4ef6-a1dd-78d05eaf99ab"
                       }
                     }
                   }
@@ -1487,15 +2005,15 @@
               "validFrom": "2018",
               "target": {
                 "attribute": {
-                  "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/199d696e-a168-4584-8f80-35d737e5e1ba"
+                  "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/199d696e-a168-4584-8f80-35d737e5e1ba"
                 },
                 "subject": {
                   "type": "objectTypeWithProperty",
                   "objectType": {
-                    "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"
+                    "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"
                   },
                   "property": {
-                    "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/ef64a2f2-6dd5-46cb-bd4e-6708e70021dc"
+                    "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/ef64a2f2-6dd5-46cb-bd4e-6708e70021dc"
                   }
                 }
               },
@@ -1505,7 +2023,7 @@
                 "left": {
                   "type": "parameterReference",
                   "parameter": {
-                    "$ref": "#/parameters/155c3536-cb1c-49a0-bd14-84fdf2dda9e8"
+                    "$ref": "#/facts/155c3536-cb1c-49a0-bd14-84fdf2dda9e8"
                   }
                 },
                 "right": {
@@ -1514,7 +2032,7 @@
                   "left": {
                     "type": "parameterReference",
                     "parameter": {
-                      "$ref": "#/parameters/70fbe842-7ba3-48df-958a-9a22db065aa3"
+                      "$ref": "#/facts/70fbe842-7ba3-48df-958a-9a22db065aa3"
                     }
                   },
                   "right": {
@@ -1523,16 +2041,16 @@
                     "left": {
                       "type": "attributeReference",
                       "attribute": {
-                        "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
                       },
                       "subject": {
-                        "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                        "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                       }
                     },
                     "right": {
                       "type": "parameterReference",
                       "parameter": {
-                        "$ref": "#/parameters/70fbc167-01ca-4ef6-a1dd-78d05eaf99ab"
+                        "$ref": "#/facts/70fbc167-01ca-4ef6-a1dd-78d05eaf99ab"
                       }
                     }
                   }
@@ -1544,10 +2062,10 @@
                   {
                     "type": "propertyReference",
                     "property": {
-                      "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/d72ead33-2e0c-450a-ba71-b83940c8e926"
+                      "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/d72ead33-2e0c-450a-ba71-b83940c8e926"
                     },
                     "subject": {
-                      "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                      "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                     }
                   },
                   {
@@ -1555,10 +2073,10 @@
                     "condition": {
                       "type": "propertyReference",
                       "property": {
-                        "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/cbe15f31-ce60-440c-8e72-0861a5089457"
+                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/cbe15f31-ce60-440c-8e72-0861a5089457"
                       },
                       "subject": {
-                        "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                        "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                       }
                     }
                   },
@@ -1568,16 +2086,16 @@
                     "left": {
                       "type": "attributeReference",
                       "attribute": {
-                        "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
                       },
                       "subject": {
-                        "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                        "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                       }
                     },
                     "right": {
                       "type": "parameterReference",
                       "parameter": {
-                        "$ref": "#/parameters/70fbc167-01ca-4ef6-a1dd-78d05eaf99ab"
+                        "$ref": "#/facts/70fbc167-01ca-4ef6-a1dd-78d05eaf99ab"
                       }
                     }
                   },
@@ -1587,16 +2105,16 @@
                     "left": {
                       "type": "attributeReference",
                       "attribute": {
-                        "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
                       },
                       "subject": {
-                        "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                        "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                       }
                     },
                     "right": {
                       "type": "parameterReference",
                       "parameter": {
-                        "$ref": "#/parameters/4773bc34-a04d-4361-b984-85e6eba67374"
+                        "$ref": "#/facts/4773bc34-a04d-4361-b984-85e6eba67374"
                       }
                     }
                   }
@@ -1615,15 +2133,15 @@
               "validFrom": "2018",
               "target": {
                 "attribute": {
-                  "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/199d696e-a168-4584-8f80-35d737e5e1ba"
+                  "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/199d696e-a168-4584-8f80-35d737e5e1ba"
                 },
                 "subject": {
                   "type": "objectTypeWithProperty",
                   "objectType": {
-                    "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"
+                    "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"
                   },
                   "property": {
-                    "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/37ddb128-913a-41b2-b5fd-ed8c05b813b2"
+                    "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/37ddb128-913a-41b2-b5fd-ed8c05b813b2"
                   }
                 }
               },
@@ -1633,7 +2151,7 @@
                 "left": {
                   "type": "parameterReference",
                   "parameter": {
-                    "$ref": "#/parameters/0d4f3025-5c31-465a-b08f-983a19507c2b"
+                    "$ref": "#/facts/0d4f3025-5c31-465a-b08f-983a19507c2b"
                   }
                 },
                 "right": {
@@ -1642,16 +2160,16 @@
                   "left": {
                     "type": "parameterReference",
                     "parameter": {
-                      "$ref": "#/parameters/4eda445b-32b0-4732-8a7c-753c5df1b33a"
+                      "$ref": "#/facts/4eda445b-32b0-4732-8a7c-753c5df1b33a"
                     }
                   },
                   "right": {
                     "type": "attributeReference",
                     "attribute": {
-                      "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                      "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
                     },
                     "subject": {
-                      "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                      "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                     }
                   }
                 }
@@ -1662,10 +2180,10 @@
                   {
                     "type": "propertyReference",
                     "property": {
-                      "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/d72ead33-2e0c-450a-ba71-b83940c8e926"
+                      "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/d72ead33-2e0c-450a-ba71-b83940c8e926"
                     },
                     "subject": {
-                      "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                      "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                     }
                   },
                   {
@@ -1673,10 +2191,10 @@
                     "condition": {
                       "type": "propertyReference",
                       "property": {
-                        "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/cbe15f31-ce60-440c-8e72-0861a5089457"
+                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/cbe15f31-ce60-440c-8e72-0861a5089457"
                       },
                       "subject": {
-                        "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                        "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                       }
                     }
                   },
@@ -1686,10 +2204,10 @@
                     "left": {
                       "type": "attributeReference",
                       "attribute": {
-                        "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
                       },
                       "subject": {
-                        "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                        "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                       }
                     },
                     "right": {
@@ -1704,16 +2222,16 @@
                     "left": {
                       "type": "attributeReference",
                       "attribute": {
-                        "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
                       },
                       "subject": {
-                        "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                        "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                       }
                     },
                     "right": {
                       "type": "parameterReference",
                       "parameter": {
-                        "$ref": "#/parameters/70fbc167-01ca-4ef6-a1dd-78d05eaf99ab"
+                        "$ref": "#/facts/70fbc167-01ca-4ef6-a1dd-78d05eaf99ab"
                       }
                     }
                   }
@@ -1732,15 +2250,15 @@
               "validFrom": "2018",
               "target": {
                 "attribute": {
-                  "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/199d696e-a168-4584-8f80-35d737e5e1ba"
+                  "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/199d696e-a168-4584-8f80-35d737e5e1ba"
                 },
                 "subject": {
                   "type": "objectTypeWithProperty",
                   "objectType": {
-                    "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"
+                    "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"
                   },
                   "property": {
-                    "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/37ddb128-913a-41b2-b5fd-ed8c05b813b2"
+                    "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/37ddb128-913a-41b2-b5fd-ed8c05b813b2"
                   }
                 }
               },
@@ -1750,7 +2268,7 @@
                 "left": {
                   "type": "parameterReference",
                   "parameter": {
-                    "$ref": "#/parameters/0a7246e7-b7d0-44e1-a928-75c92b3d2638"
+                    "$ref": "#/facts/0a7246e7-b7d0-44e1-a928-75c92b3d2638"
                   }
                 },
                 "right": {
@@ -1759,7 +2277,7 @@
                   "left": {
                     "type": "parameterReference",
                     "parameter": {
-                      "$ref": "#/parameters/082debac-4e28-4346-b133-254f418e174f"
+                      "$ref": "#/facts/082debac-4e28-4346-b133-254f418e174f"
                     }
                   },
                   "right": {
@@ -1768,16 +2286,16 @@
                     "left": {
                       "type": "attributeReference",
                       "attribute": {
-                        "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
                       },
                       "subject": {
-                        "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                        "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                       }
                     },
                     "right": {
                       "type": "parameterReference",
                       "parameter": {
-                        "$ref": "#/parameters/70fbc167-01ca-4ef6-a1dd-78d05eaf99ab"
+                        "$ref": "#/facts/70fbc167-01ca-4ef6-a1dd-78d05eaf99ab"
                       }
                     }
                   }
@@ -1789,10 +2307,10 @@
                   {
                     "type": "propertyReference",
                     "property": {
-                      "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/d72ead33-2e0c-450a-ba71-b83940c8e926"
+                      "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/d72ead33-2e0c-450a-ba71-b83940c8e926"
                     },
                     "subject": {
-                      "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                      "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                     }
                   },
                   {
@@ -1800,10 +2318,10 @@
                     "condition": {
                       "type": "propertyReference",
                       "property": {
-                        "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/cbe15f31-ce60-440c-8e72-0861a5089457"
+                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/cbe15f31-ce60-440c-8e72-0861a5089457"
                       },
                       "subject": {
-                        "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                        "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                       }
                     }
                   },
@@ -1813,16 +2331,16 @@
                     "left": {
                       "type": "attributeReference",
                       "attribute": {
-                        "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
                       },
                       "subject": {
-                        "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                        "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                       }
                     },
                     "right": {
                       "type": "parameterReference",
                       "parameter": {
-                        "$ref": "#/parameters/70fbc167-01ca-4ef6-a1dd-78d05eaf99ab"
+                        "$ref": "#/facts/70fbc167-01ca-4ef6-a1dd-78d05eaf99ab"
                       }
                     }
                   },
@@ -1832,16 +2350,16 @@
                     "left": {
                       "type": "attributeReference",
                       "attribute": {
-                        "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
                       },
                       "subject": {
-                        "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                        "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                       }
                     },
                     "right": {
                       "type": "parameterReference",
                       "parameter": {
-                        "$ref": "#/parameters/4773bc34-a04d-4361-b984-85e6eba67374"
+                        "$ref": "#/facts/4773bc34-a04d-4361-b984-85e6eba67374"
                       }
                     }
                   }
@@ -1852,12 +2370,12 @@
         }
       }
     },
-    {
+    "02ea02e6-b05f-4937-b79d-32af6a47e080": {
       "name": {
         "nl": "Kenmerktoekenning natuurlijk persoon",
         "en": "Natural person characteristic assignment"
       },
-      "rules": {
+      "items": {
         "9f38fcdc-84c9-4459-90c3-33c02aafeabc": {
           "name": {
             "nl": "passagier waarvoor het lage tarief voor belasting op basis van afstand van toepassing is 01",
@@ -1866,14 +2384,14 @@
           "versions": [
             {
               "validFrom": "2018",
-              "property": {
-                "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/ef64a2f2-6dd5-46cb-bd4e-6708e70021dc"
-              },
               "subject": {
                 "type": "objectType",
                 "ref": {
-                  "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"
+                  "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"
                 }
+              },
+              "property": {
+                "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/ef64a2f2-6dd5-46cb-bd4e-6708e70021dc"
               },
               "value": {
                 "type": "boolean",
@@ -1888,7 +2406,7 @@
                     "left": {
                       "type": "attributeReference",
                       "attribute": {
-                        "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
+                        "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
                       },
                       "subject": {
                         "type": "pronoun",
@@ -1910,7 +2428,7 @@
                         "left": {
                           "type": "attributeReference",
                           "attribute": {
-                            "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
+                            "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
                           },
                           "subject": {
                             "type": "pronoun",
@@ -1929,7 +2447,7 @@
                         "left": {
                           "type": "attributeReference",
                           "attribute": {
-                            "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
+                            "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
                           },
                           "subject": {
                             "type": "pronoun",
@@ -1957,14 +2475,14 @@
           "versions": [
             {
               "validFrom": "2018",
-              "property": {
-                "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/37ddb128-913a-41b2-b5fd-ed8c05b813b2"
-              },
               "subject": {
                 "type": "objectType",
                 "ref": {
-                  "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"
+                  "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"
                 }
+              },
+              "property": {
+                "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/37ddb128-913a-41b2-b5fd-ed8c05b813b2"
               },
               "value": {
                 "type": "boolean",
@@ -1982,7 +2500,7 @@
                         "left": {
                           "type": "attributeReference",
                           "attribute": {
-                            "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
+                            "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
                           },
                           "subject": {
                             "type": "pronoun",
@@ -2001,7 +2519,7 @@
                         "left": {
                           "type": "attributeReference",
                           "attribute": {
-                            "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
+                            "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
                           },
                           "subject": {
                             "type": "pronoun",
@@ -2022,7 +2540,7 @@
                     "left": {
                       "type": "attributeReference",
                       "attribute": {
-                        "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
+                        "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
                       },
                       "subject": {
                         "type": "pronoun",
@@ -2048,14 +2566,14 @@
           "versions": [
             {
               "validFrom": "2018",
-              "property": {
-                "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/4b9bd5f1-311a-4b59-8dd9-ee3139de153e"
-              },
               "subject": {
                 "type": "objectType",
                 "ref": {
-                  "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"
+                  "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"
                 }
+              },
+              "property": {
+                "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/4b9bd5f1-311a-4b59-8dd9-ee3139de153e"
               },
               "value": {
                 "type": "boolean",
@@ -2070,7 +2588,7 @@
                     "left": {
                       "type": "attributeReference",
                       "attribute": {
-                        "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
+                        "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
                       },
                       "subject": {
                         "type": "pronoun",
@@ -2089,16 +2607,16 @@
                     "left": {
                       "type": "attributeReference",
                       "attribute": {
-                        "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
                       },
                       "subject": {
-                        "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                        "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                       }
                     },
                     "right": {
                       "type": "parameterReference",
                       "parameter": {
-                        "$ref": "#/parameters/70fbc167-01ca-4ef6-a1dd-78d05eaf99ab"
+                        "$ref": "#/facts/70fbc167-01ca-4ef6-a1dd-78d05eaf99ab"
                       }
                     }
                   }
@@ -2109,12 +2627,12 @@
         }
       }
     },
-    {
+    "29016c2f-f466-44e5-865b-5f6c0a33932b": {
       "name": {
         "nl": "Leeftijd",
         "en": "Age"
       },
-      "rules": {
+      "items": {
         "98baf8ea-2530-4f3b-88cd-429a2b7ff2a7": {
           "name": {
             "nl": "leeftijd 01",
@@ -2125,10 +2643,10 @@
               "validFrom": "2018",
               "target": {
                 "attribute": {
-                  "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
+                  "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
                 },
                 "subject": {
-                  "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
+                  "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
                 }
               },
               "expression": {
@@ -2137,7 +2655,7 @@
                 "from": {
                   "type": "attributeReference",
                   "attribute": {
-                    "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/b5200359-418f-40db-bdd2-cf9f7f77b4d4"
+                    "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/b5200359-418f-40db-bdd2-cf9f7f77b4d4"
                   },
                   "subject": {
                     "type": "pronoun",
@@ -2147,10 +2665,10 @@
                 "to": {
                   "type": "attributeReference",
                   "attribute": {
-                    "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/bf4947b1-acc6-4857-ba8b-881360e83b36"
+                    "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/bf4947b1-acc6-4857-ba8b-881360e83b36"
                   },
                   "subject": {
-                    "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                    "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                   }
                 },
                 "unit": "jr",
@@ -2161,12 +2679,12 @@
         }
       }
     },
-    {
+    "35228308-af5d-4faf-89ba-479bf0aed40d": {
       "name": {
         "nl": "Maximum aantal treinmiles",
         "en": "Maximum number of train miles"
       },
-      "rules": {
+      "items": {
         "5c9e3e4a-d3d8-4574-9706-4c3cf988659b": {
           "name": {
             "nl": "maximaal aantal te ontvangen treinmiles 01",
@@ -2177,16 +2695,16 @@
               "validFrom": "2019",
               "target": {
                 "attribute": {
-                  "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/661f7a45-78a0-4c8f-85bc-8a27748420f5"
+                  "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/661f7a45-78a0-4c8f-85bc-8a27748420f5"
                 },
                 "subject": {
-                  "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
+                  "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
                 }
               },
               "value": {
                 "type": "parameterReference",
                 "parameter": {
-                  "$ref": "#/parameters/4c6de8d0-46a5-41c6-af10-05e87931285f"
+                  "$ref": "#/facts/4c6de8d0-46a5-41c6-af10-05e87931285f"
                 }
               },
               "condition": {
@@ -2195,7 +2713,7 @@
                 "left": {
                   "type": "attributeReference",
                   "attribute": {
-                    "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
+                    "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
                   },
                   "subject": {
                     "type": "pronoun",
@@ -2221,16 +2739,16 @@
               "validFrom": "2019",
               "target": {
                 "attribute": {
-                  "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/661f7a45-78a0-4c8f-85bc-8a27748420f5"
+                  "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/661f7a45-78a0-4c8f-85bc-8a27748420f5"
                 },
                 "subject": {
-                  "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
+                  "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
                 }
               },
               "value": {
                 "type": "parameterReference",
                 "parameter": {
-                  "$ref": "#/parameters/2aba030a-5d4d-4286-94d9-4f92e5b633a4"
+                  "$ref": "#/facts/2aba030a-5d4d-4286-94d9-4f92e5b633a4"
                 }
               },
               "condition": {
@@ -2239,7 +2757,7 @@
                 "left": {
                   "type": "attributeReference",
                   "attribute": {
-                    "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
+                    "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
                   },
                   "subject": {
                     "type": "pronoun",
@@ -2257,12 +2775,12 @@
         }
       }
     },
-    {
+    "0d0bcb1f-7f0f-4cc8-9f14-000e10719e4a": {
       "name": {
         "nl": "Te betalen belasting",
         "en": "Tax payable"
       },
-      "rules": {
+      "items": {
         "47bc8e5d-3b37-4442-8396-eb8c655960fc": {
           "name": {
             "nl": "te betalen belasting 01",
@@ -2273,10 +2791,10 @@
               "validFrom": "2018",
               "target": {
                 "attribute": {
-                  "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/ab9cc7dc-7be7-412d-ae46-0224ceef3153"
+                  "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/ab9cc7dc-7be7-412d-ae46-0224ceef3153"
                 },
                 "subject": {
-                  "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
+                  "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
                 }
               },
               "expression": {
@@ -2287,7 +2805,7 @@
                   "left": {
                     "type": "attributeReference",
                     "attribute": {
-                      "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/199d696e-a168-4584-8f80-35d737e5e1ba"
+                      "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/199d696e-a168-4584-8f80-35d737e5e1ba"
                     },
                     "subject": {
                       "type": "pronoun",
@@ -2297,7 +2815,7 @@
                   "right": {
                     "type": "attributeReference",
                     "attribute": {
-                      "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/b802e897-8854-4ad3-97b4-3ed4b04f9b16"
+                      "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/b802e897-8854-4ad3-97b4-3ed4b04f9b16"
                     },
                     "subject": {
                       "type": "pronoun",
@@ -2316,7 +2834,7 @@
                     "condition": {
                       "type": "propertyReference",
                       "property": {
-                        "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/4b9bd5f1-311a-4b59-8dd9-ee3139de153e"
+                        "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/4b9bd5f1-311a-4b59-8dd9-ee3139de153e"
                       },
                       "subject": {
                         "type": "pronoun",
@@ -2329,10 +2847,10 @@
                     "condition": {
                       "type": "propertyReference",
                       "property": {
-                        "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/866a85c0-b305-4ce3-af5b-2baf449cdfeb"
+                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/866a85c0-b305-4ce3-af5b-2baf449cdfeb"
                       },
                       "subject": {
-                        "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                        "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                       }
                     }
                   }
@@ -2351,10 +2869,10 @@
               "validFrom": "2018",
               "target": {
                 "attribute": {
-                  "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/ab9cc7dc-7be7-412d-ae46-0224ceef3153"
+                  "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/ab9cc7dc-7be7-412d-ae46-0224ceef3153"
                 },
                 "subject": {
-                  "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
+                  "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
                 }
               },
               "expression": {
@@ -2370,7 +2888,7 @@
                       "left": {
                         "type": "attributeReference",
                         "attribute": {
-                          "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/199d696e-a168-4584-8f80-35d737e5e1ba"
+                          "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/199d696e-a168-4584-8f80-35d737e5e1ba"
                         },
                         "subject": {
                           "type": "pronoun",
@@ -2380,7 +2898,7 @@
                       "right": {
                         "type": "attributeReference",
                         "attribute": {
-                          "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/b802e897-8854-4ad3-97b4-3ed4b04f9b16"
+                          "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/b802e897-8854-4ad3-97b4-3ed4b04f9b16"
                         },
                         "subject": {
                           "type": "pronoun",
@@ -2391,7 +2909,7 @@
                     "right": {
                       "type": "parameterReference",
                       "parameter": {
-                        "$ref": "#/parameters/447763d6-bb4c-4d6c-bf1e-20ef7e967bd4"
+                        "$ref": "#/facts/447763d6-bb4c-4d6c-bf1e-20ef7e967bd4"
                       }
                     }
                   },
@@ -2410,7 +2928,7 @@
                   {
                     "type": "propertyReference",
                     "property": {
-                      "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/4b9bd5f1-311a-4b59-8dd9-ee3139de153e"
+                      "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/4b9bd5f1-311a-4b59-8dd9-ee3139de153e"
                     },
                     "subject": {
                       "type": "pronoun",
@@ -2420,10 +2938,10 @@
                   {
                     "type": "propertyReference",
                     "property": {
-                      "$ref": "#/objectTypes/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/866a85c0-b305-4ce3-af5b-2baf449cdfeb"
+                      "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/866a85c0-b305-4ce3-af5b-2baf449cdfeb"
                     },
                     "subject": {
-                      "$ref": "#/factTypes/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                      "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                     }
                   }
                 ]
@@ -2433,12 +2951,12 @@
         }
       }
     },
-    {
+    "82ddcff2-67b4-4b88-83b8-e3990cad6bd9": {
       "name": {
         "nl": "Toewijzen treinmiles",
         "en": "Assign train miles"
       },
-      "rules": {
+      "items": {
         "0342341e-101c-4bf2-aa8d-d29928c3c7fa": {
           "name": {
             "nl": "treinmiles 01",
@@ -2448,20 +2966,9 @@
             {
               "validFrom": "2018",
               "validTo": "2018",
-              "source": {
-                "attribute": {
-                  "$ref": "#/objectTypes/bea88ba3-ec79-4bd2-8f8e-f6e11a08c431/properties/f2aa806f-f1f1-4212-aba8-b01334172317"
-                },
-                "subject": {
-                  "type": "role",
-                  "ref": {
-                    "$ref": "#/factTypes/da5cc365-024d-4c43-8fce-75ae4a4d461f/roles/5d45c715-f041-453c-9386-8c97fa592ea7"
-                  }
-                }
-              },
               "target": {
                 "attribute": {
-                  "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/11d155f3-d6bd-4792-94bb-e20c0c885101"
+                  "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/11d155f3-d6bd-4792-94bb-e20c0c885101"
                 },
                 "subjects": {
                   "type": "allRoles",
@@ -2469,25 +2976,7 @@
                   "ofSubject": {
                     "type": "role",
                     "ref": {
-                      "$ref": "#/factTypes/da5cc365-024d-4c43-8fce-75ae4a4d461f/roles/5d45c715-f041-453c-9386-8c97fa592ea7"
-                    }
-                  }
-                }
-              },
-              "distribution": {
-                "method": "equal",
-                "rounding": {
-                  "decimals": 0,
-                  "direction": "down"
-                },
-                "remainder": {
-                  "attribute": {
-                    "$ref": "#/objectTypes/bea88ba3-ec79-4bd2-8f8e-f6e11a08c431/properties/8f5423a5-cc51-4f78-b66e-720540da5bf8"
-                  },
-                  "subject": {
-                    "type": "role",
-                    "ref": {
-                      "$ref": "#/factTypes/da5cc365-024d-4c43-8fce-75ae4a4d461f/roles/5d45c715-f041-453c-9386-8c97fa592ea7"
+                      "$ref": "#/facts/da5cc365-024d-4c43-8fce-75ae4a4d461f/roles/5d45c715-f041-453c-9386-8c97fa592ea7"
                     }
                   }
                 }
@@ -2495,20 +2984,9 @@
             },
             {
               "validFrom": "2019",
-              "source": {
-                "attribute": {
-                  "$ref": "#/objectTypes/bea88ba3-ec79-4bd2-8f8e-f6e11a08c431/properties/f2aa806f-f1f1-4212-aba8-b01334172317"
-                },
-                "subject": {
-                  "type": "role",
-                  "ref": {
-                    "$ref": "#/factTypes/da5cc365-024d-4c43-8fce-75ae4a4d461f/roles/5d45c715-f041-453c-9386-8c97fa592ea7"
-                  }
-                }
-              },
               "target": {
                 "attribute": {
-                  "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/11d155f3-d6bd-4792-94bb-e20c0c885101"
+                  "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/11d155f3-d6bd-4792-94bb-e20c0c885101"
                 },
                 "subjects": {
                   "type": "allRoles",
@@ -2516,42 +2994,7 @@
                   "ofSubject": {
                     "type": "role",
                     "ref": {
-                      "$ref": "#/factTypes/da5cc365-024d-4c43-8fce-75ae4a4d461f/roles/5d45c715-f041-453c-9386-8c97fa592ea7"
-                    }
-                  }
-                }
-              },
-              "distribution": {
-                "method": "ordered",
-                "orderBy": {
-                  "attribute": {
-                    "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
-                  },
-                  "direction": "ascending"
-                },
-                "tieBreaker": {
-                  "method": "proportional",
-                  "attribute": {
-                    "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/85a409f3-4f30-4032-ae35-6c49a434a45d"
-                  }
-                },
-                "maximum": {
-                  "attribute": {
-                    "$ref": "#/objectTypes/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/661f7a45-78a0-4c8f-85bc-8a27748420f5"
-                  }
-                },
-                "rounding": {
-                  "decimals": 0,
-                  "direction": "down"
-                },
-                "remainder": {
-                  "attribute": {
-                    "$ref": "#/objectTypes/bea88ba3-ec79-4bd2-8f8e-f6e11a08c431/properties/8f5423a5-cc51-4f78-b66e-720540da5bf8"
-                  },
-                  "subject": {
-                    "type": "role",
-                    "ref": {
-                      "$ref": "#/factTypes/da5cc365-024d-4c43-8fce-75ae4a4d461f/roles/5d45c715-f041-453c-9386-8c97fa592ea7"
+                      "$ref": "#/facts/da5cc365-024d-4c43-8fce-75ae4a4d461f/roles/5d45c715-f041-453c-9386-8c97fa592ea7"
                     }
                   }
                 }
@@ -2561,5 +3004,13 @@
         }
       }
     }
-  ]
+  },
+  "metadata": {
+    "version": "1.0.0",
+    "language": "nl",
+    "created": "2025-01-15",
+    "description": "TOKA vliegbelasting model - Nederlandse regeling voor belasting op vliegverkeer",
+    "migrated_at": "2025-08-26T16:25:09.118343",
+    "format_version": "3.0-facts"
+  }
 }

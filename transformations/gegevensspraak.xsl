@@ -32,22 +32,26 @@
 
     <!-- Root template -->
     <xsl:template match="fn:map[fn:string[@key='$schema']]">
+        <!-- Process facts - filter by type -->
+        <xsl:variable name="facts" select="fn:map[@key='facts']"/>
+        
         <!-- Objecttypes verwerken -->
-        <xsl:apply-templates select="fn:map[@key='objectTypes']"/>
+        <xsl:apply-templates select="$facts" mode="objectTypes"/>
 
         <!-- Feittypes verwerken -->
-        <xsl:apply-templates select="fn:map[@key='factTypes']"/>
+        <xsl:apply-templates select="$facts" mode="factTypes"/>
 
         <!-- Parameters verwerken -->
-        <xsl:apply-templates select="fn:map[@key='parameters']"/>
+        <xsl:apply-templates select="$facts" mode="parameters"/>
 
         <!-- Domeinen verwerken -->
-        <xsl:apply-templates select="fn:map[@key='domains']"/>
+        <xsl:apply-templates select="$facts" mode="domains"/>
     </xsl:template>
 
     <!-- Objecttypes sectie -->
-    <xsl:template match="fn:map[@key='objectTypes']">
-        <xsl:for-each select="fn:map">
+    <xsl:template match="fn:map[@key='facts']" mode="objectTypes">
+        <!-- Select facts that are object types (have definite_article or animated) -->
+        <xsl:for-each select="fn:map[fn:map[@key='definite_article'] or fn:boolean[@key='animated']]">
             <xsl:variable name="object-name" select="fn:map[@key='name']/fn:string[@key=$language]"/>
             <xsl:variable name="article" select="fn:map[@key='definite_article']/fn:string[@key=$language]"/>
             <xsl:variable name="animated" select="fn:boolean[@key='animated'] = true()"/>
@@ -71,20 +75,21 @@
             <xsl:text>&#10;</xsl:text>
 
             <!-- Properties verwerken -->
-            <xsl:apply-templates select="fn:map[@key='properties']"/>
+            <xsl:apply-templates select="fn:map[@key='items']" mode="properties"/>
 
             <xsl:text>&#10;</xsl:text>
         </xsl:for-each>
     </xsl:template>
 
     <!-- Properties binnen objecttype -->
-    <xsl:template match="fn:map[@key='properties']">
+    <xsl:template match="fn:map[@key='items']" mode="properties">
         <xsl:for-each select="fn:map">
             <xsl:variable name="property-name" select="fn:map[@key='name']/fn:string[@key=$language]"/>
-            <xsl:variable name="property-type" select="fn:string[@key='type']"/>
             <xsl:variable name="property-article" select="fn:map[@key='article']/fn:string[@key=$language]"/>
-            <xsl:variable name="subtype" select="fn:string[@key='subtype']"/>
             <xsl:variable name="plural" select="fn:map[@key='plural']/fn:string[@key=$language]"/>
+            <xsl:variable name="version" select="fn:array[@key='versions']/fn:map[1]"/>
+            <xsl:variable name="property-type" select="$version/fn:string[@key='type']"/>
+            <xsl:variable name="subtype" select="$version/fn:string[@key='subtype']"/>
 
             <xsl:choose>
                 <!-- Characteristics -->
@@ -142,7 +147,7 @@
                     </xsl:if>
                     <xsl:text>&#9;</xsl:text>
                     <xsl:call-template name="format-datatype">
-                        <xsl:with-param name="property" select="."/>
+                        <xsl:with-param name="property" select="$version"/>
                     </xsl:call-template>
                     <xsl:text>&#10;</xsl:text>
                 </xsl:otherwise>
@@ -151,10 +156,15 @@
     </xsl:template>
 
     <!-- Feittypes sectie -->
-    <xsl:template match="fn:map[@key='factTypes']">
-        <xsl:for-each select="fn:map">
+    <xsl:template match="fn:map[@key='facts']" mode="factTypes">
+        <!-- Select facts that are fact types (have relation field) -->
+        <xsl:for-each select="fn:map[fn:string[@key='relation']]">
             <xsl:variable name="fact-name" select="fn:map[@key='name']/fn:string[@key=$language]"/>
             <xsl:variable name="relation" select="fn:string[@key='relation']"/>
+            <xsl:variable name="relation-item" select="fn:map[@key='items']/fn:map[1]"/>
+            <xsl:variable name="version" select="$relation-item/fn:array[@key='versions']/fn:map[1]"/>
+            <xsl:variable name="role-a" select="$version/fn:map[@key='a']"/>
+            <xsl:variable name="role-b" select="$version/fn:map[@key='b']"/>
 
             <!-- Feittype header -->
             <xsl:call-template name="translate">
@@ -165,13 +175,11 @@
             <xsl:value-of select="$fact-name"/>
             <xsl:text>&#10;</xsl:text>
 
-            <!-- Rollen verwerken (nu een map in plaats van array) -->
-            <xsl:variable name="roles" select="fn:map[@key='roles']/fn:map"/>
-            <xsl:for-each select="$roles">
-                <xsl:variable name="role-name" select="fn:map[@key='name']/fn:string[@key=$language]"/>
-                <xsl:variable name="role-article" select="fn:map[@key='article']/fn:string[@key=$language]"/>
-                <xsl:variable name="role-plural" select="fn:map[@key='plural']/fn:string[@key=$language]"/>
-                <xsl:variable name="object-type-ref" select="fn:map[@key='objectType']/fn:string[@key='$ref']"/>
+            <!-- Display roles -->
+            <xsl:if test="$role-a">
+                <xsl:variable name="role-name" select="$role-a/fn:map[@key='name']/fn:string[@key=$language]"/>
+                <xsl:variable name="role-article" select="$role-a/fn:map[@key='article']/fn:string[@key=$language]"/>
+                <xsl:variable name="role-plural" select="$role-a/fn:map[@key='plural']/fn:string[@key=$language]"/>
 
                 <xsl:value-of select="if ($role-article) then $role-article else 'de'"/>
                 <xsl:text>&#9;</xsl:text>
@@ -188,19 +196,42 @@
                 </xsl:if>
                 <xsl:text>&#9;</xsl:text>
                 <!-- Resolve object name from UUID reference -->
-                <xsl:call-template name="resolve-object-name">
-                    <xsl:with-param name="ref" select="$object-type-ref"/>
+                <xsl:call-template name="resolve-fact-name">
+                    <xsl:with-param name="ref" select="$role-a/fn:map[@key='objectType']/fn:string[@key='$ref']"/>
                 </xsl:call-template>
                 <xsl:text>&#10;</xsl:text>
-            </xsl:for-each>
+            </xsl:if>
+
+            <xsl:if test="$role-b">
+                <xsl:variable name="role-name" select="$role-b/fn:map[@key='name']/fn:string[@key=$language]"/>
+                <xsl:variable name="role-article" select="$role-b/fn:map[@key='article']/fn:string[@key=$language]"/>
+                <xsl:variable name="role-plural" select="$role-b/fn:map[@key='plural']/fn:string[@key=$language]"/>
+
+                <xsl:value-of select="if ($role-article) then $role-article else 'de'"/>
+                <xsl:text>&#9;</xsl:text>
+                <xsl:value-of select="$role-name"/>
+                <xsl:if test="$role-plural">
+                    <xsl:text> (</xsl:text>
+                    <xsl:call-template name="translate">
+                      <xsl:with-param name="key">plural-indicator</xsl:with-param>
+                      <xsl:with-param name="language" select="$language"/>
+                    </xsl:call-template>
+                    <xsl:text> </xsl:text>
+                    <xsl:value-of select="$role-plural"/>
+                    <xsl:text>)</xsl:text>
+                </xsl:if>
+                <xsl:text>&#9;</xsl:text>
+                <!-- Resolve object name from UUID reference -->
+                <xsl:call-template name="resolve-fact-name">
+                    <xsl:with-param name="ref" select="$role-b/fn:map[@key='objectType']/fn:string[@key='$ref']"/>
+                </xsl:call-template>
+                <xsl:text>&#10;</xsl:text>
+            </xsl:if>
 
             <!-- Relatie beschrijving -->
-            <xsl:if test="count($roles) >= 2 and $relation">
-                <xsl:variable name="role-list" select="$roles"/>
-                <xsl:variable name="first-role" select="$role-list[1]"/>
-                <xsl:variable name="second-role" select="$role-list[2]"/>
-                <xsl:variable name="first-cardinality" select="$first-role/fn:string[@key='cardinality']"/>
-                <xsl:variable name="second-cardinality" select="$second-role/fn:string[@key='cardinality']"/>
+            <xsl:if test="$role-a and $role-b and $relation">
+                <xsl:variable name="first-cardinality" select="$role-a/fn:string[@key='cardinality']"/>
+                <xsl:variable name="second-cardinality" select="$role-b/fn:string[@key='cardinality']"/>
 
                 <xsl:choose>
                     <xsl:when test="$first-cardinality = 'one'">
@@ -218,12 +249,11 @@
                 </xsl:choose>
                 <xsl:text> </xsl:text>
                 <xsl:choose>
-                    <xsl:when
-                            test="$first-cardinality = 'many' and $first-role/fn:map[@key='plural']/fn:string[@key=$language]">
-                        <xsl:value-of select="$first-role/fn:map[@key='plural']/fn:string[@key=$language]"/>
+                    <xsl:when test="$first-cardinality = 'many' and $role-a/fn:map[@key='plural']/fn:string[@key=$language]">
+                        <xsl:value-of select="$role-a/fn:map[@key='plural']/fn:string[@key=$language]"/>
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:value-of select="$first-role/fn:map[@key='name']/fn:string[@key=$language]"/>
+                        <xsl:value-of select="$role-a/fn:map[@key='name']/fn:string[@key=$language]"/>
                     </xsl:otherwise>
                 </xsl:choose>
                 <xsl:text> </xsl:text>
@@ -245,12 +275,11 @@
                 </xsl:choose>
                 <xsl:text> </xsl:text>
                 <xsl:choose>
-                    <xsl:when
-                            test="$second-cardinality = 'many' and $second-role/fn:map[@key='plural']/fn:string[@key=$language]">
-                        <xsl:value-of select="$second-role/fn:map[@key='plural']/fn:string[@key=$language]"/>
+                    <xsl:when test="$second-cardinality = 'many' and $role-b/fn:map[@key='plural']/fn:string[@key=$language]">
+                        <xsl:value-of select="$role-b/fn:map[@key='plural']/fn:string[@key=$language]"/>
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:value-of select="$second-role/fn:map[@key='name']/fn:string[@key=$language]"/>
+                        <xsl:value-of select="$role-b/fn:map[@key='name']/fn:string[@key=$language]"/>
                     </xsl:otherwise>
                 </xsl:choose>
                 <xsl:text>&#10;</xsl:text>
@@ -261,10 +290,13 @@
     </xsl:template>
 
     <!-- Parameters sectie -->
-    <xsl:template match="fn:map[@key='parameters']">
-        <xsl:for-each select="fn:map">
+    <xsl:template match="fn:map[@key='facts']" mode="parameters">
+        <!-- Select facts that are parameters (ALL CAPS names in Dutch) -->
+        <xsl:for-each select="fn:map[matches(fn:map[@key='name']/fn:string[@key='nl'], '^[A-Z][A-Z0-9\s]*$')]">
             <xsl:variable name="param-name" select="fn:map[@key='name']/fn:string[@key=$language]"/>
-            <xsl:variable name="param-article" select="fn:map[@key='article']/fn:string[@key=$language]"/>
+            <xsl:variable name="item" select="fn:map[@key='items']/fn:map[1]"/>
+            <xsl:variable name="param-article" select="$item/fn:map[@key='article']/fn:string[@key=$language]"/>
+            <xsl:variable name="version" select="$item/fn:array[@key='versions']/fn:map[1]"/>
 
             <xsl:call-template name="translate">
               <xsl:with-param name="key">parameter</xsl:with-param>
@@ -276,7 +308,7 @@
             <xsl:value-of select="$param-name"/>
             <xsl:text> : </xsl:text>
             <xsl:call-template name="format-datatype">
-                <xsl:with-param name="property" select="."/>
+                <xsl:with-param name="property" select="$version"/>
             </xsl:call-template>
             <xsl:text>&#10;</xsl:text>
         </xsl:for-each>
@@ -285,18 +317,20 @@
     </xsl:template>
 
     <!-- Domeinen sectie -->
-    <xsl:template match="fn:map[@key='domains']">
+    <xsl:template match="fn:map[@key='facts']" mode="domains">
         <xsl:call-template name="translate">
           <xsl:with-param name="key">domains-header</xsl:with-param>
           <xsl:with-param name="language" select="$language"/>
         </xsl:call-template>
         <xsl:text>&#10;</xsl:text>
 
-        <xsl:for-each select="fn:map[not(fn:array[@key='values'])]">
+        <!-- Select facts that are domains (not objectTypes, factTypes, parameters, or ruleGroups) -->
+        <xsl:for-each select="fn:map[not(fn:map[@key='definite_article'] or fn:boolean[@key='animated'] or fn:string[@key='relation'] or matches(fn:map[@key='name']/fn:string[@key='nl'], '^[A-Z][A-Z0-9\s]*$') or fn:map[@key='items']/fn:map/fn:array[@key='versions']/fn:map[fn:map[@key='target'] or fn:map[@key='condition'] or fn:map[@key='expression']]) and not(fn:array[@key='values'])]">
             <xsl:variable name="domain-name" select="fn:map[@key='name']/fn:string[@key=$language]"/>
-            <xsl:variable name="domain-type" select="fn:string[@key='type']"/>
-            <xsl:variable name="precision" select="fn:number[@key='precision']"/>
-            <xsl:variable name="unit" select="fn:string[@key='unit']"/>
+            <xsl:variable name="version" select="fn:map[@key='items']/fn:map[1]/fn:array[@key='versions']/fn:map[1]"/>
+            <xsl:variable name="domain-type" select="$version/fn:string[@key='type']"/>
+            <xsl:variable name="precision" select="$version/fn:number[@key='precision']"/>
+            <xsl:variable name="unit" select="$version/fn:string[@key='unit']"/>
 
             <xsl:call-template name="translate">
               <xsl:with-param name="key">domain</xsl:with-param>
@@ -359,8 +393,8 @@
             <xsl:when test="$property/fn:map[@key='type']/fn:string[@key='$ref']">
                 <xsl:variable name="ref-parts"
                               select="tokenize($property/fn:map[@key='type']/fn:string[@key='$ref'], '/')"/>
-                <xsl:call-template name="resolve-domain-name">
-                    <xsl:with-param name="uuid" select="$ref-parts[last()]"/>
+                <xsl:call-template name="resolve-fact-name">
+                    <xsl:with-param name="ref" select="$property/fn:map[@key='type']/fn:string[@key='$ref']"/>
                 </xsl:call-template>
             </xsl:when>
 
@@ -499,38 +533,21 @@
         </xsl:choose>
     </xsl:template>
 
-    <!-- Helper: Resolve object name from UUID reference -->
-    <xsl:template name="resolve-object-name">
+    <!-- Helper: Resolve fact name from UUID reference -->
+    <xsl:template name="resolve-fact-name">
         <xsl:param name="ref"/>
         <xsl:variable name="ref-parts" select="tokenize($ref, '/')"/>
         <xsl:variable name="uuid" select="$ref-parts[last()]"/>
 
-        <!-- Look up in objectTypes -->
-        <xsl:variable name="object-type" select="//fn:map[@key='objectTypes']/fn:map[@key=$uuid]"/>
+        <!-- Look up in facts -->
+        <xsl:variable name="fact" select="//fn:map[@key='facts']/fn:map[@key=$uuid]"/>
         <xsl:choose>
-            <xsl:when test="$object-type">
-                <xsl:variable name="name" select="$object-type/fn:map[@key='name']/fn:string[@key=$language]"/>
-                <xsl:value-of select="if ($name) then $name else 'UNKNOWN_OBJECT'"/>
+            <xsl:when test="$fact">
+                <xsl:variable name="name" select="$fact/fn:map[@key='name']/fn:string[@key=$language]"/>
+                <xsl:value-of select="if ($name) then $name else 'UNKNOWN_FACT'"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:text>UNKNOWN_OBJECT</xsl:text>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>
-
-    <!-- Helper: Resolve domain name from UUID reference -->
-    <xsl:template name="resolve-domain-name">
-        <xsl:param name="uuid"/>
-
-        <!-- Look up in domains -->
-        <xsl:variable name="domain" select="//fn:map[@key='domains']/fn:map[@key=$uuid]"/>
-        <xsl:choose>
-            <xsl:when test="$domain">
-                <xsl:variable name="name" select="$domain/fn:map[@key='name']/fn:string[@key=$language]"/>
-                <xsl:value-of select="$name"/>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:text>UNKNOWN_DOMAIN</xsl:text>
+                <xsl:text>UNKNOWN_FACT</xsl:text>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
