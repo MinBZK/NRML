@@ -35,7 +35,7 @@ this in the standard altogether)
 Should keys be allowed to be variable (should we have UUIDs as keys), or do we want a fixed and predictable number of
 keys (which for many parsers is easier)?
 
-# Reusability
+## Reusability
 
 We need a way to link across NRML definitions (in other files) so that definitions/domains/... can be reused/work
 together.
