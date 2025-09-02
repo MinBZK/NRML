@@ -55,3 +55,8 @@ Therefor, we should NOT use hashes as identifiers (and instead we should use glo
 
 All required fields of a _version_ are immutable. So, any change to a required field in a version results in a _new_
 version (with a new UUID).
+
+## Transformations
+
+Transformations from NRML to other representations (such as Regelspraak) can be done with any tool, but formal
+transformations, such as those that can be expressed in XSLT, are preferred.
