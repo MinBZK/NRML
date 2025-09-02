@@ -14,15 +14,15 @@ Strict JSON over YAML (because we don't want to shoot ourselves in the foot).
 Should language related metadata, as required by regelspraak/gegevenspraak, be in the core?
 Or should we have an extension on the core that allows for requiring this metadata?
 
-Options/choices we have: 
+Options/choices we have:
 
-- We could have a separate JSON file with for instance translations that maps uuids to objects (that can then be merged).
+- We could have a separate JSON file with for instance translations that maps uuids to objects (that can then be
+  merged).
 
 - We could have a separate schema file that will be merged with core schema. This schema could then for instance require
-certain fields that were not required in core.
+  certain fields that were not required in core.
 
 Both could result in the same view on NRML.
-
 
 ## Versioning
 
@@ -44,3 +44,14 @@ We think jsonpoints can work:
 ```json
  "$ref": "https://example.com/schemas/address.json#/definitions/address"
  ```
+
+## Hash as identifiers?
+
+We consider instead UUIDs to use a hash of the content as an identifier. However, separately defined definitions, even
+with the exact same fields can have different semantics and should not be collapsed.
+Therefor, we should NOT use hashes as identifiers (and instead we should use globally unique UUIDs)
+
+## Immutability
+
+All required fields of a _version_ are immutable. So, any change to a required field in a version results in a _new_
+version (with a new UUID).
