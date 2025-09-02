@@ -26,9 +26,16 @@ Both could result in the same view on NRML.
 
 ## Versioning
 
-Should that be _in_ the NRML definition or on the outside (using, for instance, version control)
+Should that be _in_ the NRML definition or on the outside (using, for instance, version control).
 Is ValidFrom required? Or optional? Is validTo required or optional? (we think both should be optional, assuming we keep
-this in the standard altogether)
+this in the standard altogether).
+
+We should keep all versions around (relates to immutability, see below), so that we can always freely refer to any
+version. The end user should _NOT_ need to use version control (git) to see earlier versions of a fact.
+
+Because reference can be absolutely linked to version UUIDs, versioning at this level is efficient (doesn't runtime
+resolves). Another reason to keep versions at this level is that we want to keep relations between the versions: if an
+attribute changes over time, we still want the object of the attribute to remain the same.
 
 ## Variable keys
 
