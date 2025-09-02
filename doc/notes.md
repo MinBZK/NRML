@@ -14,6 +14,16 @@ Strict JSON over YAML (because we don't want to shoot ourselves in the foot).
 Should language related metadata, as required by regelspraak/gegevenspraak, be in the core?
 Or should we have an extension on the core that allows for requiring this metadata?
 
+Options/choices we have: 
+
+- We could have a separate JSON file with for instance translations that maps uuids to objects (that can then be merged).
+
+- We could have a separate schema file that will be merged with core schema. This schema could then for instance require
+certain fields that were not required in core.
+
+Both could result in the same view on NRML.
+
+
 ## Versioning
 
 Should that be _in_ the NRML definition or on the outside (using, for instance, version control)
