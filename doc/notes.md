@@ -70,4 +70,12 @@ transformations, such as those that can be expressed in XSLT, are preferred.
 
 ## Initialisation
 
-We may need a construct to initialize something, there's no order in which facts are processed. 
+We may need a construct to initialize something, there's no order in which facts are processed.
+
+## Article
+
+we should call them "definite article"
+
+## Nested arithmetic
+
+We may need to deal still with using correct brackets for nested arithmetic. 

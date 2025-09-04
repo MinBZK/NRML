@@ -563,9 +563,11 @@
             </xsl:when>
             <!-- Arithmetic expression -->
             <xsl:when test="$operand/fn:string[@key='type'] = 'arithmetic'">
+                <xsl:text>(</xsl:text>
                 <xsl:call-template name="format-arithmetic">
                     <xsl:with-param name="arithmetic" select="$operand"/>
                 </xsl:call-template>
+                <xsl:text>)</xsl:text>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:text>onbekende operand</xsl:text>
