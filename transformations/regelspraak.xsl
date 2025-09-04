@@ -476,6 +476,11 @@
                     <xsl:with-param name="notExists" select="$condition"/>
                 </xsl:call-template>
             </xsl:when>
+            <xsl:when test="$type = 'exactlyOneOf'">
+                <xsl:call-template name="format-exactly-one-of">
+                    <xsl:with-param name="exactlyOneOf" select="$condition"/>
+                </xsl:call-template>
+            </xsl:when>
             <xsl:otherwise>
                 <xsl:text>Onbekende conditie type: </xsl:text>
                 <xsl:value-of select="$type"/>
@@ -1251,6 +1256,20 @@
         <xsl:call-template name="resolve-path">
             <xsl:with-param name="path" select="$characteristic/fn:map[2]/fn:string[@key='$ref']"/>
         </xsl:call-template>
+    </xsl:template>
+
+    <!-- Format exactlyOneOf condition -->
+    <xsl:template name="format-exactly-one-of">
+        <xsl:param name="exactlyOneOf"/>
+        <xsl:variable name="conditions" select="$exactlyOneOf/fn:array[@key='conditions']"/>
+        
+        <xsl:text>er aan precies één van de volgende voorwaarden wordt voldaan :</xsl:text>
+        <xsl:for-each select="$conditions/fn:map">
+            <xsl:text>&#10;  • </xsl:text>
+            <xsl:call-template name="format-condition">
+                <xsl:with-param name="condition" select="."/>
+            </xsl:call-template>
+        </xsl:for-each>
     </xsl:template>
 
     <!-- Check if a reference points to a characteristic -->
