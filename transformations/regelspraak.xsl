@@ -555,7 +555,62 @@
         </xsl:choose>
     </xsl:template>
 
-    <!-- Resolve reference chain -->
+    <!-- Check if rule target is animated -->
+    <xsl:template name="is-rule-target-animated">
+        <xsl:param name="target"/>
+        
+        <!-- Get the first reference in target (should be a role) -->
+        <xsl:variable name="role-ref" select="$target/fn:map[1]/fn:string[@key='$ref']"/>
+        <xsl:variable name="role-fact-uuid" select="substring-before(substring-after($role-ref, '#/facts/'), '/roles/')"/>
+        <xsl:variable name="role-uuid" select="substring-after($role-ref, '/roles/')"/>
+        
+        <!-- Look up the role's objectType to see if it points to an animated fact -->
+        <xsl:variable name="object-type-ref">
+            <xsl:for-each select="//fn:map[@key='facts']/fn:map[@key=$role-fact-uuid]/fn:map[@key='items']/fn:map/fn:array[@key='versions']/fn:map">
+                <xsl:if test="fn:map[@key='b']/fn:string[@key='uuid'] = $role-uuid">
+                    <xsl:value-of select="fn:map[@key='b']/fn:map[@key='objectType']/fn:string[@key='$ref']"/>
+                </xsl:if>
+            </xsl:for-each>
+        </xsl:variable>
+        
+        <!-- Extract fact UUID from objectType reference -->
+        <xsl:variable name="target-fact-uuid" select="substring-after($object-type-ref, '#/facts/')"/>
+        
+        <!-- Check if this fact is animated -->
+        <xsl:choose>
+            <xsl:when test="//fn:map[@key='facts']/fn:map[@key=$target-fact-uuid]/fn:boolean[@key='animated'] = 'true'">true</xsl:when>
+            <xsl:otherwise>false</xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <!-- Check if chain should use possessive pronoun -->
+    <xsl:template name="should-use-possessive">
+        <xsl:param name="chain"/>
+        
+        <!-- Find current rule context -->
+        <xsl:variable name="current-rule" select="ancestor-or-self::fn:map[fn:array[@key='target']]"/>
+        
+        <!-- If we have a rule context and it has an animated target -->
+        <xsl:if test="$current-rule">
+            <xsl:variable name="target-is-animated">
+                <xsl:call-template name="is-rule-target-animated">
+                    <xsl:with-param name="target" select="$current-rule/fn:array[@key='target']"/>
+                </xsl:call-template>
+            </xsl:variable>
+            
+            <!-- If target is animated, check if this chain references something that could belong to the target -->
+            <xsl:if test="$target-is-animated = 'true'">
+                <!-- For now, use possessive for any role reference when we have animated target -->
+                <!-- This is a simplification - in a full implementation we'd check relationship ownership -->
+                <xsl:variable name="first-ref" select="$chain/fn:map[1]/fn:string[@key='$ref']"/>
+                <xsl:if test="contains($first-ref, '/roles/')">
+                    <xsl:text>true</xsl:text>
+                </xsl:if>
+            </xsl:if>
+        </xsl:if>
+    </xsl:template>
+
+    <!-- Resolve reference chain with possessive pronoun support -->
     <xsl:template name="resolve-reference-chain">
         <xsl:param name="chain"/>
         
@@ -572,15 +627,35 @@
                 </xsl:call-template>
             </xsl:when>
             <xsl:when test="count($chain/fn:map) > 1">
+                <!-- Multiple references - check for possessive case -->
+                <xsl:variable name="first-ref" select="$chain/fn:map[1]/fn:string[@key='$ref']"/>
+                <xsl:variable name="last-ref" select="$chain/fn:map[last()]/fn:string[@key='$ref']"/>
+                
+                <!-- Check if this chain represents something owned by animated subject -->
+                <xsl:variable name="use-possessive">
+                    <xsl:call-template name="should-use-possessive">
+                        <xsl:with-param name="chain" select="$chain"/>
+                    </xsl:call-template>
+                </xsl:variable>
+                
                 <!-- Multiple references - chain -->
-                <xsl:text>de </xsl:text>
-                <xsl:call-template name="resolve-path">
+                <xsl:call-template name="resolve-path-with-article">
                     <xsl:with-param name="path" select="$chain/fn:map[last()]/fn:string[@key='$ref']"/>
                 </xsl:call-template>
-                <xsl:text> van de </xsl:text>
-                <xsl:call-template name="resolve-path">
-                    <xsl:with-param name="path" select="$chain/fn:map[1]/fn:string[@key='$ref']"/>
-                </xsl:call-template>
+                <xsl:text> van </xsl:text>
+                <xsl:choose>
+                    <xsl:when test="$use-possessive = 'true'">
+                        <xsl:text>zijn </xsl:text>
+                        <xsl:call-template name="resolve-path">
+                            <xsl:with-param name="path" select="$chain/fn:map[1]/fn:string[@key='$ref']"/>
+                        </xsl:call-template>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:call-template name="resolve-path-with-article">
+                            <xsl:with-param name="path" select="$chain/fn:map[1]/fn:string[@key='$ref']"/>
+                        </xsl:call-template>
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:text>lege referentieketen</xsl:text>
@@ -986,6 +1061,96 @@
         <xsl:call-template name="resolve-reference-chain">
             <xsl:with-param name="chain" select="$condition"/>
         </xsl:call-template>
+    </xsl:template>
+
+    <!-- Resolve path with correct article from JSON -->
+    <xsl:template name="resolve-path-with-article">
+        <xsl:param name="path"/>
+        
+        <xsl:choose>
+            <!-- Property reference -->
+            <xsl:when test="contains($path, '/properties/')">
+                <xsl:call-template name="resolve-property-with-article">
+                    <xsl:with-param name="path" select="$path"/>
+                </xsl:call-template>
+            </xsl:when>
+            <!-- Role reference -->
+            <xsl:when test="contains($path, '/roles/')">
+                <xsl:call-template name="resolve-role-with-article">
+                    <xsl:with-param name="path" select="$path"/>
+                </xsl:call-template>
+            </xsl:when>
+            <!-- Fallback to regular resolution -->
+            <xsl:otherwise>
+                <xsl:text>de </xsl:text>
+                <xsl:call-template name="resolve-path">
+                    <xsl:with-param name="path" select="$path"/>
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <!-- Resolve property with its article -->
+    <xsl:template name="resolve-property-with-article">
+        <xsl:param name="path"/>
+        <xsl:variable name="fact-uuid" select="substring-before(substring-after($path, '#/facts/'), '/properties/')"/>
+        <xsl:variable name="property-uuid" select="substring-after($path, '/properties/')"/>
+        
+        <!-- Get article from property definition -->
+        <xsl:variable name="property-article" select="//fn:map[@key='facts']/fn:map[@key=$fact-uuid]/fn:map[@key='items']/fn:map[@key=$property-uuid]/fn:map[@key='article']/fn:string[@key=$language]"/>
+        
+        <xsl:choose>
+            <xsl:when test="$property-article">
+                <xsl:value-of select="$property-article"/>
+                <xsl:text> </xsl:text>
+                <xsl:call-template name="resolve-path">
+                    <xsl:with-param name="path" select="$path"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:text>de </xsl:text>
+                <xsl:call-template name="resolve-path">
+                    <xsl:with-param name="path" select="$path"/>
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <!-- Resolve role with its article -->
+    <xsl:template name="resolve-role-with-article">
+        <xsl:param name="path"/>
+        <xsl:variable name="fact-uuid" select="substring-before(substring-after($path, '#/facts/'), '/roles/')"/>
+        <xsl:variable name="role-uuid" select="substring-after($path, '/roles/')"/>
+        
+        <!-- Look up the role's article -->
+        <xsl:variable name="role-article">
+            <xsl:for-each select="//fn:map[@key='facts']/fn:map[@key=$fact-uuid]/fn:map[@key='items']/fn:map/fn:array[@key='versions']/fn:map">
+                <xsl:choose>
+                    <xsl:when test="fn:map[@key='a']/fn:string[@key='uuid'] = $role-uuid">
+                        <xsl:value-of select="fn:map[@key='a']/fn:map[@key='article']/fn:string[@key=$language]"/>
+                    </xsl:when>
+                    <xsl:when test="fn:map[@key='b']/fn:string[@key='uuid'] = $role-uuid">
+                        <xsl:value-of select="fn:map[@key='b']/fn:map[@key='article']/fn:string[@key=$language]"/>
+                    </xsl:when>
+                </xsl:choose>
+            </xsl:for-each>
+        </xsl:variable>
+        
+        <xsl:choose>
+            <xsl:when test="$role-article != ''">
+                <xsl:value-of select="$role-article"/>
+                <xsl:text> </xsl:text>
+                <xsl:call-template name="resolve-path">
+                    <xsl:with-param name="path" select="$path"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:text>de </xsl:text>
+                <xsl:call-template name="resolve-path">
+                    <xsl:with-param name="path" select="$path"/>
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <!-- Format exists condition (classification statements) -->
