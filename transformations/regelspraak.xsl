@@ -517,6 +517,7 @@
             <xsl:when test="$operator = 'greaterThan'">is groter dan</xsl:when>
             <xsl:when test="$operator = 'lessThan'">is kleiner dan</xsl:when>
             <xsl:when test="$operator = 'greaterOrEqual'">is groter of gelijk aan</xsl:when>
+            <xsl:when test="$operator = 'greaterThanOrEquals'">is groter of gelijk aan</xsl:when>
             <xsl:when test="$operator = 'lessThanOrEquals'">is kleiner of gelijk aan</xsl:when>
             <xsl:otherwise><xsl:value-of select="$operator"/></xsl:otherwise>
         </xsl:choose>
@@ -662,15 +663,36 @@
         
         <xsl:choose>
             <xsl:when test="count($chain/fn:map) = 1">
-                <!-- Single reference -->
-                <xsl:text>de </xsl:text>
-                <xsl:call-template name="resolve-path">
-                    <xsl:with-param name="path" select="$chain/fn:map/fn:string[@key='$ref']"/>
-                </xsl:call-template>
-                <xsl:text> van de </xsl:text>
-                <xsl:call-template name="resolve-fact-from-property-ref">
-                    <xsl:with-param name="ref" select="$chain/fn:map/fn:string[@key='$ref']"/>
-                </xsl:call-template>
+                <!-- Single reference - check if in animated rule context -->
+                <xsl:variable name="current-rule" select="ancestor-or-self::fn:map[fn:array[@key='target']]"/>
+                <xsl:variable name="target-is-animated">
+                    <xsl:if test="$current-rule">
+                        <xsl:call-template name="is-rule-target-animated">
+                            <xsl:with-param name="target" select="$current-rule/fn:array[@key='target']"/>
+                        </xsl:call-template>
+                    </xsl:if>
+                </xsl:variable>
+                
+                <xsl:choose>
+                    <xsl:when test="$target-is-animated = 'true' and contains($chain/fn:map/fn:string[@key='$ref'], '/properties/')">
+                        <!-- Animated context: use possessive pronoun -->
+                        <xsl:text>zijn </xsl:text>
+                        <xsl:call-template name="resolve-path">
+                            <xsl:with-param name="path" select="$chain/fn:map/fn:string[@key='$ref']"/>
+                        </xsl:call-template>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <!-- Regular context: use full form -->
+                        <xsl:text>de </xsl:text>
+                        <xsl:call-template name="resolve-path">
+                            <xsl:with-param name="path" select="$chain/fn:map/fn:string[@key='$ref']"/>
+                        </xsl:call-template>
+                        <xsl:text> van de </xsl:text>
+                        <xsl:call-template name="resolve-fact-from-property-ref">
+                            <xsl:with-param name="ref" select="$chain/fn:map/fn:string[@key='$ref']"/>
+                        </xsl:call-template>
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:when>
             <xsl:when test="count($chain/fn:map) > 1">
                 <!-- Multiple references - check for possessive case -->
