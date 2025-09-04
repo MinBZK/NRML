@@ -390,9 +390,19 @@
         <xsl:param name="operand"/>
         
         <xsl:choose>
+            <xsl:when test="$operand/fn:map[@key='attribute']">
+                <xsl:call-template name="resolve-attribute-reference">
+                    <xsl:with-param name="ref" select="$operand/fn:map[@key='attribute']"/>
+                </xsl:call-template>
+            </xsl:when>
             <xsl:when test="$operand/fn:string[@key='type'] = 'attributeReference'">
                 <xsl:call-template name="resolve-attribute-reference">
                     <xsl:with-param name="ref" select="$operand"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="$operand/fn:boolean[@key='value'] or $operand/fn:number[@key='value'] or $operand/fn:string[@key='value']">
+                <xsl:call-template name="format-value">
+                    <xsl:with-param name="value" select="$operand"/>
                 </xsl:call-template>
             </xsl:when>
             <xsl:when test="$operand/fn:string[@key='type'] = 'literal'">
@@ -409,11 +419,21 @@
     <!-- Format value -->
     <xsl:template name="format-value">
         <xsl:param name="value"/>
-        <xsl:value-of select="$value/fn:string[@key='value'] | $value/fn:number[@key='value'] | $value/fn:boolean[@key='value']"/>
-        <xsl:if test="$value/fn:string[@key='unit']">
-            <xsl:text> </xsl:text>
-            <xsl:value-of select="$value/fn:string[@key='unit']"/>
-        </xsl:if>
+        <xsl:choose>
+            <xsl:when test="$value/fn:boolean[@key='value'] = true()">
+                <xsl:text>waar</xsl:text>
+            </xsl:when>
+            <xsl:when test="$value/fn:boolean[@key='value'] = false()">
+                <xsl:text>onwaar</xsl:text>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$value/fn:string[@key='value'] | $value/fn:number[@key='value']"/>
+                <xsl:if test="$value/fn:string[@key='unit']">
+                    <xsl:text> </xsl:text>
+                    <xsl:value-of select="$value/fn:string[@key='unit']"/>
+                </xsl:if>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <!-- Resolve target -->
@@ -439,8 +459,12 @@
     <!-- Resolve target subject only -->
     <xsl:template name="resolve-target-subject">
         <xsl:param name="target"/>
-        <xsl:call-template name="resolve-subject-reference">
-            <xsl:with-param name="ref" select="$target/fn:map[@key='subject']"/>
+        <!-- Extract subject from attribute path -->
+        <xsl:variable name="attr-path" select="$target/fn:map[@key='attribute']/fn:string[@key='$ref']"/>
+        <xsl:variable name="attr-parts" select="tokenize($attr-path, '/')"/>
+        <xsl:variable name="object-uuid" select="$attr-parts[3]"/>
+        <xsl:call-template name="resolve-path">
+            <xsl:with-param name="path" select="concat('#/facts/', $object-uuid)"/>
         </xsl:call-template>
     </xsl:template>
 

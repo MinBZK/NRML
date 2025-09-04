@@ -1498,36 +1498,20 @@
           "versions": [
             {
               "validFrom": "2018",
-              "subject": {
-                "type": "objectType",
-                "ref": {
-                  "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
+              "target": {
+                "attribute": {
+                  "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/d72ead33-2e0c-450a-ba71-b83940c8e926"
                 }
-              },
-              "property": {
-                "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/d72ead33-2e0c-450a-ba71-b83940c8e926"
-              },
-              "value": {
-                "type": "boolean",
-                "value": true
               },
               "condition": {
                 "type": "comparison",
                 "operator": "equals",
                 "left": {
-                  "type": "attributeReference",
                   "attribute": {
                     "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea5d01e3-af40-437f-bc0f-d29b26718148"
-                  },
-                  "subject": {
-                    "type": "objectType",
-                    "ref": {
-                      "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
-                    }
                   }
                 },
                 "right": {
-                  "type": "boolean",
                   "value": true
                 }
               }
@@ -1542,36 +1526,20 @@
           "versions": [
             {
               "validFrom": "2018",
-              "subject": {
-                "type": "objectType",
-                "ref": {
-                  "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
+              "target": {
+                "attribute": {
+                  "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/2330a40c-76e0-41d3-877c-43337b73c025"
                 }
-              },
-              "property": {
-                "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/2330a40c-76e0-41d3-877c-43337b73c025"
-              },
-              "value": {
-                "type": "boolean",
-                "value": true
               },
               "condition": {
                 "type": "comparison",
                 "operator": "notEquals",
                 "left": {
-                  "type": "attributeReference",
                   "attribute": {
                     "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea5d01e3-af40-437f-bc0f-d29b26718148"
-                  },
-                  "subject": {
-                    "type": "objectType",
-                    "ref": {
-                      "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
-                    }
                   }
                 },
                 "right": {
-                  "type": "boolean",
                   "value": true
                 }
               }
@@ -1586,44 +1554,22 @@
           "versions": [
             {
               "validFrom": "2018",
-              "subject": {
-                "type": "objectType",
-                "ref": {
-                  "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
+              "target": {
+                "attribute": {
+                  "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/cbe15f31-ce60-440c-8e72-0861a5089457"
                 }
-              },
-              "property": {
-                "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/cbe15f31-ce60-440c-8e72-0861a5089457"
-              },
-              "value": {
-                "type": "boolean",
-                "value": true
               },
               "condition": {
                 "type": "comparison",
                 "operator": "equals",
                 "left": {
-                  "type": "attributeReference",
                   "attribute": {
                     "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/07783713-6df0-4810-bc44-4206050cb19d"
-                  },
-                  "subject": {
-                    "type": "objectType",
-                    "ref": {
-                      "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
-                    }
                   }
                 },
                 "right": {
-                  "type": "attributeReference",
                   "attribute": {
                     "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/fe752ef2-19ba-4b5c-9e6e-ad86df5d3d59"
-                  },
-                  "subject": {
-                    "type": "objectType",
-                    "ref": {
-                      "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
-                    }
                   }
                 }
               }
