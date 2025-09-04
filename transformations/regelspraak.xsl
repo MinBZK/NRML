@@ -888,12 +888,15 @@
         <xsl:variable name="param-ref" select="$param/fn:map[@key='parameter']/fn:string[@key='$ref']"/>
         <xsl:variable name="param-uuid" select="substring-after($param-ref, '#/facts/')"/>
         
-        <!-- Look up parameter name -->
-        <xsl:variable name="param-name" select="//fn:map[@key='facts']/fn:map[@key=$param-uuid]/fn:map[@key='name']/fn:string[@key=$language]"/>
+        <!-- Look up parameter name and article -->
+        <xsl:variable name="param-fact" select="//fn:map[@key='facts']/fn:map[@key=$param-uuid]"/>
+        <xsl:variable name="param-name" select="$param-fact/fn:map[@key='name']/fn:string[@key=$language]"/>
+        <!-- Get article from the first item in the parameter fact -->
+        <xsl:variable name="param-article" select="$param-fact/fn:map[@key='items']/fn:map[1]/fn:map[@key='article']/fn:string[@key=$language]"/>
         
         <xsl:choose>
             <xsl:when test="$param-name">
-                <xsl:text>het </xsl:text><xsl:value-of select="translate($param-name, 'abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ')"/>
+                <xsl:value-of select="$param-article"/><xsl:text> </xsl:text><xsl:value-of select="translate($param-name, 'abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ')"/>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:text>onbekende parameter</xsl:text>
