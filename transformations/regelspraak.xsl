@@ -1100,20 +1100,14 @@
         <xsl:variable name="property-article" select="//fn:map[@key='facts']/fn:map[@key=$fact-uuid]/fn:map[@key='items']/fn:map[@key=$property-uuid]/fn:map[@key='article']/fn:string[@key=$language]"/>
         
         <xsl:choose>
-            <xsl:when test="$property-article">
+            <xsl:when test="$property-article and $property-article != ''">
                 <xsl:value-of select="$property-article"/>
                 <xsl:text> </xsl:text>
-                <xsl:call-template name="resolve-path">
-                    <xsl:with-param name="path" select="$path"/>
-                </xsl:call-template>
             </xsl:when>
-            <xsl:otherwise>
-                <xsl:text>de </xsl:text>
-                <xsl:call-template name="resolve-path">
-                    <xsl:with-param name="path" select="$path"/>
-                </xsl:call-template>
-            </xsl:otherwise>
         </xsl:choose>
+        <xsl:call-template name="resolve-path">
+            <xsl:with-param name="path" select="$path"/>
+        </xsl:call-template>
     </xsl:template>
 
     <!-- Resolve role with its article -->
