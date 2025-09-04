@@ -218,7 +218,7 @@
         <xsl:param name="target"/>
         <xsl:param name="expression"/>
         
-        <xsl:text>Het </xsl:text>
+        <xsl:text>De </xsl:text>
         <xsl:call-template name="resolve-path">
             <xsl:with-param name="path" select="$target/fn:map/fn:string[@key='$ref']"/>
         </xsl:call-template>
@@ -288,17 +288,46 @@
             <xsl:otherwise><xsl:value-of select="$function"/></xsl:otherwise>
         </xsl:choose>
         
-        <xsl:text> de </xsl:text>
-        <xsl:call-template name="resolve-role-name-plural">
-            <xsl:with-param name="path" select="$expression/fn:map/fn:string[@key='$ref']"/>
-        </xsl:call-template>
-        <xsl:text> van de vlucht</xsl:text>
+        <xsl:choose>
+            <xsl:when test="count($expression/fn:map) = 1">
+                <!-- Single reference: just the role -->
+                <xsl:text> de </xsl:text>
+                <xsl:call-template name="resolve-role-name-plural">
+                    <xsl:with-param name="path" select="$expression/fn:map/fn:string[@key='$ref']"/>
+                </xsl:call-template>
+                <xsl:text> van de vlucht</xsl:text>
+            </xsl:when>
+            <xsl:when test="count($expression/fn:map) > 1">
+                <!-- Multi-hop: role → property -->
+                <xsl:text> de </xsl:text>
+                <xsl:call-template name="resolve-path-plural">
+                    <xsl:with-param name="path" select="$expression/fn:map[last()]/fn:string[@key='$ref']"/>
+                </xsl:call-template>
+                <xsl:text> van alle </xsl:text>
+                <xsl:call-template name="resolve-role-name-plural">
+                    <xsl:with-param name="path" select="$expression/fn:map[1]/fn:string[@key='$ref']"/>
+                </xsl:call-template>
+                <xsl:text> van de vlucht</xsl:text>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:text> lege expressie</xsl:text>
+            </xsl:otherwise>
+        </xsl:choose>
         
         <xsl:if test="$condition">
             <xsl:text> waar </xsl:text>
             <xsl:call-template name="format-condition">
                 <xsl:with-param name="condition" select="$condition"/>
             </xsl:call-template>
+        </xsl:if>
+        
+        <!-- Add default value if present -->
+        <xsl:if test="$aggregation/fn:map[@key='default']">
+            <xsl:text>, of </xsl:text>
+            <xsl:call-template name="format-value">
+                <xsl:with-param name="value" select="$aggregation/fn:map[@key='default']"/>
+            </xsl:call-template>
+            <xsl:text> als die er niet zijn</xsl:text>
         </xsl:if>
     </xsl:template>
 
@@ -679,6 +708,55 @@
             </xsl:when>
             <xsl:otherwise>
                 <xsl:text>onbekend object</xsl:text>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <!-- Resolve path plural - enhanced to handle all reference types with plural forms -->
+    <xsl:template name="resolve-path-plural">
+        <xsl:param name="path"/>
+        
+        <xsl:variable name="single-path" select="$path[1]"/>
+        
+        <xsl:choose>
+            <xsl:when test="contains($single-path, '/properties/')">
+                <xsl:call-template name="resolve-property-name-plural">
+                    <xsl:with-param name="path" select="$single-path"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="contains($single-path, '/roles/')">
+                <xsl:call-template name="resolve-role-name-plural">
+                    <xsl:with-param name="path" select="$single-path"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <!-- Fallback to singular -->
+                <xsl:call-template name="resolve-path">
+                    <xsl:with-param name="path" select="$path"/>
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <!-- Resolve property name plural -->
+    <xsl:template name="resolve-property-name-plural">
+        <xsl:param name="path"/>
+        <!-- Extract fact UUID and property UUID from path -->
+        <xsl:variable name="fact-uuid" select="substring-before(substring-after($path, '#/facts/'), '/properties/')"/>
+        <xsl:variable name="property-uuid" select="substring-after($path, '/properties/')"/>
+        
+        <!-- Look up the property plural name in the facts -->
+        <xsl:variable name="property-plural" select="//fn:map[@key='facts']/fn:map[@key=$fact-uuid]/fn:map[@key='items']/fn:map[@key=$property-uuid]/fn:map[@key='plural']/fn:string[@key=$language]"/>
+        
+        <xsl:choose>
+            <xsl:when test="$property-plural">
+                <xsl:value-of select="$property-plural"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <!-- Fallback to singular if no plural found -->
+                <xsl:call-template name="resolve-property-name">
+                    <xsl:with-param name="path" select="$path"/>
+                </xsl:call-template>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>

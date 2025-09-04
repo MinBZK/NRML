@@ -545,6 +545,10 @@
           "article": {
             "nl": "de",
             "en": "the"
+          },
+          "plural": {
+            "nl": "te betalen belastingen",
+            "en": "taxes payable"
           }
         },
         "5c6df479-4620-4487-baaf-3c7f7581e56f": {
@@ -1646,8 +1650,7 @@
                   }
                 ],
                 "default": {
-                  "value": 0,
-                  "unit": "€"
+                  "value": 0
                 }
               }
             }
