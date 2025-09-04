@@ -1745,21 +1745,33 @@
               "value": {
                 "type": "numeric",
                 "value": 0,
-                "unit": "€"
+                "unit": "EUR"
               },
               "condition": {
                 "type": "anyOf",
                 "conditions": [
-                  [
-                    {
-                      "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
-                    }
-                  ],
-                  [
-                    {
-                      "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
-                    }
-                  ],
+                  {
+                    "type": "exists",
+                    "characteristic": [
+                      {
+                        "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                      },
+                      {
+                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/2330a40c-76e0-41d3-877c-43337b73c025"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "exists", 
+                    "characteristic": [
+                      {
+                        "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                      },
+                      {
+                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/cbe15f31-ce60-440c-8e72-0861a5089457"
+                      }
+                    ]
+                  },
                   {
                     "type": "comparison",
                     "operator": "greaterThan",
@@ -1772,7 +1784,7 @@
                       }
                     ],
                     "right": {
-                      "type": "parameterReference",
+                      
                       "parameter": {
                         "$ref": "#/facts/4773bc34-a04d-4361-b984-85e6eba67374"
                       }
@@ -1803,7 +1815,7 @@
                 "type": "arithmetic",
                 "operator": "minus",
                 "left": {
-                  "type": "parameterReference",
+                  
                   "parameter": {
                     "$ref": "#/facts/dc7826fa-37c0-499d-8d59-96a0c40b3fcd"
                   }
@@ -1812,7 +1824,7 @@
                   "type": "arithmetic",
                   "operator": "multiply",
                   "left": {
-                    "type": "parameterReference",
+                    
                     "parameter": {
                       "$ref": "#/facts/d74f5c2d-5538-4347-81be-cfb3ebe6e06c"
                     }
@@ -1830,18 +1842,30 @@
               "condition": {
                 "type": "allOf",
                 "conditions": [
-                  [
-                    {
-                      "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
-                    }
-                  ],
                   {
-                    "type": "not",
-                    "condition": [
+                    "type": "exists",
+                    "characteristic": [
                       {
                         "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                      },
+                      {
+                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/d72ead33-2e0c-450a-ba71-b83940c8e926"
                       }
                     ]
+                  },
+                  {
+                    "type": "not",
+                    "condition": {
+                      "type": "exists",
+                      "characteristic": [
+                        {
+                          "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                        },
+                        {
+                          "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/cbe15f31-ce60-440c-8e72-0861a5089457"
+                        }
+                      ]
+                    }
                   },
                   {
                     "type": "comparison",
@@ -1872,7 +1896,7 @@
                       }
                     ],
                     "right": {
-                      "type": "parameterReference",
+                      
                       "parameter": {
                         "$ref": "#/facts/70fbc167-01ca-4ef6-a1dd-78d05eaf99ab"
                       }
@@ -1903,7 +1927,7 @@
                 "type": "arithmetic",
                 "operator": "minus",
                 "left": {
-                  "type": "parameterReference",
+                  
                   "parameter": {
                     "$ref": "#/facts/155c3536-cb1c-49a0-bd14-84fdf2dda9e8"
                   }
@@ -1912,7 +1936,7 @@
                   "type": "arithmetic",
                   "operator": "multiply",
                   "left": {
-                    "type": "parameterReference",
+                    
                     "parameter": {
                       "$ref": "#/facts/70fbe842-7ba3-48df-958a-9a22db065aa3"
                     }
@@ -1929,7 +1953,7 @@
                       }
                     ],
                     "right": {
-                      "type": "parameterReference",
+                      
                       "parameter": {
                         "$ref": "#/facts/70fbc167-01ca-4ef6-a1dd-78d05eaf99ab"
                       }
@@ -1940,18 +1964,30 @@
               "condition": {
                 "type": "allOf",
                 "conditions": [
-                  [
-                    {
-                      "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
-                    }
-                  ],
                   {
-                    "type": "not",
-                    "condition": [
+                    "type": "exists",
+                    "characteristic": [
                       {
                         "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                      },
+                      {
+                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/d72ead33-2e0c-450a-ba71-b83940c8e926"
                       }
                     ]
+                  },
+                  {
+                    "type": "not",
+                    "condition": {
+                      "type": "exists",
+                      "characteristic": [
+                        {
+                          "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                        },
+                        {
+                          "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/cbe15f31-ce60-440c-8e72-0861a5089457"
+                        }
+                      ]
+                    }
                   },
                   {
                     "type": "comparison",
@@ -1965,7 +2001,7 @@
                       }
                     ],
                     "right": {
-                      "type": "parameterReference",
+                      
                       "parameter": {
                         "$ref": "#/facts/70fbc167-01ca-4ef6-a1dd-78d05eaf99ab"
                       }
@@ -1983,7 +2019,7 @@
                       }
                     ],
                     "right": {
-                      "type": "parameterReference",
+                      
                       "parameter": {
                         "$ref": "#/facts/4773bc34-a04d-4361-b984-85e6eba67374"
                       }
@@ -2014,7 +2050,7 @@
                 "type": "arithmetic",
                 "operator": "minus",
                 "left": {
-                  "type": "parameterReference",
+                  
                   "parameter": {
                     "$ref": "#/facts/0d4f3025-5c31-465a-b08f-983a19507c2b"
                   }
@@ -2023,7 +2059,7 @@
                   "type": "arithmetic",
                   "operator": "multiply",
                   "left": {
-                    "type": "parameterReference",
+                    
                     "parameter": {
                       "$ref": "#/facts/4eda445b-32b0-4732-8a7c-753c5df1b33a"
                     }
@@ -2041,18 +2077,30 @@
               "condition": {
                 "type": "allOf",
                 "conditions": [
-                  [
-                    {
-                      "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
-                    }
-                  ],
                   {
-                    "type": "not",
-                    "condition": [
+                    "type": "exists",
+                    "characteristic": [
                       {
                         "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                      },
+                      {
+                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/d72ead33-2e0c-450a-ba71-b83940c8e926"
                       }
                     ]
+                  },
+                  {
+                    "type": "not",
+                    "condition": {
+                      "type": "exists",
+                      "characteristic": [
+                        {
+                          "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                        },
+                        {
+                          "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/cbe15f31-ce60-440c-8e72-0861a5089457"
+                        }
+                      ]
+                    }
                   },
                   {
                     "type": "comparison",
@@ -2083,7 +2131,7 @@
                       }
                     ],
                     "right": {
-                      "type": "parameterReference",
+                      
                       "parameter": {
                         "$ref": "#/facts/70fbc167-01ca-4ef6-a1dd-78d05eaf99ab"
                       }
@@ -2114,7 +2162,7 @@
                 "type": "arithmetic",
                 "operator": "minus",
                 "left": {
-                  "type": "parameterReference",
+                  
                   "parameter": {
                     "$ref": "#/facts/0a7246e7-b7d0-44e1-a928-75c92b3d2638"
                   }
@@ -2123,7 +2171,7 @@
                   "type": "arithmetic",
                   "operator": "multiply",
                   "left": {
-                    "type": "parameterReference",
+                    
                     "parameter": {
                       "$ref": "#/facts/082debac-4e28-4346-b133-254f418e174f"
                     }
@@ -2140,7 +2188,7 @@
                       }
                     ],
                     "right": {
-                      "type": "parameterReference",
+                      
                       "parameter": {
                         "$ref": "#/facts/70fbc167-01ca-4ef6-a1dd-78d05eaf99ab"
                       }
@@ -2151,18 +2199,30 @@
               "condition": {
                 "type": "allOf",
                 "conditions": [
-                  [
-                    {
-                      "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
-                    }
-                  ],
                   {
-                    "type": "not",
-                    "condition": [
+                    "type": "exists",
+                    "characteristic": [
                       {
                         "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                      },
+                      {
+                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/d72ead33-2e0c-450a-ba71-b83940c8e926"
                       }
                     ]
+                  },
+                  {
+                    "type": "not",
+                    "condition": {
+                      "type": "exists",
+                      "characteristic": [
+                        {
+                          "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                        },
+                        {
+                          "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/cbe15f31-ce60-440c-8e72-0861a5089457"
+                        }
+                      ]
+                    }
                   },
                   {
                     "type": "comparison",
@@ -2176,7 +2236,7 @@
                       }
                     ],
                     "right": {
-                      "type": "parameterReference",
+                      
                       "parameter": {
                         "$ref": "#/facts/70fbc167-01ca-4ef6-a1dd-78d05eaf99ab"
                       }
@@ -2194,7 +2254,7 @@
                       }
                     ],
                     "right": {
-                      "type": "parameterReference",
+                      
                       "parameter": {
                         "$ref": "#/facts/4773bc34-a04d-4361-b984-85e6eba67374"
                       }
@@ -2415,7 +2475,7 @@
                       }
                     ],
                     "right": {
-                      "type": "parameterReference",
+                      
                       "parameter": {
                         "$ref": "#/facts/70fbc167-01ca-4ef6-a1dd-78d05eaf99ab"
                       }
@@ -2497,7 +2557,7 @@
                 }
               ],
               "value": {
-                "type": "parameterReference",
+                
                 "parameter": {
                   "$ref": "#/facts/4c6de8d0-46a5-41c6-af10-05e87931285f"
                 }
@@ -2536,7 +2596,7 @@
                 }
               ],
               "value": {
-                "type": "parameterReference",
+                
                 "parameter": {
                   "$ref": "#/facts/2aba030a-5d4d-4286-94d9-4f92e5b633a4"
                 }
@@ -2659,7 +2719,7 @@
                       ]
                     },
                     "right": {
-                      "type": "parameterReference",
+                      
                       "parameter": {
                         "$ref": "#/facts/447763d6-bb4c-4d6c-bf1e-20ef7e967bd4"
                       }

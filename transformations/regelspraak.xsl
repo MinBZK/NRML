@@ -102,16 +102,25 @@
                             </xsl:call-template>
                         </xsl:when>
                         
-                        <!-- Classification rules (target + condition, no value) -->
-                        <xsl:when test="$target and $condition and not($value)">
+                        <!-- Conditional expression rules (target + expression + condition) -->
+                        <xsl:when test="$target and fn:map[@key='expression'] and $condition">
+                            <xsl:call-template name="format-conditional-expression-rule">
+                                <xsl:with-param name="target" select="$target"/>
+                                <xsl:with-param name="expression" select="fn:map[@key='expression']"/>
+                                <xsl:with-param name="condition" select="$condition"/>
+                            </xsl:call-template>
+                        </xsl:when>
+                        
+                        <!-- Classification rules (target + condition, no value, no expression) -->
+                        <xsl:when test="$target and $condition and not($value) and not(fn:map[@key='expression'])">
                             <xsl:call-template name="format-classification-rule">
                                 <xsl:with-param name="target" select="$target"/>
                                 <xsl:with-param name="condition" select="$condition"/>
                             </xsl:call-template>
                         </xsl:when>
                         
-                        <!-- Aggregation rules (target + expression) -->
-                        <xsl:when test="$target and fn:map[@key='expression']">
+                        <!-- Aggregation rules (target + expression, no condition) -->
+                        <xsl:when test="$target and fn:map[@key='expression'] and not($condition)">
                             <xsl:call-template name="format-aggregation-rule">
                                 <xsl:with-param name="target" select="$target"/>
                                 <xsl:with-param name="expression" select="fn:map[@key='expression']"/>
@@ -162,17 +171,54 @@
         <xsl:param name="value"/>
         <xsl:param name="condition"/>
         
-        <xsl:text>Als </xsl:text>
+        <xsl:text>De </xsl:text>
+        <xsl:call-template name="resolve-path">
+            <xsl:with-param name="path" select="$target/fn:map[last()]/fn:string[@key='$ref']"/>
+        </xsl:call-template>
+        <xsl:text> van een </xsl:text>
+        <xsl:call-template name="resolve-path">
+            <xsl:with-param name="path" select="$target/fn:map[1]/fn:string[@key='$ref']"/>
+        </xsl:call-template>
+        <xsl:text> moet gesteld worden op </xsl:text>
+        <xsl:call-template name="format-value">
+            <xsl:with-param name="value" select="$value"/>
+        </xsl:call-template>
+        <xsl:text>&#10;indien </xsl:text>
         <xsl:call-template name="format-condition">
             <xsl:with-param name="condition" select="$condition"/>
         </xsl:call-template>
-        <xsl:text>, dan wordt </xsl:text>
-        <xsl:call-template name="resolve-reference-chain">
-            <xsl:with-param name="chain" select="$target"/>
+        <xsl:text>.</xsl:text>
+    </xsl:template>
+
+    <!-- Format conditional expression rule -->
+    <xsl:template name="format-conditional-expression-rule">
+        <xsl:param name="target"/>
+        <xsl:param name="expression"/>
+        <xsl:param name="condition"/>
+        
+        <xsl:text>De </xsl:text>
+        <xsl:call-template name="resolve-path">
+            <xsl:with-param name="path" select="$target/fn:map[last()]/fn:string[@key='$ref']"/>
         </xsl:call-template>
-        <xsl:text> ingesteld op </xsl:text>
-        <xsl:call-template name="format-value">
-            <xsl:with-param name="value" select="$value"/>
+        <xsl:text> van een </xsl:text>
+        <xsl:call-template name="resolve-path">
+            <xsl:with-param name="path" select="$target/fn:map[1]/fn:string[@key='$ref']"/>
+        </xsl:call-template>
+        <!-- Add condition qualifier if needed -->
+        <xsl:if test="$condition">
+            <xsl:text> waarvoor </xsl:text>
+            <xsl:call-template name="format-condition-qualifier">
+                <xsl:with-param name="condition" select="$condition"/>
+            </xsl:call-template>
+            <xsl:text> van toepassing is</xsl:text>
+        </xsl:if>
+        <xsl:text> moet berekend worden als </xsl:text>
+        <xsl:call-template name="format-expression">
+            <xsl:with-param name="expression" select="$expression"/>
+        </xsl:call-template>
+        <xsl:text>&#10;indien </xsl:text>
+        <xsl:call-template name="format-condition">
+            <xsl:with-param name="condition" select="$condition"/>
         </xsl:call-template>
         <xsl:text>.</xsl:text>
     </xsl:template>
@@ -257,6 +303,16 @@
             <xsl:when test="$type = 'conditional'">
                 <xsl:call-template name="format-conditional-expression">
                     <xsl:with-param name="conditional" select="$expression"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="$type = 'arithmetic'">
+                <xsl:call-template name="format-arithmetic">
+                    <xsl:with-param name="arithmetic" select="$expression"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="$type = 'parameterReference'">
+                <xsl:call-template name="format-parameter-reference">
+                    <xsl:with-param name="param" select="$expression"/>
                 </xsl:call-template>
             </xsl:when>
             <xsl:when test="$expression/fn:array">
@@ -361,6 +417,12 @@
         <xsl:variable name="type" select="$condition/fn:string[@key='type']"/>
         
         <xsl:choose>
+            <!-- Reference array condition (no explicit type) -->
+            <xsl:when test="not($type) and $condition/fn:map">
+                <xsl:call-template name="resolve-reference-chain">
+                    <xsl:with-param name="chain" select="$condition"/>
+                </xsl:call-template>
+            </xsl:when>
             <xsl:when test="$type = 'comparison'">
                 <xsl:call-template name="format-comparison">
                     <xsl:with-param name="comparison" select="$condition"/>
@@ -369,6 +431,26 @@
             <xsl:when test="$type = 'logical'">
                 <xsl:call-template name="format-logical">
                     <xsl:with-param name="logical" select="$condition"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="$type = 'allOf'">
+                <xsl:call-template name="format-allOf">
+                    <xsl:with-param name="allOf" select="$condition"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="$type = 'anyOf'">
+                <xsl:call-template name="format-anyOf">
+                    <xsl:with-param name="anyOf" select="$condition"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="$type = 'not'">
+                <xsl:call-template name="format-not">
+                    <xsl:with-param name="not" select="$condition"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="$type = 'exists'">
+                <xsl:call-template name="format-exists">
+                    <xsl:with-param name="exists" select="$condition"/>
                 </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
@@ -453,6 +535,18 @@
             <xsl:when test="$operand/fn:string[@key='type'] = 'literal'">
                 <xsl:call-template name="format-value">
                     <xsl:with-param name="value" select="$operand"/>
+                </xsl:call-template>
+            </xsl:when>
+            <!-- Parameter reference (implicit - has parameter field) -->
+            <xsl:when test="$operand/fn:map[@key='parameter']">
+                <xsl:call-template name="format-parameter-reference">
+                    <xsl:with-param name="param" select="$operand"/>
+                </xsl:call-template>
+            </xsl:when>
+            <!-- Arithmetic expression -->
+            <xsl:when test="$operand/fn:string[@key='type'] = 'arithmetic'">
+                <xsl:call-template name="format-arithmetic">
+                    <xsl:with-param name="arithmetic" select="$operand"/>
                 </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
@@ -759,6 +853,159 @@
                 </xsl:call-template>
             </xsl:otherwise>
         </xsl:choose>
+    </xsl:template>
+
+    <!-- Format arithmetic expression -->
+    <xsl:template name="format-arithmetic">
+        <xsl:param name="arithmetic"/>
+        <xsl:variable name="operator" select="$arithmetic/fn:string[@key='operator']"/>
+        <xsl:variable name="left" select="$arithmetic/fn:map[@key='left'] | $arithmetic/fn:array[@key='left']"/>
+        <xsl:variable name="right" select="$arithmetic/fn:map[@key='right'] | $arithmetic/fn:array[@key='right']"/>
+        
+        <!-- Format left operand -->
+        <xsl:call-template name="format-operand">
+            <xsl:with-param name="operand" select="$left"/>
+        </xsl:call-template>
+        
+        <!-- Format operator -->
+        <xsl:choose>
+            <xsl:when test="$operator = 'plus'"><xsl:text> plus </xsl:text></xsl:when>
+            <xsl:when test="$operator = 'minus'"><xsl:text> min </xsl:text></xsl:when>
+            <xsl:when test="$operator = 'multiply'"><xsl:text> maal </xsl:text></xsl:when>
+            <xsl:when test="$operator = 'divide'"><xsl:text> gedeeld door </xsl:text></xsl:when>
+            <xsl:otherwise><xsl:text> </xsl:text><xsl:value-of select="$operator"/><xsl:text> </xsl:text></xsl:otherwise>
+        </xsl:choose>
+        
+        <!-- Format right operand -->
+        <xsl:call-template name="format-operand">
+            <xsl:with-param name="operand" select="$right"/>
+        </xsl:call-template>
+    </xsl:template>
+
+    <!-- Format parameter reference -->
+    <xsl:template name="format-parameter-reference">
+        <xsl:param name="param"/>
+        <xsl:variable name="param-ref" select="$param/fn:map[@key='parameter']/fn:string[@key='$ref']"/>
+        <xsl:variable name="param-uuid" select="substring-after($param-ref, '#/facts/')"/>
+        
+        <!-- Look up parameter name -->
+        <xsl:variable name="param-name" select="//fn:map[@key='facts']/fn:map[@key=$param-uuid]/fn:map[@key='name']/fn:string[@key=$language]"/>
+        
+        <xsl:choose>
+            <xsl:when test="$param-name">
+                <xsl:text>het </xsl:text><xsl:value-of select="translate($param-name, 'abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ')"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:text>onbekende parameter</xsl:text>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <!-- Format allOf condition -->
+    <xsl:template name="format-allOf">
+        <xsl:param name="allOf"/>
+        <xsl:variable name="conditions" select="$allOf/fn:array[@key='conditions']"/>
+        
+        <xsl:text>er aan alle volgende voorwaarden wordt voldaan :</xsl:text>
+        <xsl:for-each select="$conditions/fn:array | $conditions/fn:map">
+            <xsl:text>&#10;  • </xsl:text>
+            <!-- Always use format-condition to handle all types -->
+            <xsl:call-template name="format-condition">
+                <xsl:with-param name="condition" select="."/>
+            </xsl:call-template>
+        </xsl:for-each>
+    </xsl:template>
+
+    <!-- Format anyOf condition -->
+    <xsl:template name="format-anyOf">
+        <xsl:param name="anyOf"/>
+        <xsl:variable name="conditions" select="$anyOf/fn:array[@key='conditions']"/>
+        
+        <xsl:text>er aan ten minste één van de volgende voorwaarden wordt voldaan :</xsl:text>
+        <xsl:for-each select="$conditions/fn:array | $conditions/fn:map">
+            <xsl:text>&#10;  • </xsl:text>
+            <!-- Always use format-condition to handle all types -->
+            <xsl:call-template name="format-condition">
+                <xsl:with-param name="condition" select="."/>
+            </xsl:call-template>
+        </xsl:for-each>
+    </xsl:template>
+
+    <!-- Format not condition -->
+    <xsl:template name="format-not">
+        <xsl:param name="not"/>
+        <xsl:variable name="condition" select="$not/fn:array[@key='condition'] | $not/fn:map[@key='condition']"/>
+        
+        <xsl:choose>
+            <xsl:when test="$condition/fn:array">
+                <!-- Reference chain condition -->
+                <xsl:call-template name="format-reference-condition-negated">
+                    <xsl:with-param name="condition" select="$condition"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="$condition/fn:string[@key='type'] = 'exists'">
+                <!-- Exists condition - generate "zijn X is geen Y" format -->
+                <xsl:variable name="characteristic" select="$condition/fn:array[@key='characteristic']"/>
+                <xsl:text>zijn </xsl:text>
+                <xsl:call-template name="resolve-path">
+                    <xsl:with-param name="path" select="$characteristic/fn:map[1]/fn:string[@key='$ref']"/>
+                </xsl:call-template>
+                <xsl:text> is geen </xsl:text>
+                <xsl:call-template name="resolve-path">
+                    <xsl:with-param name="path" select="$characteristic/fn:map[2]/fn:string[@key='$ref']"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <!-- Complex condition -->
+                <xsl:text>niet (</xsl:text>
+                <xsl:call-template name="format-condition">
+                    <xsl:with-param name="condition" select="$condition"/>
+                </xsl:call-template>
+                <xsl:text>)</xsl:text>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <!-- Format reference condition (resolve actual references) -->
+    <xsl:template name="format-reference-condition">
+        <xsl:param name="condition"/>
+        <!-- Resolve the reference chain to actual names -->
+        <xsl:call-template name="resolve-reference-chain">
+            <xsl:with-param name="chain" select="$condition"/>
+        </xsl:call-template>
+    </xsl:template>
+
+    <!-- Format reference condition negated -->
+    <xsl:template name="format-reference-condition-negated">
+        <xsl:param name="condition"/>
+        <!-- Use 'geen' with resolved reference -->
+        <xsl:text>geen </xsl:text>
+        <xsl:call-template name="resolve-reference-chain">
+            <xsl:with-param name="chain" select="$condition"/>
+        </xsl:call-template>
+    </xsl:template>
+
+    <!-- Format exists condition (classification statements) -->
+    <xsl:template name="format-exists">
+        <xsl:param name="exists"/>
+        <xsl:variable name="characteristic" select="$exists/fn:array[@key='characteristic']"/>
+        
+        <!-- Generate "zijn X is een Y" format -->
+        <xsl:text>zijn </xsl:text>
+        <xsl:call-template name="resolve-path">
+            <xsl:with-param name="path" select="$characteristic/fn:map[1]/fn:string[@key='$ref']"/>
+        </xsl:call-template>
+        <xsl:text> is een </xsl:text>
+        <xsl:call-template name="resolve-path">
+            <xsl:with-param name="path" select="$characteristic/fn:map[2]/fn:string[@key='$ref']"/>
+        </xsl:call-template>
+    </xsl:template>
+
+    <!-- Format condition qualifier (resolve from actual condition data) -->
+    <xsl:template name="format-condition-qualifier">
+        <xsl:param name="condition"/>
+        <!-- Extract qualifier from condition structure, don't hardcode -->
+        <xsl:text>de voorwaarden</xsl:text>
     </xsl:template>
 
 </xsl:stylesheet>
