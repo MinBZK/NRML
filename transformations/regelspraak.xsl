@@ -577,26 +577,42 @@
     <xsl:template name="is-rule-target-animated">
         <xsl:param name="target"/>
         
-        <!-- Get the first reference in target (should be a role) -->
-        <xsl:variable name="role-ref" select="$target/fn:map[1]/fn:string[@key='$ref']"/>
-        <xsl:variable name="role-fact-uuid" select="substring-before(substring-after($role-ref, '#/facts/'), '/roles/')"/>
-        <xsl:variable name="role-uuid" select="substring-after($role-ref, '/roles/')"/>
+        <xsl:variable name="first-ref" select="$target/fn:map[1]/fn:string[@key='$ref']"/>
         
-        <!-- Look up the role's objectType to see if it points to an animated fact -->
-        <xsl:variable name="object-type-ref">
-            <xsl:for-each select="//fn:map[@key='facts']/fn:map[@key=$role-fact-uuid]/fn:map[@key='items']/fn:map/fn:array[@key='versions']/fn:map">
-                <xsl:if test="fn:map[@key='b']/fn:string[@key='uuid'] = $role-uuid">
-                    <xsl:value-of select="fn:map[@key='b']/fn:map[@key='objectType']/fn:string[@key='$ref']"/>
-                </xsl:if>
-            </xsl:for-each>
-        </xsl:variable>
-        
-        <!-- Extract fact UUID from objectType reference -->
-        <xsl:variable name="target-fact-uuid" select="substring-after($object-type-ref, '#/facts/')"/>
-        
-        <!-- Check if this fact is animated -->
         <xsl:choose>
-            <xsl:when test="//fn:map[@key='facts']/fn:map[@key=$target-fact-uuid]/fn:boolean[@key='animated'] = 'true'">true</xsl:when>
+            <!-- First element is a role -->
+            <xsl:when test="contains($first-ref, '/roles/')">
+                <xsl:variable name="role-fact-uuid" select="substring-before(substring-after($first-ref, '#/facts/'), '/roles/')"/>
+                <xsl:variable name="role-uuid" select="substring-after($first-ref, '/roles/')"/>
+                
+                <!-- Look up the role's objectType to see if it points to an animated fact -->
+                <xsl:variable name="object-type-ref">
+                    <xsl:for-each select="//fn:map[@key='facts']/fn:map[@key=$role-fact-uuid]/fn:map[@key='items']/fn:map/fn:array[@key='versions']/fn:map">
+                        <xsl:if test="fn:map[@key='b']/fn:string[@key='uuid'] = $role-uuid">
+                            <xsl:value-of select="fn:map[@key='b']/fn:map[@key='objectType']/fn:string[@key='$ref']"/>
+                        </xsl:if>
+                    </xsl:for-each>
+                </xsl:variable>
+                
+                <!-- Extract fact UUID from objectType reference -->
+                <xsl:variable name="target-fact-uuid" select="substring-after($object-type-ref, '#/facts/')"/>
+                
+                <!-- Check if this fact is animated -->
+                <xsl:choose>
+                    <xsl:when test="//fn:map[@key='facts']/fn:map[@key=$target-fact-uuid]/fn:boolean[@key='animated'] = 'true'">true</xsl:when>
+                    <xsl:otherwise>false</xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
+            <!-- First element is a characteristic -->
+            <xsl:when test="contains($first-ref, '/properties/')">
+                <xsl:variable name="fact-uuid" select="substring-before(substring-after($first-ref, '#/facts/'), '/properties/')"/>
+                
+                <!-- Check if this fact is animated -->
+                <xsl:choose>
+                    <xsl:when test="//fn:map[@key='facts']/fn:map[@key=$fact-uuid]/fn:boolean[@key='animated'] = 'true'">true</xsl:when>
+                    <xsl:otherwise>false</xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
             <xsl:otherwise>false</xsl:otherwise>
         </xsl:choose>
     </xsl:template>
