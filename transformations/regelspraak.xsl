@@ -1288,9 +1288,35 @@
         <xsl:text>er aan precies één van de volgende voorwaarden wordt voldaan :</xsl:text>
         <xsl:for-each select="$conditions/fn:map">
             <xsl:text>&#10;  • </xsl:text>
-            <xsl:call-template name="format-condition">
-                <xsl:with-param name="condition" select="."/>
-            </xsl:call-template>
+            <xsl:variable name="condition-type" select="fn:string[@key='type']"/>
+            <xsl:choose>
+                <xsl:when test="$condition-type = 'allOf'">
+                    <!-- Special nested format for allOf within exactlyOneOf -->
+                    <xsl:variable name="nested-conditions" select="fn:array[@key='conditions']"/>
+                    <xsl:variable name="first-condition" select="$nested-conditions/fn:map[1]"/>
+                    
+                    <!-- Use first condition's left operand for the subject -->
+                    <xsl:variable name="subject-operand" select="$first-condition/fn:array[@key='left'] | $first-condition/fn:map[@key='left']"/>
+                    <xsl:call-template name="format-operand">
+                        <xsl:with-param name="operand" select="$subject-operand"/>
+                    </xsl:call-template>
+                    <xsl:text> voldoet aan alle volgende voorwaarden :</xsl:text>
+                    
+                    <!-- Format nested conditions with double bullets -->
+                    <xsl:for-each select="$nested-conditions/fn:map">
+                        <xsl:text>&#10;    •• </xsl:text>
+                        <xsl:call-template name="format-condition">
+                            <xsl:with-param name="condition" select="."/>
+                        </xsl:call-template>
+                    </xsl:for-each>
+                </xsl:when>
+                <xsl:otherwise>
+                    <!-- Regular condition -->
+                    <xsl:call-template name="format-condition">
+                        <xsl:with-param name="condition" select="."/>
+                    </xsl:call-template>
+                </xsl:otherwise>
+            </xsl:choose>
         </xsl:for-each>
     </xsl:template>
 
