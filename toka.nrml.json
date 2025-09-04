@@ -751,6 +751,7 @@
             {
               "validFrom": "2018",
               "a": {
+                "uuid": "5ce3e026-293e-4405-a22d-4ea222deef79",
                 "name": {
                   "nl": "reis",
                   "en": "trip"
@@ -765,6 +766,7 @@
                 }
               },
               "b": {
+                "uuid": "0cc7c4b4-2855-4c8b-93f0-5403cf286af0",
                 "name": {
                   "nl": "passagier",
                   "en": "passenger"
