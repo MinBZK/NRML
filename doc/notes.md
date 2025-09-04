@@ -4,7 +4,7 @@ _Last update: 2025-09-02 by Arvid and Anne_
 
 ## Readability
 
-The goal of NRML core is NOT to be human readable (there renders of it that are).
+The goal of NRML core is NOT to be human readable (there are renders of it that are).
 For instance, we are ok with UUIDs that are not easy to navigate by humans.
 
 Strict JSON over YAML (because we don't want to shoot ourselves in the foot).
