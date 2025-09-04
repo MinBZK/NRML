@@ -471,6 +471,11 @@
                     <xsl:with-param name="exists" select="$condition"/>
                 </xsl:call-template>
             </xsl:when>
+            <xsl:when test="$type = 'notExists'">
+                <xsl:call-template name="format-not-exists">
+                    <xsl:with-param name="notExists" select="$condition"/>
+                </xsl:call-template>
+            </xsl:when>
             <xsl:otherwise>
                 <xsl:text>Onbekende conditie type: </xsl:text>
                 <xsl:value-of select="$type"/>
@@ -1227,6 +1232,22 @@
             <xsl:with-param name="path" select="$characteristic/fn:map[1]/fn:string[@key='$ref']"/>
         </xsl:call-template>
         <xsl:text> is een </xsl:text>
+        <xsl:call-template name="resolve-path">
+            <xsl:with-param name="path" select="$characteristic/fn:map[2]/fn:string[@key='$ref']"/>
+        </xsl:call-template>
+    </xsl:template>
+
+    <!-- Format notExists condition (negative classification statements) -->
+    <xsl:template name="format-not-exists">
+        <xsl:param name="notExists"/>
+        <xsl:variable name="characteristic" select="$notExists/fn:array[@key='characteristic']"/>
+        
+        <!-- Generate "zijn X is geen Y" format -->
+        <xsl:text>zijn </xsl:text>
+        <xsl:call-template name="resolve-path">
+            <xsl:with-param name="path" select="$characteristic/fn:map[1]/fn:string[@key='$ref']"/>
+        </xsl:call-template>
+        <xsl:text> is geen </xsl:text>
         <xsl:call-template name="resolve-path">
             <xsl:with-param name="path" select="$characteristic/fn:map[2]/fn:string[@key='$ref']"/>
         </xsl:call-template>
