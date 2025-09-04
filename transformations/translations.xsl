@@ -77,6 +77,7 @@
           <xsl:when test="$key = 'then'">then</xsl:when>
           <xsl:when test="$key = 'of'">of</xsl:when>
           <xsl:when test="$key = 'divided-by'">divided by</xsl:when>
+          <xsl:when test="$key = 'has'">has</xsl:when>
           <xsl:otherwise><xsl:value-of select="$key"/></xsl:otherwise>
         </xsl:choose>
       </xsl:when>
@@ -146,6 +147,7 @@
           <xsl:when test="$key = 'then'">dan</xsl:when>
           <xsl:when test="$key = 'of'">van</xsl:when>
           <xsl:when test="$key = 'divided-by'">gedeeld door</xsl:when>
+          <xsl:when test="$key = 'has'">heeft</xsl:when>
           <xsl:otherwise><xsl:value-of select="$key"/></xsl:otherwise>
         </xsl:choose>
       </xsl:otherwise>

@@ -2407,19 +2407,14 @@
           "versions": [
             {
               "validFrom": "2018",
-              "subject": {
-                "type": "objectType",
-                "ref": {
-                  "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"
+              "target": [
+                {
+                  "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
+                },
+                {
+                  "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/4b9bd5f1-311a-4b59-8dd9-ee3139de153e"
                 }
-              },
-              "property": {
-                "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/4b9bd5f1-311a-4b59-8dd9-ee3139de153e"
-              },
-              "value": {
-                "type": "boolean",
-                "value": true
-              },
+              ],
               "condition": {
                 "type": "allOf",
                 "conditions": [

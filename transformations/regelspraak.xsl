@@ -284,10 +284,29 @@
                     <xsl:with-param name="path" select="$target/fn:map[1]/fn:string[@key='$ref']"/>
                 </xsl:call-template>
                 <xsl:text> </xsl:text>
-        <xsl:call-template name="translate">
-            <xsl:with-param name="key">is-a</xsl:with-param>
-        </xsl:call-template>
-        <xsl:text> </xsl:text>
+                
+                <!-- Check if the property is possessive -->
+                <xsl:variable name="is-possessive">
+                    <xsl:call-template name="is-property-possessive">
+                        <xsl:with-param name="path" select="$target/fn:map[last()]/fn:string[@key='$ref']"/>
+                    </xsl:call-template>
+                </xsl:variable>
+                
+                <xsl:choose>
+                    <xsl:when test="$is-possessive = 'true'">
+                        <xsl:call-template name="translate">
+                            <xsl:with-param name="key">has</xsl:with-param>
+                        </xsl:call-template>
+                        <xsl:text> </xsl:text>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:call-template name="translate">
+                            <xsl:with-param name="key">is-a</xsl:with-param>
+                        </xsl:call-template>
+                        <xsl:text> </xsl:text>
+                    </xsl:otherwise>
+                </xsl:choose>
+                
                 <xsl:call-template name="resolve-path">
                     <xsl:with-param name="path" select="$target/fn:map[last()]/fn:string[@key='$ref']"/>
                 </xsl:call-template>
@@ -1372,6 +1391,25 @@
                 <!-- Check if this fact is animated -->
                 <xsl:choose>
                     <xsl:when test="//fn:map[@key='facts']/fn:map[@key=$fact-uuid]/fn:boolean[@key='animated'] = 'true'">true</xsl:when>
+                    <xsl:otherwise>false</xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
+            <xsl:otherwise>false</xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <!-- Check if a property is possessive -->
+    <xsl:template name="is-property-possessive">
+        <xsl:param name="path"/>
+        
+        <xsl:choose>
+            <xsl:when test="contains($path, '/properties/')">
+                <xsl:variable name="fact-uuid" select="substring-before(substring-after($path, '#/facts/'), '/properties/')"/>
+                <xsl:variable name="property-uuid" select="substring-after($path, '/properties/')"/>
+                
+                <!-- Check if this property has subtype "possessive" -->
+                <xsl:choose>
+                    <xsl:when test="//fn:map[@key='facts']/fn:map[@key=$fact-uuid]/fn:map[@key='items']/fn:map[@key=$property-uuid]/fn:array[@key='versions']/fn:map/fn:string[@key='subtype'] = 'possessive'">true</xsl:when>
                     <xsl:otherwise>false</xsl:otherwise>
                 </xsl:choose>
             </xsl:when>
