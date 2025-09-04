@@ -3,7 +3,7 @@
   "version": "3.0",
   "language": "nl",
   "facts": {
-    "1ffc339e-47cf-4f17-8985-22628dddb49a3r2r": {
+    "1ffc339e-47cf-4f17-8985-22628dddb49a": {
       "name": {
         "nl": "Bedrag",
         "en": "Amount"
@@ -18,7 +18,7 @@
             {
               "validFrom": "2018",
               "type": "numeric",
-              "precision": "2",
+              "precision": 2,
               "unit": "€"
             }
           ]
