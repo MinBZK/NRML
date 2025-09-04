@@ -67,3 +67,7 @@ version (with a new UUID).
 
 Transformations from NRML to other representations (such as Regelspraak) can be done with any tool, but formal
 transformations, such as those that can be expressed in XSLT, are preferred.
+
+## Initialisation
+
+We may need a construct to initialize something, there's no order in which facts are processed. 

@@ -1469,11 +1469,11 @@
           "versions": [
             {
               "validFrom": "2018",
-              "target": {
-                "attribute": {
+              "target": [
+                {
                   "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
                 }
-              },
+              ],
               "value": {
                 "type": "numeric",
                 "value": 0,
@@ -1498,19 +1498,25 @@
           "versions": [
             {
               "validFrom": "2018",
-              "target": {
-                "attribute": {
+              "target": [
+                {
+                  "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                },
+                {
                   "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/d72ead33-2e0c-450a-ba71-b83940c8e926"
                 }
-              },
+              ],
               "condition": {
                 "type": "comparison",
                 "operator": "equals",
-                "left": {
-                  "attribute": {
+                "left": [
+                  {
+                    "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                  },
+                  {
                     "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea5d01e3-af40-437f-bc0f-d29b26718148"
                   }
-                },
+                ],
                 "right": {
                   "value": true
                 }
@@ -1526,19 +1532,25 @@
           "versions": [
             {
               "validFrom": "2018",
-              "target": {
-                "attribute": {
+              "target": [
+                {
+                  "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                },
+                {
                   "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/2330a40c-76e0-41d3-877c-43337b73c025"
                 }
-              },
+              ],
               "condition": {
                 "type": "comparison",
                 "operator": "notEquals",
-                "left": {
-                  "attribute": {
+                "left": [
+                  {
+                    "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                  },
+                  {
                     "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea5d01e3-af40-437f-bc0f-d29b26718148"
                   }
-                },
+                ],
                 "right": {
                   "value": true
                 }
@@ -1554,24 +1566,24 @@
           "versions": [
             {
               "validFrom": "2018",
-              "target": {
-                "attribute": {
+              "target": [
+                {
                   "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/cbe15f31-ce60-440c-8e72-0861a5089457"
                 }
-              },
+              ],
               "condition": {
                 "type": "comparison",
                 "operator": "equals",
-                "left": {
-                  "attribute": {
+                "left": [
+                  {
                     "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/07783713-6df0-4810-bc44-4206050cb19d"
                   }
-                },
-                "right": {
-                  "attribute": {
+                ],
+                "right": [
+                  {
                     "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/fe752ef2-19ba-4b5c-9e6e-ad86df5d3d59"
                   }
-                }
+                ]
               }
             }
           ]
@@ -1592,19 +1604,19 @@
           "versions": [
             {
               "validFrom": "2018",
-              "target": {
-                "attribute": {
+              "target": [
+                {
                   "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/89cdc694-7fae-4577-a289-08442a662d26"
                 }
-              },
+              ],
               "expression": {
                 "type": "aggregation",
                 "function": "count",
-                "expression": {
-                  "role": {
+                "expression": [
+                  {
                     "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
                   }
-                }
+                ]
               }
             }
           ]
@@ -1617,24 +1629,22 @@
           "versions": [
             {
               "validFrom": "2018",
-              "target": {
-                "attribute": {
+              "target": [
+                {
                   "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/cbc050ae-0471-4a39-add4-6b3b8fc3e9a5"
                 }
-              },
+              ],
               "expression": {
                 "type": "aggregation",
                 "function": "sum",
-                "expression": {
-                  "attribute": {
-                    "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/ab9cc7dc-7be7-412d-ae46-0224ceef3153"
+                "expression": [
+                  {
+                    "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
                   },
-                  "vias": [
-                    {
-                      "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
-                    }
-                  ]
-                },
+                  {
+                    "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/ab9cc7dc-7be7-412d-ae46-0224ceef3153"
+                  }
+                ],
                 "default": {
                   "value": 0,
                   "unit": "€"
@@ -1651,19 +1661,19 @@
           "versions": [
             {
               "validFrom": "2018",
-              "target": {
-                "attribute": {
+              "target": [
+                {
                   "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/339243f4-dee5-474f-ab62-c7df39e69788"
                 }
-              },
+              ],
               "expression": {
                 "type": "aggregation",
                 "function": "sum",
-                "expression": {
-                  "attribute": {
+                "expression": [
+                  {
                     "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/199d696e-a168-4584-8f80-35d737e5e1ba"
                   }
-                },
+                ],
                 "default": {
                   "type": "numeric",
                   "value": 0,
@@ -1681,19 +1691,19 @@
           "versions": [
             {
               "validFrom": "2018",
-              "target": {
-                "attribute": {
+              "target": [
+                {
                   "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/b09702d7-a7d4-4308-976c-da0b5903eac9"
                 }
-              },
+              ],
               "expression": {
                 "type": "aggregation",
                 "function": "sum",
-                "expression": {
-                  "attribute": {
+                "expression": [
+                  {
                     "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/b802e897-8854-4ad3-97b4-3ed4b04f9b16"
                   }
-                },
+                ],
                 "default": {
                   "type": "numeric",
                   "value": 0,
@@ -1719,16 +1729,14 @@
           "versions": [
             {
               "validFrom": "2018",
-              "target": {
-                "vias": [
-                  {
-                    "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
-                  }
-                ],
-                "attribute": {
+              "target": [
+                {
+                  "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
+                },
+                {
                   "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/199d696e-a168-4584-8f80-35d737e5e1ba"
                 }
-              },
+              ],
               "value": {
                 "type": "numeric",
                 "value": 0,
@@ -1737,39 +1745,27 @@
               "condition": {
                 "type": "anyOf",
                 "conditions": [
-                  {
-                    "property": {
-                      "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/2330a40c-76e0-41d3-877c-43337b73c025"
-                    },
-                    "vias": [
-                      {
-                        "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
-                      }
-                    ]
-                  },
-                  {
-                    "property": {
-                      "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/cbe15f31-ce60-440c-8e72-0861a5089457"
-                    },
-                    "vias": [
-                      {
-                        "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
-                      }
-                    ]
-                  },
+                  [
+                    {
+                      "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                    }
+                  ],
+                  [
+                    {
+                      "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                    }
+                  ],
                   {
                     "type": "comparison",
                     "operator": "greaterThan",
-                    "left": {
-                      "attribute": {
-                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                    "left": [
+                      {
+                        "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                       },
-                      "vias": [
-                        {
-                          "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
-                        }
-                      ]
-                    },
+                      {
+                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                      }
+                    ],
                     "right": {
                       "type": "parameterReference",
                       "parameter": {
@@ -1790,16 +1786,14 @@
           "versions": [
             {
               "validFrom": "2018",
-              "target": {
-                "vias": [
-                  {
-                    "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
-                  }
-                ],
-                "attribute": {
+              "target": [
+                {
+                  "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
+                },
+                {
                   "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/199d696e-a168-4584-8f80-35d737e5e1ba"
                 }
-              },
+              ],
               "expression": {
                 "type": "arithmetic",
                 "operator": "minus",
@@ -1818,57 +1812,43 @@
                       "$ref": "#/facts/d74f5c2d-5538-4347-81be-cfb3ebe6e06c"
                     }
                   },
-                  "right": {
-                    "attribute": {
-                      "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                  "right": [
+                    {
+                      "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                     },
-                    "vias": [
-                      {
-                        "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
-                      }
-                    ]
-                  }
+                    {
+                      "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                    }
+                  ]
                 }
               },
               "condition": {
                 "type": "allOf",
                 "conditions": [
+                  [
+                    {
+                      "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                    }
+                  ],
                   {
-                    "property": {
-                      "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/d72ead33-2e0c-450a-ba71-b83940c8e926"
-                    },
-                    "vias": [
+                    "type": "not",
+                    "condition": [
                       {
                         "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                       }
                     ]
                   },
                   {
-                    "type": "not",
-                    "condition": {
-                      "property": {
-                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/cbe15f31-ce60-440c-8e72-0861a5089457"
-                      },
-                      "vias": [
-                        {
-                          "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
-                        }
-                      ]
-                    }
-                  },
-                  {
                     "type": "comparison",
                     "operator": "greaterThan",
-                    "left": {
-                      "attribute": {
-                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                    "left": [
+                      {
+                        "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                       },
-                      "vias": [
-                        {
-                          "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
-                        }
-                      ]
-                    },
+                      {
+                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                      }
+                    ],
                     "right": {
                       "type": "numeric",
                       "value": 0,
@@ -1878,16 +1858,14 @@
                   {
                     "type": "comparison",
                     "operator": "lessThanOrEquals",
-                    "left": {
-                      "attribute": {
-                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                    "left": [
+                      {
+                        "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                       },
-                      "vias": [
-                        {
-                          "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
-                        }
-                      ]
-                    },
+                      {
+                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                      }
+                    ],
                     "right": {
                       "type": "parameterReference",
                       "parameter": {
@@ -1908,16 +1886,14 @@
           "versions": [
             {
               "validFrom": "2018",
-              "target": {
-                "vias": [
-                  {
-                    "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
-                  }
-                ],
-                "attribute": {
+              "target": [
+                {
+                  "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
+                },
+                {
                   "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/199d696e-a168-4584-8f80-35d737e5e1ba"
                 }
-              },
+              ],
               "expression": {
                 "type": "arithmetic",
                 "operator": "minus",
@@ -1939,16 +1915,14 @@
                   "right": {
                     "type": "arithmetic",
                     "operator": "minus",
-                    "left": {
-                      "attribute": {
-                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                    "left": [
+                      {
+                        "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                       },
-                      "vias": [
-                        {
-                          "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
-                        }
-                      ]
-                    },
+                      {
+                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                      }
+                    ],
                     "right": {
                       "type": "parameterReference",
                       "parameter": {
@@ -1961,42 +1935,30 @@
               "condition": {
                 "type": "allOf",
                 "conditions": [
+                  [
+                    {
+                      "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                    }
+                  ],
                   {
-                    "property": {
-                      "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/d72ead33-2e0c-450a-ba71-b83940c8e926"
-                    },
-                    "vias": [
+                    "type": "not",
+                    "condition": [
                       {
                         "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                       }
                     ]
                   },
                   {
-                    "type": "not",
-                    "condition": {
-                      "property": {
-                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/cbe15f31-ce60-440c-8e72-0861a5089457"
-                      },
-                      "vias": [
-                        {
-                          "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
-                        }
-                      ]
-                    }
-                  },
-                  {
                     "type": "comparison",
                     "operator": "greaterThan",
-                    "left": {
-                      "attribute": {
-                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                    "left": [
+                      {
+                        "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                       },
-                      "vias": [
-                        {
-                          "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
-                        }
-                      ]
-                    },
+                      {
+                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                      }
+                    ],
                     "right": {
                       "type": "parameterReference",
                       "parameter": {
@@ -2007,16 +1969,14 @@
                   {
                     "type": "comparison",
                     "operator": "lessThanOrEquals",
-                    "left": {
-                      "attribute": {
-                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                    "left": [
+                      {
+                        "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                       },
-                      "vias": [
-                        {
-                          "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
-                        }
-                      ]
-                    },
+                      {
+                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                      }
+                    ],
                     "right": {
                       "type": "parameterReference",
                       "parameter": {
@@ -2037,16 +1997,14 @@
           "versions": [
             {
               "validFrom": "2018",
-              "target": {
-                "vias": [
-                  {
-                    "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
-                  }
-                ],
-                "attribute": {
+              "target": [
+                {
+                  "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
+                },
+                {
                   "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/199d696e-a168-4584-8f80-35d737e5e1ba"
                 }
-              },
+              ],
               "expression": {
                 "type": "arithmetic",
                 "operator": "minus",
@@ -2065,57 +2023,43 @@
                       "$ref": "#/facts/4eda445b-32b0-4732-8a7c-753c5df1b33a"
                     }
                   },
-                  "right": {
-                    "attribute": {
-                      "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                  "right": [
+                    {
+                      "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                     },
-                    "vias": [
-                      {
-                        "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
-                      }
-                    ]
-                  }
+                    {
+                      "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                    }
+                  ]
                 }
               },
               "condition": {
                 "type": "allOf",
                 "conditions": [
+                  [
+                    {
+                      "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                    }
+                  ],
                   {
-                    "property": {
-                      "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/d72ead33-2e0c-450a-ba71-b83940c8e926"
-                    },
-                    "vias": [
+                    "type": "not",
+                    "condition": [
                       {
                         "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                       }
                     ]
                   },
                   {
-                    "type": "not",
-                    "condition": {
-                      "property": {
-                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/cbe15f31-ce60-440c-8e72-0861a5089457"
-                      },
-                      "vias": [
-                        {
-                          "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
-                        }
-                      ]
-                    }
-                  },
-                  {
                     "type": "comparison",
                     "operator": "greaterThan",
-                    "left": {
-                      "attribute": {
-                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                    "left": [
+                      {
+                        "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                       },
-                      "vias": [
-                        {
-                          "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
-                        }
-                      ]
-                    },
+                      {
+                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                      }
+                    ],
                     "right": {
                       "type": "numeric",
                       "value": 0,
@@ -2125,16 +2069,14 @@
                   {
                     "type": "comparison",
                     "operator": "lessThanOrEquals",
-                    "left": {
-                      "attribute": {
-                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                    "left": [
+                      {
+                        "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                       },
-                      "vias": [
-                        {
-                          "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
-                        }
-                      ]
-                    },
+                      {
+                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                      }
+                    ],
                     "right": {
                       "type": "parameterReference",
                       "parameter": {
@@ -2155,16 +2097,14 @@
           "versions": [
             {
               "validFrom": "2018",
-              "target": {
-                "vias": [
-                  {
-                    "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
-                  }
-                ],
-                "attribute": {
+              "target": [
+                {
+                  "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
+                },
+                {
                   "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/199d696e-a168-4584-8f80-35d737e5e1ba"
                 }
-              },
+              ],
               "expression": {
                 "type": "arithmetic",
                 "operator": "minus",
@@ -2186,16 +2126,14 @@
                   "right": {
                     "type": "arithmetic",
                     "operator": "minus",
-                    "left": {
-                      "attribute": {
-                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                    "left": [
+                      {
+                        "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                       },
-                      "vias": [
-                        {
-                          "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
-                        }
-                      ]
-                    },
+                      {
+                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                      }
+                    ],
                     "right": {
                       "type": "parameterReference",
                       "parameter": {
@@ -2208,42 +2146,30 @@
               "condition": {
                 "type": "allOf",
                 "conditions": [
+                  [
+                    {
+                      "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                    }
+                  ],
                   {
-                    "property": {
-                      "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/d72ead33-2e0c-450a-ba71-b83940c8e926"
-                    },
-                    "vias": [
+                    "type": "not",
+                    "condition": [
                       {
                         "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                       }
                     ]
                   },
                   {
-                    "type": "not",
-                    "condition": {
-                      "property": {
-                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/cbe15f31-ce60-440c-8e72-0861a5089457"
-                      },
-                      "vias": [
-                        {
-                          "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
-                        }
-                      ]
-                    }
-                  },
-                  {
                     "type": "comparison",
                     "operator": "greaterThan",
-                    "left": {
-                      "attribute": {
-                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                    "left": [
+                      {
+                        "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                       },
-                      "vias": [
-                        {
-                          "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
-                        }
-                      ]
-                    },
+                      {
+                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                      }
+                    ],
                     "right": {
                       "type": "parameterReference",
                       "parameter": {
@@ -2254,16 +2180,14 @@
                   {
                     "type": "comparison",
                     "operator": "lessThanOrEquals",
-                    "left": {
-                      "attribute": {
-                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                    "left": [
+                      {
+                        "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                       },
-                      "vias": [
-                        {
-                          "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
-                        }
-                      ]
-                    },
+                      {
+                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                      }
+                    ],
                     "right": {
                       "type": "parameterReference",
                       "parameter": {
@@ -2311,17 +2235,11 @@
                   {
                     "type": "comparison",
                     "operator": "lessThan",
-                    "left": {
-                      "attribute": {
+                    "left": [
+                      {
                         "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
-                      },
-                      "vias": [
-                        {
-                          "type": "pronoun",
-                          "pronoun": "zijn"
-                        }
-                      ]
-                    },
+                      }
+                    ],
                     "right": {
                       "type": "numeric",
                       "value": 18,
@@ -2334,17 +2252,11 @@
                       {
                         "type": "comparison",
                         "operator": "greaterThanOrEquals",
-                        "left": {
-                          "attribute": {
+                        "left": [
+                          {
                             "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
-                          },
-                          "vias": [
-                            {
-                              "type": "pronoun",
-                              "pronoun": "zijn"
-                            }
-                          ]
-                        },
+                          }
+                        ],
                         "right": {
                           "type": "numeric",
                           "value": 25,
@@ -2354,17 +2266,11 @@
                       {
                         "type": "comparison",
                         "operator": "lessThan",
-                        "left": {
-                          "attribute": {
+                        "left": [
+                          {
                             "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
-                          },
-                          "vias": [
-                            {
-                              "type": "pronoun",
-                              "pronoun": "zijn"
-                            }
-                          ]
-                        },
+                          }
+                        ],
                         "right": {
                           "type": "numeric",
                           "value": 65,
@@ -2408,17 +2314,11 @@
                       {
                         "type": "comparison",
                         "operator": "greaterThanOrEquals",
-                        "left": {
-                          "attribute": {
+                        "left": [
+                          {
                             "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
-                          },
-                          "vias": [
-                            {
-                              "type": "pronoun",
-                              "pronoun": "zijn"
-                            }
-                          ]
-                        },
+                          }
+                        ],
                         "right": {
                           "type": "numeric",
                           "value": 18,
@@ -2428,17 +2328,11 @@
                       {
                         "type": "comparison",
                         "operator": "lessThan",
-                        "left": {
-                          "attribute": {
+                        "left": [
+                          {
                             "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
-                          },
-                          "vias": [
-                            {
-                              "type": "pronoun",
-                              "pronoun": "zijn"
-                            }
-                          ]
-                        },
+                          }
+                        ],
                         "right": {
                           "type": "numeric",
                           "value": 25,
@@ -2450,17 +2344,11 @@
                   {
                     "type": "comparison",
                     "operator": "greaterThanOrEquals",
-                    "left": {
-                      "attribute": {
+                    "left": [
+                      {
                         "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
-                      },
-                      "vias": [
-                        {
-                          "type": "pronoun",
-                          "pronoun": "zijn"
-                        }
-                      ]
-                    },
+                      }
+                    ],
                     "right": {
                       "type": "numeric",
                       "value": 65,
@@ -2499,17 +2387,11 @@
                   {
                     "type": "comparison",
                     "operator": "greaterThanOrEquals",
-                    "left": {
-                      "attribute": {
+                    "left": [
+                      {
                         "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
-                      },
-                      "vias": [
-                        {
-                          "type": "pronoun",
-                          "pronoun": "zijn"
-                        }
-                      ]
-                    },
+                      }
+                    ],
                     "right": {
                       "type": "numeric",
                       "value": 65,
@@ -2519,16 +2401,14 @@
                   {
                     "type": "comparison",
                     "operator": "greaterThanOrEquals",
-                    "left": {
-                      "attribute": {
-                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                    "left": [
+                      {
+                        "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                       },
-                      "vias": [
-                        {
-                          "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
-                        }
-                      ]
-                    },
+                      {
+                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                      }
+                    ],
                     "right": {
                       "type": "parameterReference",
                       "parameter": {
@@ -2557,40 +2437,30 @@
           "versions": [
             {
               "validFrom": "2018",
-              "target": {
-                "vias": [
-                  {
-                    "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
-                  }
-                ],
-                "attribute": {
+              "target": [
+                {
+                  "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
+                },
+                {
                   "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
                 }
-              },
+              ],
               "expression": {
                 "type": "function",
                 "function": "timeDuration",
-                "from": {
-                  "attribute": {
+                "from": [
+                  {
                     "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/b5200359-418f-40db-bdd2-cf9f7f77b4d4"
+                  }
+                ],
+                "to": [
+                  {
+                    "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
                   },
-                  "vias": [
-                    {
-                      "type": "pronoun",
-                      "pronoun": "zijn"
-                    }
-                  ]
-                },
-                "to": {
-                  "attribute": {
+                  {
                     "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/bf4947b1-acc6-4857-ba8b-881360e83b36"
-                  },
-                  "vias": [
-                    {
-                      "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
-                    }
-                  ]
-                },
+                  }
+                ],
                 "unit": "jr",
                 "whole": true
               }
@@ -2613,16 +2483,14 @@
           "versions": [
             {
               "validFrom": "2019",
-              "target": {
-                "vias": [
-                  {
-                    "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
-                  }
-                ],
-                "attribute": {
+              "target": [
+                {
+                  "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
+                },
+                {
                   "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/661f7a45-78a0-4c8f-85bc-8a27748420f5"
                 }
-              },
+              ],
               "value": {
                 "type": "parameterReference",
                 "parameter": {
@@ -2632,17 +2500,11 @@
               "condition": {
                 "type": "comparison",
                 "operator": "lessThan",
-                "left": {
-                  "attribute": {
+                "left": [
+                  {
                     "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
-                  },
-                  "vias": [
-                    {
-                      "type": "pronoun",
-                      "pronoun": "zijn"
-                    }
-                  ]
-                },
+                  }
+                ],
                 "right": {
                   "type": "numeric",
                   "value": 65,
@@ -2660,16 +2522,14 @@
           "versions": [
             {
               "validFrom": "2019",
-              "target": {
-                "vias": [
-                  {
-                    "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
-                  }
-                ],
-                "attribute": {
+              "target": [
+                {
+                  "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
+                },
+                {
                   "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/661f7a45-78a0-4c8f-85bc-8a27748420f5"
                 }
-              },
+              ],
               "value": {
                 "type": "parameterReference",
                 "parameter": {
@@ -2679,17 +2539,11 @@
               "condition": {
                 "type": "comparison",
                 "operator": "greaterThanOrEquals",
-                "left": {
-                  "attribute": {
+                "left": [
+                  {
                     "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
-                  },
-                  "vias": [
-                    {
-                      "type": "pronoun",
-                      "pronoun": "zijn"
-                    }
-                  ]
-                },
+                  }
+                ],
                 "right": {
                   "type": "numeric",
                   "value": 65,
@@ -2715,43 +2569,29 @@
           "versions": [
             {
               "validFrom": "2018",
-              "target": {
-                "vias": [
-                  {
-                    "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
-                  }
-                ],
-                "attribute": {
+              "target": [
+                {
+                  "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
+                },
+                {
                   "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/ab9cc7dc-7be7-412d-ae46-0224ceef3153"
                 }
-              },
+              ],
               "expression": {
                 "type": "rounding",
                 "expression": {
                   "type": "arithmetic",
                   "operator": "plus",
-                  "left": {
-                    "attribute": {
+                  "left": [
+                    {
                       "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/199d696e-a168-4584-8f80-35d737e5e1ba"
-                    },
-                    "vias": [
-                      {
-                        "type": "pronoun",
-                        "pronoun": "zijn"
-                      }
-                    ]
-                  },
-                  "right": {
-                    "attribute": {
+                    }
+                  ],
+                  "right": [
+                    {
                       "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/b802e897-8854-4ad3-97b4-3ed4b04f9b16"
-                    },
-                    "vias": [
-                      {
-                        "type": "pronoun",
-                        "pronoun": "zijn"
-                      }
-                    ]
-                  }
+                    }
+                  ]
                 },
                 "decimals": 0,
                 "direction": "down"
@@ -2761,30 +2601,15 @@
                 "conditions": [
                   {
                     "type": "not",
-                    "condition": {
-                      "property": {
-                        "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/4b9bd5f1-311a-4b59-8dd9-ee3139de153e"
-                      },
-                      "vias": [
-                        {
-                          "type": "pronoun",
-                          "pronoun": "hij"
-                        }
-                      ]
-                    }
+                    "condition": []
                   },
                   {
                     "type": "not",
-                    "condition": {
-                      "property": {
-                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/866a85c0-b305-4ce3-af5b-2baf449cdfeb"
-                      },
-                      "vias": [
-                        {
-                          "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
-                        }
-                      ]
-                    }
+                    "condition": [
+                      {
+                        "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                      }
+                    ]
                   }
                 ]
               }
@@ -2799,16 +2624,14 @@
           "versions": [
             {
               "validFrom": "2018",
-              "target": {
-                "vias": [
-                  {
-                    "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
-                  }
-                ],
-                "attribute": {
+              "target": [
+                {
+                  "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
+                },
+                {
                   "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/ab9cc7dc-7be7-412d-ae46-0224ceef3153"
                 }
-              },
+              ],
               "expression": {
                 "type": "bounded",
                 "expression": {
@@ -2819,28 +2642,16 @@
                     "left": {
                       "type": "arithmetic",
                       "operator": "plus",
-                      "left": {
-                        "attribute": {
+                      "left": [
+                        {
                           "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/199d696e-a168-4584-8f80-35d737e5e1ba"
-                        },
-                        "vias": [
-                          {
-                            "type": "pronoun",
-                            "pronoun": "zijn"
-                          }
-                        ]
-                      },
-                      "right": {
-                        "attribute": {
+                        }
+                      ],
+                      "right": [
+                        {
                           "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/b802e897-8854-4ad3-97b4-3ed4b04f9b16"
-                        },
-                        "vias": [
-                          {
-                            "type": "pronoun",
-                            "pronoun": "zijn"
-                          }
-                        ]
-                      }
+                        }
+                      ]
                     },
                     "right": {
                       "type": "parameterReference",
@@ -2861,27 +2672,12 @@
               "condition": {
                 "type": "allOf",
                 "conditions": [
-                  {
-                    "property": {
-                      "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/4b9bd5f1-311a-4b59-8dd9-ee3139de153e"
-                    },
-                    "vias": [
-                      {
-                        "type": "pronoun",
-                        "pronoun": "hij"
-                      }
-                    ]
-                  },
-                  {
-                    "property": {
-                      "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/866a85c0-b305-4ce3-af5b-2baf449cdfeb"
-                    },
-                    "vias": [
-                      {
-                        "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
-                      }
-                    ]
-                  }
+                  [],
+                  [
+                    {
+                      "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                    }
+                  ]
                 ]
               }
             }
@@ -2904,49 +2700,25 @@
             {
               "validFrom": "2018",
               "validTo": "2018",
-              "target": {
-                "vias": [
-                  {
-                    "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
-                  }
-                ],
-                "attribute": {
-                  "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/11d155f3-d6bd-4792-94bb-e20c0c885101"
+              "target": [
+                {
+                  "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
                 },
-                "subjects": {
-                  "type": "allRoles",
-                  "role": "passagiers met recht op treinmiles",
-                  "ofSubject": {
-                    "type": "role",
-                    "ref": {
-                      "$ref": "#/facts/da5cc365-024d-4c43-8fce-75ae4a4d461f/roles/5d45c715-f041-453c-9386-8c97fa592ea7"
-                    }
-                  }
+                {
+                  "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/11d155f3-d6bd-4792-94bb-e20c0c885101"
                 }
-              }
+              ]
             },
             {
               "validFrom": "2019",
-              "target": {
-                "vias": [
-                  {
-                    "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
-                  }
-                ],
-                "attribute": {
-                  "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/11d155f3-d6bd-4792-94bb-e20c0c885101"
+              "target": [
+                {
+                  "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
                 },
-                "subjects": {
-                  "type": "allRoles",
-                  "role": "passagiers met recht op treinmiles",
-                  "ofSubject": {
-                    "type": "role",
-                    "ref": {
-                      "$ref": "#/facts/da5cc365-024d-4c43-8fce-75ae4a4d461f/roles/5d45c715-f041-453c-9386-8c97fa592ea7"
-                    }
-                  }
+                {
+                  "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/11d155f3-d6bd-4792-94bb-e20c0c885101"
                 }
-              }
+              ]
             }
           ]
         }
