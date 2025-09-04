@@ -325,7 +325,7 @@
         <xsl:text>&#10;</xsl:text>
 
         <!-- Select facts that are domains (not objectTypes, factTypes, parameters, ruleGroups, or enumerations) -->
-        <xsl:for-each select="fn:map[not(fn:map[@key='definite_article'] or fn:boolean[@key='animated'] or fn:string[@key='relation'] or matches(fn:map[@key='name']/fn:string[@key='nl'], '^[A-Z][A-Z0-9\s]*$') or fn:map[@key='items']/fn:map/fn:array[@key='versions']/fn:map[fn:map[@key='target'] or fn:map[@key='condition'] or fn:map[@key='expression']]) and not(fn:array[@key='values']) and not(fn:map[@key='items']/fn:map/fn:array[@key='versions']/fn:map[fn:string[@key='type'] = 'enumeration'])]">
+        <xsl:for-each select="fn:map[not(fn:map[@key='definite_article'] or fn:boolean[@key='animated'] or fn:string[@key='relation'] or matches(fn:map[@key='name']/fn:string[@key='nl'], '^[A-Z][A-Z0-9\s]*$') or fn:map[@key='items']/fn:map/fn:array[@key='versions']/fn:map[fn:array[@key='target'] or fn:map[@key='condition'] or fn:map[@key='expression']]) and not(fn:array[@key='values']) and not(fn:map[@key='items']/fn:map/fn:array[@key='versions']/fn:map[fn:string[@key='type'] = 'enumeration'])]">
             <xsl:variable name="domain-name" select="fn:map[@key='name']/fn:string[@key=$language]"/>
             <xsl:variable name="version" select="fn:map[@key='items']/fn:map[1]/fn:array[@key='versions']/fn:map[1]"/>
             <xsl:variable name="domain-type" select="$version/fn:string[@key='type']"/>
