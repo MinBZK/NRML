@@ -201,17 +201,35 @@
             <xsl:with-param name="capitalize" select="true()"/>
         </xsl:call-template>
         <xsl:text> van een </xsl:text>
-        <xsl:call-template name="resolve-path">
-            <xsl:with-param name="path" select="$target/fn:map[1]/fn:string[@key='$ref']"/>
-        </xsl:call-template>
-        <!-- Add condition qualifier if needed -->
-        <xsl:if test="$condition">
-            <xsl:text> waarvoor </xsl:text>
-            <xsl:call-template name="format-condition-qualifier">
-                <xsl:with-param name="condition" select="$condition"/>
+        <xsl:variable name="root-ref" select="$target/fn:map[1]/fn:string[@key='$ref']"/>
+        <xsl:variable name="is-root-characteristic">
+            <xsl:call-template name="is-characteristic">
+                <xsl:with-param name="ref" select="$root-ref"/>
             </xsl:call-template>
-            <xsl:text> van toepassing is</xsl:text>
-        </xsl:if>
+        </xsl:variable>
+        
+        <xsl:choose>
+            <!-- Root is a characteristic: use characteristic name directly -->
+            <xsl:when test="$is-root-characteristic = 'true'">
+                <xsl:call-template name="resolve-path">
+                    <xsl:with-param name="path" select="$root-ref"/>
+                </xsl:call-template>
+            </xsl:when>
+            <!-- Regular chain: role → property -->
+            <xsl:otherwise>
+                <xsl:call-template name="resolve-path">
+                    <xsl:with-param name="path" select="$root-ref"/>
+                </xsl:call-template>
+                <!-- Add condition qualifier if needed -->
+                <xsl:if test="$condition">
+                    <xsl:text> waarvoor </xsl:text>
+                    <xsl:call-template name="format-condition-qualifier">
+                        <xsl:with-param name="condition" select="$condition"/>
+                    </xsl:call-template>
+                    <xsl:text> van toepassing is</xsl:text>
+                </xsl:if>
+            </xsl:otherwise>
+        </xsl:choose>
         <xsl:text> moet berekend worden als </xsl:text>
         <xsl:call-template name="format-expression">
             <xsl:with-param name="expression" select="$expression"/>
@@ -1194,6 +1212,28 @@
         <xsl:call-template name="resolve-path">
             <xsl:with-param name="path" select="$characteristic/fn:map[2]/fn:string[@key='$ref']"/>
         </xsl:call-template>
+    </xsl:template>
+
+    <!-- Check if a reference points to a characteristic -->
+    <xsl:template name="is-characteristic">
+        <xsl:param name="ref"/>
+        
+        <xsl:choose>
+            <xsl:when test="contains($ref, '/properties/')">
+                <!-- Extract fact UUID and property UUID -->
+                <xsl:variable name="fact-uuid" select="substring-before(substring-after($ref, '#/facts/'), '/properties/')"/>
+                <xsl:variable name="property-uuid" select="substring-after($ref, '/properties/')"/>
+                
+                <!-- Check if this property has type "characteristic" -->
+                <xsl:variable name="property-type" select="//fn:map[@key='facts']/fn:map[@key=$fact-uuid]/fn:map[@key='items']/fn:map[@key=$property-uuid]/fn:array[@key='versions']/fn:map[1]/fn:string[@key='type']"/>
+                
+                <xsl:choose>
+                    <xsl:when test="$property-type = 'characteristic'">true</xsl:when>
+                    <xsl:otherwise>false</xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
+            <xsl:otherwise>false</xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <!-- Format condition qualifier (resolve from actual condition data) -->

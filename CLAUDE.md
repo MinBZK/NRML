@@ -387,11 +387,82 @@ Extended `format-not` template to handle `exists` conditions specially:
 </xsl:when>
 ```
 
-## Debugging Tips
+## Property-of-Characteristic Chains (Characteristic-as-Root Pattern)
 
-- Look for "onbekende rol" in output (indicates missing role references)
-- Look for "onbekende operand" in arithmetic expressions (indicates missing operand handler)
-- Check for "0 €" vs "0" in aggregation defaults
-- Verify multi-hop chains have both role and property references
-- Ensure plural forms are defined for properties used in aggregations
-- Look for "lege referentieketen" in classifications (indicates resolve-path issues)
+### Problem: Rules with Characteristic Subjects
+
+Some rules apply to specific characteristics of entities rather than general entities. For example:
+
+❌ **WRONG - Generic role as root:**
+```
+"De belasting op basis van afstand van een passagier waarvoor de voorwaarden van toepassing is moet berekend worden als..."
+```
+
+✅ **CORRECT - Characteristic as root:**
+```
+"De belasting op basis van afstand van een passagier waarvoor het lage tarief voor belasting op basis van afstand van toepassing is moet berekend worden als..."
+```
+
+### Solution: Characteristic-as-Root Pattern
+
+**When a rule applies to a specific characteristic, make the characteristic the ROOT (first element) of the target chain:**
+
+❌ **WRONG - 3-element chain with role as root:**
+```json
+"target": [
+  {"$ref": "#/facts/.../roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"},      // passagier (role)
+  {"$ref": "#/facts/.../properties/ef64a2f2-6dd5-46cb-bd4e-6708e70021dc"},  // lage tarief characteristic  
+  {"$ref": "#/facts/.../properties/199d696e-a168-4584-8f80-35d737e5e1ba"}   // belasting property
+]
+```
+
+✅ **CORRECT - 2-element chain with characteristic as root:**
+```json
+"target": [
+  {"$ref": "#/facts/.../properties/ef64a2f2-6dd5-46cb-bd4e-6708e70021dc"},  // lage tarief characteristic (ROOT)
+  {"$ref": "#/facts/.../properties/199d696e-a168-4584-8f80-35d737e5e1ba"}   // belasting property
+]
+```
+
+### XSL Template Support
+
+The `format-conditional-expression-rule` template detects characteristic roots using the `is-characteristic` helper:
+
+```xsl
+<xsl:variable name="is-root-characteristic">
+    <xsl:call-template name="is-characteristic">
+        <xsl:with-param name="ref" select="$root-ref"/>
+    </xsl:call-template>
+</xsl:variable>
+
+<xsl:choose>
+    <xsl:when test="$is-root-characteristic = 'true'">
+        <!-- Use characteristic name directly -->
+        <xsl:call-template name="resolve-path">
+            <xsl:with-param name="path" select="$root-ref"/>
+        </xsl:call-template>
+    </xsl:when>
+    <xsl:otherwise>
+        <!-- Regular role with condition qualifier -->
+        <!-- ... -->
+    </xsl:otherwise>
+</xsl:choose>
+```
+
+### How to Identify Characteristics
+
+Characteristics are identified in JSON by `"type": "characteristic"`:
+
+```json
+"ef64a2f2-6dd5-46cb-bd4e-6708e70021dc": {
+  "name": {
+    "nl": "passagier waarvoor het lage tarief voor belasting op basis van afstand van toepassing is"
+  },
+  "versions": [
+    {
+      "validFrom": "2018",
+      "type": "characteristic"  // ← This identifies it as a characteristic
+    }
+  ]
+}
+```
