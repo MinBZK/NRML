@@ -1674,13 +1674,14 @@
                 "function": "sum",
                 "expression": [
                   {
+                    "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
+                  },
+                  {
                     "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/199d696e-a168-4584-8f80-35d737e5e1ba"
                   }
                 ],
                 "default": {
-                  "type": "numeric",
-                  "value": 0,
-                  "unit": "€"
+                  "value": 0
                 }
               }
             }
@@ -1704,13 +1705,14 @@
                 "function": "sum",
                 "expression": [
                   {
+                    "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
+                  },
+                  {
                     "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/b802e897-8854-4ad3-97b4-3ed4b04f9b16"
                   }
                 ],
                 "default": {
-                  "type": "numeric",
-                  "value": 0,
-                  "unit": "€"
+                  "value": 0
                 }
               }
             }
