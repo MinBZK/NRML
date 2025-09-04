@@ -93,8 +93,17 @@
                             </xsl:call-template>
                         </xsl:when>
                         
-                        <!-- Conditional rules -->
-                        <xsl:when test="$condition">
+                        <!-- Conditional assignment rules (target + value + condition) -->
+                        <xsl:when test="$target and $value and $condition">
+                            <xsl:call-template name="format-conditional-assignment-rule">
+                                <xsl:with-param name="target" select="$target"/>
+                                <xsl:with-param name="value" select="$value"/>
+                                <xsl:with-param name="condition" select="$condition"/>
+                            </xsl:call-template>
+                        </xsl:when>
+                        
+                        <!-- Conditional classification rules (target + condition, no value) -->
+                        <xsl:when test="$condition and not($value)">
                             <xsl:call-template name="format-conditional-rule">
                                 <xsl:with-param name="target" select="$target"/>
                                 <xsl:with-param name="condition" select="$condition"/>
@@ -133,6 +142,27 @@
         <xsl:text>.</xsl:text>
     </xsl:template>
 
+    <!-- Format conditional assignment rule -->
+    <xsl:template name="format-conditional-assignment-rule">
+        <xsl:param name="target"/>
+        <xsl:param name="value"/>
+        <xsl:param name="condition"/>
+        
+        <xsl:call-template name="resolve-target">
+            <xsl:with-param name="target" select="$target"/>
+            <xsl:with-param name="article">De</xsl:with-param>
+        </xsl:call-template>
+        <xsl:text> moet gesteld worden op </xsl:text>
+        <xsl:call-template name="format-value">
+            <xsl:with-param name="value" select="$value"/>
+        </xsl:call-template>
+        <xsl:text>&#10;</xsl:text>
+        <xsl:call-template name="format-condition">
+            <xsl:with-param name="condition" select="$condition"/>
+        </xsl:call-template>
+        <xsl:text>.</xsl:text>
+    </xsl:template>
+    
     <!-- Format conditional rule -->
     <xsl:template name="format-conditional-rule">
         <xsl:param name="target"/>
@@ -194,6 +224,21 @@
                     <xsl:with-param name="aggregation" select="$expression"/>
                 </xsl:call-template>
             </xsl:when>
+            <xsl:when test="$expression/fn:string[@key='type'] = 'anyOf'">
+                <xsl:call-template name="format-anyof">
+                    <xsl:with-param name="anyof" select="$expression"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="$expression/fn:string[@key='type'] = 'allOf'">
+                <xsl:call-template name="format-allof">
+                    <xsl:with-param name="allof" select="$expression"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="$expression/fn:string[@key='type'] = 'not'">
+                <xsl:call-template name="format-not">
+                    <xsl:with-param name="not" select="$expression"/>
+                </xsl:call-template>
+            </xsl:when>
             <xsl:when test="$expression/fn:map[@key='role']">
                 <xsl:call-template name="format-role-reference">
                     <xsl:with-param name="role" select="$expression"/>
@@ -202,6 +247,11 @@
             <xsl:when test="$expression/fn:map[@key='attribute']">
                 <xsl:call-template name="format-attribute-reference">
                     <xsl:with-param name="attr-ref" select="$expression"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="$expression/fn:map[@key='property']">
+                <xsl:call-template name="format-property-reference">
+                    <xsl:with-param name="prop-ref" select="$expression"/>
                 </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
@@ -291,64 +341,26 @@
         <xsl:variable name="attribute" select="$attr-ref/fn:map[@key='attribute']/fn:string[@key='$ref']"/>
         <xsl:variable name="vias" select="$attr-ref/fn:array[@key='vias']"/>
         
-        <xsl:text>de </xsl:text>
-        <xsl:call-template name="resolve-path">
-            <xsl:with-param name="path" select="$attribute"/>
-        </xsl:call-template>
-        
-        <!-- Process vias chain -->
-        <xsl:if test="$vias">
-            <xsl:for-each select="$vias/fn:map">
-                <xsl:variable name="via-ref" select="fn:string[@key='$ref']"/>
-                <xsl:text> van </xsl:text>
-                
-                <!-- Determine if this is the last via -->
-                <xsl:choose>
-                    <xsl:when test="position() = last()">
-                        <xsl:text>alle </xsl:text>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:text>de </xsl:text>
-                    </xsl:otherwise>
-                </xsl:choose>
-                
+        <xsl:choose>
+            <xsl:when test="$vias">
+                <!-- Attribute reference with context -->
+                <xsl:text>de </xsl:text>
                 <xsl:call-template name="resolve-path">
-                    <xsl:with-param name="path" select="$via-ref"/>
+                    <xsl:with-param name="path" select="$attribute"/>
                 </xsl:call-template>
-            </xsl:for-each>
-            
-            <!-- Add contextual subject -->
-            <xsl:text> van de </xsl:text>
-            
-            <!-- Get the final context object from the last via -->
-            <xsl:variable name="last-via" select="$vias/fn:map[last()]/fn:string[@key='$ref']"/>
-            <xsl:variable name="last-via-parts" select="tokenize($last-via, '/')"/>
-            <xsl:variable name="fact-uuid" select="$last-via-parts[3]"/>
-            <xsl:variable name="role-uuid" select="$last-via-parts[5]"/>
-            <xsl:variable name="fact" select="//fn:map[@key='facts']/fn:map[@key=$fact-uuid]"/>
-            
-            <!-- Get the opposite role's objectType -->
-            <xsl:variable name="role-a" select="$fact/fn:map[@key='items']/fn:map[1]/fn:array[@key='versions']/fn:map[1]/fn:map[@key='a']"/>
-            <xsl:variable name="role-b" select="$fact/fn:map[@key='items']/fn:map[1]/fn:array[@key='versions']/fn:map[1]/fn:map[@key='b']"/>
-            
-            <xsl:choose>
-                <xsl:when test="$role-b/fn:string[@key='uuid'] = $role-uuid">
-                    <!-- This is role B (passagier), context comes from role A (vlucht) -->
-                    <xsl:variable name="object-ref" select="$role-a/fn:map[@key='objectType']/fn:string[@key='$ref']"/>
-                    <xsl:call-template name="resolve-path">
-                        <xsl:with-param name="path" select="$object-ref"/>
-                    </xsl:call-template>
-                </xsl:when>
-                <xsl:when test="$role-a/fn:string[@key='uuid'] = $role-uuid">
-                    <!-- This is role A (vlucht), context comes from role B (passagier) -->
-                    <xsl:variable name="object-ref" select="$role-b/fn:map[@key='objectType']/fn:string[@key='$ref']"/>
-                    <xsl:call-template name="resolve-path">
-                        <xsl:with-param name="path" select="$object-ref"/>
-                    </xsl:call-template>
-                </xsl:when>
-                <xsl:otherwise>UNKNOWN_VIA_CONTEXT</xsl:otherwise>
-            </xsl:choose>
-        </xsl:if>
+                <xsl:text> van zijn </xsl:text>
+                <xsl:call-template name="resolve-via-chain-subject">
+                    <xsl:with-param name="vias" select="$vias"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <!-- Direct attribute reference -->
+                <xsl:text>de </xsl:text>
+                <xsl:call-template name="resolve-path">
+                    <xsl:with-param name="path" select="$attribute"/>
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <!-- Format comparison -->
@@ -377,10 +389,10 @@
         <xsl:choose>
             <xsl:when test="$operator = 'equals'">gelijk is aan</xsl:when>
             <xsl:when test="$operator = 'notEquals'">ongelijk is aan</xsl:when>
-            <xsl:when test="$operator = 'greaterThan'">groter is dan</xsl:when>
-            <xsl:when test="$operator = 'lessThan'">kleiner is dan</xsl:when>
-            <xsl:when test="$operator = 'greaterOrEqual'">groter of gelijk is aan</xsl:when>
-            <xsl:when test="$operator = 'lessOrEqual'">kleiner of gelijk is aan</xsl:when>
+            <xsl:when test="$operator = 'greaterThan'">is groter dan</xsl:when>
+            <xsl:when test="$operator = 'lessThan'">is kleiner dan</xsl:when>
+            <xsl:when test="$operator = 'greaterOrEqual'">is groter of gelijk aan</xsl:when>
+            <xsl:when test="$operator = 'lessThanOrEquals'">is kleiner of gelijk aan</xsl:when>
             <xsl:otherwise><xsl:value-of select="$operator"/></xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -391,8 +403,18 @@
         
         <xsl:choose>
             <xsl:when test="$operand/fn:map[@key='attribute']">
-                <xsl:call-template name="resolve-attribute-reference">
-                    <xsl:with-param name="ref" select="$operand/fn:map[@key='attribute']"/>
+                <xsl:call-template name="format-attribute-reference">
+                    <xsl:with-param name="attr-ref" select="$operand"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="$operand/fn:map[@key='property']">
+                <xsl:call-template name="format-property-reference">
+                    <xsl:with-param name="prop-ref" select="$operand"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="$operand/fn:string[@key='type'] = 'parameterReference'">
+                <xsl:call-template name="format-parameter-reference">
+                    <xsl:with-param name="param-ref" select="$operand"/>
                 </xsl:call-template>
             </xsl:when>
             <xsl:when test="$operand/fn:string[@key='type'] = 'attributeReference'">
@@ -447,25 +469,43 @@
             <xsl:with-param name="ref" select="$target/fn:map[@key='attribute']"/>
         </xsl:call-template>
         <xsl:text> van een </xsl:text>
-        <!-- Get subject from attribute path - extract objectType from attribute reference -->
-        <xsl:variable name="attr-path" select="$target/fn:map[@key='attribute']/fn:string[@key='$ref']"/>
-        <xsl:variable name="attr-parts" select="tokenize($attr-path, '/')"/>
-        <xsl:variable name="object-uuid" select="$attr-parts[3]"/>
-        <xsl:call-template name="resolve-path">
-            <xsl:with-param name="path" select="concat('#/facts/', $object-uuid)"/>
-        </xsl:call-template>
+        <!-- Get subject from vias if present, otherwise from attribute path -->
+        <xsl:choose>
+            <xsl:when test="$target/fn:array[@key='vias']">
+                <xsl:call-template name="resolve-via-chain-subject">
+                    <xsl:with-param name="vias" select="$target/fn:array[@key='vias']"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:variable name="attr-path" select="$target/fn:map[@key='attribute']/fn:string[@key='$ref']"/>
+                <xsl:variable name="attr-parts" select="tokenize($attr-path, '/')"/>
+                <xsl:variable name="object-uuid" select="$attr-parts[3]"/>
+                <xsl:call-template name="resolve-path">
+                    <xsl:with-param name="path" select="concat('#/facts/', $object-uuid)"/>
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <!-- Resolve target subject only -->
     <xsl:template name="resolve-target-subject">
         <xsl:param name="target"/>
-        <!-- Extract subject from attribute path -->
-        <xsl:variable name="attr-path" select="$target/fn:map[@key='attribute']/fn:string[@key='$ref']"/>
-        <xsl:variable name="attr-parts" select="tokenize($attr-path, '/')"/>
-        <xsl:variable name="object-uuid" select="$attr-parts[3]"/>
-        <xsl:call-template name="resolve-path">
-            <xsl:with-param name="path" select="concat('#/facts/', $object-uuid)"/>
-        </xsl:call-template>
+        <!-- Get subject from vias if present, otherwise from attribute path -->
+        <xsl:choose>
+            <xsl:when test="$target/fn:array[@key='vias']">
+                <xsl:call-template name="resolve-via-chain-subject">
+                    <xsl:with-param name="vias" select="$target/fn:array[@key='vias']"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:variable name="attr-path" select="$target/fn:map[@key='attribute']/fn:string[@key='$ref']"/>
+                <xsl:variable name="attr-parts" select="tokenize($attr-path, '/')"/>
+                <xsl:variable name="object-uuid" select="$attr-parts[3]"/>
+                <xsl:call-template name="resolve-path">
+                    <xsl:with-param name="path" select="concat('#/facts/', $object-uuid)"/>
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <!-- Resolve target attribute only -->
@@ -589,6 +629,113 @@
                 <xsl:text>UNKNOWN_REFERENCE</xsl:text>
             </xsl:otherwise>
         </xsl:choose>
+    </xsl:template>
+
+    <!-- Resolve via chain subject -->
+    <xsl:template name="resolve-via-chain-subject">
+        <xsl:param name="vias"/>
+        <!-- For now, resolve the last role in the chain to get the target object type -->
+        <xsl:variable name="last-role" select="$vias/fn:map[last()]/fn:string[@key='$ref']"/>
+        <xsl:variable name="role-parts" select="tokenize($last-role, '/')"/>
+        <xsl:variable name="role-fact-uuid" select="$role-parts[3]"/>
+        <xsl:variable name="role-uuid" select="$role-parts[5]"/>
+        
+        <!-- Get the role from the fact -->
+        <xsl:variable name="role-fact" select="//fn:map[@key='facts']/fn:map[@key=$role-fact-uuid]"/>
+        
+        <!-- Find the role by UUID in the relation definition -->
+        <xsl:variable name="relation-def" select="$role-fact/fn:map[@key='items']/fn:map[fn:map[@key='name']/fn:string[@key='nl'] = 'relatie definitie']"/>
+        <xsl:variable name="version" select="$relation-def/fn:array[@key='versions']/fn:map[1]"/>
+        
+        <xsl:choose>
+            <xsl:when test="$version/fn:map[@key='a']/fn:string[@key='uuid'] = $role-uuid">
+                <!-- Role A - get the role name -->
+                <xsl:value-of select="$version/fn:map[@key='a']/fn:map[@key='name']/fn:string[@key='nl']"/>
+            </xsl:when>
+            <xsl:when test="$version/fn:map[@key='b']/fn:string[@key='uuid'] = $role-uuid">
+                <!-- Role B - get the role name -->
+                <xsl:value-of select="$version/fn:map[@key='b']/fn:map[@key='name']/fn:string[@key='nl']"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:text>UNKNOWN_VIA_CONTEXT</xsl:text>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <!-- Format property reference -->
+    <xsl:template name="format-property-reference">
+        <xsl:param name="prop-ref"/>
+        <xsl:variable name="property-ref" select="$prop-ref/fn:map[@key='property']/fn:string[@key='$ref']"/>
+        <xsl:variable name="vias" select="$prop-ref/fn:array[@key='vias']"/>
+        
+        <xsl:choose>
+            <xsl:when test="$vias">
+                <!-- Property reference with context -->
+                <xsl:text>zijn </xsl:text>
+                <xsl:call-template name="resolve-via-chain-subject">
+                    <xsl:with-param name="vias" select="$vias"/>
+                </xsl:call-template>
+                <xsl:text> is een </xsl:text>
+                <xsl:call-template name="resolve-path">
+                    <xsl:with-param name="path" select="$property-ref"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <!-- Direct property reference -->
+                <xsl:call-template name="resolve-path">
+                    <xsl:with-param name="path" select="$property-ref"/>
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <!-- Format anyOf (OR conditions) -->
+    <xsl:template name="format-anyof">
+        <xsl:param name="anyof"/>
+        <xsl:text>er aan ten minste één van de volgende voorwaarden wordt voldaan :&#10;</xsl:text>
+        <xsl:for-each select="$anyof/fn:array[@key='conditions']/fn:map">
+            <xsl:text>  • </xsl:text>
+            <xsl:call-template name="format-expression">
+                <xsl:with-param name="expression" select="."/>
+            </xsl:call-template>
+            <xsl:if test="position() != last()">
+                <xsl:text>&#10;</xsl:text>
+            </xsl:if>
+        </xsl:for-each>
+    </xsl:template>
+
+    <!-- Format allOf (AND conditions) -->
+    <xsl:template name="format-allof">
+        <xsl:param name="allof"/>
+        <xsl:text>er aan alle volgende voorwaarden wordt voldaan :&#10;</xsl:text>
+        <xsl:for-each select="$allof/fn:array[@key='conditions']/fn:map">
+            <xsl:text>  • </xsl:text>
+            <xsl:call-template name="format-expression">
+                <xsl:with-param name="expression" select="."/>
+            </xsl:call-template>
+            <xsl:if test="position() != last()">
+                <xsl:text>&#10;</xsl:text>
+            </xsl:if>
+        </xsl:for-each>
+    </xsl:template>
+
+    <!-- Format not condition -->
+    <xsl:template name="format-not">
+        <xsl:param name="not"/>
+        <xsl:text>geen </xsl:text>
+        <xsl:call-template name="format-expression">
+            <xsl:with-param name="expression" select="$not/fn:map[@key='condition']"/>
+        </xsl:call-template>
+    </xsl:template>
+
+    <!-- Format parameter reference -->
+    <xsl:template name="format-parameter-reference">
+        <xsl:param name="param-ref"/>
+        <xsl:variable name="parameter-ref" select="$param-ref/fn:map[@key='parameter']/fn:string[@key='$ref']"/>
+        <xsl:text>de </xsl:text>
+        <xsl:call-template name="resolve-path">
+            <xsl:with-param name="path" select="$parameter-ref"/>
+        </xsl:call-template>
     </xsl:template>
 
 </xsl:stylesheet>
