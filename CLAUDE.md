@@ -466,3 +466,129 @@ Characteristics are identified in JSON by `"type": "characteristic"`:
   ]
 }
 ```
+
+## ⚠️ CRITICAL: ALL REFERENCES MUST BE ARRAYS (Chains)
+
+**Every reference in NRML MUST be an array because they represent chains, even single references.**
+
+❌ **WRONG - Converting arrays to objects:**
+```json
+"target": {
+  "$ref": "#/facts/.../properties/property-uuid"  // WRONG! Never convert to object
+}
+```
+
+✅ **CORRECT - Always use arrays:**
+```json
+"target": [
+  {"$ref": "#/facts/.../properties/property-uuid"}  // CORRECT! Always array
+]
+```
+
+**Why this is critical:**
+- References conceptually represent **chains of relationships**  
+- Even a single reference is a 1-element chain (could be extended)
+- XSL templates expect arrays and use `count()` and array indexing
+- Converting to objects breaks template logic and causes errors
+
+**XSL Template Logic Depends on Arrays:**
+```xsl
+<xsl:choose>
+  <xsl:when test="count($target/fn:map) = 1">
+    <!-- Handle single-element chain -->
+  </xsl:when>
+  <xsl:when test="count($target/fn:map) > 1">  
+    <!-- Handle multi-element chain -->
+  </xsl:when>
+</xsl:choose>
+```
+
+## NotExists Condition Type
+
+For negative classifications like "zijn reis is geen rondvlucht", use `notExists` instead of nested `not` with `exists`:
+
+❌ **WRONG - Nested not + exists:**
+```json
+{
+  "type": "not", 
+  "condition": {
+    "type": "exists",
+    "characteristic": [...]
+  }
+}
+```
+
+✅ **CORRECT - Direct notExists:**
+```json
+{
+  "type": "notExists",
+  "characteristic": [
+    {"$ref": "#/facts/.../roles/role-uuid"},
+    {"$ref": "#/facts/.../properties/property-uuid"}
+  ]
+}
+```
+
+## Translation System Architecture
+
+### Multilingual Support via Centralized Translations
+
+Both `regelspraak.xsl` and `gegevensspraak.xsl` use the centralized `translations.xsl` module:
+
+```xsl
+<!-- Include translations module -->
+<xsl:include href="translations.xsl"/>
+
+<!-- Use translate template instead of hardcoded strings -->
+<xsl:call-template name="translate">
+    <xsl:with-param name="key">must-be-calculated-as</xsl:with-param>
+</xsl:call-template>
+```
+
+### Language Constructs vs Domain Terms
+
+**Strict Separation:**
+- **Language constructs** (articles, conjunctions, operators): From `translations.xsl`
+- **Domain terms** (vlucht, passagier, belasting): From JSON object model via `resolve-path`
+
+❌ **WRONG - Hardcoded language constructs:**
+```xsl
+<xsl:text>moet berekend worden als</xsl:text>  <!-- Hardcoded Dutch -->
+<xsl:text>zijn</xsl:text>  <!-- Hardcoded possessive -->
+```
+
+✅ **CORRECT - Translated constructs + JSON domain terms:**
+```xsl
+<xsl:call-template name="translate">
+    <xsl:with-param name="key">must-be-calculated-as</xsl:with-param>
+</xsl:call-template>
+
+<!-- Possessive pronoun based on rule context -->
+<xsl:choose>
+    <xsl:when test="$rule-target-animated = 'true'">
+        <xsl:call-template name="translate">
+            <xsl:with-param name="key">his</xsl:with-param>
+        </xsl:call-template>
+    </xsl:when>
+</xsl:choose>
+```
+
+### Possessive Pronouns and Rule Context
+
+Possessive pronouns ("zijn"/"his") are determined by rule target context, not by the referenced object itself:
+
+```xsl
+<!-- Check if rule target is animated (like "passagier") -->
+<xsl:variable name="rule-target-animated">
+    <xsl:call-template name="is-rule-target-animated">
+        <xsl:with-param name="target" select="$current-rule/fn:array[@key='target']"/>
+    </xsl:call-template>
+</xsl:variable>
+
+<!-- Use possessive if rule is about animated subject -->
+<xsl:when test="$rule-target-animated = 'true'">
+    <xsl:text>zijn reis is een...</xsl:text>  <!-- His trip is a... -->
+</xsl:when>
+```
+
+**Result:** Rules about "passagier" correctly generate "zijn reis is een belaste reis" because passenger is animated, even though "reis" itself is not animated.

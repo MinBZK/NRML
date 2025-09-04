@@ -143,9 +143,14 @@ Controleer of alle JSON Pointer referenties (`$ref`) correct verwijzen naar best
 - Relaties moeten beide zijden correct definiëren
 - Parameters gebruikt in regels moeten bestaan
 
-## XSLT Transformatie
+## XSLT Transformaties
 
-NRML documenten kunnen worden getransformeerd, bijvoorbeeld naar Nederlandse gegevensspraak voor menselijke leesbaarheid.
+NRML documenten kunnen worden getransformeerd naar verschillende output formaten:
+
+### Beschikbare Transformaties
+
+1. **Gegevensspraak** (`gegevensspraak.xsl`) - Object model specificatie
+2. **Regelspraak** (`regelspraak.xsl`) - Business rules in natuurlijke taal
 
 ### Quick Start
 
@@ -153,11 +158,14 @@ NRML documenten kunnen worden getransformeerd, bijvoorbeeld naar Nederlandse geg
 # Installeer dependencies (eenmalig)
 npm install
 
-# Basis transformatie
+# Gegevensspraak transformatie (standaard)
 ./scripts/transform
 
-# Custom bestanden
-./scripts/transform my.xsl input.json output.txt
+# Regelspraak transformatie  
+./scripts/transform transformations/regelspraak.xsl toka.nrml.json output.txt
+
+# Custom bestanden met taal
+./scripts/transform my.xsl input.json output.txt en
 
 # Help
 ./scripts/transform --help
@@ -170,11 +178,11 @@ npm install
 {
   "objectTypes": {
     "48c6ed9c-0911-43d8-b6ef-47d2b406ea35": {
-      "name": {"nl": "vlucht"},
-      "definite_article": {"nl": "de"},
+      "name": {"nl": "vlucht", "en": "flight"},
+      "definite_article": {"nl": "de", "en": "the"},
       "properties": {
         "d72ead33-2e0c-450a-ba71-b83940c8e926": {
-          "name": {"nl": "belaste reis"},
+          "name": {"nl": "belaste reis", "en": "taxable journey"},
           "type": "characteristic"
         }
       }
@@ -183,13 +191,48 @@ npm install
 }
 ```
 
-**Output (Nederlandse Gegevensspraak):**
+**Gegevensspraak Output (Nederlands):**
 ```
 Objecttype de vlucht
-de    belaste reis    kenmerk
+de	belaste reis	kenmerk
+de	onbelaste reis	kenmerk
+de	rondvlucht	kenmerk
+is	klimaatneutraal	kenmerk (bijvoeglijk)
 ```
 
-### Features
+**Regelspraak Output (Nederlands):**
+```
+Regel belaste reis 01
+geldig vanaf 2018
+Een reis is een belaste reis
+indien bereikbaar per trein van de reis gelijk is aan waar.
+```
+
+### Multilingual Support
+
+Beide transformaties ondersteunen Nederlands (`nl`) en Engels (`en`) via het centralized `translations.xsl` module:
+
+```bash
+# Nederlandse output (standaard)
+./scripts/transform transformations/regelspraak.xsl toka.nrml.json output-nl.txt nl
+
+# Engelse output  
+./scripts/transform transformations/regelspraak.xsl toka.nrml.json output-en.txt en
+```
+
+### Architectuur Principes
+
+**Strikte scheiding tussen taal en domein:**
+- **Taalconstructies** (lidwoorden, voegwoorden): uit `translations.xsl`
+- **Domeintermen** (vlucht, passagier): uit JSON object model
+- **Geen hardcoded strings** in XSL transformaties
+
+**Unified Reference Chain System:**
+- Alle referenties zijn arrays (zelfs enkele referenties)
+- Ondersteuning voor multi-hop chains (role → property)
+- Possessive pronouns gebaseerd op rule target context
+
+### Technical Features
 
 - **XSLT 3.0** - Declaratieve templates met pattern matching
 - **JSON native** - Directe `json-to-xml()` support  
