@@ -70,14 +70,20 @@
                     <!-- Validity period -->
                     <xsl:choose>
                         <xsl:when test="$valid-to">
-                            <xsl:text>geldig van </xsl:text>
+                            <xsl:call-template name="translate">
+                                <xsl:with-param name="key">valid-from-to</xsl:with-param>
+                            </xsl:call-template>
+                            <xsl:text> </xsl:text>
                             <xsl:value-of select="$valid-from"/>
                             <xsl:text> t/m </xsl:text>
                             <xsl:value-of select="$valid-to"/>
                             <xsl:text>&#10;</xsl:text>
                         </xsl:when>
                         <xsl:otherwise>
-                            <xsl:text>geldig vanaf </xsl:text>
+                            <xsl:call-template name="translate">
+                                <xsl:with-param name="key">valid-from</xsl:with-param>
+                            </xsl:call-template>
+                            <xsl:text> </xsl:text>
                             <xsl:value-of select="$valid-from"/>
                             <xsl:text>&#10;</xsl:text>
                         </xsl:otherwise>
@@ -154,11 +160,19 @@
             <xsl:with-param name="path" select="$target/fn:map[last()]/fn:string[@key='$ref']"/>
             <xsl:with-param name="capitalize" select="true()"/>
         </xsl:call-template>
-        <xsl:text> van een </xsl:text>
+        <xsl:text> </xsl:text>
+        <xsl:call-template name="translate">
+            <xsl:with-param name="key">of-a</xsl:with-param>
+        </xsl:call-template>
+        <xsl:text> </xsl:text>
         <xsl:call-template name="resolve-fact-from-property-ref">
             <xsl:with-param name="ref" select="$target/fn:map/fn:string[@key='$ref']"/>
         </xsl:call-template>
-        <xsl:text> moet geïnitialiseerd worden op </xsl:text>
+        <xsl:text> </xsl:text>
+        <xsl:call-template name="translate">
+            <xsl:with-param name="key">must-be-initialized-to</xsl:with-param>
+        </xsl:call-template>
+        <xsl:text> </xsl:text>
         <xsl:call-template name="format-value">
             <xsl:with-param name="value" select="$value"/>
         </xsl:call-template>
@@ -175,11 +189,19 @@
             <xsl:with-param name="path" select="$target/fn:map[last()]/fn:string[@key='$ref']"/>
             <xsl:with-param name="capitalize" select="true()"/>
         </xsl:call-template>
-        <xsl:text> van een </xsl:text>
+        <xsl:text> </xsl:text>
+        <xsl:call-template name="translate">
+            <xsl:with-param name="key">of-a</xsl:with-param>
+        </xsl:call-template>
+        <xsl:text> </xsl:text>
         <xsl:call-template name="resolve-path">
             <xsl:with-param name="path" select="$target/fn:map[1]/fn:string[@key='$ref']"/>
         </xsl:call-template>
-        <xsl:text> moet gesteld worden op </xsl:text>
+        <xsl:text> </xsl:text>
+        <xsl:call-template name="translate">
+            <xsl:with-param name="key">must-be-set-to</xsl:with-param>
+        </xsl:call-template>
+        <xsl:text> </xsl:text>
         <xsl:call-template name="format-value">
             <xsl:with-param name="value" select="$value"/>
         </xsl:call-template>
@@ -200,7 +222,11 @@
             <xsl:with-param name="path" select="$target/fn:map[last()]/fn:string[@key='$ref']"/>
             <xsl:with-param name="capitalize" select="true()"/>
         </xsl:call-template>
-        <xsl:text> van een </xsl:text>
+        <xsl:text> </xsl:text>
+        <xsl:call-template name="translate">
+            <xsl:with-param name="key">of-a</xsl:with-param>
+        </xsl:call-template>
+        <xsl:text> </xsl:text>
         <xsl:variable name="root-ref" select="$target/fn:map[1]/fn:string[@key='$ref']"/>
         <xsl:variable name="is-root-characteristic">
             <xsl:call-template name="is-characteristic">
@@ -230,7 +256,11 @@
                 </xsl:if>
             </xsl:otherwise>
         </xsl:choose>
-        <xsl:text> moet berekend worden als </xsl:text>
+        <xsl:text> </xsl:text>
+        <xsl:call-template name="translate">
+            <xsl:with-param name="key">must-be-calculated-as</xsl:with-param>
+        </xsl:call-template>
+        <xsl:text> </xsl:text>
         <xsl:call-template name="format-expression">
             <xsl:with-param name="expression" select="$expression"/>
         </xsl:call-template>
@@ -253,7 +283,11 @@
                 <xsl:call-template name="resolve-path">
                     <xsl:with-param name="path" select="$target/fn:map[1]/fn:string[@key='$ref']"/>
                 </xsl:call-template>
-                <xsl:text> is een </xsl:text>
+                <xsl:text> </xsl:text>
+        <xsl:call-template name="translate">
+            <xsl:with-param name="key">is-a</xsl:with-param>
+        </xsl:call-template>
+        <xsl:text> </xsl:text>
                 <xsl:call-template name="resolve-path">
                     <xsl:with-param name="path" select="$target/fn:map[last()]/fn:string[@key='$ref']"/>
                 </xsl:call-template>
@@ -264,7 +298,11 @@
                 <xsl:call-template name="resolve-fact-from-property-ref">
                     <xsl:with-param name="ref" select="$target/fn:map/fn:string[@key='$ref']"/>
                 </xsl:call-template>
-                <xsl:text> is een </xsl:text>
+                <xsl:text> </xsl:text>
+        <xsl:call-template name="translate">
+            <xsl:with-param name="key">is-a</xsl:with-param>
+        </xsl:call-template>
+        <xsl:text> </xsl:text>
                 <xsl:call-template name="resolve-path">
                     <xsl:with-param name="path" select="$target/fn:map/fn:string[@key='$ref']"/>
                 </xsl:call-template>
@@ -286,11 +324,19 @@
             <xsl:with-param name="path" select="$target/fn:map[last()]/fn:string[@key='$ref']"/>
             <xsl:with-param name="capitalize" select="true()"/>
         </xsl:call-template>
-        <xsl:text> van een </xsl:text>
+        <xsl:text> </xsl:text>
+        <xsl:call-template name="translate">
+            <xsl:with-param name="key">of-a</xsl:with-param>
+        </xsl:call-template>
+        <xsl:text> </xsl:text>
         <xsl:call-template name="resolve-fact-from-property-ref">
             <xsl:with-param name="ref" select="$target/fn:map/fn:string[@key='$ref']"/>
         </xsl:call-template>
-        <xsl:text> moet berekend worden als </xsl:text>
+        <xsl:text> </xsl:text>
+        <xsl:call-template name="translate">
+            <xsl:with-param name="key">must-be-calculated-as</xsl:with-param>
+        </xsl:call-template>
+        <xsl:text> </xsl:text>
         <xsl:call-template name="format-expression">
             <xsl:with-param name="expression" select="$expression"/>
         </xsl:call-template>
@@ -340,7 +386,10 @@
                 </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:text>Onbekende expressie type: </xsl:text>
+                <xsl:call-template name="translate">
+                    <xsl:with-param name="key">unknown-expression-type</xsl:with-param>
+                </xsl:call-template>
+                <xsl:text> </xsl:text>
                 <xsl:value-of select="$type"/>
             </xsl:otherwise>
         </xsl:choose>
@@ -369,7 +418,10 @@
                 <xsl:call-template name="resolve-role-name-plural">
                     <xsl:with-param name="path" select="$expression/fn:map/fn:string[@key='$ref']"/>
                 </xsl:call-template>
-                <xsl:text> van de vlucht</xsl:text>
+                <xsl:text> </xsl:text>
+                <xsl:call-template name="translate">
+                    <xsl:with-param name="key">of-the-flight</xsl:with-param>
+                </xsl:call-template>
             </xsl:when>
             <xsl:when test="count($expression/fn:map) > 1">
                 <!-- Multi-hop: role → property -->
@@ -381,7 +433,10 @@
                 <xsl:call-template name="resolve-role-name-plural">
                     <xsl:with-param name="path" select="$expression/fn:map[1]/fn:string[@key='$ref']"/>
                 </xsl:call-template>
-                <xsl:text> van de vlucht</xsl:text>
+                <xsl:text> </xsl:text>
+                <xsl:call-template name="translate">
+                    <xsl:with-param name="key">of-the-flight</xsl:with-param>
+                </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:text> lege expressie</xsl:text>
@@ -482,7 +537,10 @@
                 </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:text>Onbekende conditie type: </xsl:text>
+                <xsl:call-template name="translate">
+                    <xsl:with-param name="key">unknown-condition-type</xsl:with-param>
+                </xsl:call-template>
+                <xsl:text> </xsl:text>
                 <xsl:value-of select="$type"/>
             </xsl:otherwise>
         </xsl:choose>
@@ -581,7 +639,9 @@
                 <xsl:text>)</xsl:text>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:text>onbekende operand</xsl:text>
+                <xsl:call-template name="translate">
+                    <xsl:with-param name="key">unknown-operand</xsl:with-param>
+                </xsl:call-template>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -676,18 +736,28 @@
                 <xsl:choose>
                     <xsl:when test="$target-is-animated = 'true' and contains($chain/fn:map/fn:string[@key='$ref'], '/properties/')">
                         <!-- Animated context: use possessive pronoun -->
-                        <xsl:text>zijn </xsl:text>
+                        <xsl:call-template name="translate">
+                    <xsl:with-param name="key">his</xsl:with-param>
+                </xsl:call-template>
+                <xsl:text> </xsl:text>
                         <xsl:call-template name="resolve-path">
                             <xsl:with-param name="path" select="$chain/fn:map/fn:string[@key='$ref']"/>
                         </xsl:call-template>
                     </xsl:when>
                     <xsl:otherwise>
                         <!-- Regular context: use full form -->
-                        <xsl:text>de </xsl:text>
+                        <xsl:call-template name="translate">
+                    <xsl:with-param name="key">the</xsl:with-param>
+                </xsl:call-template>
+                <xsl:text> </xsl:text>
                         <xsl:call-template name="resolve-path">
                             <xsl:with-param name="path" select="$chain/fn:map/fn:string[@key='$ref']"/>
                         </xsl:call-template>
-                        <xsl:text> van de </xsl:text>
+                        <xsl:text> </xsl:text>
+        <xsl:call-template name="translate">
+            <xsl:with-param name="key">of-the</xsl:with-param>
+        </xsl:call-template>
+        <xsl:text> </xsl:text>
                         <xsl:call-template name="resolve-fact-from-property-ref">
                             <xsl:with-param name="ref" select="$chain/fn:map/fn:string[@key='$ref']"/>
                         </xsl:call-template>
@@ -713,7 +783,10 @@
                 <xsl:text> van </xsl:text>
                 <xsl:choose>
                     <xsl:when test="$use-possessive = 'true'">
-                        <xsl:text>zijn </xsl:text>
+                        <xsl:call-template name="translate">
+                    <xsl:with-param name="key">his</xsl:with-param>
+                </xsl:call-template>
+                <xsl:text> </xsl:text>
                         <xsl:call-template name="resolve-path">
                             <xsl:with-param name="path" select="$chain/fn:map[1]/fn:string[@key='$ref']"/>
                         </xsl:call-template>
@@ -794,7 +867,9 @@
                 <xsl:value-of select="$value/fn:string[@key='value']"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:text>onbekende waarde</xsl:text>
+                <xsl:call-template name="translate">
+                    <xsl:with-param name="key">unknown-value</xsl:with-param>
+                </xsl:call-template>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -822,7 +897,10 @@
                 </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:text>onbekende referentie: </xsl:text>
+                <xsl:call-template name="translate">
+                    <xsl:with-param name="key">unknown-reference</xsl:with-param>
+                </xsl:call-template>
+                <xsl:text> </xsl:text>
                 <xsl:value-of select="$single-path"/>
             </xsl:otherwise>
         </xsl:choose>
@@ -843,7 +921,9 @@
                 <xsl:value-of select="$property-name"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:text>onbekende eigenschap</xsl:text>
+                <xsl:call-template name="translate">
+                    <xsl:with-param name="key">unknown-property</xsl:with-param>
+                </xsl:call-template>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -874,7 +954,9 @@
                 <xsl:value-of select="$role-name"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:text>onbekende rol</xsl:text>
+                <xsl:call-template name="translate">
+                    <xsl:with-param name="key">unknown-role</xsl:with-param>
+                </xsl:call-template>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -1042,7 +1124,9 @@
                 <xsl:value-of select="$param-article"/><xsl:text> </xsl:text><xsl:value-of select="translate($param-name, 'abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ')"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:text>onbekende parameter</xsl:text>
+                <xsl:call-template name="translate">
+                    <xsl:with-param name="key">unknown-parameter</xsl:with-param>
+                </xsl:call-template>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -1052,7 +1136,9 @@
         <xsl:param name="allOf"/>
         <xsl:variable name="conditions" select="$allOf/fn:array[@key='conditions']"/>
         
-        <xsl:text>er aan alle volgende voorwaarden wordt voldaan :</xsl:text>
+        <xsl:call-template name="translate">
+            <xsl:with-param name="key">all-conditions-met</xsl:with-param>
+        </xsl:call-template>
         <xsl:for-each select="$conditions/fn:array | $conditions/fn:map">
             <xsl:text>&#10;  • </xsl:text>
             <!-- Always use format-condition to handle all types -->
@@ -1067,7 +1153,9 @@
         <xsl:param name="anyOf"/>
         <xsl:variable name="conditions" select="$anyOf/fn:array[@key='conditions']"/>
         
-        <xsl:text>er aan ten minste één van de volgende voorwaarden wordt voldaan :</xsl:text>
+        <xsl:call-template name="translate">
+            <xsl:with-param name="key">at-least-one-condition-met</xsl:with-param>
+        </xsl:call-template>
         <xsl:for-each select="$conditions/fn:array | $conditions/fn:map">
             <xsl:text>&#10;  • </xsl:text>
             <!-- Always use format-condition to handle all types -->
@@ -1092,11 +1180,18 @@
             <xsl:when test="$condition/fn:string[@key='type'] = 'exists'">
                 <!-- Exists condition - generate "zijn X is geen Y" format -->
                 <xsl:variable name="characteristic" select="$condition/fn:array[@key='characteristic']"/>
-                <xsl:text>zijn </xsl:text>
+                <xsl:call-template name="translate">
+                    <xsl:with-param name="key">his</xsl:with-param>
+                </xsl:call-template>
+                <xsl:text> </xsl:text>
                 <xsl:call-template name="resolve-path">
                     <xsl:with-param name="path" select="$characteristic/fn:map[1]/fn:string[@key='$ref']"/>
                 </xsl:call-template>
-                <xsl:text> is geen </xsl:text>
+                <xsl:text> </xsl:text>
+        <xsl:call-template name="translate">
+            <xsl:with-param name="key">is-not-a</xsl:with-param>
+        </xsl:call-template>
+        <xsl:text> </xsl:text>
                 <xsl:call-template name="resolve-path">
                     <xsl:with-param name="path" select="$characteristic/fn:map[2]/fn:string[@key='$ref']"/>
                 </xsl:call-template>
@@ -1125,7 +1220,10 @@
     <xsl:template name="format-reference-condition-negated">
         <xsl:param name="condition"/>
         <!-- Use 'geen' with resolved reference -->
-        <xsl:text>geen </xsl:text>
+        <xsl:call-template name="translate">
+            <xsl:with-param name="key">no</xsl:with-param>
+        </xsl:call-template>
+        <xsl:text> </xsl:text>
         <xsl:call-template name="resolve-reference-chain">
             <xsl:with-param name="chain" select="$condition"/>
         </xsl:call-template>
@@ -1158,7 +1256,10 @@
                         <xsl:text>De </xsl:text>
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:text>de </xsl:text>
+                        <xsl:call-template name="translate">
+                    <xsl:with-param name="key">the</xsl:with-param>
+                </xsl:call-template>
+                <xsl:text> </xsl:text>
                     </xsl:otherwise>
                 </xsl:choose>
                 <xsl:call-template name="resolve-path">
@@ -1238,7 +1339,10 @@
                         <xsl:text>De </xsl:text>
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:text>de </xsl:text>
+                        <xsl:call-template name="translate">
+                    <xsl:with-param name="key">the</xsl:with-param>
+                </xsl:call-template>
+                <xsl:text> </xsl:text>
                     </xsl:otherwise>
                 </xsl:choose>
                 <xsl:call-template name="resolve-path">
@@ -1248,17 +1352,71 @@
         </xsl:choose>
     </xsl:template>
 
+    <!-- Check if a fact (by path) is animated -->
+    <xsl:template name="is-fact-animated">
+        <xsl:param name="path"/>
+        
+        <xsl:choose>
+            <!-- Role reference -->
+            <xsl:when test="contains($path, '/roles/')">
+                <xsl:variable name="fact-uuid" select="substring-before(substring-after($path, '#/facts/'), '/roles/')"/>
+                <!-- Check if this fact is animated -->
+                <xsl:choose>
+                    <xsl:when test="//fn:map[@key='facts']/fn:map[@key=$fact-uuid]/fn:boolean[@key='animated'] = 'true'">true</xsl:when>
+                    <xsl:otherwise>false</xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
+            <!-- Property reference -->
+            <xsl:when test="contains($path, '/properties/')">
+                <xsl:variable name="fact-uuid" select="substring-before(substring-after($path, '#/facts/'), '/properties/')"/>
+                <!-- Check if this fact is animated -->
+                <xsl:choose>
+                    <xsl:when test="//fn:map[@key='facts']/fn:map[@key=$fact-uuid]/fn:boolean[@key='animated'] = 'true'">true</xsl:when>
+                    <xsl:otherwise>false</xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
+            <xsl:otherwise>false</xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
     <!-- Format exists condition (classification statements) -->
     <xsl:template name="format-exists">
         <xsl:param name="exists"/>
         <xsl:variable name="characteristic" select="$exists/fn:array[@key='characteristic']"/>
         
-        <!-- Generate "zijn X is een Y" format -->
-        <xsl:text>zijn </xsl:text>
+        <!-- Generate possessive pronoun based on rule target context -->
+        <xsl:variable name="first-ref" select="$characteristic/fn:map[1]/fn:string[@key='$ref']"/>
+        <xsl:variable name="current-rule" select="ancestor-or-self::fn:map[fn:array[@key='target']]"/>
+        <xsl:variable name="rule-target-animated">
+            <xsl:if test="$current-rule">
+                <xsl:call-template name="is-rule-target-animated">
+                    <xsl:with-param name="target" select="$current-rule/fn:array[@key='target']"/>
+                </xsl:call-template>
+            </xsl:if>
+        </xsl:variable>
+        
+        <xsl:choose>
+            <xsl:when test="$rule-target-animated = 'true'">
+                <xsl:call-template name="translate">
+                    <xsl:with-param name="key">his</xsl:with-param>
+                </xsl:call-template>
+                <xsl:text> </xsl:text>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:call-template name="translate">
+                    <xsl:with-param name="key">the</xsl:with-param>
+                </xsl:call-template>
+                <xsl:text> </xsl:text>
+            </xsl:otherwise>
+        </xsl:choose>
         <xsl:call-template name="resolve-path">
-            <xsl:with-param name="path" select="$characteristic/fn:map[1]/fn:string[@key='$ref']"/>
+            <xsl:with-param name="path" select="$first-ref"/>
         </xsl:call-template>
-        <xsl:text> is een </xsl:text>
+        <xsl:text> </xsl:text>
+        <xsl:call-template name="translate">
+            <xsl:with-param name="key">is-a</xsl:with-param>
+        </xsl:call-template>
+        <xsl:text> </xsl:text>
         <xsl:call-template name="resolve-path">
             <xsl:with-param name="path" select="$characteristic/fn:map[2]/fn:string[@key='$ref']"/>
         </xsl:call-template>
@@ -1269,12 +1427,39 @@
         <xsl:param name="notExists"/>
         <xsl:variable name="characteristic" select="$notExists/fn:array[@key='characteristic']"/>
         
-        <!-- Generate "zijn X is geen Y" format -->
-        <xsl:text>zijn </xsl:text>
+        <!-- Generate possessive pronoun based on rule target context -->
+        <xsl:variable name="first-ref" select="$characteristic/fn:map[1]/fn:string[@key='$ref']"/>
+        <xsl:variable name="current-rule" select="ancestor-or-self::fn:map[fn:array[@key='target']]"/>
+        <xsl:variable name="rule-target-animated">
+            <xsl:if test="$current-rule">
+                <xsl:call-template name="is-rule-target-animated">
+                    <xsl:with-param name="target" select="$current-rule/fn:array[@key='target']"/>
+                </xsl:call-template>
+            </xsl:if>
+        </xsl:variable>
+        
+        <xsl:choose>
+            <xsl:when test="$rule-target-animated = 'true'">
+                <xsl:call-template name="translate">
+                    <xsl:with-param name="key">his</xsl:with-param>
+                </xsl:call-template>
+                <xsl:text> </xsl:text>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:call-template name="translate">
+                    <xsl:with-param name="key">the</xsl:with-param>
+                </xsl:call-template>
+                <xsl:text> </xsl:text>
+            </xsl:otherwise>
+        </xsl:choose>
         <xsl:call-template name="resolve-path">
-            <xsl:with-param name="path" select="$characteristic/fn:map[1]/fn:string[@key='$ref']"/>
+            <xsl:with-param name="path" select="$first-ref"/>
         </xsl:call-template>
-        <xsl:text> is geen </xsl:text>
+        <xsl:text> </xsl:text>
+        <xsl:call-template name="translate">
+            <xsl:with-param name="key">is-not-a</xsl:with-param>
+        </xsl:call-template>
+        <xsl:text> </xsl:text>
         <xsl:call-template name="resolve-path">
             <xsl:with-param name="path" select="$characteristic/fn:map[2]/fn:string[@key='$ref']"/>
         </xsl:call-template>
@@ -1285,7 +1470,9 @@
         <xsl:param name="exactlyOneOf"/>
         <xsl:variable name="conditions" select="$exactlyOneOf/fn:array[@key='conditions']"/>
         
-        <xsl:text>er aan precies één van de volgende voorwaarden wordt voldaan :</xsl:text>
+        <xsl:call-template name="translate">
+            <xsl:with-param name="key">exactly-one-condition-met</xsl:with-param>
+        </xsl:call-template>
         <xsl:for-each select="$conditions/fn:map">
             <xsl:text>&#10;  • </xsl:text>
             <xsl:variable name="condition-type" select="fn:string[@key='type']"/>
@@ -1300,7 +1487,10 @@
                     <xsl:call-template name="format-operand">
                         <xsl:with-param name="operand" select="$subject-operand"/>
                     </xsl:call-template>
-                    <xsl:text> voldoet aan alle volgende voorwaarden :</xsl:text>
+                    <xsl:text> </xsl:text>
+                    <xsl:call-template name="translate">
+                        <xsl:with-param name="key">meets-all-conditions</xsl:with-param>
+                    </xsl:call-template>
                     
                     <!-- Format nested conditions with double bullets -->
                     <xsl:for-each select="$nested-conditions/fn:map">
@@ -1346,7 +1536,9 @@
     <xsl:template name="format-condition-qualifier">
         <xsl:param name="condition"/>
         <!-- Extract qualifier from condition structure, don't hardcode -->
-        <xsl:text>de voorwaarden</xsl:text>
+        <xsl:call-template name="translate">
+            <xsl:with-param name="key">the-conditions</xsl:with-param>
+        </xsl:call-template>
     </xsl:template>
 
 </xsl:stylesheet>
