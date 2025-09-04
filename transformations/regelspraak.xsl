@@ -150,9 +150,9 @@
         <xsl:param name="target"/>
         <xsl:param name="value"/>
         
-        <xsl:text>De </xsl:text>
-        <xsl:call-template name="resolve-path">
-            <xsl:with-param name="path" select="$target/fn:map/fn:string[@key='$ref']"/>
+        <xsl:call-template name="resolve-path-with-article">
+            <xsl:with-param name="path" select="$target/fn:map[last()]/fn:string[@key='$ref']"/>
+            <xsl:with-param name="capitalize" select="true()"/>
         </xsl:call-template>
         <xsl:text> van een </xsl:text>
         <xsl:call-template name="resolve-fact-from-property-ref">
@@ -171,9 +171,9 @@
         <xsl:param name="value"/>
         <xsl:param name="condition"/>
         
-        <xsl:text>De </xsl:text>
-        <xsl:call-template name="resolve-path">
+        <xsl:call-template name="resolve-path-with-article">
             <xsl:with-param name="path" select="$target/fn:map[last()]/fn:string[@key='$ref']"/>
+            <xsl:with-param name="capitalize" select="true()"/>
         </xsl:call-template>
         <xsl:text> van een </xsl:text>
         <xsl:call-template name="resolve-path">
@@ -196,9 +196,9 @@
         <xsl:param name="expression"/>
         <xsl:param name="condition"/>
         
-        <xsl:text>De </xsl:text>
-        <xsl:call-template name="resolve-path">
+        <xsl:call-template name="resolve-path-with-article">
             <xsl:with-param name="path" select="$target/fn:map[last()]/fn:string[@key='$ref']"/>
+            <xsl:with-param name="capitalize" select="true()"/>
         </xsl:call-template>
         <xsl:text> van een </xsl:text>
         <xsl:call-template name="resolve-path">
@@ -264,9 +264,9 @@
         <xsl:param name="target"/>
         <xsl:param name="expression"/>
         
-        <xsl:text>De </xsl:text>
-        <xsl:call-template name="resolve-path">
-            <xsl:with-param name="path" select="$target/fn:map/fn:string[@key='$ref']"/>
+        <xsl:call-template name="resolve-path-with-article">
+            <xsl:with-param name="path" select="$target/fn:map[last()]/fn:string[@key='$ref']"/>
+            <xsl:with-param name="capitalize" select="true()"/>
         </xsl:call-template>
         <xsl:text> van een </xsl:text>
         <xsl:call-template name="resolve-fact-from-property-ref">
@@ -1066,23 +1066,33 @@
     <!-- Resolve path with correct article from JSON -->
     <xsl:template name="resolve-path-with-article">
         <xsl:param name="path"/>
+        <xsl:param name="capitalize" select="false()"/>
         
         <xsl:choose>
             <!-- Property reference -->
             <xsl:when test="contains($path, '/properties/')">
                 <xsl:call-template name="resolve-property-with-article">
                     <xsl:with-param name="path" select="$path"/>
+                    <xsl:with-param name="capitalize" select="$capitalize"/>
                 </xsl:call-template>
             </xsl:when>
             <!-- Role reference -->
             <xsl:when test="contains($path, '/roles/')">
                 <xsl:call-template name="resolve-role-with-article">
                     <xsl:with-param name="path" select="$path"/>
+                    <xsl:with-param name="capitalize" select="$capitalize"/>
                 </xsl:call-template>
             </xsl:when>
             <!-- Fallback to regular resolution -->
             <xsl:otherwise>
-                <xsl:text>de </xsl:text>
+                <xsl:choose>
+                    <xsl:when test="$capitalize">
+                        <xsl:text>De </xsl:text>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:text>de </xsl:text>
+                    </xsl:otherwise>
+                </xsl:choose>
                 <xsl:call-template name="resolve-path">
                     <xsl:with-param name="path" select="$path"/>
                 </xsl:call-template>
@@ -1093,6 +1103,7 @@
     <!-- Resolve property with its article -->
     <xsl:template name="resolve-property-with-article">
         <xsl:param name="path"/>
+        <xsl:param name="capitalize" select="false()"/>
         <xsl:variable name="fact-uuid" select="substring-before(substring-after($path, '#/facts/'), '/properties/')"/>
         <xsl:variable name="property-uuid" select="substring-after($path, '/properties/')"/>
         
@@ -1101,7 +1112,14 @@
         
         <xsl:choose>
             <xsl:when test="$property-article and $property-article != ''">
-                <xsl:value-of select="$property-article"/>
+                <xsl:choose>
+                    <xsl:when test="$capitalize">
+                        <xsl:value-of select="concat(translate(substring($property-article, 1, 1), 'abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'), substring($property-article, 2))"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="$property-article"/>
+                    </xsl:otherwise>
+                </xsl:choose>
                 <xsl:text> </xsl:text>
             </xsl:when>
         </xsl:choose>
@@ -1113,6 +1131,7 @@
     <!-- Resolve role with its article -->
     <xsl:template name="resolve-role-with-article">
         <xsl:param name="path"/>
+        <xsl:param name="capitalize" select="false()"/>
         <xsl:variable name="fact-uuid" select="substring-before(substring-after($path, '#/facts/'), '/roles/')"/>
         <xsl:variable name="role-uuid" select="substring-after($path, '/roles/')"/>
         
@@ -1132,14 +1151,28 @@
         
         <xsl:choose>
             <xsl:when test="$role-article != ''">
-                <xsl:value-of select="$role-article"/>
+                <xsl:choose>
+                    <xsl:when test="$capitalize">
+                        <xsl:value-of select="concat(translate(substring($role-article, 1, 1), 'abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'), substring($role-article, 2))"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="$role-article"/>
+                    </xsl:otherwise>
+                </xsl:choose>
                 <xsl:text> </xsl:text>
                 <xsl:call-template name="resolve-path">
                     <xsl:with-param name="path" select="$path"/>
                 </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:text>de </xsl:text>
+                <xsl:choose>
+                    <xsl:when test="$capitalize">
+                        <xsl:text>De </xsl:text>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:text>de </xsl:text>
+                    </xsl:otherwise>
+                </xsl:choose>
                 <xsl:call-template name="resolve-path">
                     <xsl:with-param name="path" select="$path"/>
                 </xsl:call-template>
