@@ -2634,14 +2634,24 @@
                 "type": "anyOf",
                 "conditions": [
                   {
-                    "type": "not",
-                    "condition": []
+                    "type": "notExists",
+                    "characteristic": [
+                      {
+                        "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
+                      },
+                      {
+                        "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/4b9bd5f1-311a-4b59-8dd9-ee3139de153e"
+                      }
+                    ]
                   },
                   {
-                    "type": "not",
-                    "condition": [
+                    "type": "notExists",
+                    "characteristic": [
                       {
                         "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                      },
+                      {
+                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/866a85c0-b305-4ce3-af5b-2baf449cdfeb"
                       }
                     ]
                   }

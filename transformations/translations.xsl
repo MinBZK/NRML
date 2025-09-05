@@ -148,6 +148,9 @@
           <xsl:when test="$key = 'of'">van</xsl:when>
           <xsl:when test="$key = 'divided-by'">gedeeld door</xsl:when>
           <xsl:when test="$key = 'has'">heeft</xsl:when>
+          <xsl:when test="$key = 'he'">hij</xsl:when>
+          <xsl:when test="$key = 'has-no'">heeft geen</xsl:when>
+          <xsl:when test="$key = 'is-not'">is niet</xsl:when>
           <xsl:otherwise><xsl:value-of select="$key"/></xsl:otherwise>
         </xsl:choose>
       </xsl:otherwise>
