@@ -208,6 +208,7 @@
         <xsl:text>&#10;indien </xsl:text>
         <xsl:call-template name="format-condition">
             <xsl:with-param name="condition" select="$condition"/>
+            <xsl:with-param name="is-direct-condition" select="'true'"/>
         </xsl:call-template>
         <xsl:text>.</xsl:text>
     </xsl:template>
@@ -259,6 +260,7 @@
         <xsl:text>&#10;indien </xsl:text>
         <xsl:call-template name="format-condition">
             <xsl:with-param name="condition" select="$condition"/>
+            <xsl:with-param name="is-direct-condition" select="'true'"/>
         </xsl:call-template>
         <xsl:text>.</xsl:text>
     </xsl:template>
@@ -322,6 +324,7 @@
         <xsl:text>&#10;indien </xsl:text>
         <xsl:call-template name="format-condition">
             <xsl:with-param name="condition" select="$condition"/>
+            <xsl:with-param name="is-direct-condition" select="'true'"/>
         </xsl:call-template>
         <xsl:text>.</xsl:text>
     </xsl:template>
@@ -414,6 +417,11 @@
             <xsl:when test="$type = 'rounding'">
                 <xsl:call-template name="format-rounding">
                     <xsl:with-param name="rounding" select="$expression"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="$type = 'bounded'">
+                <xsl:call-template name="format-bounded">
+                    <xsl:with-param name="bounded" select="$expression"/>
                 </xsl:call-template>
             </xsl:when>
             <xsl:when test="$expression/fn:array">
@@ -524,6 +532,7 @@
     <!-- Format condition -->
     <xsl:template name="format-condition">
         <xsl:param name="condition"/>
+        <xsl:param name="is-direct-condition" select="'false'"/>
         <xsl:variable name="type" select="$condition/fn:string[@key='type']"/>
         
         <xsl:choose>
@@ -536,6 +545,7 @@
             <xsl:when test="$type = 'comparison'">
                 <xsl:call-template name="format-comparison">
                     <xsl:with-param name="comparison" select="$condition"/>
+                    <xsl:with-param name="is-direct-condition" select="$is-direct-condition"/>
                 </xsl:call-template>
             </xsl:when>
             <xsl:when test="$type = 'logical'">
@@ -586,6 +596,7 @@
     <!-- Format comparison -->
     <xsl:template name="format-comparison">
         <xsl:param name="comparison"/>
+        <xsl:param name="is-direct-condition" select="'false'"/>
         <xsl:variable name="operator" select="$comparison/fn:string[@key='operator']"/>
         <xsl:variable name="left" select="$comparison/fn:array[@key='left'] | $comparison/fn:map[@key='left']"/>
         <xsl:variable name="right" select="$comparison/fn:array[@key='right'] | $comparison/fn:map[@key='right']"/>
@@ -594,16 +605,27 @@
             <xsl:with-param name="operand" select="$left"/>
         </xsl:call-template>
         <xsl:text> </xsl:text>
-        <xsl:call-template name="format-operator">
-            <xsl:with-param name="operator" select="$operator"/>
-        </xsl:call-template>
+        <xsl:choose>
+            <xsl:when test="$is-direct-condition = 'true'">
+                <!-- Direct condition: "leeftijd kleiner is dan" (inverted order) -->
+                <xsl:call-template name="format-operator-inverted">
+                    <xsl:with-param name="operator" select="$operator"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <!-- List condition: "leeftijd is kleiner dan" (standard order) -->
+                <xsl:call-template name="format-operator">
+                    <xsl:with-param name="operator" select="$operator"/>
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
         <xsl:text> </xsl:text>
         <xsl:call-template name="format-operand">
             <xsl:with-param name="operand" select="$right"/>
         </xsl:call-template>
     </xsl:template>
 
-    <!-- Format operator -->
+    <!-- Format operator (standard order for lists) -->
     <xsl:template name="format-operator">
         <xsl:param name="operator"/>
         <xsl:choose>
@@ -614,6 +636,21 @@
             <xsl:when test="$operator = 'greaterOrEqual'">is groter of gelijk aan</xsl:when>
             <xsl:when test="$operator = 'greaterThanOrEquals'">is groter of gelijk aan</xsl:when>
             <xsl:when test="$operator = 'lessThanOrEquals'">is kleiner of gelijk aan</xsl:when>
+            <xsl:otherwise><xsl:value-of select="$operator"/></xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <!-- Format operator (inverted order for direct conditions) -->
+    <xsl:template name="format-operator-inverted">
+        <xsl:param name="operator"/>
+        <xsl:choose>
+            <xsl:when test="$operator = 'equals'">gelijk is aan</xsl:when>
+            <xsl:when test="$operator = 'notEquals'">ongelijk is aan</xsl:when>
+            <xsl:when test="$operator = 'greaterThan'">groter is dan</xsl:when>
+            <xsl:when test="$operator = 'lessThan'">kleiner is dan</xsl:when>
+            <xsl:when test="$operator = 'greaterOrEqual'">groter of gelijk is aan</xsl:when>
+            <xsl:when test="$operator = 'greaterThanOrEquals'">groter of gelijk is aan</xsl:when>
+            <xsl:when test="$operator = 'lessThanOrEquals'">kleiner of gelijk is aan</xsl:when>
             <xsl:otherwise><xsl:value-of select="$operator"/></xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -1457,31 +1494,87 @@
             </xsl:if>
         </xsl:variable>
         
+        <!-- Check characteristic subtype for correct grammar first -->
+        <xsl:variable name="second-ref" select="$characteristic/fn:map[2]/fn:string[@key='$ref']"/>
+        <xsl:variable name="is-possessive">
+            <xsl:call-template name="is-characteristic-possessive">
+                <xsl:with-param name="path" select="$second-ref"/>
+            </xsl:call-template>
+        </xsl:variable>
+        <xsl:variable name="is-adjective">
+            <xsl:call-template name="is-characteristic-adjective">
+                <xsl:with-param name="path" select="$second-ref"/>
+            </xsl:call-template>
+        </xsl:variable>
+        
         <xsl:choose>
-            <xsl:when test="$rule-target-animated = 'true'">
+            <xsl:when test="$is-possessive = 'true' and $rule-target-animated = 'true'">
+                <!-- Possessive characteristic with animated subject: "hij heeft een recht op..." -->
                 <xsl:call-template name="translate">
-                    <xsl:with-param name="key">his</xsl:with-param>
+                    <xsl:with-param name="key">he</xsl:with-param>
                 </xsl:call-template>
                 <xsl:text> </xsl:text>
+                <xsl:call-template name="translate">
+                    <xsl:with-param name="key">has</xsl:with-param>
+                </xsl:call-template>
+                <xsl:text> </xsl:text>
+                <xsl:call-template name="resolve-path-with-article">
+                    <xsl:with-param name="path" select="$second-ref"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="$is-adjective = 'true'">
+                <!-- Adjective characteristic: "zijn reis is klimaatneutraal" -->
+                <xsl:choose>
+                    <xsl:when test="$rule-target-animated = 'true'">
+                        <xsl:call-template name="translate">
+                            <xsl:with-param name="key">his</xsl:with-param>
+                        </xsl:call-template>
+                        <xsl:text> </xsl:text>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:call-template name="translate">
+                            <xsl:with-param name="key">the</xsl:with-param>
+                        </xsl:call-template>
+                        <xsl:text> </xsl:text>
+                    </xsl:otherwise>
+                </xsl:choose>
+                <xsl:call-template name="resolve-path">
+                    <xsl:with-param name="path" select="$first-ref"/>
+                </xsl:call-template>
+                <xsl:text> is </xsl:text>
+                <xsl:call-template name="resolve-path">
+                    <xsl:with-param name="path" select="$second-ref"/>
+                </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:call-template name="translate">
-                    <xsl:with-param name="key">the</xsl:with-param>
+                <!-- Standard classification: "zijn X is een Y" -->
+                <xsl:choose>
+                    <xsl:when test="$rule-target-animated = 'true'">
+                        <xsl:call-template name="translate">
+                            <xsl:with-param name="key">his</xsl:with-param>
+                        </xsl:call-template>
+                        <xsl:text> </xsl:text>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:call-template name="translate">
+                            <xsl:with-param name="key">the</xsl:with-param>
+                        </xsl:call-template>
+                        <xsl:text> </xsl:text>
+                    </xsl:otherwise>
+                </xsl:choose>
+                <xsl:call-template name="resolve-path">
+                    <xsl:with-param name="path" select="$first-ref"/>
                 </xsl:call-template>
                 <xsl:text> </xsl:text>
+                <xsl:call-template name="translate">
+                    <xsl:with-param name="key">is-a</xsl:with-param>
+                </xsl:call-template>
+                <xsl:text> </xsl:text>
+                <xsl:call-template name="resolve-path">
+                    <xsl:with-param name="path" select="$second-ref"/>
+                </xsl:call-template>
             </xsl:otherwise>
         </xsl:choose>
-        <xsl:call-template name="resolve-path">
-            <xsl:with-param name="path" select="$first-ref"/>
-        </xsl:call-template>
-        <xsl:text> </xsl:text>
-        <xsl:call-template name="translate">
-            <xsl:with-param name="key">is-a</xsl:with-param>
-        </xsl:call-template>
-        <xsl:text> </xsl:text>
-        <xsl:call-template name="resolve-path">
-            <xsl:with-param name="path" select="$characteristic/fn:map[2]/fn:string[@key='$ref']"/>
-        </xsl:call-template>
     </xsl:template>
 
     <!-- Format notExists condition (negative classification statements) -->
@@ -1766,6 +1859,24 @@
         <xsl:text> decimalen</xsl:text>
     </xsl:template>
 
+    <!-- Format bounded expression -->
+    <xsl:template name="format-bounded">
+        <xsl:param name="bounded"/>
+        <xsl:variable name="expression" select="$bounded/fn:map[@key='expression']"/>
+        <xsl:variable name="minimum" select="$bounded/fn:map[@key='minimum']"/>
+        
+        <xsl:call-template name="format-expression">
+            <xsl:with-param name="expression" select="$expression"/>
+        </xsl:call-template>
+        
+        <xsl:if test="$minimum">
+            <xsl:text> , met een minimum van </xsl:text>
+            <xsl:call-template name="format-value">
+                <xsl:with-param name="value" select="$minimum"/>
+            </xsl:call-template>
+        </xsl:if>
+    </xsl:template>
+
     <!-- Check if a characteristic is an adjective -->
     <xsl:template name="is-characteristic-adjective">
         <xsl:param name="path"/>
@@ -1778,6 +1889,25 @@
                 <!-- Check if this characteristic has subtype "adjective" -->
                 <xsl:choose>
                     <xsl:when test="//fn:map[@key='facts']/fn:map[@key=$fact-uuid]/fn:map[@key='items']/fn:map[@key=$property-uuid]/fn:array[@key='versions']/fn:map/fn:string[@key='subtype'] = 'adjective'">true</xsl:when>
+                    <xsl:otherwise>false</xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
+            <xsl:otherwise>false</xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <!-- Check if a characteristic is possessive -->
+    <xsl:template name="is-characteristic-possessive">
+        <xsl:param name="path"/>
+        
+        <xsl:choose>
+            <xsl:when test="contains($path, '/properties/')">
+                <xsl:variable name="fact-uuid" select="substring-before(substring-after($path, '#/facts/'), '/properties/')"/>
+                <xsl:variable name="property-uuid" select="substring-after($path, '/properties/')"/>
+                
+                <!-- Check if this characteristic has subtype "possessive" -->
+                <xsl:choose>
+                    <xsl:when test="//fn:map[@key='facts']/fn:map[@key=$fact-uuid]/fn:map[@key='items']/fn:map[@key=$property-uuid]/fn:array[@key='versions']/fn:map/fn:string[@key='subtype'] = 'possessive'">true</xsl:when>
                     <xsl:otherwise>false</xsl:otherwise>
                 </xsl:choose>
             </xsl:when>
