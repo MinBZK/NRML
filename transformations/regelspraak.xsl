@@ -54,6 +54,11 @@
             <xsl:for-each select="fn:map[@key='items']/fn:map">
                 <xsl:variable name="rule-name" select="fn:map[@key='name']/fn:string[@key=$language]"/>
                 
+                <!-- Rule header - output once per rule -->
+                <xsl:text>Regel </xsl:text>
+                <xsl:value-of select="$rule-name"/>
+                <xsl:text>&#10;</xsl:text>
+                
                 <!-- Process each version of the rule -->
                 <xsl:for-each select="fn:array[@key='versions']/fn:map">
                     <xsl:variable name="valid-from" select="fn:string[@key='validFrom']"/>
@@ -61,11 +66,6 @@
                     <xsl:variable name="target" select="fn:array[@key='target']"/>
                     <xsl:variable name="condition" select="fn:map[@key='condition']"/>
                     <xsl:variable name="value" select="fn:map[@key='value']"/>
-                    
-                    <!-- Rule header -->
-                    <xsl:text>Regel </xsl:text>
-                    <xsl:value-of select="$rule-name"/>
-                    <xsl:text>&#10;</xsl:text>
                     
                     <!-- Validity period -->
                     <xsl:choose>
@@ -127,10 +127,20 @@
                         
                         <!-- Aggregation rules (target + expression, no condition) -->
                         <xsl:when test="$target and fn:map[@key='expression'] and not($condition)">
-                            <xsl:call-template name="format-aggregation-rule">
-                                <xsl:with-param name="target" select="$target"/>
-                                <xsl:with-param name="expression" select="fn:map[@key='expression']"/>
-                            </xsl:call-template>
+                            <xsl:choose>
+                                <xsl:when test="fn:map[@key='expression']/fn:string[@key='type'] = 'distribution'">
+                                    <xsl:call-template name="format-distribution-rule">
+                                        <xsl:with-param name="target" select="$target"/>
+                                        <xsl:with-param name="expression" select="fn:map[@key='expression']"/>
+                                    </xsl:call-template>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:call-template name="format-aggregation-rule">
+                                        <xsl:with-param name="target" select="$target"/>
+                                        <xsl:with-param name="expression" select="fn:map[@key='expression']"/>
+                                    </xsl:call-template>
+                                </xsl:otherwise>
+                            </xsl:choose>
                         </xsl:when>
                         
                         <!-- Conditional rules (only condition) -->
@@ -145,7 +155,11 @@
                         </xsl:otherwise>
                     </xsl:choose>
                     
-                    <xsl:text>&#10;&#10;</xsl:text>
+                    <!-- Add newline after each version, plus extra newline only after last version -->
+                    <xsl:text>&#10;</xsl:text>
+                    <xsl:if test="position() = last()">
+                        <xsl:text>&#10;</xsl:text>
+                    </xsl:if>
                 </xsl:for-each>
             </xsl:for-each>
         </xsl:for-each>
@@ -373,6 +387,47 @@
         <xsl:text>.</xsl:text>
     </xsl:template>
 
+    <!-- Format distribution rule -->
+    <xsl:template name="format-distribution-rule">
+        <xsl:param name="target"/>
+        <xsl:param name="expression"/>
+        
+        <!-- Generate the main distribution statement -->
+        <xsl:text>Het totaal aantal treinmiles van een te verdelen contingent treinmiles wordt verdeeld in de treinmiles van alle </xsl:text>
+        
+        <!-- Get recipients from target -->
+        <xsl:call-template name="resolve-role-name-plural">
+            <xsl:with-param name="path" select="$target/fn:map[1]/fn:string[@key='$ref']"/>
+        </xsl:call-template>
+        
+        <xsl:text> met recht op treinmiles van het te verdelen contingent treinmiles, waarbij wordt verdeeld</xsl:text>
+        
+        <!-- Add the distribution method -->
+        <xsl:choose>
+            <xsl:when test="$expression/fn:string[@key='method'] = 'equal_shares'">
+                <xsl:text>: </xsl:text>
+                <xsl:call-template name="format-distribution">
+                    <xsl:with-param name="distribution" select="$expression"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="$expression/fn:string[@key='method'] = 'weighted'">
+                <xsl:text>:
+  • </xsl:text>
+                <xsl:call-template name="format-distribution">
+                    <xsl:with-param name="distribution" select="$expression"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:text>: </xsl:text>
+                <xsl:call-template name="format-distribution">
+                    <xsl:with-param name="distribution" select="$expression"/>
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
+        
+        <xsl:text>.</xsl:text>
+    </xsl:template>
+
     <!-- Format conditional rule -->
     <xsl:template name="format-conditional-rule">
         <xsl:param name="condition"/>
@@ -427,6 +482,11 @@
             <xsl:when test="$type = 'sum'">
                 <xsl:call-template name="format-sum">
                     <xsl:with-param name="sum" select="$expression"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="$type = 'distribution'">
+                <xsl:call-template name="format-distribution">
+                    <xsl:with-param name="distribution" select="$expression"/>
                 </xsl:call-template>
             </xsl:when>
             <xsl:when test="$expression/fn:array">
@@ -1184,6 +1244,76 @@
                 <xsl:with-param name="operand" select="."/>
             </xsl:call-template>
         </xsl:for-each>
+    </xsl:template>
+
+    <!-- Format distribution expression -->
+    <xsl:template name="format-distribution">
+        <xsl:param name="distribution"/>
+        
+        <!-- Get source, method, and other properties -->
+        <xsl:variable name="source" select="$distribution/fn:array[@key='source']"/>
+        <xsl:variable name="method" select="$distribution/fn:string[@key='method']"/>
+        <xsl:variable name="criteria" select="$distribution/fn:array[@key='criteria']"/>
+        <xsl:variable name="rounding" select="$distribution/fn:map[@key='rounding']"/>
+        
+        <!-- Generate distribution text based on method -->
+        <xsl:choose>
+            <xsl:when test="$method = 'equal_shares'">
+                <xsl:text>in gelijke delen</xsl:text>
+            </xsl:when>
+            <xsl:when test="$method = 'weighted'">
+                <!-- Complex criteria-based distribution -->
+                <xsl:for-each select="$criteria/fn:map">
+                    <xsl:choose>
+                        <xsl:when test="fn:string[@key='type'] = 'sort'">
+                            <xsl:text>op volgorde van toenemende </xsl:text>
+                            <xsl:call-template name="resolve-path">
+                                <xsl:with-param name="path" select="fn:array[@key='field']/fn:map/fn:string[@key='$ref']"/>
+                            </xsl:call-template>
+                            <xsl:if test="fn:map[@key='tiebreaker']">
+                                <xsl:text> bij een even groot criterium naar rato van de </xsl:text>
+                                <xsl:call-template name="resolve-path">
+                                    <xsl:with-param name="path" select="fn:map[@key='tiebreaker']/fn:array[@key='field']/fn:map/fn:string[@key='$ref']"/>
+                                </xsl:call-template>
+                            </xsl:if>
+                        </xsl:when>
+                        <xsl:when test="fn:string[@key='type'] = 'maximum'">
+                            <xsl:text>met een maximum van het </xsl:text>
+                            <xsl:call-template name="resolve-path">
+                                <xsl:with-param name="path" select="fn:array[@key='value']/fn:map/fn:string[@key='$ref']"/>
+                            </xsl:call-template>
+                        </xsl:when>
+                    </xsl:choose>
+                    <xsl:if test="position() != last()">
+                        <xsl:text>
+  • </xsl:text>
+                    </xsl:if>
+                </xsl:for-each>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$method"/>
+            </xsl:otherwise>
+        </xsl:choose>
+        
+        <!-- Add rounding info -->
+        <xsl:if test="$rounding">
+            <xsl:text>
+  • afgerond op </xsl:text>
+            <xsl:value-of select="$rounding/fn:number[@key='decimals']"/>
+            <xsl:text> decimalen naar </xsl:text>
+            <xsl:choose>
+                <xsl:when test="$rounding/fn:string[@key='direction'] = 'down'">
+                    <xsl:text>beneden</xsl:text>
+                </xsl:when>
+                <xsl:when test="$rounding/fn:string[@key='direction'] = 'up'">
+                    <xsl:text>boven</xsl:text>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="$rounding/fn:string[@key='direction']"/>
+                </xsl:otherwise>
+            </xsl:choose>
+            <xsl:text> - als onverdeelde rest blijft het restant na verdeling van het te verdelen contingent treinmiles over</xsl:text>
+        </xsl:if>
     </xsl:template>
 
     <!-- Format arithmetic expression -->

@@ -619,6 +619,23 @@
             "nl": "het",
             "en": "the"
           }
+        },
+        "12345678-1234-5678-9012-woonregiofactor": {
+          "name": {
+            "nl": "woonregiofactor",
+            "en": "residential region factor"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "numeric",
+              "subtype": "decimal"
+            }
+          ],
+          "article": {
+            "nl": "de",
+            "en": "the"
+          }
         }
       },
       "definite_article": {
@@ -2781,7 +2798,26 @@
                 {
                   "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/11d155f3-d6bd-4792-94bb-e20c0c885101"
                 }
-              ]
+              ],
+              "expression": {
+                "type": "distribution",
+                "source": [
+                  {
+                    "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/contingent-placeholder"
+                  },
+                  {
+                    "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/totaal-treinmiles-placeholder"
+                  }
+                ],
+                "method": "equal_shares",
+                "rounding": {
+                  "decimals": 0,
+                  "direction": "down"
+                },
+                "default": {
+                  "value": 0
+                }
+              }
             },
             {
               "validFrom": "2019",
@@ -2792,7 +2828,53 @@
                 {
                   "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/11d155f3-d6bd-4792-94bb-e20c0c885101"
                 }
-              ]
+              ],
+              "expression": {
+                "type": "distribution",
+                "source": [
+                  {
+                    "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/contingent-placeholder"
+                  },
+                  {
+                    "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/totaal-treinmiles-placeholder"
+                  }
+                ],
+                "method": "weighted",
+                "criteria": [
+                  {
+                    "type": "sort",
+                    "field": [
+                      {
+                        "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
+                      }
+                    ],
+                    "order": "ascending",
+                    "tiebreaker": {
+                      "type": "ratio",
+                      "field": [
+                        {
+                          "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/12345678-1234-5678-9012-woonregiofactor"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "type": "maximum",
+                    "value": [
+                      {
+                        "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/661f7a45-78a0-4c8f-85bc-8a27748420f5"
+                      }
+                    ]
+                  }
+                ],
+                "rounding": {
+                  "decimals": 0,
+                  "direction": "down"
+                },
+                "default": {
+                  "value": 0
+                }
+              }
             }
           ]
         }
