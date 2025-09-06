@@ -214,6 +214,29 @@ sed -n '30,33p' toka.regelspraak.unified.txt
 
 The unified file is the single source of truth for current transformation output.
 
+## 🚨 CRITICAL RULE: ABSOLUTE SEPARATION OF DOMAIN KNOWLEDGE AND LANGUAGE CONSTRUCTS
+
+**CORE PRINCIPLE THAT CAN NEVER BE VIOLATED:**
+
+**XSL templates MUST NEVER contain ANY domain-specific terms, concepts, or knowledge!**
+
+This includes but is not limited to:
+- ❌ "treinmiles" (domain concept)
+- ❌ "vlucht" (domain entity)  
+- ❌ "passagier" (domain role)
+- ❌ "belasting" (domain concept)
+- ❌ "contingent" (domain concept)
+- ❌ "te verdelen" (domain process)
+- ❌ ANY business-specific terminology
+
+**XSL may ONLY contain:**
+- ✅ Language constructs ("het", "de", "een", "moet", "wordt", "als")
+- ✅ Grammatical patterns ("X van een Y", "indien Z")
+- ✅ Mathematical operators ("plus", "min", "maal")
+- ✅ Logical connectives ("en", "of", "niet")
+
+**ALL domain knowledge MUST come from JSON data via reference resolution.**
+
 ## 🚨 CRITICAL RULE: NO HARDCODED DOMAIN STRINGS IN XSL
 
 **NEVER hardcode domain-specific text in XSL templates!**

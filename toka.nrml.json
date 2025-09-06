@@ -2803,10 +2803,10 @@
                 "type": "distribution",
                 "source": [
                   {
-                    "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/contingent-placeholder"
+                    "$ref": "#/facts/bea88ba3-ec79-4bd2-8f8e-f6e11a08c431"
                   },
                   {
-                    "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/totaal-treinmiles-placeholder"
+                    "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/11d155f3-d6bd-4792-94bb-e20c0c885101"
                   }
                 ],
                 "method": "equal_shares",
@@ -2833,10 +2833,10 @@
                 "type": "distribution",
                 "source": [
                   {
-                    "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/contingent-placeholder"
+                    "$ref": "#/facts/bea88ba3-ec79-4bd2-8f8e-f6e11a08c431"
                   },
                   {
-                    "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/totaal-treinmiles-placeholder"
+                    "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/11d155f3-d6bd-4792-94bb-e20c0c885101"
                   }
                 ],
                 "method": "weighted",

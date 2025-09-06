@@ -401,14 +401,75 @@
         <xsl:param name="expression"/>
         
         <!-- Generate the main distribution statement -->
-        <xsl:text>Het totaal aantal treinmiles van een te verdelen contingent treinmiles wordt verdeeld in de treinmiles van alle </xsl:text>
+        <xsl:call-template name="translate">
+            <xsl:with-param name="key">total-number-of</xsl:with-param>
+        </xsl:call-template>
+        <xsl:text> </xsl:text>
+        
+        <!-- Resolve source property being distributed -->
+        <xsl:call-template name="resolve-path-plural">
+            <xsl:with-param name="path" select="$expression/fn:array[@key='source']/fn:map[2]/fn:string[@key='$ref']"/>
+        </xsl:call-template>
+        
+        <xsl:text> </xsl:text>
+        <xsl:call-template name="translate">
+            <xsl:with-param name="key">of-a-to-distribute</xsl:with-param>
+        </xsl:call-template>
+        <xsl:text> </xsl:text>
+        
+        <!-- Resolve source role/contingent -->
+        <xsl:call-template name="resolve-path">
+            <xsl:with-param name="path" select="$expression/fn:array[@key='source']/fn:map[1]/fn:string[@key='$ref']"/>
+        </xsl:call-template>
+        
+        <xsl:text> </xsl:text>
+        <xsl:call-template name="translate">
+            <xsl:with-param name="key">is-distributed-in</xsl:with-param>
+        </xsl:call-template>
+        <xsl:text> </xsl:text>
+        
+        <!-- Resolve target property -->
+        <xsl:call-template name="resolve-path-plural">
+            <xsl:with-param name="path" select="$target/fn:map[2]/fn:string[@key='$ref']"/>
+        </xsl:call-template>
+        
+        <xsl:text> </xsl:text>
+        <xsl:call-template name="translate">
+            <xsl:with-param name="key">of-all</xsl:with-param>
+        </xsl:call-template>
+        <xsl:text> </xsl:text>
         
         <!-- Get recipients from target -->
         <xsl:call-template name="resolve-role-name-plural">
             <xsl:with-param name="path" select="$target/fn:map[1]/fn:string[@key='$ref']"/>
         </xsl:call-template>
         
-        <xsl:text> met recht op treinmiles van het te verdelen contingent treinmiles, waarbij wordt verdeeld</xsl:text>
+        <xsl:text> </xsl:text>
+        <xsl:call-template name="translate">
+            <xsl:with-param name="key">with-right-to</xsl:with-param>
+        </xsl:call-template>
+        <xsl:text> </xsl:text>
+        
+        <!-- Resolve target property again for "right to X" -->
+        <xsl:call-template name="resolve-path-plural">
+            <xsl:with-param name="path" select="$target/fn:map[2]/fn:string[@key='$ref']"/>
+        </xsl:call-template>
+        
+        <xsl:text> </xsl:text>
+        <xsl:call-template name="translate">
+            <xsl:with-param name="key">of-the-to-distribute</xsl:with-param>
+        </xsl:call-template>
+        <xsl:text> </xsl:text>
+        
+        <!-- Resolve source role again -->
+        <xsl:call-template name="resolve-path">
+            <xsl:with-param name="path" select="$expression/fn:array[@key='source']/fn:map[1]/fn:string[@key='$ref']"/>
+        </xsl:call-template>
+        
+        <xsl:text>, </xsl:text>
+        <xsl:call-template name="translate">
+            <xsl:with-param name="key">whereby-is-distributed</xsl:with-param>
+        </xsl:call-template>
         
         <!-- Add the distribution method -->
         <xsl:choose>
@@ -1471,7 +1532,18 @@
                     <xsl:value-of select="$rounding/fn:string[@key='direction']"/>
                 </xsl:otherwise>
             </xsl:choose>
-            <xsl:text> - als onverdeelde rest blijft het restant na verdeling van het te verdelen contingent treinmiles over</xsl:text>
+            <xsl:text> - </xsl:text>
+            <xsl:call-template name="translate">
+                <xsl:with-param name="key">undistributed-remainder</xsl:with-param>
+            </xsl:call-template>
+            <xsl:text> </xsl:text>
+            <xsl:call-template name="resolve-path">
+                <xsl:with-param name="path" select="$distribution/fn:array[@key='source']/fn:map[1]/fn:string[@key='$ref']"/>
+            </xsl:call-template>
+            <xsl:text> </xsl:text>
+            <xsl:call-template name="translate">
+                <xsl:with-param name="key">over</xsl:with-param>
+            </xsl:call-template>
         </xsl:if>
     </xsl:template>
 
@@ -1778,7 +1850,7 @@
                 </xsl:call-template>
             </xsl:when>
             <xsl:when test="$is-adjective = 'true'">
-                <!-- Adjective characteristic: "zijn reis is klimaatneutraal" -->
+                <!-- Adjective characteristic -->
                 <xsl:choose>
                     <xsl:when test="$rule-target-animated = 'true'">
                         <xsl:call-template name="translate">

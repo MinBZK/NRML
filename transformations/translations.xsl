@@ -215,6 +215,15 @@
           <xsl:when test="$key = 'max'">het maximum van</xsl:when>
           <xsl:when test="$key = 'sum-of'">de som van</xsl:when>
           <xsl:when test="$key = 'rounded-up'">naar boven afgerond</xsl:when>
+          <xsl:when test="$key = 'total-number-of'">Het totaal aantal</xsl:when>
+          <xsl:when test="$key = 'of-a-to-distribute'">van een te verdelen</xsl:when>
+          <xsl:when test="$key = 'is-distributed-in'">wordt verdeeld in de</xsl:when>
+          <xsl:when test="$key = 'of-all'">van alle</xsl:when>
+          <xsl:when test="$key = 'with-right-to'">met recht op</xsl:when>
+          <xsl:when test="$key = 'of-the-to-distribute'">van het te verdelen</xsl:when>
+          <xsl:when test="$key = 'whereby-is-distributed'">waarbij wordt verdeeld</xsl:when>
+          <xsl:when test="$key = 'undistributed-remainder'">als onverdeelde rest blijft het restant na verdeling van het te verdelen</xsl:when>
+          <xsl:when test="$key = 'over'">over</xsl:when>
           <xsl:otherwise><xsl:value-of select="$key"/></xsl:otherwise>
         </xsl:choose>
       </xsl:otherwise>
