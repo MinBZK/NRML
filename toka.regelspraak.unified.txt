@@ -157,3 +157,4 @@ Het totaal aantal treinmiles van een te verdelen contingent treinmiles wordt ver
   • op volgorde van toenemende leeftijd bij een even groot criterium naar rato van de woonregiofactor
   • met een maximum van het maximaal aantal te ontvangen treinmiles
   • afgerond op 0 decimalen naar beneden - als onverdeelde rest blijft het restant na verdeling van het te verdelen contingent treinmiles over.
+

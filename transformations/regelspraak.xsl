@@ -701,8 +701,9 @@
         <xsl:choose>
             <xsl:when test="$is-direct-condition = 'true'">
                 <!-- Direct condition: "leeftijd kleiner is dan" (inverted order) -->
-                <xsl:call-template name="format-operator-inverted">
+                <xsl:call-template name="format-operator">
                     <xsl:with-param name="operator" select="$operator"/>
+                    <xsl:with-param name="inverted" select="true()"/>
                 </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
@@ -721,6 +722,7 @@
     <!-- Format operator (standard order for lists) -->
     <xsl:template name="format-operator">
         <xsl:param name="operator"/>
+        <xsl:param name="inverted" select="false()"/>
         <xsl:choose>
             <xsl:when test="$operator = 'equals'">
                 <xsl:call-template name="translate">
@@ -734,65 +736,48 @@
             </xsl:when>
             <xsl:when test="$operator = 'greaterThan'">
                 <xsl:call-template name="translate">
-                    <xsl:with-param name="key">greater-than</xsl:with-param>
+                    <xsl:with-param name="key">
+                        <xsl:choose>
+                            <xsl:when test="$inverted">greater-than-inverted</xsl:when>
+                            <xsl:otherwise>greater-than</xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:with-param>
                 </xsl:call-template>
             </xsl:when>
             <xsl:when test="$operator = 'lessThan'">
                 <xsl:call-template name="translate">
-                    <xsl:with-param name="key">less-than</xsl:with-param>
+                    <xsl:with-param name="key">
+                        <xsl:choose>
+                            <xsl:when test="$inverted">less-than-inverted</xsl:when>
+                            <xsl:otherwise>less-than</xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:with-param>
                 </xsl:call-template>
             </xsl:when>
             <xsl:when test="$operator = 'greaterOrEqual' or $operator = 'greaterThanOrEquals'">
                 <xsl:call-template name="translate">
-                    <xsl:with-param name="key">greater-or-equal</xsl:with-param>
+                    <xsl:with-param name="key">
+                        <xsl:choose>
+                            <xsl:when test="$inverted">greater-or-equal-inverted</xsl:when>
+                            <xsl:otherwise>greater-or-equal</xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:with-param>
                 </xsl:call-template>
             </xsl:when>
             <xsl:when test="$operator = 'lessThanOrEquals'">
                 <xsl:call-template name="translate">
-                    <xsl:with-param name="key">less-or-equal</xsl:with-param>
+                    <xsl:with-param name="key">
+                        <xsl:choose>
+                            <xsl:when test="$inverted">less-or-equal-inverted</xsl:when>
+                            <xsl:otherwise>less-or-equal</xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:with-param>
                 </xsl:call-template>
             </xsl:when>
             <xsl:otherwise><xsl:value-of select="$operator"/></xsl:otherwise>
         </xsl:choose>
     </xsl:template>
 
-    <!-- Format operator (inverted order for direct conditions) -->
-    <xsl:template name="format-operator-inverted">
-        <xsl:param name="operator"/>
-        <xsl:choose>
-            <xsl:when test="$operator = 'equals'">
-                <xsl:call-template name="translate">
-                    <xsl:with-param name="key">equals</xsl:with-param>
-                </xsl:call-template>
-            </xsl:when>
-            <xsl:when test="$operator = 'notEquals'">
-                <xsl:call-template name="translate">
-                    <xsl:with-param name="key">not-equals</xsl:with-param>
-                </xsl:call-template>
-            </xsl:when>
-            <xsl:when test="$operator = 'greaterThan'">
-                <xsl:call-template name="translate">
-                    <xsl:with-param name="key">greater-than-inverted</xsl:with-param>
-                </xsl:call-template>
-            </xsl:when>
-            <xsl:when test="$operator = 'lessThan'">
-                <xsl:call-template name="translate">
-                    <xsl:with-param name="key">less-than-inverted</xsl:with-param>
-                </xsl:call-template>
-            </xsl:when>
-            <xsl:when test="$operator = 'greaterOrEqual' or $operator = 'greaterThanOrEquals'">
-                <xsl:call-template name="translate">
-                    <xsl:with-param name="key">greater-or-equal-inverted</xsl:with-param>
-                </xsl:call-template>
-            </xsl:when>
-            <xsl:when test="$operator = 'lessThanOrEquals'">
-                <xsl:call-template name="translate">
-                    <xsl:with-param name="key">less-or-equal-inverted</xsl:with-param>
-                </xsl:call-template>
-            </xsl:when>
-            <xsl:otherwise><xsl:value-of select="$operator"/></xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>
 
     <!-- Format logical -->
     <xsl:template name="format-logical">
@@ -1099,12 +1084,95 @@
         </xsl:choose>
     </xsl:template>
 
-    <!-- Resolve path - enhanced to handle all reference types -->
+    <!-- Resolve path - unified with article support -->
     <xsl:template name="resolve-path">
         <xsl:param name="path"/>
+        <xsl:param name="with-article" select="false()"/>
+        <xsl:param name="capitalize" select="false()"/>
         
         <xsl:variable name="single-path" select="$path[1]"/>
         
+        <!-- Handle articles first if requested -->
+        <xsl:if test="$with-article">
+            <xsl:choose>
+                <xsl:when test="contains($single-path, '/properties/')">
+                    <xsl:variable name="fact-uuid" select="substring-before(substring-after($single-path, '#/facts/'), '/properties/')"/>
+                    <xsl:variable name="property-uuid" select="substring-after($single-path, '/properties/')"/>
+                    <xsl:variable name="property-article" select="//fn:map[@key='facts']/fn:map[@key=$fact-uuid]/fn:map[@key='items']/fn:map[@key=$property-uuid]/fn:map[@key='article']/fn:string[@key=$language]"/>
+                    <xsl:choose>
+                        <xsl:when test="$property-article and $property-article != ''">
+                            <xsl:choose>
+                                <xsl:when test="$capitalize">
+                                    <xsl:value-of select="concat(translate(substring($property-article, 1, 1), 'abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'), substring($property-article, 2))"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="$property-article"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <!-- No fallback article for properties without explicit article -->
+                        </xsl:otherwise>
+                    </xsl:choose>
+                    <xsl:if test="$property-article and $property-article != ''">
+                        <xsl:text> </xsl:text>
+                    </xsl:if>
+                </xsl:when>
+                <xsl:when test="contains($single-path, '/roles/')">
+                    <xsl:variable name="fact-uuid" select="substring-before(substring-after($single-path, '#/facts/'), '/roles/')"/>
+                    <xsl:variable name="role-uuid" select="substring-after($single-path, '/roles/')"/>
+                    <!-- Look up the role article using the same pattern as resolve-role-name -->
+                    <xsl:variable name="role-article">
+                        <xsl:for-each select="//fn:map[@key='facts']/fn:map[@key=$fact-uuid]/fn:map[@key='items']/fn:map/fn:array[@key='versions']/fn:map">
+                            <xsl:choose>
+                                <xsl:when test="fn:map[@key='a']/fn:string[@key='uuid'] = $role-uuid">
+                                    <xsl:value-of select="fn:map[@key='a']/fn:map[@key='article']/fn:string[@key=$language]"/>
+                                </xsl:when>
+                                <xsl:when test="fn:map[@key='b']/fn:string[@key='uuid'] = $role-uuid">
+                                    <xsl:value-of select="fn:map[@key='b']/fn:map[@key='article']/fn:string[@key=$language]"/>
+                                </xsl:when>
+                            </xsl:choose>
+                        </xsl:for-each>
+                    </xsl:variable>
+                    <xsl:choose>
+                        <xsl:when test="$role-article and $role-article != ''">
+                            <xsl:choose>
+                                <xsl:when test="$capitalize">
+                                    <xsl:value-of select="concat(translate(substring($role-article, 1, 1), 'abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'), substring($role-article, 2))"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="$role-article"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <!-- No fallback article for roles without explicit article -->
+                        </xsl:otherwise>
+                    </xsl:choose>
+                    <xsl:if test="$role-article and $role-article != ''">
+                        <xsl:text> </xsl:text>
+                    </xsl:if>
+                </xsl:when>
+                <xsl:otherwise>
+                    <!-- Fallback article for facts/unknown -->
+                    <xsl:choose>
+                        <xsl:when test="$capitalize">
+                            <xsl:call-template name="translate">
+                                <xsl:with-param name="key">the-capitalized</xsl:with-param>
+                            </xsl:call-template>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:call-template name="translate">
+                                <xsl:with-param name="key">the</xsl:with-param>
+                            </xsl:call-template>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                    <xsl:text> </xsl:text>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:if>
+        
+        <!-- Then resolve the actual name -->
         <xsl:choose>
             <xsl:when test="contains($single-path, '/properties/')">
                 <xsl:call-template name="resolve-property-name">
@@ -1461,37 +1529,42 @@
     </xsl:template>
 
     <!-- Format allOf condition -->
-    <xsl:template name="format-allOf">
-        <xsl:param name="allOf"/>
-        <xsl:variable name="conditions" select="$allOf/fn:array[@key='conditions']"/>
+    <!-- Format condition list (allOf/anyOf) -->
+    <xsl:template name="format-condition-list">
+        <xsl:param name="conditions-array"/>
+        <xsl:param name="list-type"/>
         
         <xsl:call-template name="translate">
-            <xsl:with-param name="key">all-conditions-met</xsl:with-param>
+            <xsl:with-param name="key">
+                <xsl:choose>
+                    <xsl:when test="$list-type = 'allOf'">all-conditions-met</xsl:when>
+                    <xsl:when test="$list-type = 'anyOf'">at-least-one-condition-met</xsl:when>
+                    <xsl:otherwise>conditions-met</xsl:otherwise>
+                </xsl:choose>
+            </xsl:with-param>
         </xsl:call-template>
-        <xsl:for-each select="$conditions/fn:array | $conditions/fn:map">
+        <xsl:for-each select="$conditions-array/fn:array | $conditions-array/fn:map">
             <xsl:text>&#10;  • </xsl:text>
-            <!-- Always use format-condition to handle all types -->
             <xsl:call-template name="format-condition">
                 <xsl:with-param name="condition" select="."/>
             </xsl:call-template>
         </xsl:for-each>
     </xsl:template>
+    
+    <xsl:template name="format-allOf">
+        <xsl:param name="allOf"/>
+        <xsl:call-template name="format-condition-list">
+            <xsl:with-param name="conditions-array" select="$allOf/fn:array[@key='conditions']"/>
+            <xsl:with-param name="list-type">allOf</xsl:with-param>
+        </xsl:call-template>
+    </xsl:template>
 
-    <!-- Format anyOf condition -->
     <xsl:template name="format-anyOf">
         <xsl:param name="anyOf"/>
-        <xsl:variable name="conditions" select="$anyOf/fn:array[@key='conditions']"/>
-        
-        <xsl:call-template name="translate">
-            <xsl:with-param name="key">at-least-one-condition-met</xsl:with-param>
+        <xsl:call-template name="format-condition-list">
+            <xsl:with-param name="conditions-array" select="$anyOf/fn:array[@key='conditions']"/>
+            <xsl:with-param name="list-type">anyOf</xsl:with-param>
         </xsl:call-template>
-        <xsl:for-each select="$conditions/fn:array | $conditions/fn:map">
-            <xsl:text>&#10;  • </xsl:text>
-            <!-- Always use format-condition to handle all types -->
-            <xsl:call-template name="format-condition">
-                <xsl:with-param name="condition" select="."/>
-            </xsl:call-template>
-        </xsl:for-each>
     </xsl:template>
 
     <!-- Format not condition -->
@@ -1566,15 +1639,17 @@
         <xsl:choose>
             <!-- Property reference -->
             <xsl:when test="contains($path, '/properties/')">
-                <xsl:call-template name="resolve-property-with-article">
+                <xsl:call-template name="resolve-path">
                     <xsl:with-param name="path" select="$path"/>
+                    <xsl:with-param name="with-article" select="true()"/>
                     <xsl:with-param name="capitalize" select="$capitalize"/>
                 </xsl:call-template>
             </xsl:when>
             <!-- Role reference -->
             <xsl:when test="contains($path, '/roles/')">
-                <xsl:call-template name="resolve-role-with-article">
+                <xsl:call-template name="resolve-path">
                     <xsl:with-param name="path" select="$path"/>
+                    <xsl:with-param name="with-article" select="true()"/>
                     <xsl:with-param name="capitalize" select="$capitalize"/>
                 </xsl:call-template>
             </xsl:when>
@@ -1598,88 +1673,6 @@
         </xsl:choose>
     </xsl:template>
 
-    <!-- Resolve property with its article -->
-    <xsl:template name="resolve-property-with-article">
-        <xsl:param name="path"/>
-        <xsl:param name="capitalize" select="false()"/>
-        <xsl:variable name="fact-uuid" select="substring-before(substring-after($path, '#/facts/'), '/properties/')"/>
-        <xsl:variable name="property-uuid" select="substring-after($path, '/properties/')"/>
-        
-        <!-- Get article from property definition -->
-        <xsl:variable name="property-article" select="//fn:map[@key='facts']/fn:map[@key=$fact-uuid]/fn:map[@key='items']/fn:map[@key=$property-uuid]/fn:map[@key='article']/fn:string[@key=$language]"/>
-        
-        <xsl:choose>
-            <xsl:when test="$property-article and $property-article != ''">
-                <xsl:choose>
-                    <xsl:when test="$capitalize">
-                        <xsl:value-of select="concat(translate(substring($property-article, 1, 1), 'abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'), substring($property-article, 2))"/>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:value-of select="$property-article"/>
-                    </xsl:otherwise>
-                </xsl:choose>
-                <xsl:text> </xsl:text>
-            </xsl:when>
-        </xsl:choose>
-        <xsl:call-template name="resolve-path">
-            <xsl:with-param name="path" select="$path"/>
-        </xsl:call-template>
-    </xsl:template>
-
-    <!-- Resolve role with its article -->
-    <xsl:template name="resolve-role-with-article">
-        <xsl:param name="path"/>
-        <xsl:param name="capitalize" select="false()"/>
-        <xsl:variable name="fact-uuid" select="substring-before(substring-after($path, '#/facts/'), '/roles/')"/>
-        <xsl:variable name="role-uuid" select="substring-after($path, '/roles/')"/>
-        
-        <!-- Look up the role's article -->
-        <xsl:variable name="role-article">
-            <xsl:for-each select="//fn:map[@key='facts']/fn:map[@key=$fact-uuid]/fn:map[@key='items']/fn:map/fn:array[@key='versions']/fn:map">
-                <xsl:choose>
-                    <xsl:when test="fn:map[@key='a']/fn:string[@key='uuid'] = $role-uuid">
-                        <xsl:value-of select="fn:map[@key='a']/fn:map[@key='article']/fn:string[@key=$language]"/>
-                    </xsl:when>
-                    <xsl:when test="fn:map[@key='b']/fn:string[@key='uuid'] = $role-uuid">
-                        <xsl:value-of select="fn:map[@key='b']/fn:map[@key='article']/fn:string[@key=$language]"/>
-                    </xsl:when>
-                </xsl:choose>
-            </xsl:for-each>
-        </xsl:variable>
-        
-        <xsl:choose>
-            <xsl:when test="$role-article != ''">
-                <xsl:choose>
-                    <xsl:when test="$capitalize">
-                        <xsl:value-of select="concat(translate(substring($role-article, 1, 1), 'abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'), substring($role-article, 2))"/>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:value-of select="$role-article"/>
-                    </xsl:otherwise>
-                </xsl:choose>
-                <xsl:text> </xsl:text>
-                <xsl:call-template name="resolve-path">
-                    <xsl:with-param name="path" select="$path"/>
-                </xsl:call-template>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:choose>
-                    <xsl:when test="$capitalize">
-                        <xsl:text>De </xsl:text>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:call-template name="translate">
-                    <xsl:with-param name="key">the</xsl:with-param>
-                </xsl:call-template>
-                <xsl:text> </xsl:text>
-                    </xsl:otherwise>
-                </xsl:choose>
-                <xsl:call-template name="resolve-path">
-                    <xsl:with-param name="path" select="$path"/>
-                </xsl:call-template>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>
 
     <!-- Check if a fact (by path) is animated -->
     <xsl:template name="is-fact-animated">
