@@ -61,6 +61,30 @@
           <xsl:when test="$key = 'unknown-role'">unknown role</xsl:when>
           <xsl:when test="$key = 'unknown-parameter'">unknown parameter</xsl:when>
           <xsl:when test="$key = 'unknown-operand'">unknown operand</xsl:when>
+          <xsl:when test="$key = 'unknown-fact'">unknown fact</xsl:when>
+          <xsl:when test="$key = 'down'">down</xsl:when>
+          <xsl:when test="$key = 'up'">up</xsl:when>
+          <xsl:when test="$key = 'rounded-to'">rounded to</xsl:when>
+          <xsl:when test="$key = 'decimals-to'">decimals to</xsl:when>
+          <xsl:when test="$key = 'rounded'">rounded</xsl:when>
+          <xsl:when test="$key = 'to-decimals'">to decimals</xsl:when>
+          <xsl:when test="$key = 'time-duration-of'">time duration of</xsl:when>
+          <xsl:when test="$key = 'in-whole'">in whole</xsl:when>
+          <xsl:when test="$key = 'years'">years</xsl:when>
+          <xsl:when test="$key = 'to'">to</xsl:when>
+          <xsl:when test="$key = 'through'">through</xsl:when>
+          <xsl:when test="$key = 'or'">or</xsl:when>
+          <xsl:when test="$key = 'if-none-exist'">if none exist</xsl:when>
+          <xsl:when test="$key = 'as'">as</xsl:when>
+          <xsl:when test="$key = 'otherwise'">otherwise</xsl:when>
+          <xsl:when test="$key = 'not-opening'">not (</xsl:when>
+          <xsl:when test="$key = 'newline-if'">&#10;if</xsl:when>
+          <xsl:when test="$key = 'a-entity'">A</xsl:when>
+          <xsl:when test="$key = 'true'">true</xsl:when>
+          <xsl:when test="$key = 'then'">then</xsl:when>
+          <xsl:when test="$key = 'of-a'">of a</xsl:when>
+          <xsl:when test="$key = 'equal-criterion-ratio-of'">with equal criterion in ratio of</xsl:when>
+          <xsl:when test="$key = 'with-maximum-of'">with a maximum of</xsl:when>
           <xsl:when test="$key = 'unknown-condition-type'">Unknown condition type:</xsl:when>
           <xsl:when test="$key = 'unknown-expression-type'">Unknown expression type:</xsl:when>
           <xsl:when test="$key = 'of-the-flight'">of the flight</xsl:when>
@@ -163,6 +187,30 @@
           <xsl:when test="$key = 'unknown-role'">onbekende rol</xsl:when>
           <xsl:when test="$key = 'unknown-parameter'">onbekende parameter</xsl:when>
           <xsl:when test="$key = 'unknown-operand'">onbekende operand</xsl:when>
+          <xsl:when test="$key = 'unknown-fact'">onbekend feit</xsl:when>
+          <xsl:when test="$key = 'down'">beneden</xsl:when>
+          <xsl:when test="$key = 'up'">boven</xsl:when>
+          <xsl:when test="$key = 'rounded-to'">afgerond op</xsl:when>
+          <xsl:when test="$key = 'decimals-to'">decimalen naar</xsl:when>
+          <xsl:when test="$key = 'rounded'">afgerond</xsl:when>
+          <xsl:when test="$key = 'to-decimals'">decimalen</xsl:when>
+          <xsl:when test="$key = 'time-duration-of'">de tijdsduur van</xsl:when>
+          <xsl:when test="$key = 'in-whole'">in hele</xsl:when>
+          <xsl:when test="$key = 'years'">jaren</xsl:when>
+          <xsl:when test="$key = 'to'">tot</xsl:when>
+          <xsl:when test="$key = 'through'">t/m</xsl:when>
+          <xsl:when test="$key = 'or'">of</xsl:when>
+          <xsl:when test="$key = 'if-none-exist'">als die er niet zijn</xsl:when>
+          <xsl:when test="$key = 'as'">als</xsl:when>
+          <xsl:when test="$key = 'otherwise'">anders</xsl:when>
+          <xsl:when test="$key = 'not-opening'">niet (</xsl:when>
+          <xsl:when test="$key = 'newline-if'">&#10;indien</xsl:when>
+          <xsl:when test="$key = 'a-entity'">Een</xsl:when>
+          <xsl:when test="$key = 'true'">waar</xsl:when>
+          <xsl:when test="$key = 'then'">dan</xsl:when>
+          <xsl:when test="$key = 'of-a'">van een</xsl:when>
+          <xsl:when test="$key = 'equal-criterion-ratio-of'">bij een even groot criterium naar rato van de</xsl:when>
+          <xsl:when test="$key = 'with-maximum-of'">met een maximum van het</xsl:when>
           <xsl:when test="$key = 'unknown-condition-type'">Onbekende conditie type:</xsl:when>
           <xsl:when test="$key = 'unknown-expression-type'">Onbekende expressie type:</xsl:when>
           <xsl:when test="$key = 'of-the-flight'">van de vlucht</xsl:when>
