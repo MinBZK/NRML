@@ -46,7 +46,10 @@
             <xsl:variable name="rule-group-name" select="fn:map[@key='name']/fn:string[@key=$language]"/>
             
             <!-- Rule group header -->
-            <xsl:text>Regelgroep </xsl:text>
+            <xsl:call-template name="translate">
+                <xsl:with-param name="key">rule-group</xsl:with-param>
+            </xsl:call-template>
+            <xsl:text> </xsl:text>
             <xsl:value-of select="$rule-group-name"/>
             <xsl:text>&#10;&#10;</xsl:text>
 
@@ -55,7 +58,10 @@
                 <xsl:variable name="rule-name" select="fn:map[@key='name']/fn:string[@key=$language]"/>
                 
                 <!-- Rule header - output once per rule -->
-                <xsl:text>Regel </xsl:text>
+                <xsl:call-template name="translate">
+                    <xsl:with-param name="key">rule</xsl:with-param>
+                </xsl:call-template>
+                <xsl:text> </xsl:text>
                 <xsl:value-of select="$rule-name"/>
                 <xsl:text>&#10;</xsl:text>
                 
@@ -151,7 +157,9 @@
                         </xsl:when>
                         
                         <xsl:otherwise>
-                            <xsl:text>Rule type not recognized</xsl:text>
+                            <xsl:call-template name="translate">
+                                <xsl:with-param name="key">rule-type-not-recognized</xsl:with-param>
+                            </xsl:call-template>
                         </xsl:otherwise>
                     </xsl:choose>
                     
@@ -694,13 +702,36 @@
     <xsl:template name="format-operator">
         <xsl:param name="operator"/>
         <xsl:choose>
-            <xsl:when test="$operator = 'equals'">gelijk is aan</xsl:when>
-            <xsl:when test="$operator = 'notEquals'">ongelijk is aan</xsl:when>
-            <xsl:when test="$operator = 'greaterThan'">is groter dan</xsl:when>
-            <xsl:when test="$operator = 'lessThan'">is kleiner dan</xsl:when>
-            <xsl:when test="$operator = 'greaterOrEqual'">is groter of gelijk aan</xsl:when>
-            <xsl:when test="$operator = 'greaterThanOrEquals'">is groter of gelijk aan</xsl:when>
-            <xsl:when test="$operator = 'lessThanOrEquals'">is kleiner of gelijk aan</xsl:when>
+            <xsl:when test="$operator = 'equals'">
+                <xsl:call-template name="translate">
+                    <xsl:with-param name="key">equals</xsl:with-param>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="$operator = 'notEquals'">
+                <xsl:call-template name="translate">
+                    <xsl:with-param name="key">not-equals</xsl:with-param>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="$operator = 'greaterThan'">
+                <xsl:call-template name="translate">
+                    <xsl:with-param name="key">greater-than</xsl:with-param>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="$operator = 'lessThan'">
+                <xsl:call-template name="translate">
+                    <xsl:with-param name="key">less-than</xsl:with-param>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="$operator = 'greaterOrEqual' or $operator = 'greaterThanOrEquals'">
+                <xsl:call-template name="translate">
+                    <xsl:with-param name="key">greater-or-equal</xsl:with-param>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="$operator = 'lessThanOrEquals'">
+                <xsl:call-template name="translate">
+                    <xsl:with-param name="key">less-or-equal</xsl:with-param>
+                </xsl:call-template>
+            </xsl:when>
             <xsl:otherwise><xsl:value-of select="$operator"/></xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -709,13 +740,36 @@
     <xsl:template name="format-operator-inverted">
         <xsl:param name="operator"/>
         <xsl:choose>
-            <xsl:when test="$operator = 'equals'">gelijk is aan</xsl:when>
-            <xsl:when test="$operator = 'notEquals'">ongelijk is aan</xsl:when>
-            <xsl:when test="$operator = 'greaterThan'">groter is dan</xsl:when>
-            <xsl:when test="$operator = 'lessThan'">kleiner is dan</xsl:when>
-            <xsl:when test="$operator = 'greaterOrEqual'">groter of gelijk is aan</xsl:when>
-            <xsl:when test="$operator = 'greaterThanOrEquals'">groter of gelijk is aan</xsl:when>
-            <xsl:when test="$operator = 'lessThanOrEquals'">kleiner of gelijk is aan</xsl:when>
+            <xsl:when test="$operator = 'equals'">
+                <xsl:call-template name="translate">
+                    <xsl:with-param name="key">equals</xsl:with-param>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="$operator = 'notEquals'">
+                <xsl:call-template name="translate">
+                    <xsl:with-param name="key">not-equals</xsl:with-param>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="$operator = 'greaterThan'">
+                <xsl:call-template name="translate">
+                    <xsl:with-param name="key">greater-than-inverted</xsl:with-param>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="$operator = 'lessThan'">
+                <xsl:call-template name="translate">
+                    <xsl:with-param name="key">less-than-inverted</xsl:with-param>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="$operator = 'greaterOrEqual' or $operator = 'greaterThanOrEquals'">
+                <xsl:call-template name="translate">
+                    <xsl:with-param name="key">greater-or-equal-inverted</xsl:with-param>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="$operator = 'lessThanOrEquals'">
+                <xsl:call-template name="translate">
+                    <xsl:with-param name="key">less-or-equal-inverted</xsl:with-param>
+                </xsl:call-template>
+            </xsl:when>
             <xsl:otherwise><xsl:value-of select="$operator"/></xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -728,11 +782,11 @@
         
         <xsl:for-each select="$operands/fn:map">
             <xsl:if test="position() > 1">
-                <xsl:choose>
-                    <xsl:when test="$operator = 'and'"> en </xsl:when>
-                    <xsl:when test="$operator = 'or'"> of </xsl:when>
-                    <xsl:otherwise> <xsl:value-of select="$operator"/> </xsl:otherwise>
-                </xsl:choose>
+                <xsl:text> </xsl:text>
+                <xsl:call-template name="translate">
+                    <xsl:with-param name="key" select="$operator"/>
+                </xsl:call-template>
+                <xsl:text> </xsl:text>
             </xsl:if>
             <xsl:call-template name="format-condition">
                 <xsl:with-param name="condition" select="."/>
@@ -1325,13 +1379,31 @@
         <xsl:for-each select="$operands/fn:array | $operands/fn:map">
             <xsl:if test="position() > 1">
                 <!-- Format operator between operands -->
+                <xsl:text> </xsl:text>
                 <xsl:choose>
-                    <xsl:when test="$operator = 'plus'"><xsl:text> plus </xsl:text></xsl:when>
-                    <xsl:when test="$operator = 'minus'"><xsl:text> min </xsl:text></xsl:when>
-                    <xsl:when test="$operator = 'multiply'"><xsl:text> maal </xsl:text></xsl:when>
-                    <xsl:when test="$operator = 'divide'"><xsl:text> gedeeld door </xsl:text></xsl:when>
-                    <xsl:otherwise><xsl:text> </xsl:text><xsl:value-of select="$operator"/><xsl:text> </xsl:text></xsl:otherwise>
+                    <xsl:when test="$operator = 'plus'">
+                        <xsl:call-template name="translate">
+                            <xsl:with-param name="key">plus</xsl:with-param>
+                        </xsl:call-template>
+                    </xsl:when>
+                    <xsl:when test="$operator = 'minus'">
+                        <xsl:call-template name="translate">
+                            <xsl:with-param name="key">minus</xsl:with-param>
+                        </xsl:call-template>
+                    </xsl:when>
+                    <xsl:when test="$operator = 'multiply'">
+                        <xsl:call-template name="translate">
+                            <xsl:with-param name="key">multiply</xsl:with-param>
+                        </xsl:call-template>
+                    </xsl:when>
+                    <xsl:when test="$operator = 'divide'">
+                        <xsl:call-template name="translate">
+                            <xsl:with-param name="key">divided-by</xsl:with-param>
+                        </xsl:call-template>
+                    </xsl:when>
+                    <xsl:otherwise><xsl:value-of select="$operator"/></xsl:otherwise>
                 </xsl:choose>
+                <xsl:text> </xsl:text>
             </xsl:if>
             
             <xsl:call-template name="format-operand">

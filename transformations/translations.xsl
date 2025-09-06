@@ -78,6 +78,27 @@
           <xsl:when test="$key = 'of'">of</xsl:when>
           <xsl:when test="$key = 'divided-by'">divided by</xsl:when>
           <xsl:when test="$key = 'has'">has</xsl:when>
+          <xsl:when test="$key = 'rule-group'">Rule Group</xsl:when>
+          <xsl:when test="$key = 'rule'">Rule</xsl:when>
+          <xsl:when test="$key = 'rule-type-not-recognized'">Rule type not recognized</xsl:when>
+          <xsl:when test="$key = 'plus'">plus</xsl:when>
+          <xsl:when test="$key = 'minus'">minus</xsl:when>
+          <xsl:when test="$key = 'multiply'">times</xsl:when>
+          <xsl:when test="$key = 'greater-than'">is greater than</xsl:when>
+          <xsl:when test="$key = 'less-than'">is less than</xsl:when>
+          <xsl:when test="$key = 'greater-or-equal'">is greater or equal to</xsl:when>
+          <xsl:when test="$key = 'less-or-equal'">is less or equal to</xsl:when>
+          <xsl:when test="$key = 'minimum-of'">the minimum of</xsl:when>
+          <xsl:when test="$key = 'rounded-down'">rounded down</xsl:when>
+          <xsl:when test="$key = 'with-minimum-of'">with a minimum of</xsl:when>
+          <xsl:when test="$key = 'equals'">is equal to</xsl:when>
+          <xsl:when test="$key = 'not-equals'">is not equal to</xsl:when>
+          <xsl:when test="$key = 'and'">and</xsl:when>
+          <xsl:when test="$key = 'or'">or</xsl:when>
+          <xsl:when test="$key = 'greater-than-inverted'">greater is than</xsl:when>
+          <xsl:when test="$key = 'less-than-inverted'">less is than</xsl:when>
+          <xsl:when test="$key = 'greater-or-equal-inverted'">greater or equal is to</xsl:when>
+          <xsl:when test="$key = 'less-or-equal-inverted'">less or equal is to</xsl:when>
           <xsl:otherwise><xsl:value-of select="$key"/></xsl:otherwise>
         </xsl:choose>
       </xsl:when>
@@ -151,6 +172,27 @@
           <xsl:when test="$key = 'he'">hij</xsl:when>
           <xsl:when test="$key = 'has-no'">heeft geen</xsl:when>
           <xsl:when test="$key = 'is-not'">is niet</xsl:when>
+          <xsl:when test="$key = 'rule-group'">Regelgroep</xsl:when>
+          <xsl:when test="$key = 'rule'">Regel</xsl:when>
+          <xsl:when test="$key = 'rule-type-not-recognized'">Rule type not recognized</xsl:when>
+          <xsl:when test="$key = 'plus'">plus</xsl:when>
+          <xsl:when test="$key = 'minus'">min</xsl:when>
+          <xsl:when test="$key = 'multiply'">maal</xsl:when>
+          <xsl:when test="$key = 'greater-than'">is groter dan</xsl:when>
+          <xsl:when test="$key = 'less-than'">is kleiner dan</xsl:when>
+          <xsl:when test="$key = 'greater-or-equal'">is groter of gelijk aan</xsl:when>
+          <xsl:when test="$key = 'less-or-equal'">is kleiner of gelijk aan</xsl:when>
+          <xsl:when test="$key = 'minimum-of'">het minimum van</xsl:when>
+          <xsl:when test="$key = 'rounded-down'">naar beneden afgerond</xsl:when>
+          <xsl:when test="$key = 'with-minimum-of'">met een minimum van</xsl:when>
+          <xsl:when test="$key = 'equals'">gelijk is aan</xsl:when>
+          <xsl:when test="$key = 'not-equals'">ongelijk is aan</xsl:when>
+          <xsl:when test="$key = 'and'">en</xsl:when>
+          <xsl:when test="$key = 'or'">of</xsl:when>
+          <xsl:when test="$key = 'greater-than-inverted'">groter is dan</xsl:when>
+          <xsl:when test="$key = 'less-than-inverted'">kleiner is dan</xsl:when>
+          <xsl:when test="$key = 'greater-or-equal-inverted'">groter of gelijk is aan</xsl:when>
+          <xsl:when test="$key = 'less-or-equal-inverted'">kleiner of gelijk is aan</xsl:when>
           <xsl:otherwise><xsl:value-of select="$key"/></xsl:otherwise>
         </xsl:choose>
       </xsl:otherwise>
