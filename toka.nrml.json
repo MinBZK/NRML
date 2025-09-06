@@ -2724,7 +2724,7 @@
                 "minimum": {
                   "type": "numeric",
                   "value": 0,
-                  "unit": "€"
+                  "unit": "EUR"
                 }
               },
               "condition": {
