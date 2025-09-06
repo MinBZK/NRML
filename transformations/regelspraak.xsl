@@ -577,7 +577,10 @@
                 </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:text> lege expressie</xsl:text>
+                <xsl:text> </xsl:text>
+                <xsl:call-template name="translate">
+                    <xsl:with-param name="key">empty-expression</xsl:with-param>
+                </xsl:call-template>
             </xsl:otherwise>
         </xsl:choose>
         
@@ -1003,7 +1006,9 @@
                 </xsl:choose>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:text>lege referentieketen</xsl:text>
+                <xsl:call-template name="translate">
+                    <xsl:with-param name="key">empty-reference-chain</xsl:with-param>
+                </xsl:call-template>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -1056,8 +1061,16 @@
         <xsl:choose>
             <xsl:when test="$value/fn:boolean[@key='value']">
                 <xsl:choose>
-                    <xsl:when test="$value/fn:boolean[@key='value'] = true()">waar</xsl:when>
-                    <xsl:otherwise>onwaar</xsl:otherwise>
+                    <xsl:when test="$value/fn:boolean[@key='value'] = true()">
+                        <xsl:call-template name="translate">
+                            <xsl:with-param name="key">true</xsl:with-param>
+                        </xsl:call-template>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:call-template name="translate">
+                            <xsl:with-param name="key">false</xsl:with-param>
+                        </xsl:call-template>
+                    </xsl:otherwise>
                 </xsl:choose>
             </xsl:when>
             <xsl:when test="$value/fn:number[@key='value']">

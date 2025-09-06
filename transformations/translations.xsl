@@ -71,6 +71,12 @@
           <xsl:when test="$key = 'is-applicable'">is applicable</xsl:when>
           <xsl:when test="$key = 'of-all'">of all</xsl:when>
           <xsl:when test="$key = 'where'">where</xsl:when>
+          <!-- Fallback/error strings -->
+          <xsl:when test="$key = 'empty-expression'">empty expression</xsl:when>
+          <xsl:when test="$key = 'empty-reference-chain'">empty reference chain</xsl:when>
+          <!-- Boolean values -->
+          <xsl:when test="$key = 'true'">true</xsl:when>
+          <xsl:when test="$key = 'false'">false</xsl:when>
           <xsl:when test="$key = 'or'">or</xsl:when>
           <xsl:when test="$key = 'if-none-exist'">if none exist</xsl:when>
           <xsl:when test="$key = 'as'">as</xsl:when>
@@ -167,6 +173,12 @@
           <xsl:when test="$key = 'is-applicable'">van toepassing is</xsl:when>
           <xsl:when test="$key = 'of-all'">van alle</xsl:when>
           <xsl:when test="$key = 'where'">waar</xsl:when>
+          <!-- Fallback/error strings -->
+          <xsl:when test="$key = 'empty-expression'">lege expressie</xsl:when>
+          <xsl:when test="$key = 'empty-reference-chain'">lege referentieketen</xsl:when>
+          <!-- Boolean values -->
+          <xsl:when test="$key = 'true'">waar</xsl:when>
+          <xsl:when test="$key = 'false'">onwaar</xsl:when>
           <xsl:when test="$key = 'or'">of</xsl:when>
           <xsl:when test="$key = 'if-none-exist'">als die er niet zijn</xsl:when>
           <xsl:when test="$key = 'as'">als</xsl:when>
