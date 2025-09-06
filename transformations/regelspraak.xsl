@@ -424,6 +424,11 @@
                     <xsl:with-param name="bounded" select="$expression"/>
                 </xsl:call-template>
             </xsl:when>
+            <xsl:when test="$type = 'sum'">
+                <xsl:call-template name="format-sum">
+                    <xsl:with-param name="sum" select="$expression"/>
+                </xsl:call-template>
+            </xsl:when>
             <xsl:when test="$expression/fn:array">
                 <!-- Direct reference chain -->
                 <xsl:call-template name="resolve-reference-chain">
@@ -703,6 +708,14 @@
                 <xsl:call-template name="format-parameter-reference">
                     <xsl:with-param name="param" select="$operand"/>
                 </xsl:call-template>
+            </xsl:when>
+            <!-- Sum expression -->
+            <xsl:when test="$operand/fn:string[@key='type'] = 'sum'">
+                <xsl:text>(</xsl:text>
+                <xsl:call-template name="format-sum">
+                    <xsl:with-param name="sum" select="$operand"/>
+                </xsl:call-template>
+                <xsl:text>)</xsl:text>
             </xsl:when>
             <!-- Arithmetic expression -->
             <xsl:when test="$operand/fn:string[@key='type'] = 'arithmetic'">
@@ -1160,31 +1173,43 @@
         </xsl:choose>
     </xsl:template>
 
+    <!-- Format sum expression -->
+    <xsl:template name="format-sum">
+        <xsl:param name="sum"/>
+        <xsl:variable name="operands" select="$sum/fn:array[@key='operands']"/>
+        
+        <xsl:for-each select="$operands/fn:array | $operands/fn:map">
+            <xsl:if test="position() > 1">
+                <xsl:text> plus </xsl:text>
+            </xsl:if>
+            <xsl:call-template name="format-operand">
+                <xsl:with-param name="operand" select="."/>
+            </xsl:call-template>
+        </xsl:for-each>
+    </xsl:template>
+
     <!-- Format arithmetic expression -->
     <xsl:template name="format-arithmetic">
         <xsl:param name="arithmetic"/>
         <xsl:variable name="operator" select="$arithmetic/fn:string[@key='operator']"/>
-        <xsl:variable name="left" select="$arithmetic/fn:map[@key='left'] | $arithmetic/fn:array[@key='left']"/>
-        <xsl:variable name="right" select="$arithmetic/fn:map[@key='right'] | $arithmetic/fn:array[@key='right']"/>
+        <xsl:variable name="operands" select="$arithmetic/fn:array[@key='operands']"/>
         
-        <!-- Format left operand -->
-        <xsl:call-template name="format-operand">
-            <xsl:with-param name="operand" select="$left"/>
-        </xsl:call-template>
-        
-        <!-- Format operator -->
-        <xsl:choose>
-            <xsl:when test="$operator = 'plus'"><xsl:text> plus </xsl:text></xsl:when>
-            <xsl:when test="$operator = 'minus'"><xsl:text> min </xsl:text></xsl:when>
-            <xsl:when test="$operator = 'multiply'"><xsl:text> maal </xsl:text></xsl:when>
-            <xsl:when test="$operator = 'divide'"><xsl:text> gedeeld door </xsl:text></xsl:when>
-            <xsl:otherwise><xsl:text> </xsl:text><xsl:value-of select="$operator"/><xsl:text> </xsl:text></xsl:otherwise>
-        </xsl:choose>
-        
-        <!-- Format right operand -->
-        <xsl:call-template name="format-operand">
-            <xsl:with-param name="operand" select="$right"/>
-        </xsl:call-template>
+        <xsl:for-each select="$operands/fn:array | $operands/fn:map">
+            <xsl:if test="position() > 1">
+                <!-- Format operator between operands -->
+                <xsl:choose>
+                    <xsl:when test="$operator = 'plus'"><xsl:text> plus </xsl:text></xsl:when>
+                    <xsl:when test="$operator = 'minus'"><xsl:text> min </xsl:text></xsl:when>
+                    <xsl:when test="$operator = 'multiply'"><xsl:text> maal </xsl:text></xsl:when>
+                    <xsl:when test="$operator = 'divide'"><xsl:text> gedeeld door </xsl:text></xsl:when>
+                    <xsl:otherwise><xsl:text> </xsl:text><xsl:value-of select="$operator"/><xsl:text> </xsl:text></xsl:otherwise>
+                </xsl:choose>
+            </xsl:if>
+            
+            <xsl:call-template name="format-operand">
+                <xsl:with-param name="operand" select="."/>
+            </xsl:call-template>
+        </xsl:for-each>
     </xsl:template>
 
     <!-- Format parameter reference -->

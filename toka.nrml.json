@@ -1810,30 +1810,32 @@
               "expression": {
                 "type": "arithmetic",
                 "operator": "minus",
-                "left": {
-                  
-                  "parameter": {
-                    "$ref": "#/facts/dc7826fa-37c0-499d-8d59-96a0c40b3fcd"
-                  }
-                },
-                "right": {
-                  "type": "arithmetic",
-                  "operator": "multiply",
-                  "left": {
-                    
+                "operands": [
+                  {
                     "parameter": {
-                      "$ref": "#/facts/d74f5c2d-5538-4347-81be-cfb3ebe6e06c"
+                      "$ref": "#/facts/dc7826fa-37c0-499d-8d59-96a0c40b3fcd"
                     }
                   },
-                  "right": [
-                    {
-                      "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
-                    },
-                    {
-                      "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
-                    }
-                  ]
-                }
+                  {
+                    "type": "arithmetic",
+                    "operator": "multiply",
+                    "operands": [
+                      {
+                        "parameter": {
+                          "$ref": "#/facts/d74f5c2d-5538-4347-81be-cfb3ebe6e06c"
+                        }
+                      },
+                      [
+                        {
+                          "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                        },
+                        {
+                          "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                        }
+                      ]
+                    ]
+                  }
+                ]
               },
               "condition": {
                 "type": "allOf",
@@ -1919,40 +1921,43 @@
               "expression": {
                 "type": "arithmetic",
                 "operator": "minus",
-                "left": {
-                  
-                  "parameter": {
-                    "$ref": "#/facts/155c3536-cb1c-49a0-bd14-84fdf2dda9e8"
-                  }
-                },
-                "right": {
-                  "type": "arithmetic",
-                  "operator": "multiply",
-                  "left": {
-                    
+                "operands": [
+                  {
                     "parameter": {
-                      "$ref": "#/facts/70fbe842-7ba3-48df-958a-9a22db065aa3"
+                      "$ref": "#/facts/155c3536-cb1c-49a0-bd14-84fdf2dda9e8"
                     }
                   },
-                  "right": {
+                  {
                     "type": "arithmetic",
-                    "operator": "minus",
-                    "left": [
+                    "operator": "multiply",
+                    "operands": [
                       {
-                        "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                        "parameter": {
+                          "$ref": "#/facts/70fbe842-7ba3-48df-958a-9a22db065aa3"
+                        }
                       },
                       {
-                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                        "type": "arithmetic",
+                        "operator": "minus",
+                        "operands": [
+                          [
+                            {
+                              "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                            },
+                            {
+                              "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                            }
+                          ],
+                          {
+                            "parameter": {
+                              "$ref": "#/facts/70fbc167-01ca-4ef6-a1dd-78d05eaf99ab"
+                            }
+                          }
+                        ]
                       }
-                    ],
-                    "right": {
-                      
-                      "parameter": {
-                        "$ref": "#/facts/70fbc167-01ca-4ef6-a1dd-78d05eaf99ab"
-                      }
-                    }
+                    ]
                   }
-                }
+                ]
               },
               "condition": {
                 "type": "allOf",
@@ -2039,30 +2044,32 @@
               "expression": {
                 "type": "arithmetic",
                 "operator": "minus",
-                "left": {
-                  
-                  "parameter": {
-                    "$ref": "#/facts/0d4f3025-5c31-465a-b08f-983a19507c2b"
-                  }
-                },
-                "right": {
-                  "type": "arithmetic",
-                  "operator": "multiply",
-                  "left": {
-                    
+                "operands": [
+                  {
                     "parameter": {
-                      "$ref": "#/facts/4eda445b-32b0-4732-8a7c-753c5df1b33a"
+                      "$ref": "#/facts/0d4f3025-5c31-465a-b08f-983a19507c2b"
                     }
                   },
-                  "right": [
-                    {
-                      "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
-                    },
-                    {
-                      "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
-                    }
-                  ]
-                }
+                  {
+                    "type": "arithmetic",
+                    "operator": "multiply",
+                    "operands": [
+                      {
+                        "parameter": {
+                          "$ref": "#/facts/4eda445b-32b0-4732-8a7c-753c5df1b33a"
+                        }
+                      },
+                      [
+                        {
+                          "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                        },
+                        {
+                          "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                        }
+                      ]
+                    ]
+                  }
+                ]
               },
               "condition": {
                 "type": "allOf",
@@ -2148,40 +2155,43 @@
               "expression": {
                 "type": "arithmetic",
                 "operator": "minus",
-                "left": {
-                  
-                  "parameter": {
-                    "$ref": "#/facts/0a7246e7-b7d0-44e1-a928-75c92b3d2638"
-                  }
-                },
-                "right": {
-                  "type": "arithmetic",
-                  "operator": "multiply",
-                  "left": {
-                    
+                "operands": [
+                  {
                     "parameter": {
-                      "$ref": "#/facts/082debac-4e28-4346-b133-254f418e174f"
+                      "$ref": "#/facts/0a7246e7-b7d0-44e1-a928-75c92b3d2638"
                     }
                   },
-                  "right": {
+                  {
                     "type": "arithmetic",
-                    "operator": "minus",
-                    "left": [
+                    "operator": "multiply",
+                    "operands": [
                       {
-                        "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                        "parameter": {
+                          "$ref": "#/facts/082debac-4e28-4346-b133-254f418e174f"
+                        }
                       },
                       {
-                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                        "type": "arithmetic",
+                        "operator": "minus",
+                        "operands": [
+                          [
+                            {
+                              "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                            },
+                            {
+                              "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                            }
+                          ],
+                          {
+                            "parameter": {
+                              "$ref": "#/facts/70fbc167-01ca-4ef6-a1dd-78d05eaf99ab"
+                            }
+                          }
+                        ]
                       }
-                    ],
-                    "right": {
-                      
-                      "parameter": {
-                        "$ref": "#/facts/70fbc167-01ca-4ef6-a1dd-78d05eaf99ab"
-                      }
-                    }
+                    ]
                   }
-                }
+                ]
               },
               "condition": {
                 "type": "allOf",
@@ -2616,15 +2626,17 @@
                 "expression": {
                   "type": "arithmetic",
                   "operator": "plus",
-                  "left": [
-                    {
-                      "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/199d696e-a168-4584-8f80-35d737e5e1ba"
-                    }
-                  ],
-                  "right": [
-                    {
-                      "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/b802e897-8854-4ad3-97b4-3ed4b04f9b16"
-                    }
+                  "operands": [
+                    [
+                      {
+                        "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/199d696e-a168-4584-8f80-35d737e5e1ba"
+                      }
+                    ],
+                    [
+                      {
+                        "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/b802e897-8854-4ad3-97b4-3ed4b04f9b16"
+                      }
+                    ]
                   ]
                 },
                 "decimals": 0,
@@ -2683,26 +2695,28 @@
                   "expression": {
                     "type": "arithmetic",
                     "operator": "minus",
-                    "left": {
-                      "type": "arithmetic",
-                      "operator": "plus",
-                      "left": [
-                        {
-                          "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/199d696e-a168-4584-8f80-35d737e5e1ba"
+                    "operands": [
+                      {
+                        "type": "sum",
+                        "operands": [
+                          [
+                            {
+                              "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/199d696e-a168-4584-8f80-35d737e5e1ba"
+                            }
+                          ],
+                          [
+                            {
+                              "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/b802e897-8854-4ad3-97b4-3ed4b04f9b16"
+                            }
+                          ]
+                        ]
+                      },
+                      {
+                        "parameter": {
+                          "$ref": "#/facts/447763d6-bb4c-4d6c-bf1e-20ef7e967bd4"
                         }
-                      ],
-                      "right": [
-                        {
-                          "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/b802e897-8854-4ad3-97b4-3ed4b04f9b16"
-                        }
-                      ]
-                    },
-                    "right": {
-                      
-                      "parameter": {
-                        "$ref": "#/facts/447763d6-bb4c-4d6c-bf1e-20ef7e967bd4"
                       }
-                    }
+                    ]
                   },
                   "decimals": 0,
                   "direction": "down"
