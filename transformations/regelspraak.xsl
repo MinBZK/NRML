@@ -521,11 +521,31 @@
         <xsl:variable name="condition" select="$aggregation/fn:map[@key='condition']"/>
         
         <xsl:choose>
-            <xsl:when test="$function = 'sum'">de som van</xsl:when>
-            <xsl:when test="$function = 'count'">het aantal</xsl:when>
-            <xsl:when test="$function = 'average'">het gemiddelde van</xsl:when>
-            <xsl:when test="$function = 'min'">het minimum van</xsl:when>
-            <xsl:when test="$function = 'max'">het maximum van</xsl:when>
+            <xsl:when test="$function = 'sum'">
+                <xsl:call-template name="translate">
+                    <xsl:with-param name="key">sum-of</xsl:with-param>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="$function = 'count'">
+                <xsl:call-template name="translate">
+                    <xsl:with-param name="key">count</xsl:with-param>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="$function = 'average'">
+                <xsl:call-template name="translate">
+                    <xsl:with-param name="key">average</xsl:with-param>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="$function = 'min'">
+                <xsl:call-template name="translate">
+                    <xsl:with-param name="key">minimum-of</xsl:with-param>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="$function = 'max'">
+                <xsl:call-template name="translate">
+                    <xsl:with-param name="key">max</xsl:with-param>
+                </xsl:call-template>
+            </xsl:when>
             <xsl:otherwise><xsl:value-of select="$function"/></xsl:otherwise>
         </xsl:choose>
         
@@ -1292,7 +1312,11 @@
         
         <xsl:for-each select="$operands/fn:array | $operands/fn:map">
             <xsl:if test="position() > 1">
-                <xsl:text> plus </xsl:text>
+                <xsl:text> </xsl:text>
+                <xsl:call-template name="translate">
+                    <xsl:with-param name="key">plus</xsl:with-param>
+                </xsl:call-template>
+                <xsl:text> </xsl:text>
             </xsl:if>
             <xsl:call-template name="format-operand">
                 <xsl:with-param name="operand" select="."/>
@@ -2069,10 +2093,16 @@
         
         <xsl:choose>
             <xsl:when test="$direction = 'down'">
-                <xsl:text> naar beneden afgerond</xsl:text>
+                <xsl:text> </xsl:text>
+                <xsl:call-template name="translate">
+                    <xsl:with-param name="key">rounded-down</xsl:with-param>
+                </xsl:call-template>
             </xsl:when>
             <xsl:when test="$direction = 'up'">
-                <xsl:text> naar boven afgerond</xsl:text>
+                <xsl:text> </xsl:text>
+                <xsl:call-template name="translate">
+                    <xsl:with-param name="key">rounded-up</xsl:with-param>
+                </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:text> afgerond</xsl:text>
@@ -2095,7 +2125,11 @@
         </xsl:call-template>
         
         <xsl:if test="$minimum">
-            <xsl:text> , met een minimum van </xsl:text>
+            <xsl:text> , </xsl:text>
+            <xsl:call-template name="translate">
+                <xsl:with-param name="key">with-minimum-of</xsl:with-param>
+            </xsl:call-template>
+            <xsl:text> </xsl:text>
             <xsl:call-template name="format-value">
                 <xsl:with-param name="value" select="$minimum"/>
             </xsl:call-template>

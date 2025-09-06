@@ -99,6 +99,11 @@
           <xsl:when test="$key = 'less-than-inverted'">less is than</xsl:when>
           <xsl:when test="$key = 'greater-or-equal-inverted'">greater or equal is to</xsl:when>
           <xsl:when test="$key = 'less-or-equal-inverted'">less or equal is to</xsl:when>
+          <xsl:when test="$key = 'count'">the number of</xsl:when>
+          <xsl:when test="$key = 'average'">the average of</xsl:when>
+          <xsl:when test="$key = 'max'">the maximum of</xsl:when>
+          <xsl:when test="$key = 'sum-of'">the sum of</xsl:when>
+          <xsl:when test="$key = 'rounded-up'">rounded up</xsl:when>
           <xsl:otherwise><xsl:value-of select="$key"/></xsl:otherwise>
         </xsl:choose>
       </xsl:when>
@@ -193,6 +198,11 @@
           <xsl:when test="$key = 'less-than-inverted'">kleiner is dan</xsl:when>
           <xsl:when test="$key = 'greater-or-equal-inverted'">groter of gelijk is aan</xsl:when>
           <xsl:when test="$key = 'less-or-equal-inverted'">kleiner of gelijk is aan</xsl:when>
+          <xsl:when test="$key = 'count'">het aantal</xsl:when>
+          <xsl:when test="$key = 'average'">het gemiddelde van</xsl:when>
+          <xsl:when test="$key = 'max'">het maximum van</xsl:when>
+          <xsl:when test="$key = 'sum-of'">de som van</xsl:when>
+          <xsl:when test="$key = 'rounded-up'">naar boven afgerond</xsl:when>
           <xsl:otherwise><xsl:value-of select="$key"/></xsl:otherwise>
         </xsl:choose>
       </xsl:otherwise>
