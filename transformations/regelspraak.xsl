@@ -711,11 +711,9 @@
             </xsl:when>
             <!-- Sum expression -->
             <xsl:when test="$operand/fn:string[@key='type'] = 'sum'">
-                <xsl:text>(</xsl:text>
                 <xsl:call-template name="format-sum">
                     <xsl:with-param name="sum" select="$operand"/>
                 </xsl:call-template>
-                <xsl:text>)</xsl:text>
             </xsl:when>
             <!-- Arithmetic expression -->
             <xsl:when test="$operand/fn:string[@key='type'] = 'arithmetic'">
