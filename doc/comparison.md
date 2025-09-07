@@ -2,7 +2,7 @@
 
 ## Executive Summary
 
-NRML (Normalized Rule Model Language) is a JSON-based format for describing business rules, object models, and their relationships. This analysis examines how NRML relates to existing standards in the legal and rule specification domain, identifying unique features, overlaps, and lessons learned from other initiatives.
+NRML (Normalized Rule Model Language) is a JSON-based format for describing legal and regulatory rules, object models, and their relationships. This analysis examines how NRML relates to existing standards in the legal and rule specification domain, identifying unique features, overlaps, and lessons learned from other initiatives.
 
 ## 1. Nederlandse Overheidsstandaarden (Dutch Government Standards)
 
@@ -277,7 +277,7 @@ NRML (Normalized Rule Model Language) is a JSON-based format for describing busi
 
 - **Verification**: DatalogCert emphasizes formal verification
 - **Declarative**: Both use declarative approaches
-- **Domain**: DatalogCert more general, NRML specific to business rules
+- **Domain**: DatalogCert more general, NRML specific to legal and regulatory rules
 - **Lesson**: NRML could explore Datalog for rule inference
 
 ### 3.4 Oracle Policy Automation (OPA)
@@ -315,7 +315,7 @@ NRML (Normalized Rule Model Language) is a JSON-based format for describing busi
 
 - **Standards**: Both use JSON-based formats
 - **Extensibility**: Both support extensions
-- **Domain**: ODRL for rights, NRML for business rules
+- **Domain**: ODRL for digital rights, NRML for legal and regulatory rules
 - **Lesson**: NRML could adopt ODRL's policy expression patterns
 
 ### 4.2 POWDER
@@ -354,32 +354,76 @@ NRML (Normalized Rule Model Language) is a JSON-based format for describing busi
 - **Standards**: LKIF uses OWL, NRML uses JSON
 - **Lesson**: NRML could adopt LKIF's approach to exceptions and meta-rules
 
+## Analysis: NRML as Datalog with JSON Syntax
+
+### **The Theoretical Foundation**
+
+After analyzing NRML's structure and comparing it with existing standards, a key insight emerges: **NRML is fundamentally Datalog with JSON syntax and path expressions**.
+
+This realization connects NRML to 40+ years of formal logic programming theory:
+
+- **NRML Facts** = Datalog facts/relations
+- **NRML Reference chains** = Path expressions through fact graphs
+- **NRML Conditions** = Datalog predicates with arithmetic extensions
+- **NRML Rules** = Horn clauses with default logic
+- **NRML Aggregations** = SQL-like aggregate functions over fact sets
+
+#### **Datalog Connection to Other Standards**
+
+Most rule languages in our comparison are actually **Datalog variants**:
+
+- **FLINT**: Facts and acts with preconditions = Datalog rules
+- **Catala**: Default logic = Stratified Datalog with negation
+- **OpenFisca**: Python formulas = Datalog rules with arithmetic
+- **OPA**: Policy rules = Forward-chaining Datalog
+- **LKIF**: OWL restrictions = Description Logic (subset of Datalog)
+- **SPARQL**: RDF queries = Datalog over triple stores
+- **DMN**: Decision tables = Datalog rules with priorities
+
+This means NRML isn't inventing new concepts - it's providing a **JSON-friendly syntax for well-established logic programming patterns**.
+
 ## Analysis: What Makes NRML Unique?
 
-### 1. **JSON-First Approach**
+### 1. **JSON-Based Datalog**
 
-- While most legal standards use XML, NRML's JSON format is more developer-friendly
-- Aligns with modern API practices and web development
+- While most rule languages use custom syntax, NRML uses JSON
+- Makes Datalog concepts accessible to modern developers
+- Enables direct API integration without parsing layers
 
-### 2. **Integrated Test Scenarios**
+### 2. **Path-Based Reference System**
 
-- Built-in support for Gherkin-style test scenarios
-- Direct connection between rules and their tests
+- Reference chains provide intuitive navigation through fact graphs
+- More developer-friendly than Datalog's positional arguments
+- Enables complex multi-hop relationships with simple syntax
 
-### 3. **Business Rule Focus**
+### 3. **Complementary Bridge Format**
 
-- Specifically designed for business rules rather than legal documents
-- Practical implementation focus vs theoretical representation
+Rather than competing with existing standards, NRML serves as a **bridge format** that could:
+- Store Blawx visual rule definitions
+- Serialize FLINT legal interpretations  
+- Execute via existing Datalog engines
+- Generate RegelSpraak-style natural language
+- Reference BWB/ELI legal documents
 
-### 4. **Dutch Context Integration**
+### 4. **Inverse Relationship to RegelSpraak**
 
-- Article support (de/het) for Dutch language
-- Builds on Dutch initiatives while remaining language-agnostic
+NRML and RegelSpraak are **complementary inverses**:
+- **RegelSpraak**: Dutch CNL → Executable code
+- **NRML**: JSON rules → Dutch natural language
 
-### 5. **Simplicity**
+This suggests potential for integration where RegelSpraak authors rules and NRML stores/executes them.
 
-- Simpler than comprehensive standards like Akoma Ntoso or LKIF
-- Lower barrier to entry than formal methods like Catala
+### 5. **Version-Aware Temporal Logic**
+
+- Built-in versioning system for rules over time
+- Handles legal changes and effective dates naturally
+- More sophisticated than most rule engines' change management
+
+### 6. **Multilingual by Design**
+
+- Language objects baked into the core structure
+- Supports rule authoring in multiple languages simultaneously
+- Enables internationalization without structural changes
 
 ## Overlaps with Existing Standards
 
@@ -421,7 +465,7 @@ NRML occupies a unique position as:
 
 1. **A Bridge Format**: Between human-readable specifications and machine-executable code
 2. **Developer-Friendly**: JSON format appeals to modern developers
-3. **Domain-Specific**: Focused on business rules rather than general legal documents
+3. **Domain-Specific**: Focused on executable legal rules rather than legal document structure
 4. **Pragmatic**: Emphasizes practical implementation over theoretical completeness
 5. **Complementary to FLINT**: Where FLINT captures interpretations, NRML executes them
 6. **Blockly-Compatible**: Like Blawx, leverages visual programming for accessibility
@@ -454,7 +498,7 @@ NRML occupies a unique position as:
 
 ## Conclusion
 
-NRML represents a pragmatic approach to rule specification that builds on lessons from existing standards while maintaining its own identity. Its JSON-first approach and focus on business rules distinguish it from document-oriented legal standards. To succeed, NRML should:
+NRML represents a pragmatic approach to rule specification that builds on lessons from existing standards while maintaining its own identity. Its JSON-first approach and focus on executable legal rules distinguish it from document-oriented legal standards. To succeed, NRML should:
 
 1. Leverage strengths from existing standards
 2. Maintain its simplicity and developer focus

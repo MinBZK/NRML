@@ -2,8 +2,19 @@
 
 ## Overview
 
-NRML (uitspraak: /ˈnɔrməl/) is een JSON-gebaseerd formaat voor het beschrijven van bedrijfsregels, objectmodellen en hun
-relaties op een gestructureerde manier.
+NRML (uitspraak: /ˈnɔrməl/) is een JSON-gebaseerd Datalog voor wet- en regelgeving met path expressions en multilinguale ondersteuning.
+
+### Theoretical Foundation
+
+NRML is fundamentally **Datalog with JSON syntax**:
+
+- **NRML Facts** = Datalog facts/relations
+- **NRML Reference chains** = Path expressions through fact graphs  
+- **NRML Conditions** = Datalog predicates with arithmetic extensions
+- **NRML Rules** = Horn clauses with default logic
+- **NRML Aggregations** = SQL-like aggregate functions
+
+This connects NRML to 40+ years of formal logic programming theory and enables potential formal verification using existing Datalog tools.
 
 ## Key Files
 

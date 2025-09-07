@@ -1,17 +1,52 @@
 # NRML - Normalized Rule Model Language
 
-NRML (uitspraak: /ˈnɔrməl/) is een JSON-gebaseerd formaat voor het beschrijven van bedrijfsregels, objectmodellen en hun relaties op een gestructureerde manier.
+NRML (uitspraak: /ˈnɔrməl/) is een **JSON-gebaseerd Datalog voor wet- en regelgeving** met path expressions en multilinguale ondersteuning.
+
+## Theoretische Basis: Datalog met JSON Syntax
+
+NRML is fundamenteel **Datalog met JSON syntax**. Deze realisatie verbindt NRML met 40+ jaar formele logica programmering theorie:
+
+- **NRML Facts** = Datalog facts/relaties
+- **NRML Reference chains** = Path expressions door fact graphs  
+- **NRML Conditions** = Datalog predicates met rekenkundige extensies
+- **NRML Rules** = Horn clauses met default logic
+- **NRML Aggregations** = SQL-achtige aggregate functies
+
+## Positie in het Ecosystem
+
+NRML fungeert als **bridge format** in het landscape van rule languages:
+
+### **Complementair, niet concurrerend**
+
+In plaats van te concurreren met bestaande standaarden, dient NRML als **brug tussen**:
+- **FLINT interpretaties** → NRML serialisatie  
+- **Blawx visuele rules** → NRML opslag
+- **RegelSpraak Dutch CNL** ← NRML natuurlijke taal generatie
+- **Datalog engines** ← NRML executie
+
+### **Inverse relatie met RegelSpraak**
+
+NRML en RegelSpraak zijn **complementaire inversen**:
+- **RegelSpraak**: Nederlandse CNL → Uitvoerbare code
+- **NRML**: JSON rules → Nederlandse natuurlijke taal
 
 ## Wat maakt NRML uniek?
 
-In tegenstelling tot bestaande XML-gebaseerde standaarden zoals BWB, Akoma Ntoso of MetaLex, kiest NRML bewust voor een **JSON-first** aanpak die aansluiting zoekt bij moderne software development practices. Waar standaarden zoals OpenFisca (Frankrijk) en Oracle Policy Automation zich richten op specifieke domeinen of propriëtaire oplossingen, biedt NRML een **open, developer-vriendelijke** benadering voor het specificeren van bedrijfsregels.
+### 1. **JSON-Based Datalog**
+- Maakt Datalog concepten toegankelijk voor moderne developers
+- Directe API integratie zonder parsing layers
 
-NRML onderscheidt zich door:
+### 2. **Path-Based Reference System**  
+- Intuïtieve navigatie door fact graphs
+- Developer-vriendelijker dan Datalog's positionele argumenten
 
-- **Executie-gerichte** aanpak (vs. document-georiënteerde juridische standaarden)
-- **Brugfunctie** tussen menselijk leesbare specificaties en machine-uitvoerbare code
-- **Nederlandse taalondersteuning** met ingebouwde lidwoorden (de/het)
-- **Pragmatische simpliciteit** met een lagere drempel dan formele methoden zoals Catala
+### 3. **Version-Aware Temporal Logic**
+- Ingebouwd versioning systeem voor regels over tijd
+- Natuurlijke handling van juridische wijzigingen
+
+### 4. **Multilingual by Design**
+- Language objects ingebakken in de core structuur
+- Ondersteunt regel authoring in meerdere talen tegelijk
 
 ## Context
 
