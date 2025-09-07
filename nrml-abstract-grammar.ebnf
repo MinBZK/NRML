@@ -1,0 +1,204 @@
+(* NRML (Normalized Rule Model Language) Abstract Grammar *)
+(* Defines the conceptual syntax of NRML language constructs *)
+(* Independent of JSON serialization format *)
+
+(* Top-level Language Structure *)
+nrml_specification ::= metadata? facts
+
+metadata ::= creation_info migration_info? description? format_version?
+
+facts ::= fact+
+
+(* Core Language Elements *)
+(* Facts are the only top-level construct - they represent different source types *)
+fact ::= identifier language_names source_type? definite_article? animated? relation? items+
+
+source_type ::= "domain" | "objectType" | "factType" | "parameter" | "ruleGroup"
+
+relation ::= string
+
+(* Items and Versioning *)
+items ::= property | role | rule
+
+property ::= identifier language_names article? plural? versions+
+
+role ::= identifier language_names article? plural? cardinality object_reference versions+
+
+rule ::= identifier validity_period rule_body
+
+(* Version System *)
+versions ::= version+
+
+version ::= validity_period type_definition? constraints? assignment_logic?
+
+type_definition ::= primitive_type | reference_type | characteristic_type
+
+primitive_type ::= numeric | text | boolean | date | percentage | enumeration
+
+numeric ::= integer | decimal | precision?
+
+(* Assignment Logic in Versions *)
+assignment_logic ::= target_assignment | conditional_assignment
+
+target_assignment ::= reference_chain "=" ( value | expression )
+
+conditional_assignment ::= target_assignment "if" condition ["default" default_value]
+
+(* Reference Chain System *)
+reference_chain ::= reference+
+
+reference ::= fact_reference property_reference? version_reference? endpoint_reference?
+
+fact_reference ::= identifier
+
+property_reference ::= property_id | role_id
+
+version_reference ::= version_number
+
+endpoint_reference ::= "a" | "b"
+
+(* Condition System *)
+condition ::= exists_condition 
+            | not_exists_condition
+            | comparison_condition  
+            | logical_condition
+            | exactly_one_condition
+
+exists_condition ::= "exists" "(" reference_chain ")"
+
+not_exists_condition ::= "notExists" "(" reference_chain ")"
+
+comparison_condition ::= operand comparison_operator operand
+
+logical_condition ::= "all_of" "(" condition+ ")"
+                    | "any_of" "(" condition+ ")"
+
+exactly_one_condition ::= "exactly_one_of" "(" condition condition+ ")"
+
+(* Expression System *)
+expression ::= aggregation_expression
+             | arithmetic_expression  
+             | distribution_expression
+             | parameter_expression
+             | function_expression
+             | rounding_expression
+             | bounded_expression
+
+aggregation_expression ::= aggregation_function "(" reference_chain ["," default_value] ")"
+
+arithmetic_expression ::= arithmetic_operator "(" operand operand+ ")"
+
+distribution_expression ::= "distribute" "(" reference_chain "," distribution_method 
+                           ["," criteria] ["," rounding] ["," default_value] ")"
+
+parameter_expression ::= parameter_reference
+
+function_expression ::= function_name "(" [function_args] ")"
+
+rounding_expression ::= "round" "(" expression "," decimals "," direction ")"
+
+bounded_expression ::= "bounded" "(" expression "," minimum ["," maximum] ")"
+
+(* Operand System *)
+operand ::= reference_chain
+          | parameter_reference  
+          | literal_value
+          | expression
+
+(* Distribution System *)
+distribution_method ::= "equal_shares" | "weighted"
+
+criteria ::= criterion+
+
+criterion ::= sort_criterion | maximum_criterion | ratio_criterion
+
+sort_criterion ::= "sort_by" "(" reference_chain ["," order] ["," tiebreaker] ")"
+
+maximum_criterion ::= "maximum" "(" reference_chain ")"
+
+ratio_criterion ::= "ratio" "(" reference_chain ")"
+
+(* Value System *)
+literal_value ::= number | string | boolean
+
+typed_value ::= literal_value [unit]
+
+default_value ::= typed_value
+
+(* Language Support *)
+language_names ::= language_name+
+
+language_name ::= language_code ":" string
+
+(* Operators *)
+comparison_operator ::= "equals" | "notEquals" | "lessThan" | "lessThanOrEquals" 
+                      | "greaterThan" | "greaterThanOrEquals" | "greaterOrEqual"
+
+arithmetic_operator ::= "add" | "subtract" | "multiply" | "divide" | "min" | "max"
+
+aggregation_function ::= "add" | "count" | "average" | "min" | "max" | "timeDuration"
+
+(* Identifiers and References *)
+identifier ::= uuid | symbolic_name
+
+parameter_reference ::= parameter_identifier
+
+object_reference ::= reference_chain
+
+function_name ::= "timeDuration"
+
+function_args ::= reference_chain "to" reference_chain ["in" unit] ["whole" boolean]
+
+(* Constraints and Properties *)
+cardinality ::= "one" | "many"
+
+validity_period ::= "from" date ["to" date]
+
+constraints ::= cardinality? unit? precision? enumeration_values?
+
+enumeration_values ::= string+
+
+precision ::= integer | "days" | "milliseconds"
+
+unit ::= string
+
+decimals ::= integer
+
+direction ::= "up" | "down"
+
+order ::= "ascending" | "descending"
+
+(* Basic Types *)
+base_type ::= "numeric" | "text" | "boolean" | "date" | "percentage"
+
+characteristic_type ::= "characteristic" ["(" subtype ")"]
+
+subtype ::= "possessive" | "adjective"
+
+reference_type ::= object_reference
+
+(* Terminals *)
+uuid ::= hex_string  (* UUID format *)
+
+symbolic_name ::= identifier_string
+
+language_code ::= letter letter  (* ISO 639-1 *)
+
+string ::= quoted_string
+
+number ::= integer | decimal
+
+boolean ::= "true" | "false"
+
+date ::= iso_date_string
+
+integer ::= digit+
+
+decimal ::= digit+ "." digit+
+
+(* Character Classes *)
+letter ::= "a".."z" | "A".."Z"
+
+digit ::= "0".."9"
+
+hex_digit ::= digit | "a".."f" | "A".."F"
