@@ -1,0 +1,168 @@
+  {
+  "$schema": "schema.json",
+  "version": "1.0.0",
+  "language": "nl",
+  "metadata": {
+    "description": "Penitentiaire beginselenwet - Bepalen detentiestatus",
+    "created": "2025-09-07",
+    "legal_basis": {
+      "law": "Penitentiaire beginselenwet",
+      "bwb_id": "BWBR0009709",
+      "article": "2, 3",
+      "url": "https://wetten.overheid.nl/BWBR0009709/2024-01-01"
+    },
+    "uuid": "292c11ff-8318-4b7a-bb11-3ea545b04c8e"
+  },
+  "facts": {
+    "4c72dc9d-78d4-4f0b-a0cd-6037944f26ce": {
+      "name": {
+        "nl": "natuurlijk persoon",
+        "en": "natural person"
+      },
+      "_source": "objectType",
+      "animated": true,
+      "items": {
+        "b5200359-418f-40db-bdd2-cf9f7f77b4d4": {
+          "name": {
+            "nl": "burgerservicenummer",
+            "en": "citizen service number"
+          },
+          "versions": [
+            {
+              "validFrom": "2022",
+              "type": "text"
+            }
+          ]
+        },
+        "c1d2e3f4-5678-90ab-cdef-123456789abc": {
+          "name": {
+            "nl": "is gedetineerd",
+            "en": "is detained"
+          },
+          "versions": [
+            {
+              "validFrom": "2022",
+              "type": "characteristic"
+            }
+          ]
+        }
+      }
+    },
+    "ef9e731c-4f81-4905-a902-2a533e1eebc5": {
+      "name": {
+        "nl": "detentie-inrichting", 
+        "en": "detention facility"
+      },
+      "_source": "objectType",
+      "animated": false,
+      "items": {
+        "48c6ed9c-0911-43d8-b6ef-47d2b406ea35": {
+          "name": {
+            "nl": "type inrichting",
+            "en": "facility type"
+          },
+          "versions": [
+            {
+              "validFrom": "2022",
+              "type": "enumeration",
+              "values": ["PENITENTIAIRE_INRICHTING", "HUIS_VAN_BEWARING", "INRICHTING_STELSELMATIGE_DADERS"]
+            }
+          ]
+        }
+      }
+    },
+    "d1e2f3a4-5678-90bc-def1-234567890abc": {
+      "name": {
+        "nl": "parameters",
+        "en": "parameters"
+      },
+      "_source": "parameter",
+      "items": {
+        "f1a2b3c4-5678-90de-fab1-234567890cde": {
+          "name": {
+            "nl": "GELDIG DETENTIE STATUS TYPES",
+            "en": "VALID DETENTION STATUS TYPES"
+          },
+          "versions": [
+            {
+              "validFrom": "2022",
+              "type": "enumeration",
+              "values": ["INGESLOTEN", "TIJDELIJK_AFWEZIG"]
+            }
+          ]
+        }
+      }
+    },
+    "e1f2a3b4-5678-90cd-efa1-234567890bcd": {
+      "name": {
+        "nl": "Detentiestatus regels",
+        "en": "Detention status rules"
+      },
+      "_source": "ruleGroup",
+      "items": {
+        "a1b2c3d4-5678-90ef-abc1-234567890def": {
+          "name": {
+            "nl": "Bepaling detentiestatus volgens artikel 2 Pbw",
+            "en": "Detention status determination per article 2"
+          },
+          "versions": [
+            {
+              "validFrom": "2022",
+              "target": [
+                {
+                  "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/items/c1d2e3f4-5678-90ab-cdef-123456789abc"
+                }
+              ],
+              "condition": {
+                "type": "comparison",
+                "left": [
+                  {
+                    "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/items/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
+                  }
+                ],
+                "operator": "equals",
+                "right": {
+                  "value": "PENITENTIAIRE_INRICHTING"
+                }
+              },
+              "value": {
+                "value": true
+              }
+            }
+          ]
+        },
+        "b1c2d3e4-5678-90ef-bcd1-234567890eff": {
+          "name": {
+            "nl": "Bepaling detentiestatus voor huis van bewaring",
+            "en": "Detention status for house of detention"
+          },
+          "versions": [
+            {
+              "validFrom": "2022",
+              "target": [
+                {
+                  "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/items/c1d2e3f4-5678-90ab-cdef-123456789abc"
+                }
+              ],
+              "condition": {
+                "type": "comparison",
+                "left": [
+                  {
+                    "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/items/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
+                  }
+                ],
+                "operator": "equals",
+                "right": {
+                  "value": "HUIS_VAN_BEWARING"
+                }
+              },
+              "value": {
+                "value": true
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
