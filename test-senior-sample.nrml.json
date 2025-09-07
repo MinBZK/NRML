@@ -1,0 +1,668 @@
+{
+  "facts": {
+    "4c72dc9d-78d4-4f0b-a0cd-6037944f26ce": {
+      "name": {
+        "nl": "natuurlijk persoon",
+        "en": "natural person"
+      },
+      "_source": "objectType",
+      "animated": true,
+      "items": {
+        "b5200359-418f-40db-bdd2-cf9f7f77b4d4": {
+          "name": {
+            "nl": "geboortedatum",
+            "en": "birth date"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "date"
+            }
+          ]
+        },
+        "age-property": {
+          "name": {
+            "nl": "leeftijd",
+            "en": "age"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "numeric",
+              "subtype": "integer",
+              "unit": "jr"
+            }
+          ]
+        },
+        "senior-characteristic": {
+          "name": {
+            "nl": "passagier waarvoor korting van toepassing is",
+            "en": "passenger eligible for discount"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "characteristic"
+            }
+          ]
+        },
+        "tax-amount": {
+          "name": {
+            "nl": "te betalen belasting",
+            "en": "tax amount"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "numeric",
+              "subtype": "decimal",
+              "precision": 2,
+              "unit": "EUR"
+            }
+          ]
+        }
+      },
+      "properties": {
+        "instance_1_age": {
+          "name": {
+            "nl": "leeftijd van John",
+            "en": "age of John"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "number",
+              "defaultValue": 17,
+              "unit": "jr"
+            }
+          ]
+        },
+        "instance_1_name": {
+          "name": {
+            "nl": "naam van John",
+            "en": "name of John"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "string",
+              "defaultValue": "John"
+            }
+          ]
+        },
+        "instance_1_distance": {
+          "name": {
+            "nl": "afstand tot bestemming van John",
+            "en": "distance to destination of John"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "number",
+              "defaultValue": 300,
+              "unit": "km"
+            }
+          ]
+        },
+        "instance_2_age": {
+          "name": {
+            "nl": "leeftijd van Maria",
+            "en": "age of Maria"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "number",
+              "defaultValue": 25,
+              "unit": "jr"
+            }
+          ]
+        },
+        "instance_2_name": {
+          "name": {
+            "nl": "naam van Maria",
+            "en": "name of Maria"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "string",
+              "defaultValue": "Maria"
+            }
+          ]
+        },
+        "instance_2_distance": {
+          "name": {
+            "nl": "afstand tot bestemming van Maria",
+            "en": "distance to destination of Maria"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "number",
+              "defaultValue": 600,
+              "unit": "km"
+            }
+          ]
+        },
+        "instance_3_age": {
+          "name": {
+            "nl": "leeftijd van Ahmed",
+            "en": "age of Ahmed"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "number",
+              "defaultValue": 45,
+              "unit": "jr"
+            }
+          ]
+        },
+        "instance_3_name": {
+          "name": {
+            "nl": "naam van Ahmed",
+            "en": "name of Ahmed"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "string",
+              "defaultValue": "Ahmed"
+            }
+          ]
+        },
+        "instance_3_distance": {
+          "name": {
+            "nl": "afstand tot bestemming van Ahmed",
+            "en": "distance to destination of Ahmed"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "number",
+              "defaultValue": 1200,
+              "unit": "km"
+            }
+          ]
+        },
+        "instance_4_age": {
+          "name": {
+            "nl": "leeftijd van Lisa",
+            "en": "age of Lisa"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "number",
+              "defaultValue": 67,
+              "unit": "jr"
+            }
+          ]
+        },
+        "instance_4_name": {
+          "name": {
+            "nl": "naam van Lisa",
+            "en": "name of Lisa"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "string",
+              "defaultValue": "Lisa"
+            }
+          ]
+        },
+        "instance_4_distance": {
+          "name": {
+            "nl": "afstand tot bestemming van Lisa",
+            "en": "distance to destination of Lisa"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "number",
+              "defaultValue": 450,
+              "unit": "km"
+            }
+          ]
+        },
+        "instance_5_age": {
+          "name": {
+            "nl": "leeftijd van Carlos",
+            "en": "age of Carlos"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "number",
+              "defaultValue": 72,
+              "unit": "jr"
+            }
+          ]
+        },
+        "instance_5_name": {
+          "name": {
+            "nl": "naam van Carlos",
+            "en": "name of Carlos"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "string",
+              "defaultValue": "Carlos"
+            }
+          ]
+        },
+        "instance_5_distance": {
+          "name": {
+            "nl": "afstand tot bestemming van Carlos",
+            "en": "distance to destination of Carlos"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "number",
+              "defaultValue": 2800,
+              "unit": "km"
+            }
+          ]
+        },
+        "instance_6_age": {
+          "name": {
+            "nl": "leeftijd van Yuki",
+            "en": "age of Yuki"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "number",
+              "defaultValue": 28,
+              "unit": "jr"
+            }
+          ]
+        },
+        "instance_6_name": {
+          "name": {
+            "nl": "naam van Yuki",
+            "en": "name of Yuki"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "string",
+              "defaultValue": "Yuki"
+            }
+          ]
+        },
+        "instance_6_distance": {
+          "name": {
+            "nl": "afstand tot bestemming van Yuki",
+            "en": "distance to destination of Yuki"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "number",
+              "defaultValue": 150,
+              "unit": "km"
+            }
+          ]
+        },
+        "instance_7_age": {
+          "name": {
+            "nl": "leeftijd van Sophie",
+            "en": "age of Sophie"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "number",
+              "defaultValue": 33,
+              "unit": "jr"
+            }
+          ]
+        },
+        "instance_7_name": {
+          "name": {
+            "nl": "naam van Sophie",
+            "en": "name of Sophie"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "string",
+              "defaultValue": "Sophie"
+            }
+          ]
+        },
+        "instance_7_distance": {
+          "name": {
+            "nl": "afstand tot bestemming van Sophie",
+            "en": "distance to destination of Sophie"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "number",
+              "defaultValue": 900,
+              "unit": "km"
+            }
+          ]
+        },
+        "instance_8_age": {
+          "name": {
+            "nl": "leeftijd van David",
+            "en": "age of David"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "number",
+              "defaultValue": 19,
+              "unit": "jr"
+            }
+          ]
+        },
+        "instance_8_name": {
+          "name": {
+            "nl": "naam van David",
+            "en": "name of David"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "string",
+              "defaultValue": "David"
+            }
+          ]
+        },
+        "instance_8_distance": {
+          "name": {
+            "nl": "afstand tot bestemming van David",
+            "en": "distance to destination of David"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "number",
+              "defaultValue": 1800,
+              "unit": "km"
+            }
+          ]
+        }
+      }
+    },
+    "parameter-facts": {
+      "name": {
+        "nl": "parameters",
+        "en": "parameters"
+      },
+      "_source": "parameter",
+      "items": {
+        "senior-age": {
+          "name": {
+            "nl": "MINIMUM LEEFTIJD VOOR KORTING",
+            "en": "MINIMUM AGE FOR DISCOUNT"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "numeric",
+              "subtype": "integer",
+              "unit": "jr",
+              "value": {
+                "value": 65
+              }
+            }
+          ]
+        },
+        "base-tax": {
+          "name": {
+            "nl": "BASIS BELASTING TARIEF",
+            "en": "BASE TAX RATE"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "numeric",
+              "subtype": "decimal",
+              "precision": 2,
+              "unit": "EUR",
+              "value": {
+                "value": 100
+              }
+            }
+          ]
+        },
+        "senior-discount": {
+          "name": {
+            "nl": "KORTING PERCENTAGE SENIOREN",
+            "en": "SENIOR DISCOUNT PERCENTAGE"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "percentage",
+              "subtype": "decimal",
+              "value": {
+                "value": 0.5
+              }
+            }
+          ]
+        }
+      }
+    },
+    "rule-group": {
+      "name": {
+        "nl": "Senioren korting regels",
+        "en": "Senior discount rules"
+      },
+      "_source": "ruleGroup",
+      "items": {
+        "senior-eligibility-rule": {
+          "name": {
+            "nl": "Senior korting regel 01",
+            "en": "Senior discount rule 01"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "target": [
+                {
+                  "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/items/senior-characteristic"
+                }
+              ],
+              "condition": {
+                "type": "comparison",
+                "left": [
+                  {
+                    "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/items/age-property"
+                  }
+                ],
+                "operator": "greaterThanOrEquals",
+                "right": {
+                  "parameter": {
+                    "$ref": "#/facts/parameter-facts/items/senior-age"
+                  }
+                }
+              },
+              "value": {
+                "value": true
+              }
+            }
+          ]
+        },
+        "tax-calculation-rule": {
+          "name": {
+            "nl": "Belasting berekening regel 01",
+            "en": "Tax calculation rule 01"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "target": [
+                {
+                  "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/items/tax-amount"
+                }
+              ],
+              "expression": {
+                "type": "arithmetic",
+                "operator": "multiply",
+                "operands": [
+                  {
+                    "parameter": {
+                      "$ref": "#/facts/parameter-facts/items/base-tax"
+                    }
+                  },
+                  {
+                    "parameter": {
+                      "$ref": "#/facts/parameter-facts/items/senior-discount"
+                    }
+                  }
+                ]
+              },
+              "condition": {
+                "type": "exists",
+                "characteristic": [
+                  {
+                    "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/items/senior-characteristic"
+                  }
+                ]
+              },
+              "default": {
+                "parameter": {
+                  "$ref": "#/facts/parameter-facts/items/base-tax"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "system-params": {
+      "name": {
+        "nl": "systeem parameters",
+        "en": "system parameters"
+      },
+      "properties": {
+        "senior_age_threshold": {
+          "name": {
+            "nl": "leeftijd grens voor senioren",
+            "en": "senior age threshold"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "number",
+              "defaultValue": 65,
+              "unit": "jr"
+            }
+          ]
+        },
+        "base_tax_rate": {
+          "name": {
+            "nl": "basis belasting tarief",
+            "en": "base tax rate"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "number",
+              "defaultValue": 100,
+              "unit": "EUR"
+            }
+          ]
+        },
+        "senior_discount_percent": {
+          "name": {
+            "nl": "senior korting percentage",
+            "en": "senior discount percentage"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "number",
+              "defaultValue": 50,
+              "unit": "%"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "instances": [
+    {
+      "id": "person_1",
+      "name": "John",
+      "age": 17,
+      "distance": 300,
+      "birthDate": "2008-06-14",
+      "isSenior": false,
+      "isLongDistance": false
+    },
+    {
+      "id": "person_2",
+      "name": "Maria",
+      "age": 25,
+      "distance": 600,
+      "birthDate": "2000-06-14",
+      "isSenior": false,
+      "isLongDistance": true
+    },
+    {
+      "id": "person_3",
+      "name": "Ahmed",
+      "age": 45,
+      "distance": 1200,
+      "birthDate": "1980-06-14",
+      "isSenior": false,
+      "isLongDistance": true
+    },
+    {
+      "id": "person_4",
+      "name": "Lisa",
+      "age": 67,
+      "distance": 450,
+      "birthDate": "1958-06-14",
+      "isSenior": true,
+      "isLongDistance": false
+    },
+    {
+      "id": "person_5",
+      "name": "Carlos",
+      "age": 72,
+      "distance": 2800,
+      "birthDate": "1953-06-14",
+      "isSenior": true,
+      "isLongDistance": true
+    },
+    {
+      "id": "person_6",
+      "name": "Yuki",
+      "age": 28,
+      "distance": 150,
+      "birthDate": "1997-06-14",
+      "isSenior": false,
+      "isLongDistance": false
+    },
+    {
+      "id": "person_7",
+      "name": "Sophie",
+      "age": 33,
+      "distance": 900,
+      "birthDate": "1992-06-14",
+      "isSenior": false,
+      "isLongDistance": true
+    },
+    {
+      "id": "person_8",
+      "name": "David",
+      "age": 19,
+      "distance": 1800,
+      "birthDate": "2006-06-14",
+      "isSenior": false,
+      "isLongDistance": true
+    }
+  ]
+}

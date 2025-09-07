@@ -1,0 +1,221 @@
+{
+  "$schema": "schema.json",
+  "version": "1.0.0",
+  "language": "nl",
+  "metadata": {
+    "description": "Simplified NRML example for traceable execution demo",
+    "created": "2024-01-15"
+  },
+  "facts": {
+    "4c72dc9d-78d4-4f0b-a0cd-6037944f26ce": {
+      "name": {
+        "nl": "natuurlijk persoon",
+        "en": "natural person"
+      },
+      "_source": "objectType",
+      "animated": true,
+      "items": {
+        "b5200359-418f-40db-bdd2-cf9f7f77b4d4": {
+          "name": {
+            "nl": "geboortedatum",
+            "en": "birth date"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "date"
+            }
+          ]
+        },
+        "age-property": {
+          "name": {
+            "nl": "leeftijd",
+            "en": "age"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "numeric",
+              "subtype": "integer",
+              "unit": "jr"
+            }
+          ]
+        },
+        "senior-characteristic": {
+          "name": {
+            "nl": "passagier waarvoor korting van toepassing is",
+            "en": "passenger eligible for discount"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "characteristic"
+            }
+          ]
+        },
+        "tax-amount": {
+          "name": {
+            "nl": "te betalen belasting",
+            "en": "tax amount"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "numeric",
+              "subtype": "decimal",
+              "precision": 2,
+              "unit": "EUR"
+            }
+          ]
+        }
+      }
+    },
+    "parameter-facts": {
+      "name": {
+        "nl": "parameters",
+        "en": "parameters"
+      },
+      "_source": "parameter",
+      "items": {
+        "senior-age": {
+          "name": {
+            "nl": "MINIMUM LEEFTIJD VOOR KORTING",
+            "en": "MINIMUM AGE FOR DISCOUNT"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "numeric",
+              "subtype": "integer",
+              "unit": "jr",
+              "value": {
+                "value": 65
+              }
+            }
+          ]
+        },
+        "base-tax": {
+          "name": {
+            "nl": "BASIS BELASTING TARIEF",
+            "en": "BASE TAX RATE"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "numeric",
+              "subtype": "decimal",
+              "precision": 2,
+              "unit": "EUR",
+              "value": {
+                "value": 100.00
+              }
+            }
+          ]
+        },
+        "senior-discount": {
+          "name": {
+            "nl": "KORTING PERCENTAGE SENIOREN",
+            "en": "SENIOR DISCOUNT PERCENTAGE"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "type": "percentage",
+              "subtype": "decimal",
+              "value": {
+                "value": 0.5
+              }
+            }
+          ]
+        }
+      }
+    },
+    "rule-group": {
+      "name": {
+        "nl": "Senioren korting regels",
+        "en": "Senior discount rules"
+      },
+      "_source": "ruleGroup",
+      "items": {
+        "senior-eligibility-rule": {
+          "name": {
+            "nl": "Senior korting regel 01",
+            "en": "Senior discount rule 01"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "target": [
+                {
+                  "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/items/senior-characteristic"
+                }
+              ],
+              "condition": {
+                "type": "comparison",
+                "left": [
+                  {
+                    "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/items/age-property"
+                  }
+                ],
+                "operator": "greaterThanOrEquals",
+                "right": {
+                  "parameter": {
+                    "$ref": "#/facts/parameter-facts/items/senior-age"
+                  }
+                }
+              },
+              "value": {
+                "value": true
+              }
+            }
+          ]
+        },
+        "tax-calculation-rule": {
+          "name": {
+            "nl": "Belasting berekening regel 01",
+            "en": "Tax calculation rule 01"
+          },
+          "versions": [
+            {
+              "validFrom": "2018",
+              "target": [
+                {
+                  "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/items/tax-amount"
+                }
+              ],
+              "expression": {
+                "type": "arithmetic",
+                "operator": "multiply",
+                "operands": [
+                  {
+                    "parameter": {
+                      "$ref": "#/facts/parameter-facts/items/base-tax"
+                    }
+                  },
+                  {
+                    "parameter": {
+                      "$ref": "#/facts/parameter-facts/items/senior-discount"
+                    }
+                  }
+                ]
+              },
+              "condition": {
+                "type": "exists",
+                "characteristic": [
+                  {
+                    "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/items/senior-characteristic"
+                  }
+                ]
+              },
+              "default": {
+                "parameter": {
+                  "$ref": "#/facts/parameter-facts/items/base-tax"
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
