@@ -21,6 +21,7 @@
     <!-- Parameters -->
     <xsl:param name="language" select="'nl'" as="xs:string"/>
     <xsl:param name="input-file" as="xs:string"/>
+    
 
 
     <!-- Initial template voor JSON transformatie -->
@@ -606,7 +607,7 @@
         <xsl:variable name="condition" select="$aggregation/fn:map[@key='condition']"/>
         
         <xsl:choose>
-            <xsl:when test="$function = 'sum'">
+            <xsl:when test="$function = 'add'">
                 <xsl:call-template name="translate">
                     <xsl:with-param name="key">sum-of</xsl:with-param>
                 </xsl:call-template>
@@ -914,6 +915,7 @@
     <!-- Format operand -->
     <xsl:template name="format-operand">
         <xsl:param name="operand"/>
+        <xsl:param name="parent-operator" select="''"/>
         
         <xsl:choose>
             <!-- Reference chain (array of references) -->
@@ -948,11 +950,10 @@
             </xsl:when>
             <!-- Arithmetic expression -->
             <xsl:when test="$operand/fn:string[@key='type'] = 'arithmetic'">
-                <xsl:text>(</xsl:text>
                 <xsl:call-template name="format-arithmetic">
                     <xsl:with-param name="arithmetic" select="$operand"/>
+                    <xsl:with-param name="parent-operator" select="$parent-operator"/>
                 </xsl:call-template>
-                <xsl:text>)</xsl:text>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:call-template name="translate">
@@ -1126,7 +1127,7 @@
         <xsl:param name="position"/>
         
         <xsl:if test="$position > 0">
-            <xsl:if test="$position < count($chain/fn:map) - 1">
+            <xsl:if test="$position &lt; count($chain/fn:map) - 1">
                 <xsl:call-template name="resolve-chain-context">
                     <xsl:with-param name="chain" select="$chain"/>
                     <xsl:with-param name="position" select="$position - 1"/>
@@ -1609,20 +1610,40 @@
     <!-- Format arithmetic expression -->
     <xsl:template name="format-arithmetic">
         <xsl:param name="arithmetic"/>
+        <xsl:param name="add-parentheses" select="false()"/>
+        <xsl:param name="parent-operator" select="''"/>
+        
         <xsl:variable name="operator" select="$arithmetic/fn:string[@key='operator']"/>
         <xsl:variable name="operands" select="$arithmetic/fn:array[@key='operands']"/>
+        
+        <!-- Determine if we need parentheses based on operator precedence -->
+        <xsl:variable name="needs-parens">
+            <xsl:choose>
+                <!-- Always add parentheses when explicitly requested (nested operands) -->
+                <xsl:when test="$add-parentheses = true()">true</xsl:when>
+                <!-- Add parentheses around multiply operations when they are operands of other operations -->
+                <xsl:when test="$operator = 'multiply' and $parent-operator != ''">true</xsl:when>
+                <!-- Add parentheses if lower precedence operation is nested in higher precedence -->
+                <xsl:when test="$parent-operator = 'multiply' and ($operator = 'add' or $operator = 'subtract')">true</xsl:when>
+                <xsl:otherwise>false</xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        
+        <xsl:if test="$needs-parens = 'true'">
+            <xsl:text>(</xsl:text>
+        </xsl:if>
         
         <xsl:for-each select="$operands/fn:array | $operands/fn:map">
             <xsl:if test="position() > 1">
                 <!-- Format operator between operands -->
                 <xsl:text> </xsl:text>
                 <xsl:choose>
-                    <xsl:when test="$operator = 'plus'">
+                    <xsl:when test="$operator = 'add'">
                         <xsl:call-template name="translate">
                             <xsl:with-param name="key">plus</xsl:with-param>
                         </xsl:call-template>
                     </xsl:when>
-                    <xsl:when test="$operator = 'minus'">
+                    <xsl:when test="$operator = 'subtract'">
                         <xsl:call-template name="translate">
                             <xsl:with-param name="key">minus</xsl:with-param>
                         </xsl:call-template>
@@ -1644,8 +1665,13 @@
             
             <xsl:call-template name="format-operand">
                 <xsl:with-param name="operand" select="."/>
+                <xsl:with-param name="parent-operator" select="$operator"/>
             </xsl:call-template>
         </xsl:for-each>
+        
+        <xsl:if test="$needs-parens = 'true'">
+            <xsl:text>)</xsl:text>
+        </xsl:if>
     </xsl:template>
 
     <!-- Format parameter reference -->

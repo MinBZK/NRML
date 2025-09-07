@@ -196,12 +196,18 @@ The XSL uses `resolve-path-plural` and `resolve-property-name-plural` templates 
 ```bash
 # Run transformation - ALWAYS use the unified file
 ./scripts/transform transformations/regelspraak.xsl toka.nrml.json toka.regelspraak.unified.txt
+./scripts/transform [xsl] [json] [output]  # Transform with custom params
 
 # Compare with ground truth
 diff toka.regelspraak.unified.txt toka.regelspraak.groundtruth.txt
 
 # Check specific rule lines
 sed -n '30,33p' toka.regelspraak.unified.txt
+
+
+# Validate against schema
+./scripts/validate                         # Validate JSON
+
 ```
 
 ## IMPORTANT: File Usage Rules

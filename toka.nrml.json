@@ -1653,7 +1653,7 @@
               ],
               "expression": {
                 "type": "aggregation",
-                "function": "sum",
+                "function": "add",
                 "expression": [
                   {
                     "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
@@ -1684,7 +1684,7 @@
               ],
               "expression": {
                 "type": "aggregation",
-                "function": "sum",
+                "function": "add",
                 "expression": [
                   {
                     "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
@@ -1715,7 +1715,7 @@
               ],
               "expression": {
                 "type": "aggregation",
-                "function": "sum",
+                "function": "add",
                 "expression": [
                   {
                     "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/0cc7c4b4-2855-4c8b-93f0-5403cf286af0"
@@ -1775,7 +1775,7 @@
                     ]
                   },
                   {
-                    "type": "exists", 
+                    "type": "exists",
                     "characteristic": [
                       {
                         "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
@@ -1797,7 +1797,6 @@
                       }
                     ],
                     "right": {
-                      
                       "parameter": {
                         "$ref": "#/facts/4773bc34-a04d-4361-b984-85e6eba67374"
                       }
@@ -1826,7 +1825,7 @@
               ],
               "expression": {
                 "type": "arithmetic",
-                "operator": "minus",
+                "operator": "subtract",
                 "operands": [
                   {
                     "parameter": {
@@ -1908,7 +1907,6 @@
                       }
                     ],
                     "right": {
-                      
                       "parameter": {
                         "$ref": "#/facts/70fbc167-01ca-4ef6-a1dd-78d05eaf99ab"
                       }
@@ -1937,7 +1935,7 @@
               ],
               "expression": {
                 "type": "arithmetic",
-                "operator": "minus",
+                "operator": "subtract",
                 "operands": [
                   {
                     "parameter": {
@@ -1955,7 +1953,7 @@
                       },
                       {
                         "type": "arithmetic",
-                        "operator": "minus",
+                        "operator": "subtract",
                         "operands": [
                           [
                             {
@@ -2013,7 +2011,6 @@
                       }
                     ],
                     "right": {
-                      
                       "parameter": {
                         "$ref": "#/facts/70fbc167-01ca-4ef6-a1dd-78d05eaf99ab"
                       }
@@ -2031,7 +2028,6 @@
                       }
                     ],
                     "right": {
-                      
                       "parameter": {
                         "$ref": "#/facts/4773bc34-a04d-4361-b984-85e6eba67374"
                       }
@@ -2060,7 +2056,7 @@
               ],
               "expression": {
                 "type": "arithmetic",
-                "operator": "minus",
+                "operator": "subtract",
                 "operands": [
                   {
                     "parameter": {
@@ -2142,7 +2138,6 @@
                       }
                     ],
                     "right": {
-                      
                       "parameter": {
                         "$ref": "#/facts/70fbc167-01ca-4ef6-a1dd-78d05eaf99ab"
                       }
@@ -2171,7 +2166,7 @@
               ],
               "expression": {
                 "type": "arithmetic",
-                "operator": "minus",
+                "operator": "subtract",
                 "operands": [
                   {
                     "parameter": {
@@ -2189,7 +2184,7 @@
                       },
                       {
                         "type": "arithmetic",
-                        "operator": "minus",
+                        "operator": "subtract",
                         "operands": [
                           [
                             {
@@ -2247,7 +2242,6 @@
                       }
                     ],
                     "right": {
-                      
                       "parameter": {
                         "$ref": "#/facts/70fbc167-01ca-4ef6-a1dd-78d05eaf99ab"
                       }
@@ -2265,7 +2259,6 @@
                       }
                     ],
                     "right": {
-                      
                       "parameter": {
                         "$ref": "#/facts/4773bc34-a04d-4361-b984-85e6eba67374"
                       }
@@ -2471,7 +2464,6 @@
                       }
                     ],
                     "right": {
-                      
                       "parameter": {
                         "$ref": "#/facts/70fbc167-01ca-4ef6-a1dd-78d05eaf99ab"
                       }
@@ -2553,7 +2545,6 @@
                 }
               ],
               "value": {
-                
                 "parameter": {
                   "$ref": "#/facts/4c6de8d0-46a5-41c6-af10-05e87931285f"
                 }
@@ -2592,7 +2583,6 @@
                 }
               ],
               "value": {
-                
                 "parameter": {
                   "$ref": "#/facts/2aba030a-5d4d-4286-94d9-4f92e5b633a4"
                 }
@@ -2642,7 +2632,7 @@
                 "type": "rounding",
                 "expression": {
                   "type": "arithmetic",
-                  "operator": "plus",
+                  "operator": "add",
                   "operands": [
                     [
                       {
@@ -2711,10 +2701,10 @@
                   "type": "rounding",
                   "expression": {
                     "type": "arithmetic",
-                    "operator": "minus",
+                    "operator": "subtract",
                     "operands": [
                       {
-                        "type": "sum",
+                        "type": "arithmetic",
                         "operands": [
                           [
                             {
@@ -2726,7 +2716,8 @@
                               "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/b802e897-8854-4ad3-97b4-3ed4b04f9b16"
                             }
                           ]
-                        ]
+                        ],
+                        "operator": "add"
                       },
                       {
                         "parameter": {
