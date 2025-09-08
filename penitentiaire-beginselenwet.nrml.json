@@ -63,7 +63,7 @@
           }]
         },
         "B1C2D3E4-5678-90BC-BCD1-234567890DEF": {
-          "name": {"nl": "plaatsvindt in inrichting", "en": "takes place in institution"},
+          "name": {"nl": "plaatsvindt in een penitentiaire inrichting", "en": "takes place in a penitentiary institution"},
           "versions": [{"validFrom": "2022", "type": "characteristic"}]
         }
       }
