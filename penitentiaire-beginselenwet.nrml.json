@@ -1,166 +1,95 @@
-  {
+{
   "$schema": "schema.json",
-  "version": "1.0.0",
+  "version": "1.0.0", 
   "language": "nl",
   "metadata": {
-    "description": "Penitentiaire beginselenwet - Bepalen detentiestatus",
-    "created": "2025-09-07",
-    "legal_basis": {
-      "law": "Penitentiaire beginselenwet",
-      "bwb_id": "BWBR0009709",
-      "article": "2, 3",
-      "url": "https://wetten.overheid.nl/BWBR0009709/2024-01-01"
-    },
-    "uuid": "292c11ff-8318-4b7a-bb11-3ea545b04c8e"
+    "description": "Penitentiaire beginselenwet - Correcte structuur volgens wettekst",
+    "created": "2025-09-07"
   },
   "facts": {
     "4c72dc9d-78d4-4f0b-a0cd-6037944f26ce": {
-      "name": {
-        "nl": "natuurlijk persoon",
-        "en": "natural person"
-      },
+      "name": {"nl": "natuurlijk persoon", "en": "natural person"},
       "_source": "objectType",
       "animated": true,
       "items": {
-        "b5200359-418f-40db-bdd2-cf9f7f77b4d4": {
-          "name": {
-            "nl": "burgerservicenummer",
-            "en": "citizen service number"
-          },
-          "versions": [
-            {
-              "validFrom": "2022",
-              "type": "text"
-            }
-          ]
-        },
-        "c1d2e3f4-5678-90ab-cdef-123456789abc": {
-          "name": {
-            "nl": "is gedetineerd",
-            "en": "is detained"
-          },
-          "versions": [
-            {
-              "validFrom": "2022",
-              "type": "characteristic"
-            }
-          ]
+        "E1F2A3B4-5678-90DE-EFA1-234567890ABC": {
+          "name": {"nl": "gedetineerde", "en": "detainee"}, 
+          "versions": [{"validFrom": "2022", "type": "characteristic"}]
         }
       }
     },
     "ef9e731c-4f81-4905-a902-2a533e1eebc5": {
-      "name": {
-        "nl": "detentie-inrichting", 
-        "en": "detention facility"
-      },
+      "name": {"nl": "penitentiaire inrichting", "en": "penitentiary institution"},
       "_source": "objectType",
       "animated": false,
       "items": {
-        "48c6ed9c-0911-43d8-b6ef-47d2b406ea35": {
-          "name": {
-            "nl": "type inrichting",
-            "en": "facility type"
-          },
-          "versions": [
-            {
-              "validFrom": "2022",
-              "type": "enumeration",
-              "values": ["PENITENTIAIRE_INRICHTING", "HUIS_VAN_BEWARING", "INRICHTING_STELSELMATIGE_DADERS"]
-            }
-          ]
+        "F1A2B3C4-5678-90EF-FAB1-234567890BCD": {
+          "name": {"nl": "type inrichting", "en": "institution type"},
+          "versions": [{
+            "validFrom": "2022",
+            "type": "enumeration", 
+            "values": ["PENITENTIAIRE_INRICHTING", "HUIS_VAN_BEWARING"]
+          }]
         }
       }
     },
-    "d1e2f3a4-5678-90bc-def1-234567890abc": {
-      "name": {
-        "nl": "parameters",
-        "en": "parameters"
-      },
-      "_source": "parameter",
+    "48c6ed9c-0911-43d8-b6ef-47d2b406ea36": {
+      "name": {"nl": "tenuitvoerlegging", "en": "execution"},
+      "_source": "objectType",
+      "animated": false, 
       "items": {
-        "f1a2b3c4-5678-90de-fab1-234567890cde": {
-          "name": {
-            "nl": "GELDIG DETENTIE STATUS TYPES",
-            "en": "VALID DETENTION STATUS TYPES"
-          },
-          "versions": [
-            {
-              "validFrom": "2022",
-              "type": "enumeration",
-              "values": ["INGESLOTEN", "TIJDELIJK_AFWEZIG"]
-            }
-          ]
+        "A1B2C3D4-5678-90AB-ABC1-234567890CDE": {
+          "name": {"nl": "type straf of maatregel", "en": "sentence or measure type"},
+          "versions": [{
+            "validFrom": "2022",
+            "type": "enumeration",
+            "values": ["VRIJHEIDSSTRAF", "VRIJHEIDSBENEMENDE_MAATREGEL"]
+          }]
+        },
+        "B1C2D3E4-5678-90BC-BCD1-234567890DEF": {
+          "name": {"nl": "plaatsvindt in inrichting", "en": "takes place in institution"},
+          "versions": [{"validFrom": "2022", "type": "characteristic"}]
         }
       }
     },
-    "e1f2a3b4-5678-90cd-efa1-234567890bcd": {
-      "name": {
-        "nl": "Detentiestatus regels",
-        "en": "Detention status rules"
-      },
+    "rule-group": {
+      "name": {"nl": "Penitentiaire beginselenwet regels", "en": "Penitentiary law rules"},
       "_source": "ruleGroup",
       "items": {
-        "a1b2c3d4-5678-90ef-abc1-234567890def": {
-          "name": {
-            "nl": "Bepaling detentiestatus volgens artikel 2 Pbw",
-            "en": "Detention status determination per article 2"
-          },
-          "versions": [
-            {
-              "validFrom": "2022",
-              "target": [
+        "A1B2C3D4-5678-90EF-ABC1-234567890EFG": {
+          "name": {"nl": "Artikel 1e: Definitie gedetineerde", "en": "Article 1e: Definition of detainee"},
+          "versions": [{
+            "validFrom": "2022",
+            "target": [
+              {"$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"},
+              {"$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/items/E1F2A3B4-5678-90DE-EFA1-234567890ABC"}
+            ],
+            "condition": {
+              "type": "allOf",
+              "conditions": [
                 {
-                  "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/items/c1d2e3f4-5678-90ab-cdef-123456789abc"
-                }
-              ],
-              "condition": {
-                "type": "comparison",
-                "left": [
-                  {
-                    "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/items/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
-                  }
-                ],
-                "operator": "equals",
-                "right": {
-                  "value": "PENITENTIAIRE_INRICHTING"
-                }
-              },
-              "value": {
-                "value": true
-              }
-            }
-          ]
-        },
-        "b1c2d3e4-5678-90ef-bcd1-234567890eff": {
-          "name": {
-            "nl": "Bepaling detentiestatus voor huis van bewaring",
-            "en": "Detention status for house of detention"
-          },
-          "versions": [
-            {
-              "validFrom": "2022",
-              "target": [
+                  "type": "comparison",
+                  "left": [{"$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea36/items/A1B2C3D4-5678-90AB-ABC1-234567890CDE"}],
+                  "operator": "in",
+                  "right": {"values": ["VRIJHEIDSSTRAF", "VRIJHEIDSBENEMENDE_MAATREGEL"]}
+                },
                 {
-                  "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/items/c1d2e3f4-5678-90ab-cdef-123456789abc"
+                  "type": "exists",
+                  "characteristic": [
+                    {"$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea36"},
+                    {"$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea36/items/B1C2D3E4-5678-90BC-BCD1-234567890DEF"}
+                  ]
+                },
+                {
+                  "type": "comparison",
+                  "left": [{"$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/items/F1A2B3C4-5678-90EF-FAB1-234567890BCD"}],
+                  "operator": "in",
+                  "right": {"values": ["PENITENTIAIRE_INRICHTING", "HUIS_VAN_BEWARING"]}
                 }
-              ],
-              "condition": {
-                "type": "comparison",
-                "left": [
-                  {
-                    "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/items/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
-                  }
-                ],
-                "operator": "equals",
-                "right": {
-                  "value": "HUIS_VAN_BEWARING"
-                }
-              },
-              "value": {
-                "value": true
-              }
-            }
-          ]
+              ]
+            },
+            "value": {"value": true}
+          }]
         }
       }
     }

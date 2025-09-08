@@ -58,6 +58,7 @@
           <xsl:when test="$key = 'unknown-value'">unknown value</xsl:when>
           <xsl:when test="$key = 'unknown-reference'">unknown reference:</xsl:when>
           <xsl:when test="$key = 'unknown-property'">unknown property</xsl:when>
+          <xsl:when test="$key = 'unknown-item'">unknown item</xsl:when>
           <xsl:when test="$key = 'unknown-role'">unknown role</xsl:when>
           <xsl:when test="$key = 'unknown-parameter'">unknown parameter</xsl:when>
           <xsl:when test="$key = 'unknown-operand'">unknown operand</xsl:when>
@@ -134,6 +135,8 @@
           <xsl:when test="$key = 'max'">the maximum of</xsl:when>
           <xsl:when test="$key = 'sum-of'">the sum of</xsl:when>
           <xsl:when test="$key = 'rounded-up'">rounded up</xsl:when>
+          <xsl:when test="$key = 'in-set'">is in</xsl:when>
+          <xsl:when test="$key = 'not-in-set'">is not in</xsl:when>
           <xsl:otherwise><xsl:value-of select="$key"/></xsl:otherwise>
         </xsl:choose>
       </xsl:when>
@@ -168,7 +171,7 @@
           <xsl:when test="$key = 'text-type'">Tekst</xsl:when>
           <xsl:when test="$key = 'plural-indicator'">mv:</xsl:when>
           <xsl:when test="$key = 'valid-from'">geldig vanaf</xsl:when>
-          <xsl:when test="$key = 'must-be-set-to'">moet gesteld worden op</xsl:when>
+          <xsl:when test="$key = 'must-be-set-to'">geldt als</xsl:when>
           <xsl:when test="$key = 'must-be-calculated-as'">moet berekend worden als</xsl:when>
           <xsl:when test="$key = 'all-conditions-met'">er aan alle volgende voorwaarden wordt voldaan :</xsl:when>
           <xsl:when test="$key = 'at-least-one-condition-met'">er aan ten minste één van de volgende voorwaarden wordt voldaan :</xsl:when>
@@ -184,6 +187,7 @@
           <xsl:when test="$key = 'unknown-value'">onbekende waarde</xsl:when>
           <xsl:when test="$key = 'unknown-reference'">onbekende referentie:</xsl:when>
           <xsl:when test="$key = 'unknown-property'">onbekende eigenschap</xsl:when>
+          <xsl:when test="$key = 'unknown-item'">onbekend feit</xsl:when>
           <xsl:when test="$key = 'unknown-role'">onbekende rol</xsl:when>
           <xsl:when test="$key = 'unknown-parameter'">onbekende parameter</xsl:when>
           <xsl:when test="$key = 'unknown-operand'">onbekende operand</xsl:when>
@@ -272,6 +276,8 @@
           <xsl:when test="$key = 'whereby-is-distributed'">waarbij wordt verdeeld</xsl:when>
           <xsl:when test="$key = 'undistributed-remainder'">als onverdeelde rest blijft het restant na verdeling van het te verdelen</xsl:when>
           <xsl:when test="$key = 'over'">over</xsl:when>
+          <xsl:when test="$key = 'in-set'">is</xsl:when>
+          <xsl:when test="$key = 'not-in-set'">is niet</xsl:when>
           <xsl:otherwise><xsl:value-of select="$key"/></xsl:otherwise>
         </xsl:choose>
       </xsl:otherwise>

@@ -23,6 +23,9 @@
       "patternProperties": {
         "^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Za-z-]+$": {
           "$ref": "#/$defs/fact"
+        },
+        "^(parameter-facts|rule-group)$": {
+          "$ref": "#/$defs/fact"
         }
       },
       "additionalProperties": false
@@ -144,7 +147,8 @@
         {"$ref": "#/$defs/notExistsCondition"},
         {"$ref": "#/$defs/comparisonCondition"},
         {"$ref": "#/$defs/logicalCondition"},
-        {"$ref": "#/$defs/exactlyOneOfCondition"}
+        {"$ref": "#/$defs/exactlyOneOfCondition"},
+        {"$ref": "#/$defs/temporalCondition"}
       ]
     },
     "existsCondition": {
@@ -181,7 +185,7 @@
         "left": {"$ref": "#/$defs/operand"},
         "operator": {
           "type": "string",
-          "enum": ["equals", "notEquals", "lessThan", "lessThanOrEquals", "greaterThan", "greaterThanOrEquals", "greaterOrEqual"]
+          "enum": ["equals", "notEquals", "lessThan", "lessThanOrEquals", "greaterThan", "greaterThanOrEquals", "greaterOrEqual", "in", "notIn", "contains", "containsAll", "containsAny"]
         },
         "right": {"$ref": "#/$defs/operand"}
       },
@@ -210,6 +214,20 @@
           "items": {"$ref": "#/$defs/condition"},
           "minItems": 2
         }
+      },
+      "additionalProperties": false
+    },
+    "temporalCondition": {
+      "type": "object",
+      "required": ["type", "temporalType", "condition"],
+      "properties": {
+        "type": {"const": "temporal"},
+        "temporalType": {
+          "type": "string",
+          "enum": ["during", "before", "after", "between"]
+        },
+        "timeReference": {"type": "string"},
+        "condition": {"$ref": "#/$defs/condition"}
       },
       "additionalProperties": false
     },
@@ -362,6 +380,7 @@
         },
         {"$ref": "#/$defs/parameterOperand"},
         {"$ref": "#/$defs/value"},
+        {"$ref": "#/$defs/valuesOperand"},
         {"$ref": "#/$defs/arithmeticExpression"},
         {"$ref": "#/$defs/aggregationExpression"}
       ]
@@ -371,6 +390,18 @@
       "required": ["parameter"],
       "properties": {
         "parameter": {"$ref": "#/$defs/jsonPointer"}
+      },
+      "additionalProperties": false
+    },
+    "valuesOperand": {
+      "type": "object",
+      "required": ["values"],
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {"type": ["string", "number", "boolean"]},
+          "minItems": 1
+        }
       },
       "additionalProperties": false
     },
