@@ -119,23 +119,11 @@
               "type": "allOf",
               "conditions": [
                 {
-                  "type": "comparison",
-                  "left": [{"$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea36/items/A1B2C3D4-5678-90AB-ABC1-234567890CDE"}],
-                  "operator": "in",
-                  "right": {"values": ["VRIJHEIDSSTRAF", "VRIJHEIDSBENEMENDE_MAATREGEL"]}
-                },
-                {
                   "type": "exists",
                   "characteristic": [
-                    {"$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea36"},
-                    {"$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea36/items/B1C2D3E4-5678-90BC-BCD1-234567890DEF"}
+                    {"$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"},
+                    {"$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/items/E1F2A3B4-5678-90DE-EFA1-234567890ABC"}
                   ]
-                },
-                {
-                  "type": "comparison",
-                  "left": [{"$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/items/F1A2B3C4-5678-90EF-FAB1-234567890BCD"}],
-                  "operator": "in",
-                  "right": {"values": ["PENITENTIAIRE_INRICHTING", "HUIS_VAN_BEWARING"]}
                 },
                 {
                   "type": "comparison",
@@ -160,23 +148,11 @@
               "type": "allOf",
               "conditions": [
                 {
-                  "type": "comparison",
-                  "left": [{"$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea36/items/A1B2C3D4-5678-90AB-ABC1-234567890CDE"}],
-                  "operator": "in",
-                  "right": {"values": ["VRIJHEIDSSTRAF", "VRIJHEIDSBENEMENDE_MAATREGEL"]}
-                },
-                {
                   "type": "exists",
                   "characteristic": [
-                    {"$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea36"},
-                    {"$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea36/items/B1C2D3E4-5678-90BC-BCD1-234567890DEF"}
+                    {"$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"},
+                    {"$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/items/E1F2A3B4-5678-90DE-EFA1-234567890ABC"}
                   ]
-                },
-                {
-                  "type": "comparison",
-                  "left": [{"$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/items/F1A2B3C4-5678-90EF-FAB1-234567890BCD"}],
-                  "operator": "in",
-                  "right": {"values": ["PENITENTIAIRE_INRICHTING", "HUIS_VAN_BEWARING"]}
                 },
                 {
                   "type": "comparison",

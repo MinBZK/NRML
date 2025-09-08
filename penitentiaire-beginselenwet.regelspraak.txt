@@ -12,17 +12,13 @@ Regel Regel: Persoon is ingesloten
 geldig vanaf 2022
 Een natuurlijk persoon heeft verblijfsstatus INGESLOTEN
 indien er aan alle volgende voorwaarden wordt voldaan :
-  • de type straf of maatregel van de tenuitvoerlegging is VRIJHEIDSSTRAF of VRIJHEIDSBENEMENDE_MAATREGEL
-  • de tenuitvoerlegging plaatsvindt in een penitentiaire inrichting
-  • de type inrichting van de penitentiaire inrichting is PENITENTIAIRE_INRICHTING of HUIS_VAN_BEWARING
+  • de natuurlijk persoon is een gedetineerde
   • de onbekend feit van de tenuitvoerlegging is niet ALGEMEEN_VERLOF, REGIMESGEBONDEN_VERLOF, INCIDENTEEL_VERLOF of STRAFONDERBREKING.
 
 Regel Regel: Persoon is tijdelijk afwezig
 geldig vanaf 2022
 Een natuurlijk persoon heeft verblijfsstatus TIJDELIJK_AFWEZIG
 indien er aan alle volgende voorwaarden wordt voldaan :
-  • de type straf of maatregel van de tenuitvoerlegging is VRIJHEIDSSTRAF of VRIJHEIDSBENEMENDE_MAATREGEL
-  • de tenuitvoerlegging plaatsvindt in een penitentiaire inrichting
-  • de type inrichting van de penitentiaire inrichting is PENITENTIAIRE_INRICHTING of HUIS_VAN_BEWARING
+  • de natuurlijk persoon is een gedetineerde
   • de onbekend feit van de tenuitvoerlegging is ALGEMEEN_VERLOF, REGIMESGEBONDEN_VERLOF, INCIDENTEEL_VERLOF of STRAFONDERBREKING.
 
