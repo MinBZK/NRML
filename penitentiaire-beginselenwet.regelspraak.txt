@@ -8,3 +8,17 @@ indien er aan alle volgende voorwaarden wordt voldaan :
   • de tenuitvoerlegging plaatsvindt in inrichting
   • de type inrichting van de penitentiaire inrichting is PENITENTIAIRE_INRICHTING of HUIS_VAN_BEWARING.
 
+Regel Regel: Gedetineerde status ingesloten
+geldig vanaf 2022
+Een natuurlijk persoon heeft verblijfsstatus INGESLOTEN
+indien er aan alle volgende voorwaarden wordt voldaan :
+  • de natuurlijk persoon is een gedetineerde
+  • zijn natuurlijk persoon is geen type verlof.
+
+Regel Regel: Gedetineerde status tijdelijk afwezig
+geldig vanaf 2022
+Een natuurlijk persoon heeft verblijfsstatus TIJDELIJK_AFWEZIG
+indien er aan alle volgende voorwaarden wordt voldaan :
+  • de natuurlijk persoon is een gedetineerde
+  • de type verlof van de natuurlijk persoon is ALGEMEEN_VERLOF, REGIMESGEBONDEN_VERLOF, INCIDENTEEL_VERLOF of STRAFONDERBREKING.
+

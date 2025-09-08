@@ -15,6 +15,22 @@
         "E1F2A3B4-5678-90DE-EFA1-234567890ABC": {
           "name": {"nl": "gedetineerde", "en": "detainee"}, 
           "versions": [{"validFrom": "2022", "type": "characteristic"}]
+        },
+        "F2G3H4I5-6789-01EF-GHI2-345678901234": {
+          "name": {"nl": "verblijfsstatus", "en": "residence status"},
+          "versions": [{
+            "validFrom": "2022",
+            "type": "enumeration",
+            "values": ["INGESLOTEN", "TIJDELIJK_AFWEZIG"]
+          }]
+        },
+        "G3H4I5J6-7890-12FG-HIJ3-456789012345": {
+          "name": {"nl": "type verlof", "en": "type of leave"},
+          "versions": [{
+            "validFrom": "2022", 
+            "type": "enumeration",
+            "values": ["ALGEMEEN_VERLOF", "REGIMESGEBONDEN_VERLOF", "INCIDENTEEL_VERLOF", "STRAFONDERBREKING"]
+          }]
         }
       }
     },
@@ -89,6 +105,65 @@
               ]
             },
             "value": {"value": true}
+          }]
+        },
+        "B2C3D4E5-7890-12FG-BCD2-345678901EFG": {
+          "name": {"nl": "Regel: Gedetineerde status ingesloten", "en": "Rule: Detainee status confined"},
+          "versions": [{
+            "validFrom": "2022",
+            "target": [
+              {"$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"},
+              {"$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/items/F2G3H4I5-6789-01EF-GHI2-345678901234"}
+            ],
+            "condition": {
+              "type": "allOf",
+              "conditions": [
+                {
+                  "type": "exists",
+                  "characteristic": [
+                    {"$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"},
+                    {"$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/items/E1F2A3B4-5678-90DE-EFA1-234567890ABC"}
+                  ]
+                },
+                {
+                  "type": "notExists",
+                  "characteristic": [
+                    {"$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"},
+                    {"$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/items/G3H4I5J6-7890-12FG-HIJ3-456789012345"}
+                  ]
+                }
+              ]
+            },
+            "value": {"value": "INGESLOTEN"}
+          }]
+        },
+        "C3D4E5F6-8901-23GH-CDE3-456789012FGH": {
+          "name": {"nl": "Regel: Gedetineerde status tijdelijk afwezig", "en": "Rule: Detainee status temporarily absent"},
+          "versions": [{
+            "validFrom": "2022", 
+            "target": [
+              {"$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"},
+              {"$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/items/F2G3H4I5-6789-01EF-GHI2-345678901234"}
+            ],
+            "condition": {
+              "type": "allOf",
+              "conditions": [
+                {
+                  "type": "exists",
+                  "characteristic": [
+                    {"$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"},
+                    {"$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/items/E1F2A3B4-5678-90DE-EFA1-234567890ABC"}
+                  ]
+                },
+                {
+                  "type": "comparison",
+                  "left": [{"$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/items/G3H4I5J6-7890-12FG-HIJ3-456789012345"}],
+                  "operator": "in",
+                  "right": {"values": ["ALGEMEEN_VERLOF", "REGIMESGEBONDEN_VERLOF", "INCIDENTEEL_VERLOF", "STRAFONDERBREKING"]}
+                }
+              ]
+            },
+            "value": {"value": "TIJDELIJK_AFWEZIG"}
           }]
         }
       }

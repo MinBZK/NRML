@@ -212,7 +212,9 @@
         <xsl:param name="value"/>
         <xsl:param name="condition"/>
         
-        <!-- More natural Dutch: "Een X is een Y indien..." -->
+        <!-- Check if value is boolean true for "is a" or specific value for "has" -->
+        <xsl:variable name="is-boolean-true" select="$value/fn:boolean[@key='value'] = 'true'"/>
+        
         <xsl:call-template name="translate">
             <xsl:with-param name="key">a-entity</xsl:with-param>
         </xsl:call-template>
@@ -221,13 +223,30 @@
             <xsl:with-param name="path" select="$target/fn:map[1]/fn:string[@key='$ref']"/>
         </xsl:call-template>
         <xsl:text> </xsl:text>
-        <xsl:call-template name="translate">
-            <xsl:with-param name="key">is-a</xsl:with-param>
-        </xsl:call-template>
-        <xsl:text> </xsl:text>
-        <xsl:call-template name="resolve-path">
-            <xsl:with-param name="path" select="$target/fn:map[last()]/fn:string[@key='$ref']"/>
-        </xsl:call-template>
+        
+        <xsl:choose>
+            <xsl:when test="$is-boolean-true">
+                <!-- Boolean true: "Een X is een Y" -->
+                <xsl:call-template name="translate">
+                    <xsl:with-param name="key">is-a</xsl:with-param>
+                </xsl:call-template>
+                <xsl:text> </xsl:text>
+                <xsl:call-template name="resolve-path">
+                    <xsl:with-param name="path" select="$target/fn:map[last()]/fn:string[@key='$ref']"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <!-- Specific value: "Een X heeft Y [value]" -->
+                <xsl:text>heeft </xsl:text>
+                <xsl:call-template name="resolve-path">
+                    <xsl:with-param name="path" select="$target/fn:map[last()]/fn:string[@key='$ref']"/>
+                </xsl:call-template>
+                <xsl:text> </xsl:text>
+                <xsl:call-template name="format-value">
+                    <xsl:with-param name="value" select="$value"/>
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
         <xsl:call-template name="translate">
             <xsl:with-param name="key">newline-if</xsl:with-param>
         </xsl:call-template>
