@@ -457,7 +457,7 @@
               "validFrom": "2018",
               "type": "numeric",
               "subtype": "integer",
-              "unit": "jr"
+              "unit": "years"
             }
           ],
           "article": {
@@ -2307,7 +2307,7 @@
                     "right": {
                       "type": "numeric",
                       "value": 18,
-                      "unit": "jr"
+                      "unit": "years"
                     }
                   },
                   {
@@ -2324,7 +2324,7 @@
                         "right": {
                           "type": "numeric",
                           "value": 25,
-                          "unit": "jr"
+                          "unit": "years"
                         }
                       },
                       {
@@ -2338,7 +2338,7 @@
                         "right": {
                           "type": "numeric",
                           "value": 65,
-                          "unit": "jr"
+                          "unit": "years"
                         }
                       }
                     ]
@@ -2381,7 +2381,7 @@
                         "right": {
                           "type": "numeric",
                           "value": 18,
-                          "unit": "jr"
+                          "unit": "years"
                         }
                       },
                       {
@@ -2395,7 +2395,7 @@
                         "right": {
                           "type": "numeric",
                           "value": 25,
-                          "unit": "jr"
+                          "unit": "years"
                         }
                       }
                     ]
@@ -2411,7 +2411,7 @@
                     "right": {
                       "type": "numeric",
                       "value": 65,
-                      "unit": "jr"
+                      "unit": "years"
                     }
                   }
                 ]
@@ -2449,7 +2449,7 @@
                     "right": {
                       "type": "numeric",
                       "value": 65,
-                      "unit": "jr"
+                      "unit": "years"
                     }
                   },
                   {
@@ -2514,7 +2514,7 @@
                     "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/bf4947b1-acc6-4857-ba8b-881360e83b36"
                   }
                 ],
-                "unit": "jr",
+                "unit": "years",
                 "whole": true
               }
             }
@@ -2560,7 +2560,7 @@
                 "right": {
                   "type": "numeric",
                   "value": 65,
-                  "unit": "jr"
+                  "unit": "years"
                 }
               }
             }
@@ -2598,7 +2598,7 @@
                 "right": {
                   "type": "numeric",
                   "value": 65,
-                  "unit": "jr"
+                  "unit": "years"
                 }
               }
             }
@@ -2629,7 +2629,8 @@
                 }
               ],
               "expression": {
-                "type": "rounding",
+                "type": "function",
+                "function": "rounding",
                 "expression": {
                   "type": "arithmetic",
                   "operator": "add",
@@ -2696,9 +2697,11 @@
                 }
               ],
               "expression": {
-                "type": "bounded",
+                "type": "function",
+                "function": "bounded",
                 "expression": {
-                  "type": "rounding",
+                  "type": "function",
+                  "function": "rounding",
                   "expression": {
                     "type": "arithmetic",
                     "operator": "subtract",

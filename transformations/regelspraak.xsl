@@ -563,16 +563,6 @@
                     <xsl:with-param name="function" select="$expression"/>
                 </xsl:call-template>
             </xsl:when>
-            <xsl:when test="$type = 'rounding'">
-                <xsl:call-template name="format-rounding">
-                    <xsl:with-param name="rounding" select="$expression"/>
-                </xsl:call-template>
-            </xsl:when>
-            <xsl:when test="$type = 'bounded'">
-                <xsl:call-template name="format-bounded">
-                    <xsl:with-param name="bounded" select="$expression"/>
-                </xsl:call-template>
-            </xsl:when>
             <xsl:when test="$type = 'sum'">
                 <xsl:call-template name="format-sum">
                     <xsl:with-param name="sum" select="$expression"/>
@@ -1185,7 +1175,15 @@
                 <xsl:value-of select="$value/fn:number[@key='value']"/>
                 <xsl:if test="$value/fn:string[@key='unit']">
                     <xsl:text> </xsl:text>
-                    <xsl:value-of select="$value/fn:string[@key='unit']"/>
+                    <xsl:variable name="unit" select="$value/fn:string[@key='unit']"/>
+                    <xsl:choose>
+                        <xsl:when test="$unit = 'years'">
+                            <xsl:text>jr</xsl:text>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="$unit"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
                 </xsl:if>
             </xsl:when>
             <xsl:when test="$value/fn:string[@key='value']">
@@ -2196,6 +2194,16 @@
                     <xsl:with-param name="timeDuration" select="$function"/>
                 </xsl:call-template>
             </xsl:when>
+            <xsl:when test="$functionName = 'rounding'">
+                <xsl:call-template name="format-rounding">
+                    <xsl:with-param name="rounding" select="$function"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="$functionName = 'bounded'">
+                <xsl:call-template name="format-bounded">
+                    <xsl:with-param name="bounded" select="$function"/>
+                </xsl:call-template>
+            </xsl:when>
             <xsl:otherwise>
                 <xsl:call-template name="translate">
                     <xsl:with-param name="key">unknown-function</xsl:with-param>
@@ -2240,7 +2248,7 @@
         
         <xsl:if test="$unit">
             <xsl:choose>
-                <xsl:when test="$unit = 'jr'">
+                <xsl:when test="$unit = 'years'">
                     <xsl:choose>
                         <xsl:when test="$whole = 'true'">
                             <xsl:call-template name="translate">

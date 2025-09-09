@@ -50,7 +50,7 @@ We think jsonpoints can work:
 
 ```json
  "$ref": "https://example.com/schemas/address.json#/definitions/address"
- ```
+```
 
 ## Hash as identifiers?
 
@@ -78,4 +78,10 @@ we should call them "definite article"
 
 ## Nested arithmetic
 
-We may need to deal still with using correct brackets for nested arithmetic. 
+We may need to deal still with using correct brackets for nested arithmetic.
+
+## Multiple ways of expressing the same thing
+
+Do we ever need multiple ways to say the same thing: sum(a, b, c) vs a + (b + c)?
+What's part of NRML-core? What's an extension?
+Isn't the sum syntactic suger?
