@@ -643,7 +643,11 @@
                     </xsl:when>
                     <xsl:otherwise>
                         <!-- For sum/average: "de som van de belastingen" (with article) -->
-                        <xsl:text> de </xsl:text>
+                        <xsl:text> </xsl:text>
+                        <xsl:call-template name="translate">
+                            <xsl:with-param name="key">the</xsl:with-param>
+                        </xsl:call-template>
+                        <xsl:text> </xsl:text>
                     </xsl:otherwise>
                 </xsl:choose>
                 <xsl:call-template name="resolve-role-name">
@@ -673,11 +677,19 @@
             </xsl:when>
             <xsl:when test="count($expression/fn:map) > 1">
                 <!-- Multi-hop: role → property -->
-                <xsl:text> de </xsl:text>
+                <xsl:text> </xsl:text>
+                <xsl:call-template name="translate">
+                    <xsl:with-param name="key">the</xsl:with-param>
+                </xsl:call-template>
+                <xsl:text> </xsl:text>
                 <xsl:call-template name="resolve-path-plural">
                     <xsl:with-param name="path" select="$expression/fn:map[last()]/fn:string[@key='$ref']"/>
                 </xsl:call-template>
-                <xsl:text> van alle </xsl:text>
+                <xsl:text> </xsl:text>
+                <xsl:call-template name="translate">
+                    <xsl:with-param name="key">of-all</xsl:with-param>
+                </xsl:call-template>
+                <xsl:text> </xsl:text>
                 <xsl:call-template name="resolve-role-name">
                     <xsl:with-param name="path" select="$expression/fn:map[1]/fn:string[@key='$ref']"/>
                     <xsl:with-param name="plural" select="true()"/>
