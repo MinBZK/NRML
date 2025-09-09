@@ -172,7 +172,7 @@
           <xsl:when test="$key = 'plural-indicator'">mv:</xsl:when>
           <xsl:when test="$key = 'valid-from'">geldig vanaf</xsl:when>
           <xsl:when test="$key = 'must-be-set-to'">geldt als</xsl:when>
-          <xsl:when test="$key = 'must-be-calculated-as'">moet berekend worden als</xsl:when>
+          <xsl:when test="$key = 'must-be-calculated-as'">moet berekend worden</xsl:when>
           <xsl:when test="$key = 'all-conditions-met'">er aan alle volgende voorwaarden wordt voldaan :</xsl:when>
           <xsl:when test="$key = 'at-least-one-condition-met'">er aan ten minste één van de volgende voorwaarden wordt voldaan :</xsl:when>
           <xsl:when test="$key = 'exactly-one-condition-met'">er aan precies één van de volgende voorwaarden wordt voldaan :</xsl:when>

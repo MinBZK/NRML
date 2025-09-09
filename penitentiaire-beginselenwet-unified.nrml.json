@@ -1,0 +1,124 @@
+{
+  "$schema": "schema.json",
+  "version": "1.0.0",
+  "language": "nl",
+  "metadata": {
+    "description": "Penitentiaire beginselenwet - Unified single rule implementation",
+    "created": "2025-09-08",
+    "legal_basis": "Artikel 1e Penitentiaire beginselenwet"
+  },
+  "facts": {
+    "4c72dc9d-78d4-4f0b-a0cd-6037944f26ce": {
+      "name": {"nl": "natuurlijk persoon", "en": "natural person"},
+      "_source": "objectType",
+      "animated": true,
+      "items": {
+        "A1B2C3D4-5678-90DE-EFA1-234567890ABC": {
+          "name": {"nl": "burgerservicenummer", "en": "citizen service number"},
+          "versions": [{"validFrom": "2022", "type": "text"}]
+        },
+        "E1F2A3B4-5678-90DE-EFA1-234567890ABC": {
+          "name": {"nl": "gedetineerde", "en": "detainee"}, 
+          "versions": [{"validFrom": "2022", "type": "boolean"}]
+        },
+        "F2G3H4I5-6789-01EF-GHI2-345678901234": {
+          "name": {"nl": "verblijfsstatus", "en": "residence status"},
+          "versions": [{
+            "validFrom": "2022",
+            "type": "enumeration",
+            "values": ["INGESLOTEN", "TIJDELIJK_AFWEZIG"]
+          }]
+        }
+      }
+    },
+    "48c6ed9c-0911-43d8-b6ef-47d2b406ea36": {
+      "name": {"nl": "tenuitvoerlegging", "en": "execution"},
+      "_source": "objectType",
+      "animated": false,
+      "items": {
+        "A1B2C3D4-5678-90AB-ABC1-234567890CDE": {
+          "name": {"nl": "type straf of maatregel", "en": "sentence or measure type"},
+          "versions": [{
+            "validFrom": "2022",
+            "type": "enumeration",
+            "values": ["VRIJHEIDSSTRAF", "VRIJHEIDSBENEMENDE_MAATREGEL"]
+          }]
+        },
+        "G3H4I5J6-7890-12FG-HIJ3-456789012345": {
+          "name": {"nl": "type verlof", "en": "type of leave"},
+          "versions": [{
+            "validFrom": "2022", 
+            "type": "enumeration",
+            "values": ["ALGEMEEN_VERLOF", "REGIMESGEBONDEN_VERLOF", "INCIDENTEEL_VERLOF", "STRAFONDERBREKING"]
+          }]
+        }
+      }
+    },
+    "ef9e731c-4f81-4905-a902-2a533e1eebc5": {
+      "name": {"nl": "penitentiaire inrichting", "en": "penitentiary institution"},
+      "_source": "objectType",
+      "animated": false,
+      "items": {
+        "F1A2B3C4-5678-90EF-FAB1-234567890BCD": {
+          "name": {"nl": "type inrichting", "en": "institution type"},
+          "versions": [{
+            "validFrom": "2022",
+            "type": "enumeration", 
+            "values": ["PENITENTIAIRE_INRICHTING", "HUIS_VAN_BEWARING"]
+          }]
+        }
+      }
+    },
+    "rule-group": {
+      "name": {"nl": "Penitentiaire beginselenwet regels", "en": "Penitentiary law rules"},
+      "_source": "ruleGroup",
+      "items": {
+        "A1B2C3D4-5678-90EF-ABC1-234567890EFG": {
+          "name": {"nl": "Volledige detentie status bepaling", "en": "Complete detention status determination"},
+          "versions": [{
+            "validFrom": "2022",
+            "description": {"nl": "Unified regel die volledig bepaalt of iemand gedetineerd is en wat de verblijfsstatus is"},
+            "target": [
+              {"$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"},
+              {"$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/items/E1F2A3B4-5678-90DE-EFA1-234567890ABC"}
+            ],
+            "condition": {
+              "type": "allOf",
+              "conditions": [
+                {
+                  "type": "comparison",
+                  "left": [{"$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea36/items/A1B2C3D4-5678-90AB-ABC1-234567890CDE"}],
+                  "operator": "in",
+                  "right": {"values": ["VRIJHEIDSSTRAF", "VRIJHEIDSBENEMENDE_MAATREGEL"]}
+                },
+                {
+                  "type": "comparison",
+                  "left": [{"$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/items/F1A2B3C4-5678-90EF-FAB1-234567890BCD"}],
+                  "operator": "in",
+                  "right": {"values": ["PENITENTIAIRE_INRICHTING", "HUIS_VAN_BEWARING"]}
+                }
+              ]
+            },
+            "value": {"value": true},
+            "effects": [
+              {
+                "target": [
+                  {"$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"},
+                  {"$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/items/F2G3H4I5-6789-01EF-GHI2-345678901234"}
+                ],
+                "condition": {
+                  "type": "comparison",
+                  "left": [{"$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea36/items/G3H4I5J6-7890-12FG-HIJ3-456789012345"}],
+                  "operator": "in",
+                  "right": {"values": ["ALGEMEEN_VERLOF", "REGIMESGEBONDEN_VERLOF", "INCIDENTEEL_VERLOF", "STRAFONDERBREKING"]}
+                },
+                "value": {"value": "TIJDELIJK_AFWEZIG"},
+                "else": {"value": "INGESLOTEN"}
+              }
+            ]
+          }]
+        }
+      }
+    }
+  }
+}

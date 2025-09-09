@@ -1,0 +1,9 @@
+Regelgroep Penitentiaire beginselenwet
+
+Regel Volledige detentie status regel
+geldig vanaf 2022
+De detentie status van een natuurlijk persoon moet berekend worden 
+  • NIET_GEDETINEERD als geen lege referentieketen
+  • anders GEDETINEERD_TIJDELIJK_AFWEZIG als de type verlof van de tenuitvoerlegging is ALGEMEEN_VERLOF, REGIMESGEBONDEN_VERLOF, INCIDENTEEL_VERLOF of STRAFONDERBREKING
+  • anders GEDETINEERD_INGESLOTEN.
+

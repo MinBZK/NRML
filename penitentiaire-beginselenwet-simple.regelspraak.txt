@@ -1,0 +1,13 @@
+Regelgroep Penitentiaire beginselenwet
+
+Regel Volledige detentie status regel
+geldig vanaf 2022
+De detentie status van een natuurlijk persoon moet berekend worden 
+  • GEDETINEERD_TIJDELIJK_AFWEZIG als de type verlof van de tenuitvoerlegging is ALGEMEEN_VERLOF, REGIMESGEBONDEN_VERLOF, INCIDENTEEL_VERLOF of STRAFONDERBREKING
+  • anders GEDETINEERD_INGESLOTEN als de type verlof van de tenuitvoerlegging gelijk is aan GEEN_VERLOF
+  • anders NIET_GEDETINEERD
+indien er aan alle volgende voorwaarden wordt voldaan :
+  • de type straf of maatregel van de tenuitvoerlegging is VRIJHEIDSSTRAF of VRIJHEIDSBENEMENDE_MAATREGEL
+  • de type inrichting van de penitentiaire inrichting is PENITENTIAIRE_INRICHTING of HUIS_VAN_BEWARING
+  • de type verlof van de tenuitvoerlegging is ALGEMEEN_VERLOF, REGIMESGEBONDEN_VERLOF, INCIDENTEEL_VERLOF, STRAFONDERBREKING of GEEN_VERLOF.
+

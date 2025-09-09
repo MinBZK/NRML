@@ -719,34 +719,92 @@
     <xsl:template name="format-conditional-expression">
         <xsl:param name="conditional"/>
         <xsl:variable name="condition" select="$conditional/fn:map[@key='condition']"/>
-        <xsl:variable name="then" select="$conditional/fn:array[@key='then']"/>
-        <xsl:variable name="else" select="$conditional/fn:array[@key='else']"/>
+        <xsl:variable name="then" select="$conditional/fn:array[@key='then'] | $conditional/fn:map[@key='then']"/>
+        <xsl:variable name="else" select="$conditional/fn:array[@key='else'] | $conditional/fn:map[@key='else']"/>
         
-        <xsl:call-template name="translate">
-            <xsl:with-param name="key">as</xsl:with-param>
-        </xsl:call-template>
-        <xsl:text> </xsl:text>
+        <!-- Format as "VALUE als CONDITION" for better readability -->
+        <xsl:text>&#10;  • </xsl:text>
+        
+        <!-- Handle then value first -->
+        <xsl:choose>
+            <xsl:when test="$then/fn:string[@key='$ref']">
+                <!-- Reference chain -->
+                <xsl:call-template name="resolve-reference-chain">
+                    <xsl:with-param name="chain" select="$then"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="$then/fn:string[@key='value']">
+                <!-- Simple value -->
+                <xsl:value-of select="$then/fn:string[@key='value']"/>
+            </xsl:when>
+            <xsl:when test="$then/fn:string[@key='type'] = 'conditional'">
+                <!-- Nested conditional - indent further -->
+                <xsl:call-template name="format-conditional-expression">
+                    <xsl:with-param name="conditional" select="$then"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:text>onbekende then-waarde</xsl:text>
+            </xsl:otherwise>
+        </xsl:choose>
+        
+        <xsl:text> als </xsl:text>
         <xsl:call-template name="format-condition">
             <xsl:with-param name="condition" select="$condition"/>
         </xsl:call-template>
-        <xsl:text> </xsl:text>
-        <xsl:call-template name="translate">
-            <xsl:with-param name="key">then</xsl:with-param>
-        </xsl:call-template>
-        <xsl:text> </xsl:text>
-        <xsl:call-template name="resolve-reference-chain">
-            <xsl:with-param name="chain" select="$then"/>
-        </xsl:call-template>
         
         <xsl:if test="$else">
-            <xsl:text> </xsl:text>
-            <xsl:call-template name="translate">
-                <xsl:with-param name="key">otherwise</xsl:with-param>
-            </xsl:call-template>
-            <xsl:text> </xsl:text>
-            <xsl:call-template name="resolve-reference-chain">
-                <xsl:with-param name="chain" select="$else"/>
-            </xsl:call-template>
+            <!-- Handle else value: could be reference chain, value object, or nested conditional -->
+            <xsl:choose>
+                <xsl:when test="$else/fn:string[@key='$ref']">
+                    <!-- Reference chain -->
+                    <xsl:text>&#10;  • anders </xsl:text>
+                    <xsl:call-template name="resolve-reference-chain">
+                        <xsl:with-param name="chain" select="$else"/>
+                    </xsl:call-template>
+                </xsl:when>
+                <xsl:when test="$else/fn:string[@key='value']">
+                    <!-- Simple value -->
+                    <xsl:text>&#10;  • anders </xsl:text>
+                    <xsl:value-of select="$else/fn:string[@key='value']"/>
+                </xsl:when>
+                <xsl:when test="$else/fn:string[@key='type'] = 'conditional'">
+                    <!-- Nested conditional - format as "anders als..." -->
+                    <xsl:variable name="nested-condition" select="$else/fn:map[@key='condition']"/>
+                    <xsl:variable name="nested-then" select="$else/fn:array[@key='then'] | $else/fn:map[@key='then']"/>
+                    <xsl:variable name="nested-else" select="$else/fn:array[@key='else'] | $else/fn:map[@key='else']"/>
+                    
+                    <xsl:text>&#10;  • anders </xsl:text>
+                    <xsl:choose>
+                        <xsl:when test="$nested-then/fn:string[@key='value']">
+                            <xsl:value-of select="$nested-then/fn:string[@key='value']"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:text>onbekende nested-then-waarde</xsl:text>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                    <xsl:text> als </xsl:text>
+                    <xsl:call-template name="format-condition">
+                        <xsl:with-param name="condition" select="$nested-condition"/>
+                    </xsl:call-template>
+                    
+                    <!-- Handle final else -->
+                    <xsl:if test="$nested-else">
+                        <xsl:text>&#10;  • anders </xsl:text>
+                        <xsl:choose>
+                            <xsl:when test="$nested-else/fn:string[@key='value']">
+                                <xsl:value-of select="$nested-else/fn:string[@key='value']"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:text>onbekende nested-else-waarde</xsl:text>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:if>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:text>&#10;  • anders onbekende else-waarde</xsl:text>
+                </xsl:otherwise>
+            </xsl:choose>
         </xsl:if>
     </xsl:template>
 
