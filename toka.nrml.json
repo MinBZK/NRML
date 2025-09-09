@@ -1559,7 +1559,7 @@
               ],
               "condition": {
                 "type": "comparison",
-                "operator": "notEquals",
+                "operator": "notEqual",
                 "left": [
                   {
                     "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
@@ -1897,7 +1897,7 @@
                   },
                   {
                     "type": "comparison",
-                    "operator": "lessThanOrEquals",
+                    "operator": "lessThanOrEqual",
                     "left": [
                       {
                         "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
@@ -2018,7 +2018,7 @@
                   },
                   {
                     "type": "comparison",
-                    "operator": "lessThanOrEquals",
+                    "operator": "lessThanOrEqual",
                     "left": [
                       {
                         "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
@@ -2128,7 +2128,7 @@
                   },
                   {
                     "type": "comparison",
-                    "operator": "lessThanOrEquals",
+                    "operator": "lessThanOrEqual",
                     "left": [
                       {
                         "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
@@ -2249,7 +2249,7 @@
                   },
                   {
                     "type": "comparison",
-                    "operator": "lessThanOrEquals",
+                    "operator": "lessThanOrEqual",
                     "left": [
                       {
                         "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
@@ -2315,7 +2315,7 @@
                     "conditions": [
                       {
                         "type": "comparison",
-                        "operator": "greaterThanOrEquals",
+                        "operator": "greaterThanOrEqual",
                         "left": [
                           {
                             "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
@@ -2372,7 +2372,7 @@
                     "conditions": [
                       {
                         "type": "comparison",
-                        "operator": "greaterThanOrEquals",
+                        "operator": "greaterThanOrEqual",
                         "left": [
                           {
                             "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
@@ -2402,7 +2402,7 @@
                   },
                   {
                     "type": "comparison",
-                    "operator": "greaterThanOrEquals",
+                    "operator": "greaterThanOrEqual",
                     "left": [
                       {
                         "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
@@ -2440,7 +2440,7 @@
                 "conditions": [
                   {
                     "type": "comparison",
-                    "operator": "greaterThanOrEquals",
+                    "operator": "greaterThanOrEqual",
                     "left": [
                       {
                         "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
@@ -2454,7 +2454,7 @@
                   },
                   {
                     "type": "comparison",
-                    "operator": "greaterThanOrEquals",
+                    "operator": "greaterThanOrEqual",
                     "left": [
                       {
                         "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
@@ -2589,7 +2589,7 @@
               },
               "condition": {
                 "type": "comparison",
-                "operator": "greaterThanOrEquals",
+                "operator": "greaterThanOrEqual",
                 "left": [
                   {
                     "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
