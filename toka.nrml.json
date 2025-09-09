@@ -1525,7 +1525,7 @@
               ],
               "condition": {
                 "type": "comparison",
-                "operator": "equals",
+                "operator": "equal",
                 "left": [
                   {
                     "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
@@ -1590,7 +1590,7 @@
               ],
               "condition": {
                 "type": "comparison",
-                "operator": "equals",
+                "operator": "equal",
                 "left": [
                   {
                     "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/07783713-6df0-4810-bc44-4206050cb19d"

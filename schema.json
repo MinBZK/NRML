@@ -346,7 +346,7 @@
           "description": "Comparison condition: requires operator, left, right",
           "properties": {
             "type": {"type": "string", "enum": ["comparison"]},
-            "operator": {"type": "string", "enum": ["equals", "greaterThan", "lessThan", "greaterThanOrEqual", "lessThanOrEqual", "notEqual", "in", "notIn"]},
+            "operator": {"type": "string", "enum": ["equal", "greaterThan", "lessThan", "greaterThanOrEqual", "lessThanOrEqual", "notEqual", "in", "notIn"]},
             "left": {
               "oneOf": [
                 {"type": "array", "items": {"$ref": "#/$defs/reference"}},

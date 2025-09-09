@@ -888,7 +888,7 @@
         <xsl:param name="operator"/>
         <xsl:param name="inverted" select="false()"/>
         <xsl:choose>
-            <xsl:when test="$operator = 'equals'">
+            <xsl:when test="$operator = 'equal'">
                 <xsl:call-template name="translate">
                     <xsl:with-param name="key">equals</xsl:with-param>
                 </xsl:call-template>
