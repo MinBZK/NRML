@@ -74,6 +74,8 @@
                     <xsl:variable name="condition" select="fn:map[@key='condition']"/>
                     <xsl:variable name="value" select="fn:map[@key='value']"/>
                     
+                    <!-- Skip versions that are just type definitions (no rule elements) -->
+                    <xsl:if test="$target or $value or $condition or fn:map[@key='expression']">
                     <!-- Validity period -->
                     <xsl:choose>
                         <xsl:when test="$valid-to">
@@ -167,6 +169,7 @@
                             </xsl:call-template>
                         </xsl:otherwise>
                     </xsl:choose>
+                    </xsl:if>
                     
                     <!-- Add newline after each version, plus extra newline only after last version -->
                     <xsl:text>&#10;</xsl:text>
@@ -286,6 +289,7 @@
         <xsl:text> </xsl:text>
         <xsl:call-template name="format-expression">
             <xsl:with-param name="expression" select="$expression"/>
+            <xsl:with-param name="rule-target" select="$target"/>
         </xsl:call-template>
         <xsl:call-template name="translate">
             <xsl:with-param name="key">newline-if</xsl:with-param>
@@ -415,6 +419,7 @@
         <xsl:text> </xsl:text>
         <xsl:call-template name="format-expression">
             <xsl:with-param name="expression" select="$expression"/>
+            <xsl:with-param name="rule-target" select="$target"/>
         </xsl:call-template>
         <xsl:text>.</xsl:text>
     </xsl:template>
@@ -535,12 +540,14 @@
     <!-- Format expression -->
     <xsl:template name="format-expression">
         <xsl:param name="expression"/>
+        <xsl:param name="rule-target" select="()"/>
         <xsl:variable name="type" select="$expression/fn:string[@key='type']"/>
         
         <xsl:choose>
             <xsl:when test="$type = 'aggregation'">
                 <xsl:call-template name="format-aggregation">
                     <xsl:with-param name="aggregation" select="$expression"/>
+                    <xsl:with-param name="rule-target" select="$rule-target"/>
                 </xsl:call-template>
             </xsl:when>
             <xsl:when test="$type = 'conditional'">
@@ -592,6 +599,7 @@
     <!-- Format aggregation -->
     <xsl:template name="format-aggregation">
         <xsl:param name="aggregation"/>
+        <xsl:param name="rule-target" select="()"/>
         <xsl:variable name="function" select="$aggregation/fn:string[@key='function']"/>
         <xsl:variable name="expression" select="$aggregation/fn:array[@key='expression']"/>
         <xsl:variable name="condition" select="$aggregation/fn:map[@key='condition']"/>
@@ -628,31 +636,84 @@
         <xsl:choose>
             <xsl:when test="count($expression/fn:map) = 1">
                 <!-- Single reference: just the role -->
-                <xsl:text> de </xsl:text>
+                <xsl:choose>
+                    <xsl:when test="$function = 'count'">
+                        <!-- For count: "het aantal kinderen" (no extra article) -->
+                        <xsl:text> </xsl:text>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <!-- For sum/average: "de som van de belastingen" (with article) -->
+                        <xsl:text> </xsl:text>
+                        <xsl:call-template name="translate">
+                            <xsl:with-param name="key">the</xsl:with-param>
+                        </xsl:call-template>
+                        <xsl:text> </xsl:text>
+                    </xsl:otherwise>
+                </xsl:choose>
                 <xsl:call-template name="resolve-role-name">
                     <xsl:with-param name="path" select="$expression/fn:map/fn:string[@key='$ref']"/>
                     <xsl:with-param name="plural" select="true()"/>
                 </xsl:call-template>
-                <xsl:text> </xsl:text>
-                <xsl:call-template name="translate">
-                    <xsl:with-param name="key">of-the-flight</xsl:with-param>
-                </xsl:call-template>
+                <!-- Determine parent context from rule target (what the rule is about) -->
+                <xsl:choose>
+                    <xsl:when test="$rule-target and count($rule-target/fn:map) > 0">
+                        <xsl:text> </xsl:text>
+                        <xsl:call-template name="translate">
+                            <xsl:with-param name="key">of-the</xsl:with-param>
+                        </xsl:call-template>
+                        <xsl:text> </xsl:text>
+                        <xsl:call-template name="resolve-fact-from-property-ref">
+                            <xsl:with-param name="ref" select="$rule-target/fn:map[1]/fn:string[@key='$ref']"/>
+                        </xsl:call-template>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <!-- Fallback to generic context -->
+                        <xsl:text> </xsl:text>
+                        <xsl:call-template name="translate">
+                            <xsl:with-param name="key">of-the-context</xsl:with-param>
+                        </xsl:call-template>
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:when>
             <xsl:when test="count($expression/fn:map) > 1">
                 <!-- Multi-hop: role → property -->
-                <xsl:text> de </xsl:text>
+                <xsl:text> </xsl:text>
+                <xsl:call-template name="translate">
+                    <xsl:with-param name="key">the</xsl:with-param>
+                </xsl:call-template>
+                <xsl:text> </xsl:text>
                 <xsl:call-template name="resolve-path-plural">
                     <xsl:with-param name="path" select="$expression/fn:map[last()]/fn:string[@key='$ref']"/>
                 </xsl:call-template>
-                <xsl:text> van alle </xsl:text>
+                <xsl:text> </xsl:text>
+                <xsl:call-template name="translate">
+                    <xsl:with-param name="key">of-all</xsl:with-param>
+                </xsl:call-template>
+                <xsl:text> </xsl:text>
                 <xsl:call-template name="resolve-role-name">
                     <xsl:with-param name="path" select="$expression/fn:map[1]/fn:string[@key='$ref']"/>
                     <xsl:with-param name="plural" select="true()"/>
                 </xsl:call-template>
-                <xsl:text> </xsl:text>
-                <xsl:call-template name="translate">
-                    <xsl:with-param name="key">of-the-flight</xsl:with-param>
-                </xsl:call-template>
+                <!-- Determine parent context from rule target (what the rule is about) -->
+                <xsl:choose>
+                    <xsl:when test="$rule-target and count($rule-target/fn:map) > 0">
+                        <xsl:text> </xsl:text>
+                        <xsl:call-template name="translate">
+                            <xsl:with-param name="key">of-the</xsl:with-param>
+                        </xsl:call-template>
+                        <xsl:text> </xsl:text>
+                        <xsl:call-template name="resolve-fact-from-property-ref">
+                            <xsl:with-param name="ref" select="$rule-target/fn:map[1]/fn:string[@key='$ref']"/>
+                        </xsl:call-template>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <!-- Fallback to generic context -->
+                        <xsl:text> </xsl:text>
+                        <xsl:call-template name="translate">
+                            <xsl:with-param name="key">of-the-context</xsl:with-param>
+                        </xsl:call-template>
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:text> </xsl:text>
@@ -827,12 +888,12 @@
         <xsl:param name="operator"/>
         <xsl:param name="inverted" select="false()"/>
         <xsl:choose>
-            <xsl:when test="$operator = 'equals'">
+            <xsl:when test="$operator = 'equal'">
                 <xsl:call-template name="translate">
                     <xsl:with-param name="key">equals</xsl:with-param>
                 </xsl:call-template>
             </xsl:when>
-            <xsl:when test="$operator = 'notEquals'">
+            <xsl:when test="$operator = 'notEqual'">
                 <xsl:call-template name="translate">
                     <xsl:with-param name="key">not-equals</xsl:with-param>
                 </xsl:call-template>
@@ -857,7 +918,7 @@
                     </xsl:with-param>
                 </xsl:call-template>
             </xsl:when>
-            <xsl:when test="$operator = 'greaterOrEqual' or $operator = 'greaterThanOrEquals'">
+            <xsl:when test="$operator = 'greaterOrEqual' or $operator = 'greaterThanOrEqual'">
                 <xsl:call-template name="translate">
                     <xsl:with-param name="key">
                         <xsl:choose>
@@ -867,7 +928,7 @@
                     </xsl:with-param>
                 </xsl:call-template>
             </xsl:when>
-            <xsl:when test="$operator = 'lessThanOrEquals'">
+            <xsl:when test="$operator = 'lessThanOrEqual'">
                 <xsl:call-template name="translate">
                     <xsl:with-param name="key">
                         <xsl:choose>
@@ -1050,19 +1111,15 @@
                         </xsl:call-template>
                     </xsl:when>
                     <xsl:otherwise>
-                        <!-- Regular context: use full form -->
-                        <xsl:call-template name="translate">
-                    <xsl:with-param name="key">the</xsl:with-param>
-                </xsl:call-template>
-                <xsl:text> </xsl:text>
-                        <xsl:call-template name="resolve-path">
+                        <!-- Regular context: use proper article from JSON -->
+                        <xsl:call-template name="resolve-path-with-article">
                             <xsl:with-param name="path" select="$chain/fn:map/fn:string[@key='$ref']"/>
                         </xsl:call-template>
                         <xsl:text> </xsl:text>
-        <xsl:call-template name="translate">
-            <xsl:with-param name="key">of-the</xsl:with-param>
-        </xsl:call-template>
-        <xsl:text> </xsl:text>
+                        <xsl:call-template name="translate">
+                            <xsl:with-param name="key">of-the</xsl:with-param>
+                        </xsl:call-template>
+                        <xsl:text> </xsl:text>
                         <xsl:call-template name="resolve-fact-from-property-ref">
                             <xsl:with-param name="ref" select="$chain/fn:map/fn:string[@key='$ref']"/>
                         </xsl:call-template>
@@ -1272,6 +1329,83 @@
                         <xsl:text> </xsl:text>
                     </xsl:if>
                 </xsl:when>
+                <xsl:when test="contains($single-path, '/items/')">
+                    <xsl:variable name="fact-uuid" select="substring-before(substring-after($single-path, '#/facts/'), '/items/')"/>
+                    <xsl:variable name="item-uuid" select="substring-after($single-path, '/items/')"/>
+                    
+                    <!-- First try to get definite article from objectType reference -->
+                    <xsl:variable name="objecttype-ref">
+                        <xsl:for-each select="//fn:map[@key='facts']/fn:map[@key=$fact-uuid]/fn:map[@key='items']/fn:map[@key=$item-uuid]/fn:array[@key='versions']/fn:map">
+                            <xsl:choose>
+                                <xsl:when test="fn:map[@key='b']/fn:string[@key='uuid'] = $item-uuid">
+                                    <xsl:value-of select="fn:map[@key='b']/fn:map[@key='objectType']/fn:string[@key='$ref']"/>
+                                </xsl:when>
+                                <xsl:when test="fn:map[@key='a']/fn:string[@key='uuid'] = $item-uuid">
+                                    <xsl:value-of select="fn:map[@key='a']/fn:map[@key='objectType']/fn:string[@key='$ref']"/>
+                                </xsl:when>
+                            </xsl:choose>
+                        </xsl:for-each>
+                    </xsl:variable>
+                    
+                    <xsl:variable name="target-fact-uuid">
+                        <xsl:if test="$objecttype-ref != ''">
+                            <xsl:value-of select="substring-after($objecttype-ref, '#/facts/')"/>
+                        </xsl:if>
+                    </xsl:variable>
+                    
+                    <xsl:variable name="fact-article">
+                        <xsl:choose>
+                            <xsl:when test="$target-fact-uuid != ''">
+                                <!-- Use article from objectType target fact -->
+                                <xsl:value-of select="//fn:map[@key='facts']/fn:map[@key=$target-fact-uuid]/fn:map[@key='definite_article']/fn:string[@key=$language]"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <!-- Try item's own article first -->
+                                <xsl:variable name="item-article" select="//fn:map[@key='facts']/fn:map[@key=$fact-uuid]/fn:map[@key='items']/fn:map[@key=$item-uuid]/fn:map[@key='article']/fn:string[@key=$language]"/>
+                                <xsl:choose>
+                                    <xsl:when test="$item-article and $item-article != ''">
+                                        <xsl:value-of select="$item-article"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <!-- Fallback to parent fact's article -->
+                                        <xsl:value-of select="//fn:map[@key='facts']/fn:map[@key=$fact-uuid]/fn:map[@key='definite_article']/fn:string[@key=$language]"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:variable>
+                    
+                    <xsl:choose>
+                        <xsl:when test="$fact-article and $fact-article != ''">
+                            <xsl:choose>
+                                <xsl:when test="$capitalize">
+                                    <xsl:value-of select="concat(translate(substring($fact-article, 1, 1), 'abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'), substring($fact-article, 2))"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="$fact-article"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <!-- Fallback to generic article if no fact article found -->
+                            <xsl:choose>
+                                <xsl:when test="$capitalize">
+                                    <xsl:call-template name="translate">
+                                        <xsl:with-param name="key">the-capitalized</xsl:with-param>
+                                    </xsl:call-template>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:call-template name="translate">
+                                        <xsl:with-param name="key">the</xsl:with-param>
+                                    </xsl:call-template>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                    <xsl:if test="$fact-article and $fact-article != ''">
+                        <xsl:text> </xsl:text>
+                    </xsl:if>
+                </xsl:when>
                 <xsl:otherwise>
                     <!-- Fallback article for facts/unknown -->
                     <xsl:choose>
@@ -1293,7 +1427,7 @@
         
         <!-- Then resolve the actual name -->
         <xsl:choose>
-            <xsl:when test="contains($single-path, '/properties/')">
+            <xsl:when test="contains($single-path, '/properties/') or contains($single-path, '/items/')">
                 <xsl:call-template name="resolve-property-name">
                     <xsl:with-param name="path" select="$single-path"/>
                 </xsl:call-template>
@@ -1323,8 +1457,26 @@
         <xsl:param name="path"/>
         <xsl:param name="plural" select="false()"/>
         <!-- Extract fact UUID and property UUID from path -->
-        <xsl:variable name="fact-uuid" select="substring-before(substring-after($path, '#/facts/'), '/properties/')"/>
-        <xsl:variable name="property-uuid" select="substring-after($path, '/properties/')"/>
+        <xsl:variable name="fact-uuid">
+            <xsl:choose>
+                <xsl:when test="contains($path, '/properties/')">
+                    <xsl:value-of select="substring-before(substring-after($path, '#/facts/'), '/properties/')"/>
+                </xsl:when>
+                <xsl:when test="contains($path, '/items/')">
+                    <xsl:value-of select="substring-before(substring-after($path, '#/facts/'), '/items/')"/>
+                </xsl:when>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:variable name="property-uuid">
+            <xsl:choose>
+                <xsl:when test="contains($path, '/properties/')">
+                    <xsl:value-of select="substring-after($path, '/properties/')"/>
+                </xsl:when>
+                <xsl:when test="contains($path, '/items/')">
+                    <xsl:value-of select="substring-after($path, '/items/')"/>
+                </xsl:when>
+            </xsl:choose>
+        </xsl:variable>
         
         <!-- Look up the property name in the facts (singular or plural) -->
         <xsl:variable name="property-name">
@@ -1362,9 +1514,27 @@
         <xsl:param name="path"/>
         <xsl:param name="plural" select="false()"/>
         <xsl:variable name="single-path" select="if (count($path) > 1) then $path[1] else $path"/>
-        <!-- Extract fact UUID and role UUID from path -->
-        <xsl:variable name="fact-uuid" select="substring-before(substring-after($single-path, '#/facts/'), '/roles/')"/>
-        <xsl:variable name="role-uuid" select="substring-after($single-path, '/roles/')"/>
+        <!-- Extract fact UUID and role UUID from path (handles both /roles/ and /items/) -->
+        <xsl:variable name="fact-uuid">
+            <xsl:choose>
+                <xsl:when test="contains($single-path, '/roles/')">
+                    <xsl:value-of select="substring-before(substring-after($single-path, '#/facts/'), '/roles/')"/>
+                </xsl:when>
+                <xsl:when test="contains($single-path, '/items/')">
+                    <xsl:value-of select="substring-before(substring-after($single-path, '#/facts/'), '/items/')"/>
+                </xsl:when>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:variable name="role-uuid">
+            <xsl:choose>
+                <xsl:when test="contains($single-path, '/roles/')">
+                    <xsl:value-of select="substring-after($single-path, '/roles/')"/>
+                </xsl:when>
+                <xsl:when test="contains($single-path, '/items/')">
+                    <xsl:value-of select="substring-after($single-path, '/items/')"/>
+                </xsl:when>
+            </xsl:choose>
+        </xsl:variable>
         
         <!-- Look up the role in the fact's items/versions (singular or plural) -->
         <xsl:variable name="role-name">
@@ -1422,8 +1592,19 @@
         <xsl:variable name="fact-uuid">
             <xsl:choose>
                 <xsl:when test="$from-property">
-                    <!-- Extract from property path: #/facts/uuid/properties/... -->
-                    <xsl:value-of select="substring-before(substring-after($path, '#/facts/'), '/properties/')"/>
+                    <!-- Extract from property path: #/facts/uuid/properties/... or #/facts/uuid/items/... -->
+                    <xsl:choose>
+                        <xsl:when test="contains($path, '/properties/')">
+                            <xsl:value-of select="substring-before(substring-after($path, '#/facts/'), '/properties/')"/>
+                        </xsl:when>
+                        <xsl:when test="contains($path, '/items/')">
+                            <xsl:value-of select="substring-before(substring-after($path, '#/facts/'), '/items/')"/>
+                        </xsl:when>
+                        <xsl:when test="starts-with($path, '#/facts/') and not(contains($path, '/properties/')) and not(contains($path, '/items/'))">
+                            <!-- Direct fact reference: #/facts/uuid -->
+                            <xsl:value-of select="substring-after($path, '#/facts/')"/>
+                        </xsl:when>
+                    </xsl:choose>
                 </xsl:when>
                 <xsl:otherwise>
                     <!-- Extract from fact path: #/facts/uuid -->
@@ -1822,6 +2003,14 @@
             </xsl:when>
             <!-- Role reference -->
             <xsl:when test="contains($path, '/roles/')">
+                <xsl:call-template name="resolve-path">
+                    <xsl:with-param name="path" select="$path"/>
+                    <xsl:with-param name="with-article" select="true()"/>
+                    <xsl:with-param name="capitalize" select="$capitalize"/>
+                </xsl:call-template>
+            </xsl:when>
+            <!-- Items reference (kinderbijslag uses /items/ instead of /roles/) -->
+            <xsl:when test="contains($path, '/items/')">
                 <xsl:call-template name="resolve-path">
                     <xsl:with-param name="path" select="$path"/>
                     <xsl:with-param name="with-article" select="true()"/>
@@ -2278,6 +2467,7 @@
         
         <xsl:call-template name="format-expression">
             <xsl:with-param name="expression" select="$expression"/>
+            <xsl:with-param name="rule-target" select="()"/>
         </xsl:call-template>
         
         <xsl:choose>
@@ -2317,6 +2507,7 @@
         
         <xsl:call-template name="format-expression">
             <xsl:with-param name="expression" select="$expression"/>
+            <xsl:with-param name="rule-target" select="()"/>
         </xsl:call-template>
         
         <xsl:if test="$minimum">

@@ -265,12 +265,7 @@
         "expression": {"$ref": "#/$defs/expression"}
       },
       "additionalProperties": false,
-      "not": {
-        "anyOf": [
-          {"required": ["condition"]},
-          {"required": ["value"]}
-        ]
-      }
+      "not": {"required": ["value"]}
     },
     "conditionalValue": {
       "description": "Conditional value: has 'target' + 'value' + 'condition'",
@@ -351,7 +346,7 @@
           "description": "Comparison condition: requires operator, left, right",
           "properties": {
             "type": {"type": "string", "enum": ["comparison"]},
-            "operator": {"type": "string", "enum": ["equals", "greaterThan", "lessThan", "greaterThanOrEquals", "lessThanOrEquals", "notEquals", "in", "notIn"]},
+            "operator": {"type": "string", "enum": ["equal", "greaterThan", "lessThan", "greaterThanOrEqual", "lessThanOrEqual", "notEqual", "in", "notIn"]},
             "left": {
               "oneOf": [
                 {"type": "array", "items": {"$ref": "#/$defs/reference"}},
@@ -489,7 +484,8 @@
           "type": "array",
           "items": {"$ref": "#/$defs/reference"}
         },
-        "default": {"$ref": "#/$defs/valueObject"}
+        "default": {"$ref": "#/$defs/valueObject"},
+        "condition": {"$ref": "#/$defs/condition"}
       },
       "additionalProperties": false
     },

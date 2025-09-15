@@ -53,6 +53,7 @@
           <xsl:when test="$key = 'his'">his</xsl:when>
           <xsl:when test="$key = 'the'">the</xsl:when>
           <xsl:when test="$key = 'of-the'">of the</xsl:when>
+          <xsl:when test="$key = 'of-the-context'">of the context</xsl:when>
           <xsl:when test="$key = 'is-not-a'">is not a</xsl:when>
           <xsl:when test="$key = 'no'">no</xsl:when>
           <xsl:when test="$key = 'unknown-value'">unknown value</xsl:when>
@@ -87,7 +88,6 @@
           <xsl:when test="$key = 'with-maximum-of'">with a maximum of</xsl:when>
           <xsl:when test="$key = 'unknown-condition-type'">Unknown condition type:</xsl:when>
           <xsl:when test="$key = 'unknown-expression-type'">Unknown expression type:</xsl:when>
-          <xsl:when test="$key = 'of-the-flight'">of the flight</xsl:when>
           <xsl:when test="$key = 'the-conditions'">the conditions</xsl:when>
           <xsl:when test="$key = 'valid-from-to'">valid from</xsl:when>
           <xsl:when test="$key = 'must-be-initialized-to'">must be initialized to</xsl:when>
@@ -179,6 +179,7 @@
           <xsl:when test="$key = 'his'">zijn</xsl:when>
           <xsl:when test="$key = 'the'">de</xsl:when>
           <xsl:when test="$key = 'of-the'">van de</xsl:when>
+          <xsl:when test="$key = 'of-the-context'">van de context</xsl:when>
           <xsl:when test="$key = 'is-not-a'">is geen</xsl:when>
           <xsl:when test="$key = 'no'">geen</xsl:when>
           <xsl:when test="$key = 'unknown-value'">onbekende waarde</xsl:when>
@@ -213,7 +214,6 @@
           <xsl:when test="$key = 'with-maximum-of'">met een maximum van het</xsl:when>
           <xsl:when test="$key = 'unknown-condition-type'">Onbekende conditie type:</xsl:when>
           <xsl:when test="$key = 'unknown-expression-type'">Onbekende expressie type:</xsl:when>
-          <xsl:when test="$key = 'of-the-flight'">van de vlucht</xsl:when>
           <xsl:when test="$key = 'the-conditions'">de voorwaarden</xsl:when>
           <xsl:when test="$key = 'valid-from-to'">geldig van</xsl:when>
           <xsl:when test="$key = 'must-be-initialized-to'">moet geïnitialiseerd worden op</xsl:when>
