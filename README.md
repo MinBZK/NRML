@@ -1,6 +1,9 @@
-# NRML - Normalized Rule Model Language
+![GitHub License](https://img.shields.io/github/license/minbzk/NRML)
+![RegelRecht](https://img.shields.io/badge/RegelRecht-NRML-blue)
 
-NRML (uitspraak: /ˈnɔrməl/) is een **JSON-gebaseerd Datalog voor wet- en regelgeving** met path expressions en multilinguale ondersteuning.
+# RegelRecht NRML (Normalized Rule Model Language)
+
+NRML (uitspraak: /ˈnɔrməl/) is een **JSON-gebaseerd formaat voor wet- en regelgeving**.
 
 ## Theoretische Basis: Datalog met JSON Syntax
 
