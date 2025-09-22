@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>NRML Viewer</title>
+    <style>
+        :root{--title-h:52px;--toolbar-h:44px;--gap:10px;--left-w:40%}
+        html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial}
+        .titlebar{height:var(--title-h);display:flex;align-items:center;padding:0 16px;background:#0f172a;color:#fff;box-shadow:0 1px 0 rgba(0,0,0,.2)}
+        .titlebar h1{font-size:16px;margin:0;font-weight:600;letter-spacing:.4px}
+
+        .toolbar{height:var(--toolbar-h);display:flex;align-items:center;gap:8px;padding:8px 12px;background:#f3f4f6;border-bottom:1px solid rgba(15,23,42,0.04)}
+        .toolbar .btn{padding:8px 12px;border:1px solid rgba(15,23,42,0.08);background:#fff;border-radius:6px;cursor:pointer;font-weight:600}
+        .toolbar .btn:active{transform:translateY(1px)}
+
+        .app{display:flex;height:calc(100vh - var(--title-h) - var(--toolbar-h));gap:var(--gap);padding:12px;background:#fff;box-sizing:border-box}
+
+        .panel{display:flex;flex-direction:column;border:1px solid rgba(15,23,42,0.06);border-radius:8px;overflow:hidden}
+        .left{width:var(--left-w);min-width:260px}
+        textarea.json-input{flex:1;border:0;padding:12px;font-family:monospace;font-size:13px;resize:none;outline:none}
+
+        .right{flex:1;min-width:300px;padding:12px;overflow:auto;background:linear-gradient(180deg,#ffffff,#fbfdff)}
+
+        .status{padding:6px 12px;font-size:13px;color:#374151}
+
+        /* JSON out styles */
+        .node{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,monospace;font-size:13px;line-height:1.5}
+        .node .key{color:#0f172a;font-weight:700;margin-right:6px}
+        .node .type-string{color:#b91c1c}
+        .node .type-number{color:#0b5cff}
+        .node .type-boolean{color:#a16207}
+        .node .type-null{color:#6b7280;font-style:italic}
+        details>summary{cursor:pointer;outline:none}
+        details>summary::-webkit-details-marker{display:none}
+        .summary-line{display:inline-block}
+        .children{margin-left:14px;border-left:1px dashed rgba(15,23,42,0.04);padding-left:8px}
+
+        /* Responsive */
+        @media (max-width:800px){
+            .app{flex-direction:column}
+            .left{width:100%;height:40vh}
+            .right{height:60vh}
+        }
+    </style>
+</head>
+<body>
+<div class="titlebar">
+    <h1>NRML Viewer</h1>
+</div>
+
+<div class="toolbar">
+    <button class="btn" id="viewNrmlBtn">View NRML</button>
+    <button class="btn" id="viewJsonBtn">View JSON</button>
+    <button class="btn" id="prettyBtn">Pretty</button>
+    <button class="btn" id="loadSampleBtn">Load sample</button>
+    <button class="btn" id="clearBtn">Clear</button>
+    <div style="flex:1"></div>
+    <div class="status" id="status">Ready</div>
+</div>
+
+<div class="app">
+    <div class="panel left">
+        <textarea id="jsonInput" class="json-input" spellcheck="false" placeholder="Paste JSON here..."></textarea>
+    </div>
+
+    <div class="panel right" id="viewer" aria-live="polite">
+        <div style="padding-bottom:6px;color:#374151">Rendered JSON will appear here.</div>
+        <div id="out" class="node"></div>
+    </div>
+</div>
+
+<script>
+    const input = document.getElementById('jsonInput');
+    const viewJsonBtn = document.getElementById('viewJsonBtn');
+    const prettyBtn = document.getElementById('prettyBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const loadSampleBtn = document.getElementById('loadSampleBtn');
+    const status = document.getElementById('status');
+    const out = document.getElementById('out');
+
+    function setStatus(msg, isError){
+        status.textContent = msg;
+        status.style.color = isError ? '#b91c1c' : '#374151';
+    }
+
+    function clearViewer(){
+        out.innerHTML = '';
+        setStatus('Cleared');
+    }
+
+    function renderJSONValue(value){
+        const wrap = document.createElement('span');
+        if (value === null){
+            wrap.textContent = 'null';
+            wrap.className = 'type-null';
+            return wrap;
+        }
+        const t = typeof value;
+        if (t === 'string'){
+            wrap.textContent = '"' + value + '"';
+            wrap.className = 'type-string';
+            return wrap;
+        }
+        if (t === 'number'){
+            wrap.textContent = String(value);
+            wrap.className = 'type-number';
+            return wrap;
+        }
+        if (t === 'boolean'){
+            wrap.textContent = String(value);
+            wrap.className = 'type-boolean';
+            return wrap;
+        }
+        if (Array.isArray(value)){
+            const d = document.createElement('details');
+            d.open = true;
+            const s = document.createElement('summary');
+            s.innerHTML = '<span class="summary-line">[Array] (' + value.length + ')</span>';
+            d.appendChild(s);
+            const c = document.createElement('div');
+            c.className = 'children';
+            value.forEach((v,i)=>{
+                const row = document.createElement('div');
+                const idx = document.createElement('span');
+                idx.className = 'key';
+                idx.textContent = i + ':';
+                row.appendChild(idx);
+                row.appendChild(renderJSONValue(v));
+                c.appendChild(row);
+            });
+            d.appendChild(c);
+            return d;
+        }
+        if (t === 'object'){
+            const keys = Object.keys(value);
+            const d = document.createElement('details');
+            d.open = true;
+            const s = document.createElement('summary');
+            s.innerHTML = '<span class="summary-line">{Object} (' + keys.length + ')</span>';
+            d.appendChild(s);
+            const c = document.createElement('div');
+            c.className = 'children';
+            keys.forEach(k=>{
+                const row = document.createElement('div');
+                const keySpan = document.createElement('span');
+                keySpan.className = 'key';
+                keySpan.textContent = k + ':';
+                row.appendChild(keySpan);
+                row.appendChild(renderJSONValue(value[k]));
+                c.appendChild(row);
+            });
+            d.appendChild(c);
+            return d;
+        }
+        wrap.textContent = String(value);
+        return wrap;
+    }
+
+    function viewJson(){
+        const text = input.value.trim();
+        if (!text){ setStatus('Input empty', true); clearViewer(); return; }
+        try{
+            const parsed = JSON.parse(text);
+            out.innerHTML = '';
+            out.appendChild(renderJSONValue(parsed));
+            setStatus('Rendered OK');
+        }catch(e){
+            setStatus('JSON parse error: ' + e.message, true);
+            out.innerHTML = '';
+        }
+    }
+
+    function renderFacts(obj){
+        let result = '<h2>Facts</h2>';
+        for (const [key, value] of Object.entries(obj)) {
+            const name = value.name.en;
+            let fact = `<h3 title="${key}">${name}</h3>`
+            fact += '<dl>'
+            for (const [itemKey, itemValue] of Object.entries(value.items)) {
+                let item = `<dt title="${itemKey}">${itemValue.name.en}</dt>`
+                item+= '<dd><ul>'
+                for (const [vKey, vValue] of Object.entries(itemValue.versions[0])) {
+                    item+= `<li><b>${vKey}</b>: ${vValue}</li>`;
+                }
+                item+= '</ul></dd>';
+                fact += item;
+            }
+            fact += '</dl>'
+            result += fact;
+        }
+        return result;
+    }
+
+    function appendHtml(el, str) {
+        let div = document.createElement('div');
+        div.innerHTML = str;
+        while (div.children.length > 0) {
+            el.appendChild(div.children[0]);
+        }
+    }
+
+    function viewNrml(){
+        const text = input.value.trim();
+        if (!text){ setStatus('Input empty', true); clearViewer(); return; }
+        try{
+            const parsed = JSON.parse(text);
+            out.innerHTML = '';
+            // out.appendChild();
+            appendHtml(out, renderFacts(parsed.facts))
+            setStatus('Rendered OK');
+        }catch(e){
+            setStatus('JSON parse error: ' + e.message, true);
+            out.innerHTML = '';
+        }
+    }
+
+    viewJsonBtn.addEventListener('click', viewJson);
+    viewNrmlBtn.addEventListener('click', viewNrml);
+
+    prettyBtn.addEventListener('click', ()=>{
+        const text = input.value.trim();
+        if (!text){ setStatus('Nothing to pretty-print', true); return; }
+        try{
+            const parsed = JSON.parse(text);
+            input.value = JSON.stringify(parsed, null, 2);
+            setStatus('Pretty-printed');
+        }catch(e){ setStatus('Cannot pretty-print: ' + e.message, true); }
+    });
+
+    clearBtn.addEventListener('click', ()=>{ input.value=''; clearViewer(); setStatus('Ready'); });
+
+    loadSampleBtn.addEventListener('click', ()=>{
+        /*const sample = {
+            "name":"Example document",
+            "version":1,
+            "items":[
+                {"id":1,"label":"First","active":true},
+                {"id":2,"label":"Second","active":false},
+                null
+            ],
+            "nested":{"a":10,"b":[1,2,3]},
+            "notes": "This is a sample NRML-like JSON"
+        };
+        JSON.stringify(sample,null,2);
+        */
+
+        // url (required), options (optional)
+        fetch('../toka.nrml.json', {method: 'get'})
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(data) {
+                input.value = JSON.stringify(data,null,2);
+                setStatus('Sample loaded');
+            }).catch(function(err) {
+                setStatus('Error:' + err.message, true)
+            });
+
+    });
+
+    // Keyboard: Ctrl+Enter to view, Ctrl+Shift+P to pretty
+    input.addEventListener('keydown', (ev)=>{
+        if (ev.key === 'Enter' && (ev.ctrlKey || ev.metaKey)){
+            ev.preventDefault(); viewJson();
+        }
+        if (ev.key.toLowerCase() === 'p' && (ev.ctrlKey || ev.metaKey) && ev.shiftKey){
+            ev.preventDefault(); prettyBtn.click();
+        }
+    });
+
+    // initialize with sample
+    loadSampleBtn.click();
+    viewJson();
+</script>
+</body>
+</html>
