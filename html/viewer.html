@@ -171,19 +171,43 @@
         }
     }
 
+    function renderObj(obj, idToName) {
+        let item = '<ul>'
+        for (const [vKey, vValue] of Object.entries(obj)) {
+            if(vValue == null) {
+                item += `<li><b>${vKey}</b>: -</li>`;
+            } else if(typeof vValue === 'object') {
+                item += `<li><b>${vKey}</b>: ${renderObj(vValue, idToName)}</li>`;
+            } else if(vKey === '$ref') {
+                // "#/facts/61b9f36b-d866-4b5d-aa61-7451e6aee5c0"
+                const id = vValue.split('/')[2];
+                item += `<li><b>${vKey}</b>: <a href="#${id}">${idToName.get(id)}</a></li>`;
+            } else {
+                item += `<li><b>${vKey}</b>: ${vValue}</li>`;
+            }
+        }
+        item+= '</ul>';
+        return item;
+    }
+
     function renderFacts(obj){
         let result = '<h2>Facts</h2>';
+
+        const idToName = new Map();
+        for (const [key, value] of Object.entries(obj)) {
+            idToName.set(key, value.name.en);
+        }
+
         for (const [key, value] of Object.entries(obj)) {
             const name = value.name.en;
-            let fact = `<h3 title="${key}">${name}</h3>`
+            let fact = `<a id="${key}"><h3 title="${key}">${name}</h3></a>`
             fact += '<dl>'
             for (const [itemKey, itemValue] of Object.entries(value.items)) {
                 let item = `<dt title="${itemKey}">${itemValue.name.en}</dt>`
-                item+= '<dd><ul>'
-                for (const [vKey, vValue] of Object.entries(itemValue.versions[0])) {
-                    item+= `<li><b>${vKey}</b>: ${vValue}</li>`;
-                }
-                item+= '</ul></dd>';
+                item += '<dd>'
+                item += renderObj(itemValue.versions[0], idToName);
+                item+= '</dd>';
+
                 fact += item;
             }
             fact += '</dl>'
