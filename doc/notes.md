@@ -85,3 +85,27 @@ We may need to deal still with using correct brackets for nested arithmetic.
 Do we ever need multiple ways to say the same thing: sum(a, b, c) vs a + (b + c)?
 What's part of NRML-core? What's an extension?
 Isn't the sum syntactic suger?
+
+
+We had multiple representations of expressions:
+- `{operator, left, right}`
+- `{operator, a, b}`
+- `{operator, from, to}`
+- `{operator, [xs]}`
+
+The new idea is:
+- `{operators, [args]}`
+  a.k.a. one way to do functions.
+
+To make it strict, the schema can enforce that certain operators have exactly 2 args, `less than` for example, where `sum` can take a list of arbitrary length.
+
+```json
+{
+  "type": "array",
+  "contains": {
+    "type": "number"
+  },
+  "minContains": 2,
+  "maxContains": 2
+}
+```
