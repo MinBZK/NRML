@@ -5,6 +5,9 @@
 
 NRML (uitspraak: /ˈnɔrməl/) is een **JSON-gebaseerd formaat voor wet- en regelgeving**.
 
+NRML is onderdeel van het **[RegelRecht Ecosysteem](https://minbzk.github.io/regelrecht/)**.
+
+
 ## Theoretische Basis: Datalog met JSON Syntax
 
 NRML is fundamenteel **Datalog met JSON syntax**. Deze realisatie verbindt NRML met 40+ jaar formele logica programmering theorie:
