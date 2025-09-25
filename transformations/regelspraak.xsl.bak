@@ -947,7 +947,7 @@
     <xsl:template name="format-logical">
         <xsl:param name="logical"/>
         <xsl:variable name="operator" select="$logical/fn:string[@key='operator']"/>
-        <xsl:variable name="operands" select="$logical/fn:array[@key='operands']"/>
+        <xsl:variable name="operands" select="$logical/fn:array[@key='arguments']"/>
         
         <xsl:for-each select="$operands/fn:map">
             <xsl:if test="position() > 1">
@@ -1670,7 +1670,7 @@
     <!-- Format sum expression -->
     <xsl:template name="format-sum">
         <xsl:param name="sum"/>
-        <xsl:variable name="operands" select="$sum/fn:array[@key='operands']"/>
+        <xsl:variable name="operands" select="$sum/fn:array[@key='arguments']"/>
         
         <xsl:for-each select="$operands/fn:array | $operands/fn:map">
             <xsl:if test="position() > 1">
@@ -1793,7 +1793,7 @@
         <xsl:param name="parent-operator" select="''"/>
         
         <xsl:variable name="operator" select="$arithmetic/fn:string[@key='operator']"/>
-        <xsl:variable name="operands" select="$arithmetic/fn:array[@key='operands']"/>
+        <xsl:variable name="operands" select="$arithmetic/fn:array[@key='arguments']"/>
         
         <!-- Determine if we need parentheses based on operator precedence -->
         <xsl:variable name="needs-parens">

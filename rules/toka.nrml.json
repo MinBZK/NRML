@@ -767,40 +767,42 @@
           "versions": [
             {
               "validFrom": "2018",
-              "a": {
-                "uuid": "5ce3e026-293e-4405-a22d-4ea222deef79",
-                "name": {
-                  "nl": "reis",
-                  "en": "trip"
+              "arguments": [
+                {
+                  "uuid": "5ce3e026-293e-4405-a22d-4ea222deef79",
+                  "name": {
+                    "nl": "reis",
+                    "en": "trip"
+                  },
+                  "cardinality": "one",
+                  "article": {
+                    "nl": "de",
+                    "en": "the"
+                  },
+                  "objectType": {
+                    "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
+                  }
                 },
-                "cardinality": "one",
-                "article": {
-                  "nl": "de",
-                  "en": "the"
-                },
-                "objectType": {
-                  "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
+                {
+                  "uuid": "0cc7c4b4-2855-4c8b-93f0-5403cf286af0",
+                  "name": {
+                    "nl": "passagier",
+                    "en": "passenger"
+                  },
+                  "cardinality": "many",
+                  "article": {
+                    "nl": "de",
+                    "en": "the"
+                  },
+                  "plural": {
+                    "nl": "passagiers",
+                    "en": "passengers"
+                  },
+                  "objectType": {
+                    "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"
+                  }
                 }
-              },
-              "b": {
-                "uuid": "0cc7c4b4-2855-4c8b-93f0-5403cf286af0",
-                "name": {
-                  "nl": "passagier",
-                  "en": "passenger"
-                },
-                "cardinality": "many",
-                "article": {
-                  "nl": "de",
-                  "en": "the"
-                },
-                "plural": {
-                  "nl": "passagiers",
-                  "en": "passengers"
-                },
-                "objectType": {
-                  "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"
-                }
-              }
+              ]
             }
           ]
         }
@@ -821,34 +823,36 @@
           "versions": [
             {
               "validFrom": "2018",
-              "a": {
-                "name": {
-                  "nl": "reis met treinmiles",
-                  "en": "trip with train miles"
+              "arguments": [
+                {
+                  "name": {
+                    "nl": "reis met treinmiles",
+                    "en": "trip with train miles"
+                  },
+                  "cardinality": "one",
+                  "article": {
+                    "nl": "de",
+                    "en": "the"
+                  },
+                  "objectType": {
+                    "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
+                  }
                 },
-                "cardinality": "one",
-                "article": {
-                  "nl": "de",
-                  "en": "the"
-                },
-                "objectType": {
-                  "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
+                {
+                  "name": {
+                    "nl": "vastgesteld contingent treinmiles",
+                    "en": "established train miles quota"
+                  },
+                  "cardinality": "one",
+                  "article": {
+                    "nl": "het",
+                    "en": "the"
+                  },
+                  "objectType": {
+                    "$ref": "#/facts/bea88ba3-ec79-4bd2-8f8e-f6e11a08c431"
+                  }
                 }
-              },
-              "b": {
-                "name": {
-                  "nl": "vastgesteld contingent treinmiles",
-                  "en": "established train miles quota"
-                },
-                "cardinality": "one",
-                "article": {
-                  "nl": "het",
-                  "en": "the"
-                },
-                "objectType": {
-                  "$ref": "#/facts/bea88ba3-ec79-4bd2-8f8e-f6e11a08c431"
-                }
-              }
+              ]
             }
           ]
         }
@@ -869,38 +873,40 @@
           "versions": [
             {
               "validFrom": "2018",
-              "a": {
-                "name": {
-                  "nl": "te verdelen contingent treinmiles",
-                  "en": "train miles quota to distribute"
+              "arguments": [
+                {
+                  "name": {
+                    "nl": "te verdelen contingent treinmiles",
+                    "en": "train miles quota to distribute"
+                  },
+                  "cardinality": "one",
+                  "article": {
+                    "nl": "het",
+                    "en": "the"
+                  },
+                  "objectType": {
+                    "$ref": "#/facts/bea88ba3-ec79-4bd2-8f8e-f6e11a08c431"
+                  }
                 },
-                "cardinality": "one",
-                "article": {
-                  "nl": "het",
-                  "en": "the"
-                },
-                "objectType": {
-                  "$ref": "#/facts/bea88ba3-ec79-4bd2-8f8e-f6e11a08c431"
+                {
+                  "name": {
+                    "nl": "passagier met recht op treinmiles",
+                    "en": "passenger entitled to train miles"
+                  },
+                  "cardinality": "many",
+                  "article": {
+                    "nl": "de",
+                    "en": "the"
+                  },
+                  "plural": {
+                    "nl": "passagiers met recht op treinmiles",
+                    "en": "passengers entitled to train miles"
+                  },
+                  "objectType": {
+                    "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"
+                  }
                 }
-              },
-              "b": {
-                "name": {
-                  "nl": "passagier met recht op treinmiles",
-                  "en": "passenger entitled to train miles"
-                },
-                "cardinality": "many",
-                "article": {
-                  "nl": "de",
-                  "en": "the"
-                },
-                "plural": {
-                  "nl": "passagiers met recht op treinmiles",
-                  "en": "passengers entitled to train miles"
-                },
-                "objectType": {
-                  "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce"
-                }
-              }
+              ]
             }
           ]
         }
@@ -921,38 +927,40 @@
           "versions": [
             {
               "validFrom": "2018",
-              "a": {
-                "name": {
-                  "nl": "vlucht met gegevens",
-                  "en": "flight with data"
+              "arguments": [
+                {
+                  "name": {
+                    "nl": "vlucht met gegevens",
+                    "en": "flight with data"
+                  },
+                  "cardinality": "one",
+                  "article": {
+                    "nl": "de",
+                    "en": "the"
+                  },
+                  "objectType": {
+                    "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
+                  }
                 },
-                "cardinality": "one",
-                "article": {
-                  "nl": "de",
-                  "en": "the"
-                },
-                "objectType": {
-                  "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35"
+                {
+                  "name": {
+                    "nl": "reden uitworp",
+                    "en": "rejection reason"
+                  },
+                  "cardinality": "many",
+                  "article": {
+                    "nl": "de",
+                    "en": "the"
+                  },
+                  "plural": {
+                    "nl": "redenen uitworp",
+                    "en": "rejection reasons"
+                  },
+                  "objectType": {
+                    "$ref": "#/facts/dd04dbff-736a-4703-94a2-bbba4588fcc0"
+                  }
                 }
-              },
-              "b": {
-                "name": {
-                  "nl": "reden uitworp",
-                  "en": "rejection reason"
-                },
-                "cardinality": "many",
-                "article": {
-                  "nl": "de",
-                  "en": "the"
-                },
-                "plural": {
-                  "nl": "redenen uitworp",
-                  "en": "rejection reasons"
-                },
-                "objectType": {
-                  "$ref": "#/facts/dd04dbff-736a-4703-94a2-bbba4588fcc0"
-                }
-              }
+              ]
             }
           ]
         }
@@ -1526,17 +1534,19 @@
               "condition": {
                 "type": "comparison",
                 "operator": "equal",
-                "left": [
+                "arguments": [
+                  [
+                    {
+                      "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                    },
+                    {
+                      "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea5d01e3-af40-437f-bc0f-d29b26718148"
+                    }
+                  ],
                   {
-                    "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
-                  },
-                  {
-                    "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea5d01e3-af40-437f-bc0f-d29b26718148"
+                    "value": true
                   }
-                ],
-                "right": {
-                  "value": true
-                }
+                ]
               }
             }
           ]
@@ -1560,17 +1570,19 @@
               "condition": {
                 "type": "comparison",
                 "operator": "notEqual",
-                "left": [
+                "arguments": [
+                  [
+                    {
+                      "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                    },
+                    {
+                      "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea5d01e3-af40-437f-bc0f-d29b26718148"
+                    }
+                  ],
                   {
-                    "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
-                  },
-                  {
-                    "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea5d01e3-af40-437f-bc0f-d29b26718148"
+                    "value": true
                   }
-                ],
-                "right": {
-                  "value": true
-                }
+                ]
               }
             }
           ]
@@ -1591,15 +1603,17 @@
               "condition": {
                 "type": "comparison",
                 "operator": "equal",
-                "left": [
-                  {
-                    "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/07783713-6df0-4810-bc44-4206050cb19d"
-                  }
-                ],
-                "right": [
-                  {
-                    "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/fe752ef2-19ba-4b5c-9e6e-ad86df5d3d59"
-                  }
+                "arguments": [
+                  [
+                    {
+                      "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/07783713-6df0-4810-bc44-4206050cb19d"
+                    }
+                  ],
+                  [
+                    {
+                      "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/fe752ef2-19ba-4b5c-9e6e-ad86df5d3d59"
+                    }
+                  ]
                 ]
               }
             }
@@ -1788,19 +1802,21 @@
                   {
                     "type": "comparison",
                     "operator": "greaterThan",
-                    "left": [
+                    "arguments": [
+                      [
+                        {
+                          "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                        },
+                        {
+                          "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                        }
+                      ],
                       {
-                        "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
-                      },
-                      {
-                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                        "parameter": {
+                          "$ref": "#/facts/4773bc34-a04d-4361-b984-85e6eba67374"
+                        }
                       }
-                    ],
-                    "right": {
-                      "parameter": {
-                        "$ref": "#/facts/4773bc34-a04d-4361-b984-85e6eba67374"
-                      }
-                    }
+                    ]
                   }
                 ]
               }
@@ -1826,7 +1842,7 @@
               "expression": {
                 "type": "arithmetic",
                 "operator": "subtract",
-                "operands": [
+                "arguments": [
                   {
                     "parameter": {
                       "$ref": "#/facts/dc7826fa-37c0-499d-8d59-96a0c40b3fcd"
@@ -1835,7 +1851,7 @@
                   {
                     "type": "arithmetic",
                     "operator": "multiply",
-                    "operands": [
+                    "arguments": [
                       {
                         "parameter": {
                           "$ref": "#/facts/d74f5c2d-5538-4347-81be-cfb3ebe6e06c"
@@ -1881,36 +1897,40 @@
                   {
                     "type": "comparison",
                     "operator": "greaterThan",
-                    "left": [
+                    "arguments": [
+                      [
+                        {
+                          "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                        },
+                        {
+                          "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                        }
+                      ],
                       {
-                        "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
-                      },
-                      {
-                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                        "type": "numeric",
+                        "value": 0,
+                        "unit": "km"
                       }
-                    ],
-                    "right": {
-                      "type": "numeric",
-                      "value": 0,
-                      "unit": "km"
-                    }
+                    ]
                   },
                   {
                     "type": "comparison",
                     "operator": "lessThanOrEqual",
-                    "left": [
+                    "arguments": [
+                      [
+                        {
+                          "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                        },
+                        {
+                          "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                        }
+                      ],
                       {
-                        "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
-                      },
-                      {
-                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                        "parameter": {
+                          "$ref": "#/facts/70fbc167-01ca-4ef6-a1dd-78d05eaf99ab"
+                        }
                       }
-                    ],
-                    "right": {
-                      "parameter": {
-                        "$ref": "#/facts/70fbc167-01ca-4ef6-a1dd-78d05eaf99ab"
-                      }
-                    }
+                    ]
                   }
                 ]
               }
@@ -1936,7 +1956,7 @@
               "expression": {
                 "type": "arithmetic",
                 "operator": "subtract",
-                "operands": [
+                "arguments": [
                   {
                     "parameter": {
                       "$ref": "#/facts/155c3536-cb1c-49a0-bd14-84fdf2dda9e8"
@@ -1945,7 +1965,7 @@
                   {
                     "type": "arithmetic",
                     "operator": "multiply",
-                    "operands": [
+                    "arguments": [
                       {
                         "parameter": {
                           "$ref": "#/facts/70fbe842-7ba3-48df-958a-9a22db065aa3"
@@ -1954,7 +1974,7 @@
                       {
                         "type": "arithmetic",
                         "operator": "subtract",
-                        "operands": [
+                        "arguments": [
                           [
                             {
                               "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
@@ -2002,36 +2022,40 @@
                   {
                     "type": "comparison",
                     "operator": "greaterThan",
-                    "left": [
+                    "arguments": [
+                      [
+                        {
+                          "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                        },
+                        {
+                          "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                        }
+                      ],
                       {
-                        "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
-                      },
-                      {
-                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                        "parameter": {
+                          "$ref": "#/facts/70fbc167-01ca-4ef6-a1dd-78d05eaf99ab"
+                        }
                       }
-                    ],
-                    "right": {
-                      "parameter": {
-                        "$ref": "#/facts/70fbc167-01ca-4ef6-a1dd-78d05eaf99ab"
-                      }
-                    }
+                    ]
                   },
                   {
                     "type": "comparison",
                     "operator": "lessThanOrEqual",
-                    "left": [
+                    "arguments": [
+                      [
+                        {
+                          "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                        },
+                        {
+                          "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                        }
+                      ],
                       {
-                        "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
-                      },
-                      {
-                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                        "parameter": {
+                          "$ref": "#/facts/4773bc34-a04d-4361-b984-85e6eba67374"
+                        }
                       }
-                    ],
-                    "right": {
-                      "parameter": {
-                        "$ref": "#/facts/4773bc34-a04d-4361-b984-85e6eba67374"
-                      }
-                    }
+                    ]
                   }
                 ]
               }
@@ -2057,7 +2081,7 @@
               "expression": {
                 "type": "arithmetic",
                 "operator": "subtract",
-                "operands": [
+                "arguments": [
                   {
                     "parameter": {
                       "$ref": "#/facts/0d4f3025-5c31-465a-b08f-983a19507c2b"
@@ -2066,7 +2090,7 @@
                   {
                     "type": "arithmetic",
                     "operator": "multiply",
-                    "operands": [
+                    "arguments": [
                       {
                         "parameter": {
                           "$ref": "#/facts/4eda445b-32b0-4732-8a7c-753c5df1b33a"
@@ -2112,36 +2136,40 @@
                   {
                     "type": "comparison",
                     "operator": "greaterThan",
-                    "left": [
+                    "arguments": [
+                      [
+                        {
+                          "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                        },
+                        {
+                          "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                        }
+                      ],
                       {
-                        "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
-                      },
-                      {
-                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                        "type": "numeric",
+                        "value": 0,
+                        "unit": "km"
                       }
-                    ],
-                    "right": {
-                      "type": "numeric",
-                      "value": 0,
-                      "unit": "km"
-                    }
+                    ]
                   },
                   {
                     "type": "comparison",
                     "operator": "lessThanOrEqual",
-                    "left": [
+                    "arguments": [
+                      [
+                        {
+                          "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                        },
+                        {
+                          "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                        }
+                      ],
                       {
-                        "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
-                      },
-                      {
-                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                        "parameter": {
+                          "$ref": "#/facts/70fbc167-01ca-4ef6-a1dd-78d05eaf99ab"
+                        }
                       }
-                    ],
-                    "right": {
-                      "parameter": {
-                        "$ref": "#/facts/70fbc167-01ca-4ef6-a1dd-78d05eaf99ab"
-                      }
-                    }
+                    ]
                   }
                 ]
               }
@@ -2167,7 +2195,7 @@
               "expression": {
                 "type": "arithmetic",
                 "operator": "subtract",
-                "operands": [
+                "arguments": [
                   {
                     "parameter": {
                       "$ref": "#/facts/0a7246e7-b7d0-44e1-a928-75c92b3d2638"
@@ -2176,7 +2204,7 @@
                   {
                     "type": "arithmetic",
                     "operator": "multiply",
-                    "operands": [
+                    "arguments": [
                       {
                         "parameter": {
                           "$ref": "#/facts/082debac-4e28-4346-b133-254f418e174f"
@@ -2185,7 +2213,7 @@
                       {
                         "type": "arithmetic",
                         "operator": "subtract",
-                        "operands": [
+                        "arguments": [
                           [
                             {
                               "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
@@ -2233,36 +2261,40 @@
                   {
                     "type": "comparison",
                     "operator": "greaterThan",
-                    "left": [
+                    "arguments": [
+                      [
+                        {
+                          "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                        },
+                        {
+                          "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                        }
+                      ],
                       {
-                        "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
-                      },
-                      {
-                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                        "parameter": {
+                          "$ref": "#/facts/70fbc167-01ca-4ef6-a1dd-78d05eaf99ab"
+                        }
                       }
-                    ],
-                    "right": {
-                      "parameter": {
-                        "$ref": "#/facts/70fbc167-01ca-4ef6-a1dd-78d05eaf99ab"
-                      }
-                    }
+                    ]
                   },
                   {
                     "type": "comparison",
                     "operator": "lessThanOrEqual",
-                    "left": [
+                    "arguments": [
+                      [
+                        {
+                          "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                        },
+                        {
+                          "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                        }
+                      ],
                       {
-                        "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
-                      },
-                      {
-                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                        "parameter": {
+                          "$ref": "#/facts/4773bc34-a04d-4361-b984-85e6eba67374"
+                        }
                       }
-                    ],
-                    "right": {
-                      "parameter": {
-                        "$ref": "#/facts/4773bc34-a04d-4361-b984-85e6eba67374"
-                      }
-                    }
+                    ]
                   }
                 ]
               }
@@ -2299,16 +2331,18 @@
                   {
                     "type": "comparison",
                     "operator": "lessThan",
-                    "left": [
+                    "arguments": [
+                      [
+                        {
+                          "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
+                        }
+                      ],
                       {
-                        "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
+                        "type": "numeric",
+                        "value": 18,
+                        "unit": "years"
                       }
-                    ],
-                    "right": {
-                      "type": "numeric",
-                      "value": 18,
-                      "unit": "years"
-                    }
+                    ]
                   },
                   {
                     "type": "allOf",
@@ -2316,30 +2350,34 @@
                       {
                         "type": "comparison",
                         "operator": "greaterThanOrEqual",
-                        "left": [
+                        "arguments": [
+                          [
+                            {
+                              "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
+                            }
+                          ],
                           {
-                            "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
+                            "type": "numeric",
+                            "value": 25,
+                            "unit": "years"
                           }
-                        ],
-                        "right": {
-                          "type": "numeric",
-                          "value": 25,
-                          "unit": "years"
-                        }
+                        ]
                       },
                       {
                         "type": "comparison",
                         "operator": "lessThan",
-                        "left": [
+                        "arguments": [
+                          [
+                            {
+                              "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
+                            }
+                          ],
                           {
-                            "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
+                            "type": "numeric",
+                            "value": 65,
+                            "unit": "years"
                           }
-                        ],
-                        "right": {
-                          "type": "numeric",
-                          "value": 65,
-                          "unit": "years"
-                        }
+                        ]
                       }
                     ]
                   }
@@ -2373,46 +2411,52 @@
                       {
                         "type": "comparison",
                         "operator": "greaterThanOrEqual",
-                        "left": [
+                        "arguments": [
+                          [
+                            {
+                              "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
+                            }
+                          ],
                           {
-                            "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
+                            "type": "numeric",
+                            "value": 18,
+                            "unit": "years"
                           }
-                        ],
-                        "right": {
-                          "type": "numeric",
-                          "value": 18,
-                          "unit": "years"
-                        }
+                        ]
                       },
                       {
                         "type": "comparison",
                         "operator": "lessThan",
-                        "left": [
+                        "arguments": [
+                          [
+                            {
+                              "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
+                            }
+                          ],
                           {
-                            "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
+                            "type": "numeric",
+                            "value": 25,
+                            "unit": "years"
                           }
-                        ],
-                        "right": {
-                          "type": "numeric",
-                          "value": 25,
-                          "unit": "years"
-                        }
+                        ]
                       }
                     ]
                   },
                   {
                     "type": "comparison",
                     "operator": "greaterThanOrEqual",
-                    "left": [
+                    "arguments": [
+                      [
+                        {
+                          "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
+                        }
+                      ],
                       {
-                        "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
+                        "type": "numeric",
+                        "value": 65,
+                        "unit": "years"
                       }
-                    ],
-                    "right": {
-                      "type": "numeric",
-                      "value": 65,
-                      "unit": "years"
-                    }
+                    ]
                   }
                 ]
               }
@@ -2441,33 +2485,37 @@
                   {
                     "type": "comparison",
                     "operator": "greaterThanOrEqual",
-                    "left": [
+                    "arguments": [
+                      [
+                        {
+                          "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
+                        }
+                      ],
                       {
-                        "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
+                        "type": "numeric",
+                        "value": 65,
+                        "unit": "years"
                       }
-                    ],
-                    "right": {
-                      "type": "numeric",
-                      "value": 65,
-                      "unit": "years"
-                    }
+                    ]
                   },
                   {
                     "type": "comparison",
                     "operator": "greaterThanOrEqual",
-                    "left": [
+                    "arguments": [
+                      [
+                        {
+                          "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                        },
+                        {
+                          "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                        }
+                      ],
                       {
-                        "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
-                      },
-                      {
-                        "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/ea7d8d81-5ce2-4d79-b69f-a982cb90f35d"
+                        "parameter": {
+                          "$ref": "#/facts/70fbc167-01ca-4ef6-a1dd-78d05eaf99ab"
+                        }
                       }
-                    ],
-                    "right": {
-                      "parameter": {
-                        "$ref": "#/facts/70fbc167-01ca-4ef6-a1dd-78d05eaf99ab"
-                      }
-                    }
+                    ]
                   }
                 ]
               }
@@ -2501,21 +2549,23 @@
               "expression": {
                 "type": "function",
                 "function": "timeDuration",
-                "from": [
-                  {
-                    "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/b5200359-418f-40db-bdd2-cf9f7f77b4d4"
-                  }
-                ],
-                "to": [
-                  {
-                    "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
-                  },
-                  {
-                    "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/bf4947b1-acc6-4857-ba8b-881360e83b36"
-                  }
-                ],
                 "unit": "years",
-                "whole": true
+                "whole": true,
+                "arguments": [
+                  [
+                    {
+                      "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/b5200359-418f-40db-bdd2-cf9f7f77b4d4"
+                    }
+                  ],
+                  [
+                    {
+                      "$ref": "#/facts/ef9e731c-4f81-4905-a902-2a533e1eebc5/roles/5ce3e026-293e-4405-a22d-4ea222deef79"
+                    },
+                    {
+                      "$ref": "#/facts/48c6ed9c-0911-43d8-b6ef-47d2b406ea35/properties/bf4947b1-acc6-4857-ba8b-881360e83b36"
+                    }
+                  ]
+                ]
               }
             }
           ]
@@ -2552,16 +2602,18 @@
               "condition": {
                 "type": "comparison",
                 "operator": "lessThan",
-                "left": [
+                "arguments": [
+                  [
+                    {
+                      "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
+                    }
+                  ],
                   {
-                    "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
+                    "type": "numeric",
+                    "value": 65,
+                    "unit": "years"
                   }
-                ],
-                "right": {
-                  "type": "numeric",
-                  "value": 65,
-                  "unit": "years"
-                }
+                ]
               }
             }
           ]
@@ -2590,16 +2642,18 @@
               "condition": {
                 "type": "comparison",
                 "operator": "greaterThanOrEqual",
-                "left": [
+                "arguments": [
+                  [
+                    {
+                      "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
+                    }
+                  ],
                   {
-                    "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/9ffef501-48f3-4c4c-827a-52478ea82ab8"
+                    "type": "numeric",
+                    "value": 65,
+                    "unit": "years"
                   }
-                ],
-                "right": {
-                  "type": "numeric",
-                  "value": 65,
-                  "unit": "years"
-                }
+                ]
               }
             }
           ]
@@ -2634,7 +2688,7 @@
                 "expression": {
                   "type": "arithmetic",
                   "operator": "add",
-                  "operands": [
+                  "arguments": [
                     [
                       {
                         "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/199d696e-a168-4584-8f80-35d737e5e1ba"
@@ -2705,10 +2759,11 @@
                   "expression": {
                     "type": "arithmetic",
                     "operator": "subtract",
-                    "operands": [
+                    "arguments": [
                       {
                         "type": "arithmetic",
-                        "operands": [
+                        "operator": "add",
+                        "arguments": [
                           [
                             {
                               "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/199d696e-a168-4584-8f80-35d737e5e1ba"
@@ -2719,8 +2774,7 @@
                               "$ref": "#/facts/4c72dc9d-78d4-4f0b-a0cd-6037944f26ce/properties/b802e897-8854-4ad3-97b4-3ed4b04f9b16"
                             }
                           ]
-                        ],
-                        "operator": "add"
+                        ]
                       },
                       {
                         "parameter": {

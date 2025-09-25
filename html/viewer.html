@@ -249,7 +249,7 @@
         }
 
         if (expr.type === 'arithmetic') {
-            if (expr.operands && Array.isArray(expr.operands) && expr.operands.length === 2) {
+            if (expr.arguments && Array.isArray(expr.arguments) && expr.arguments.length === 2) {
                 // Binary operation - use infix notation
                 let result = `<div style="margin-bottom:8px;">`;
 
@@ -265,8 +265,8 @@
                     }
                 };
 
-                const leftOperand = renderOperand(expr.operands[0]);
-                const rightOperand = renderOperand(expr.operands[1]);
+                const leftOperand = renderOperand(expr.arguments[0]);
+                const rightOperand = renderOperand(expr.arguments[1]);
 
                 result += `${leftOperand} <span class="pill pill-arithmetic">${expr.operator.toUpperCase()}</span> ${rightOperand}`;
                 result += `</div>`;
@@ -278,10 +278,10 @@
                 result += `<span class="pill pill-operator">${expr.operator.toUpperCase()}</span>`;
                 result += `</div>`;
 
-                if (expr.operands && Array.isArray(expr.operands)) {
+                if (expr.arguments && Array.isArray(expr.arguments)) {
                     result += '<div><strong>Operands:</strong></div><ul style="margin-top:4px;">';
-                    for (let i = 0; i < expr.operands.length; i++) {
-                        const operand = expr.operands[i];
+                    for (let i = 0; i < expr.arguments.length; i++) {
+                        const operand = expr.arguments[i];
                         if (Array.isArray(operand)) {
                             result += `<li style="margin-bottom:4px;"><div style="background:#f3f4f6;padding:4px 8px;border-radius:4px;">${renderReferenceChain(operand, idToName, itemIdToName)}</div></li>`;
                         } else if (operand && typeof operand === 'object' && operand.type) {
@@ -307,11 +307,11 @@
             if (expr.expression) {
                 result += `<div style="margin-bottom:8px;"><strong>Expression:</strong><br><div class="expression-container">${renderExpression(expr.expression, idToName, itemIdToName)}</div></div>`;
             }
-            if (expr.from && Array.isArray(expr.from)) {
-                result += `<div style="margin-bottom:8px;"><strong>From:</strong><br>${renderReferenceChain(expr.from, idToName, itemIdToName)}</div>`;
+            if (expr.arguments && expr.arguments[0] && Array.isArray(expr.arguments && expr.arguments[0])) {
+                result += `<div style="margin-bottom:8px;"><strong>From:</strong><br>${renderReferenceChain(expr.arguments && expr.arguments[0], idToName, itemIdToName)}</div>`;
             }
-            if (expr.to && Array.isArray(expr.to)) {
-                result += `<div style="margin-bottom:8px;"><strong>To:</strong><br>${renderReferenceChain(expr.to, idToName, itemIdToName)}</div>`;
+            if (expr.arguments && expr.arguments[1] && Array.isArray(expr.arguments && expr.arguments[1])) {
+                result += `<div style="margin-bottom:8px;"><strong>To:</strong><br>${renderReferenceChain(expr.arguments && expr.arguments[1], idToName, itemIdToName)}</div>`;
             }
             if (expr.unit) {
                 result += `<div style="margin-bottom:8px;"><strong>Unit:</strong> <code>${expr.unit}</code></div>`;
@@ -408,12 +408,12 @@
     }
 
     function renderRelation(relation, idToName, itemIdToName) {
-        if (!relation || !relation.a || !relation.b) return 'Invalid relation';
+        if (!relation || !relation.arguments[0]rguments || !Array.isArray(relation.arguments[0]rguments) || relation.arguments[0]rguments.length !== 2) return 'Invalid relation';
 
-        const aName = relation.a.name?.nl || relation.a.name?.en || 'Unknown A';
-        const bName = relation.b.name?.nl || relation.b.name?.en || 'Unknown B';
-        const aCardinality = relation.a.cardinality || 'unknown';
-        const bCardinality = relation.b.cardinality || 'unknown';
+        const aName = relation.arguments[0].name?.nl || relation.arguments[0].name?.en || 'Unknown A';
+        const bName = relation.arguments[1].name?.nl || relation.arguments[1].name?.en || 'Unknown B';
+        const aCardinality = relation.arguments[0].cardinality || 'unknown';
+        const bCardinality = relation.arguments[1].cardinality || 'unknown';
 
         // Create visual cardinality symbols
         const getCardinalitySymbol = (card) => {
@@ -441,15 +441,15 @@
         result += `</div>`;
         result += `<div class="relation-details">`;
         result += `<span style="font-family:monospace;">${getCardinalitySymbol(aCardinality)} ${aCardinality}</span> → <span style="font-family:monospace;">${getCardinalitySymbol(bCardinality)} ${bCardinality}</span>`;
-        if (relation.a.objectType?.$ref || relation.b.objectType?.$ref) {
+        if (relation.arguments[0].objectType?.$ref || relation.arguments[1].objectType?.$ref) {
             result += '<br><em style="color:#6b7280;">Types:</em> ';
-            if (relation.a.objectType?.$ref) {
-                const aTypeId = relation.a.objectType.$ref.split('/')[2];
+            if (relation.arguments[0].objectType?.$ref) {
+                const aTypeId = relation.arguments[0].objectType.$ref.split('/')[2];
                 result += `${aName} (${idToName?.get(aTypeId) || 'Unknown'})`;
             }
-            if (relation.b.objectType?.$ref) {
-                const bTypeId = relation.b.objectType.$ref.split('/')[2];
-                if (relation.a.objectType?.$ref) result += ' → ';
+            if (relation.arguments[1].objectType?.$ref) {
+                const bTypeId = relation.arguments[1].objectType.$ref.split('/')[2];
+                if (relation.arguments[0].objectType?.$ref) result += ' → ';
                 result += `${bName} (${idToName?.get(bTypeId) || 'Unknown'})`;
             }
         }
@@ -506,20 +506,20 @@
         if (condition.type === 'comparison') {
             let result = `<div style="margin-bottom:8px;">`;
 
-            if (condition.left && condition.right) {
-                const leftStr = Array.isArray(condition.left)
-                    ? renderReferenceChain(condition.left, idToName, itemIdToName)
-                    : JSON.stringify(condition.left);
+            if (condition.arguments && Array.isArray(condition.arguments) && condition.arguments.length >= 2) {
+                const leftStr = Array.isArray(condition.arguments[0])
+                    ? renderReferenceChain(condition.arguments[0], idToName, itemIdToName)
+                    : JSON.stringify(condition.arguments[0]);
 
                 let rightStr;
-                if (condition.right.parameter && condition.right.parameter.$ref) {
-                    rightStr = renderParameter(condition.right, idToName);
-                } else if (Array.isArray(condition.right)) {
-                    rightStr = renderReferenceChain(condition.right, idToName, itemIdToName);
-                } else if (condition.right.value !== undefined) {
-                    rightStr = renderValue(condition.right);
+                if (condition.arguments[1].parameter && condition.arguments[1].parameter.$ref) {
+                    rightStr = renderParameter(condition.arguments[1], idToName);
+                } else if (Array.isArray(condition.arguments[1])) {
+                    rightStr = renderReferenceChain(condition.arguments[1], idToName, itemIdToName);
+                } else if (condition.arguments[1].value !== undefined) {
+                    rightStr = renderValue(condition.arguments[1]);
                 } else {
-                    rightStr = `<code>${JSON.stringify(condition.right)}</code>`;
+                    rightStr = `<code>${JSON.stringify(condition.arguments[1])}</code>`;
                 }
 
                 // Infix notation: Left OPERATOR Right
@@ -651,7 +651,7 @@
                     const hasExpression = version.expression;
                     const hasTarget = version.target;
                     const hasCondition = version.condition;
-                    const hasRelation = version.a && version.b;
+                    const hasRelation = version.arguments && Array.isArray(version.arguments) && version.arguments.length === 2;
                     const isRule = hasExpression || hasTarget || hasCondition || hasRelation;
 
                     if (isRule) {

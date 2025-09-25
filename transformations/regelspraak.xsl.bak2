@@ -947,7 +947,7 @@
     <xsl:template name="format-logical">
         <xsl:param name="logical"/>
         <xsl:variable name="operator" select="$logical/fn:string[@key='operator']"/>
-        <xsl:variable name="operands" select="$logical/fn:array[@key='operands']"/>
+        <xsl:variable name="operands" select="$logical/fn:array[@key='arguments']"/>
         
         <xsl:for-each select="$operands/fn:map">
             <xsl:if test="position() > 1">
@@ -1301,8 +1301,8 @@
                     <xsl:variable name="role-article">
                         <xsl:for-each select="//fn:map[@key='facts']/fn:map[@key=$fact-uuid]/fn:map[@key='items']/fn:map/fn:array[@key='versions']/fn:map">
                             <xsl:choose>
-                                <xsl:when test="fn:map[@key='a']/fn:string[@key='uuid'] = $role-uuid">
-                                    <xsl:value-of select="fn:map[@key='a']/fn:map[@key='article']/fn:string[@key=$language]"/>
+                                <xsl:when test="fn:array[@key='arguments']/fn:map[1]/fn:string[@key='uuid'] = $role-uuid">
+                                    <xsl:value-of select="fn:array[@key='arguments']/fn:map[1]/fn:map[@key='article']/fn:string[@key=$language]"/>
                                 </xsl:when>
                                 <xsl:when test="fn:map[@key='b']/fn:string[@key='uuid'] = $role-uuid">
                                     <xsl:value-of select="fn:map[@key='b']/fn:map[@key='article']/fn:string[@key=$language]"/>
@@ -1340,8 +1340,8 @@
                                 <xsl:when test="fn:map[@key='b']/fn:string[@key='uuid'] = $item-uuid">
                                     <xsl:value-of select="fn:map[@key='b']/fn:map[@key='objectType']/fn:string[@key='$ref']"/>
                                 </xsl:when>
-                                <xsl:when test="fn:map[@key='a']/fn:string[@key='uuid'] = $item-uuid">
-                                    <xsl:value-of select="fn:map[@key='a']/fn:map[@key='objectType']/fn:string[@key='$ref']"/>
+                                <xsl:when test="fn:array[@key='arguments']/fn:map[1]/fn:string[@key='uuid'] = $item-uuid">
+                                    <xsl:value-of select="fn:array[@key='arguments']/fn:map[1]/fn:map[@key='objectType']/fn:string[@key='$ref']"/>
                                 </xsl:when>
                             </xsl:choose>
                         </xsl:for-each>
@@ -1540,13 +1540,13 @@
         <xsl:variable name="role-name">
             <xsl:for-each select="//fn:map[@key='facts']/fn:map[@key=$fact-uuid]/fn:map[@key='items']/fn:map/fn:array[@key='versions']/fn:map">
                 <xsl:choose>
-                    <xsl:when test="fn:map[@key='a']/fn:string[@key='uuid'] = $role-uuid">
+                    <xsl:when test="fn:array[@key='arguments']/fn:map[1]/fn:string[@key='uuid'] = $role-uuid">
                         <xsl:choose>
                             <xsl:when test="$plural">
-                                <xsl:value-of select="fn:map[@key='a']/fn:map[@key='plural']/fn:string[@key=$language]"/>
+                                <xsl:value-of select="fn:array[@key='arguments']/fn:map[1]/fn:map[@key='plural']/fn:string[@key=$language]"/>
                             </xsl:when>
                             <xsl:otherwise>
-                                <xsl:value-of select="fn:map[@key='a']/fn:map[@key='name']/fn:string[@key=$language]"/>
+                                <xsl:value-of select="fn:array[@key='arguments']/fn:map[1]/fn:map[@key='name']/fn:string[@key=$language]"/>
                             </xsl:otherwise>
                         </xsl:choose>
                     </xsl:when>
@@ -1670,7 +1670,7 @@
     <!-- Format sum expression -->
     <xsl:template name="format-sum">
         <xsl:param name="sum"/>
-        <xsl:variable name="operands" select="$sum/fn:array[@key='operands']"/>
+        <xsl:variable name="operands" select="$sum/fn:array[@key='arguments']"/>
         
         <xsl:for-each select="$operands/fn:array | $operands/fn:map">
             <xsl:if test="position() > 1">
@@ -1793,7 +1793,7 @@
         <xsl:param name="parent-operator" select="''"/>
         
         <xsl:variable name="operator" select="$arithmetic/fn:string[@key='operator']"/>
-        <xsl:variable name="operands" select="$arithmetic/fn:array[@key='operands']"/>
+        <xsl:variable name="operands" select="$arithmetic/fn:array[@key='arguments']"/>
         
         <!-- Determine if we need parentheses based on operator precedence -->
         <xsl:variable name="needs-parens">

@@ -164,8 +164,8 @@
             <xsl:variable name="relation" select="fn:string[@key='relation']"/>
             <xsl:variable name="relation-item" select="fn:map[@key='items']/fn:map[1]"/>
             <xsl:variable name="version" select="$relation-item/fn:array[@key='versions']/fn:map[1]"/>
-            <xsl:variable name="role-a" select="$version/fn:map[@key='a']"/>
-            <xsl:variable name="role-b" select="$version/fn:map[@key='b']"/>
+            <xsl:variable name="role-a" select="$version/fn:array[@key='arguments']/fn:map[1]"/>
+            <xsl:variable name="role-b" select="$version/fn:array[@key='arguments']/fn:map[2]"/>
 
             <!-- Feittype header -->
             <xsl:call-template name="translate">
