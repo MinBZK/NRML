@@ -1,0 +1,762 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>NRML Viewer</title>
+    <style>
+        :root{--title-h:52px;--toolbar-h:44px;--gap:10px;--left-w:40%}
+        html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial}
+        .titlebar{height:var(--title-h);display:flex;align-items:center;padding:0 16px;background:#0f172a;color:#fff;box-shadow:0 1px 0 rgba(0,0,0,.2)}
+        .titlebar h1{font-size:16px;margin:0;font-weight:600;letter-spacing:.4px}
+
+        .toolbar{height:var(--toolbar-h);display:flex;align-items:center;gap:8px;padding:8px 12px;background:#f3f4f6;border-bottom:1px solid rgba(15,23,42,0.04)}
+        .toolbar .btn{padding:8px 12px;border:1px solid rgba(15,23,42,0.08);background:#fff;border-radius:6px;cursor:pointer;font-weight:600}
+        .toolbar .btn:active{transform:translateY(1px)}
+
+        .app{display:flex;height:calc(100vh - var(--title-h) - var(--toolbar-h));gap:var(--gap);padding:12px;background:#fff;box-sizing:border-box}
+
+        .panel{display:flex;flex-direction:column;border:1px solid rgba(15,23,42,0.06);border-radius:8px;overflow:hidden}
+        .left{width:var(--left-w);min-width:260px}
+        textarea.json-input{flex:1;border:0;padding:12px;font-family:monospace;font-size:13px;resize:none;outline:none}
+
+        .right{flex:1;min-width:300px;padding:12px;overflow:auto;background:linear-gradient(180deg,#ffffff,#fbfdff)}
+
+        .status{padding:6px 12px;font-size:13px;color:#374151}
+
+        /* JSON out styles */
+        .node{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,monospace;font-size:13px;line-height:1.5}
+        .node .key{color:#0f172a;font-weight:700;margin-right:6px}
+        .node .type-string{color:#b91c1c}
+        .node .type-number{color:#0b5cff}
+        .node .type-boolean{color:#a16207}
+        .node .type-null{color:#6b7280;font-style:italic}
+        details>summary{cursor:pointer;outline:none}
+        details>summary::-webkit-details-marker{display:none}
+        .summary-line{display:inline-block}
+        .children{margin-left:14px;border-left:1px dashed rgba(15,23,42,0.04);padding-left:8px}
+
+        /* Pills for conditions, expressions, etc. */
+        .pill{color:white;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:bold;white-space:nowrap}
+        .pill-large{color:white;padding:4px 12px;border-radius:20px;font-size:14px;font-weight:bold;white-space:nowrap}
+        .pill-condition{background:#dc2626}
+        .pill-logical{background:#7c3aed}
+        .pill-exists{background:#059669}
+        .pill-arithmetic{background:#dc2626}
+        .pill-function{background:#8b5cf6}
+        .pill-aggregation{background:#7c3aed}
+        .pill-param{background:#f59e0b}
+        .pill-value{background:#10b981}
+        .pill-operator{background:#059669}
+        .expression-container{background:#fef7ff;border:2px solid #a21caf;border-radius:6px;padding:12px;margin:8px 0}
+        .condition-container{background:#fef2f2;border:2px solid #dc2626;border-radius:6px;padding:12px;margin:8px 0}
+        .relation-container{background:#f0fdf4;border:2px solid #16a34a;border-radius:6px;padding:12px;margin:8px 0}
+        .relation-diagram{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+        .relation-entity{background:#f3f4f6;border:1px solid #9ca3af;border-radius:8px;padding:8px 12px;font-weight:bold}
+        .relation-arrow{font-size:18px;color:#16a34a;font-weight:bold}
+        .relation-details{margin-top:12px;font-size:12px;color:#6b7280}
+
+        /* Responsive */
+        @media (max-width:800px){
+            .app{flex-direction:column}
+            .left{width:100%;height:40vh}
+            .right{height:60vh}
+        }
+    </style>
+</head>
+<body>
+<div class="titlebar">
+    <h1>NRML Viewer</h1>
+</div>
+
+<div class="toolbar">
+    <button class="btn" id="viewNrmlBtn">View NRML</button>
+    <button class="btn" id="viewJsonBtn">View JSON</button>
+    <button class="btn" id="prettyBtn">Pretty</button>
+    <select class="btn" id="loadSampleSelect" style="min-width:120px;">
+        <option value="">Load NRML file...</option>
+        <option value="rules/toka.nrml.json">Toka (Flight Tax)</option>
+        <option value="rules/kinderbijslag.nrml.json">Kinderbijslag (Child Benefit)</option>
+    </select>
+    <button class="btn" id="clearBtn">Clear</button>
+    <div style="flex:1"></div>
+    <div class="status" id="status">Ready</div>
+</div>
+
+<div class="app">
+    <div class="panel left">
+        <textarea id="jsonInput" class="json-input" spellcheck="false" placeholder="Paste JSON here..."></textarea>
+    </div>
+
+    <div class="panel right" id="viewer" aria-live="polite">
+        <div style="padding-bottom:6px;color:#374151">Rendered JSON will appear here.</div>
+        <div id="out" class="node"></div>
+    </div>
+</div>
+
+<script>
+    const input = document.getElementById('jsonInput');
+    const viewJsonBtn = document.getElementById('viewJsonBtn');
+    const prettyBtn = document.getElementById('prettyBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const loadSampleSelect = document.getElementById('loadSampleSelect');
+    const status = document.getElementById('status');
+    const out = document.getElementById('out');
+
+    function setStatus(msg, isError){
+        status.textContent = msg;
+        status.style.color = isError ? '#b91c1c' : '#374151';
+    }
+
+    function clearViewer(){
+        out.innerHTML = '';
+        setStatus('Cleared');
+    }
+
+    function renderJSONValue(value){
+        const wrap = document.createElement('span');
+        if (value === null){
+            wrap.textContent = 'null';
+            wrap.className = 'type-null';
+            return wrap;
+        }
+        const t = typeof value;
+        if (t === 'string'){
+            wrap.textContent = '"' + value + '"';
+            wrap.className = 'type-string';
+            return wrap;
+        }
+        if (t === 'number'){
+            wrap.textContent = String(value);
+            wrap.className = 'type-number';
+            return wrap;
+        }
+        if (t === 'boolean'){
+            wrap.textContent = String(value);
+            wrap.className = 'type-boolean';
+            return wrap;
+        }
+        if (Array.isArray(value)){
+            const d = document.createElement('details');
+            d.open = true;
+            const s = document.createElement('summary');
+            s.innerHTML = '<span class="summary-line">[Array] (' + value.length + ')</span>';
+            d.appendChild(s);
+            const c = document.createElement('div');
+            c.className = 'children';
+            value.forEach((v,i)=>{
+                const row = document.createElement('div');
+                const idx = document.createElement('span');
+                idx.className = 'key';
+                idx.textContent = i + ':';
+                row.appendChild(idx);
+                row.appendChild(renderJSONValue(v));
+                c.appendChild(row);
+            });
+            d.appendChild(c);
+            return d;
+        }
+        if (t === 'object'){
+            const keys = Object.keys(value);
+            const d = document.createElement('details');
+            d.open = true;
+            const s = document.createElement('summary');
+            s.innerHTML = '<span class="summary-line">{Object} (' + keys.length + ')</span>';
+            d.appendChild(s);
+            const c = document.createElement('div');
+            c.className = 'children';
+            keys.forEach(k=>{
+                const row = document.createElement('div');
+                const keySpan = document.createElement('span');
+                keySpan.className = 'key';
+                keySpan.textContent = k + ':';
+                row.appendChild(keySpan);
+                row.appendChild(renderJSONValue(value[k]));
+                c.appendChild(row);
+            });
+            d.appendChild(c);
+            return d;
+        }
+        wrap.textContent = String(value);
+        return wrap;
+    }
+
+    function viewJson(){
+        const text = input.value.trim();
+        if (!text){ setStatus('Input empty', true); clearViewer(); return; }
+        try{
+            const parsed = JSON.parse(text);
+            out.innerHTML = '';
+            out.appendChild(renderJSONValue(parsed));
+            setStatus('Rendered OK');
+        }catch(e){
+            setStatus('JSON parse error: ' + e.message, true);
+            out.innerHTML = '';
+        }
+    }
+
+    function renderObj(obj, idToName, itemIdToName) {
+        let item = '<ul>'
+        for (const [vKey, vValue] of Object.entries(obj)) {
+            if(vValue == null) {
+                item += `<li><b>${vKey}</b>: -</li>`;
+            } else if(vKey === 'expression' && typeof vValue === 'object') {
+                // Special handling for expressions to make them more readable
+                item += `<li><b>${vKey}</b>: <div class="expression-container">${renderExpression(vValue, idToName, itemIdToName)}</div></li>`;
+            } else if(vKey === 'condition' && typeof vValue === 'object') {
+                // Special handling for conditions to make them more readable
+                item += `<li><b>${vKey}</b>: <div class="condition-container">${renderCondition(vValue, idToName, itemIdToName)}</div></li>`;
+            } else if(typeof vValue === 'object' && vValue.a && vValue.b) {
+                // Special handling for relations (versions with a and b fields)
+                item += `<li><b>${vKey}</b>: ${renderRelation(vValue, idToName, itemIdToName)}</li>`;
+            } else if(vKey === '$ref') {
+                // "#/facts/61b9f36b-d866-4b5d-aa61-7451e6aee5c0"
+                const id = vValue.split('/')[2];
+                item += `<li><b>${vKey}</b>: <a href="#${id}">${idToName.get(id)}</a></li>`;
+            } else if(typeof vValue === 'object' && vValue.$ref) {
+                // Handle any object with $ref (type, objectType, etc.)
+                const id = vValue.$ref.split('/')[2];
+                item += `<li><b>${vKey}</b>: <a href="#${id}">${idToName.get(id)}</a></li>`;
+            } else if(typeof vValue === 'object') {
+                item += `<li><b>${vKey}</b>: ${renderObj(vValue, idToName, itemIdToName)}</li>`;
+            } else {
+                item += `<li><b>${vKey}</b>: ${vValue}</li>`;
+            }
+        }
+        item+= '</ul>';
+        return item;
+    }
+
+    function renderExpression(expr, idToName, itemIdToName) {
+        if (!expr || typeof expr !== 'object') return String(expr);
+
+        if (expr.type === 'aggregation') {
+            let result = `<div style="margin-bottom:12px;">`;
+            result += `<span class="pill pill-aggregation">AGGREGATION</span> `;
+            result += `<span class="pill pill-operator">${expr.function.toUpperCase()}</span>`;
+            result += `</div>`;
+
+            if (expr.expression && Array.isArray(expr.expression)) {
+                result += `<div style="margin-bottom:8px;"><strong>Expression:</strong><br>${renderReferenceChain(expr.expression, idToName, itemIdToName)}</div>`;
+            }
+            if (expr.condition) {
+                result += `<div style="margin-bottom:8px;"><strong>Condition:</strong><br><div style="background:#fef2f2;border:1px solid #fca5a5;border-radius:4px;padding:8px;">${renderCondition(expr.condition, idToName)}</div></div>`;
+            }
+            if (expr.default) {
+                result += `<div><strong>Default:</strong> <code>${expr.default.value}</code></div>`;
+            }
+            return result;
+        }
+
+        if (expr.type === 'arithmetic') {
+            if (expr.operands && Array.isArray(expr.operands) && expr.operands.length === 2) {
+                // Binary operation - use infix notation
+                let result = `<div style="margin-bottom:8px;">`;
+
+                const renderOperand = (operand) => {
+                    if (Array.isArray(operand)) {
+                        return renderReferenceChain(operand, idToName, itemIdToName);
+                    } else if (operand && typeof operand === 'object' && operand.type) {
+                        return `<div style="background:#fef7ff;border:1px solid #d946ef;border-radius:4px;padding:4px;display:inline-block;">${renderExpression(operand, idToName)}</div>`;
+                    } else if (operand && typeof operand === 'object' && operand.parameter && operand.parameter.$ref) {
+                        return renderParameter(operand, idToName);
+                    } else {
+                        return `<code>${JSON.stringify(operand)}</code>`;
+                    }
+                };
+
+                const leftOperand = renderOperand(expr.operands[0]);
+                const rightOperand = renderOperand(expr.operands[1]);
+
+                result += `${leftOperand} <span class="pill pill-arithmetic">${expr.operator.toUpperCase()}</span> ${rightOperand}`;
+                result += `</div>`;
+                return result;
+            } else {
+                // Non-binary or complex operation - use prefix notation
+                let result = `<div style="margin-bottom:12px;">`;
+                result += `<span class="pill pill-arithmetic">ARITHMETIC</span> `;
+                result += `<span class="pill pill-operator">${expr.operator.toUpperCase()}</span>`;
+                result += `</div>`;
+
+                if (expr.operands && Array.isArray(expr.operands)) {
+                    result += '<div><strong>Operands:</strong></div><ul style="margin-top:4px;">';
+                    for (let i = 0; i < expr.operands.length; i++) {
+                        const operand = expr.operands[i];
+                        if (Array.isArray(operand)) {
+                            result += `<li style="margin-bottom:4px;"><div style="background:#f3f4f6;padding:4px 8px;border-radius:4px;">${renderReferenceChain(operand, idToName, itemIdToName)}</div></li>`;
+                        } else if (operand && typeof operand === 'object' && operand.type) {
+                            result += `<li style="margin-bottom:4px;"><div style="background:#fef7ff;border:1px solid #d946ef;border-radius:4px;padding:8px;">${renderExpression(operand, idToName)}</div></li>`;
+                        } else if (operand && typeof operand === 'object' && operand.parameter && operand.parameter.$ref) {
+                            result += `<li style="margin-bottom:4px;"><div style="background:#fef3c7;padding:4px 8px;border-radius:4px;">${renderParameter(operand, idToName)}</div></li>`;
+                        } else {
+                            result += `<li style="margin-bottom:4px;"><code>${JSON.stringify(operand)}</code></li>`;
+                        }
+                    }
+                    result += '</ul>';
+                }
+            }
+            return result;
+        }
+
+        if (expr.type === 'function') {
+            let result = `<div style="margin-bottom:12px;">`;
+            result += `<span class="pill pill-function">FUNCTION</span> `;
+            result += `<span class="pill pill-operator">${expr.function.toUpperCase()}</span>`;
+            result += `</div>`;
+
+            if (expr.expression) {
+                result += `<div style="margin-bottom:8px;"><strong>Expression:</strong><br><div class="expression-container">${renderExpression(expr.expression, idToName, itemIdToName)}</div></div>`;
+            }
+            if (expr.from && Array.isArray(expr.from)) {
+                result += `<div style="margin-bottom:8px;"><strong>From:</strong><br>${renderReferenceChain(expr.from, idToName, itemIdToName)}</div>`;
+            }
+            if (expr.to && Array.isArray(expr.to)) {
+                result += `<div style="margin-bottom:8px;"><strong>To:</strong><br>${renderReferenceChain(expr.to, idToName, itemIdToName)}</div>`;
+            }
+            if (expr.unit) {
+                result += `<div style="margin-bottom:8px;"><strong>Unit:</strong> <code>${expr.unit}</code></div>`;
+            }
+            if (expr.whole !== undefined) {
+                result += `<div style="margin-bottom:8px;"><strong>Whole:</strong> <code>${expr.whole}</code></div>`;
+            }
+            if (expr.minimum) {
+                result += `<div style="margin-bottom:8px;"><strong>Minimum:</strong><br>${renderObj(expr.minimum, idToName)}</div>`;
+            }
+            if (expr.decimals !== undefined) {
+                result += `<div style="margin-bottom:8px;"><strong>Decimals:</strong> <code>${expr.decimals}</code></div>`;
+            }
+            if (expr.direction) {
+                result += `<div><strong>Direction:</strong> <code>${expr.direction}</code></div>`;
+            }
+            return result;
+        }
+
+        // Default rendering for other expression types
+        return renderObj(expr, idToName, itemIdToName);
+    }
+
+    function renderReferenceChain(refs, idToName, itemIdToName) {
+        if (!Array.isArray(refs)) return String(refs);
+
+        // Debug info - uncomment for debugging
+        // console.log('renderReferenceChain called with:', refs);
+        // console.log('itemIdToName size:', itemIdToName ? itemIdToName.size : 'undefined');
+
+        // For multi-hop chains, we want to show the path through the relationships
+        if (refs.length > 1) {
+            // Multi-hop: typically role/relationship → property
+            const parts = refs.map(ref => {
+                if (ref && ref.$ref) {
+                    const pathParts = ref.$ref.split('/');
+                    const factId = pathParts[2];
+                    const itemType = pathParts[3];
+                    const itemId = pathParts[4];
+
+                    // console.log(`Processing multi-hop ref: factId=${factId}, itemType=${itemType}, itemId=${itemId}`);
+
+                    // Use global mapping as fallback
+                    const effectiveItemIdToName = itemIdToName || globalItemIdToName;
+
+                    if (itemId && itemType && effectiveItemIdToName && effectiveItemIdToName.has(itemId)) {
+                        // console.log(`Found item name: ${effectiveItemIdToName.get(itemId)}`);
+                        return effectiveItemIdToName.get(itemId);
+                    } else if ((idToName || globalIdToName).has(factId)) {
+                        // console.log(`Found fact name: ${(idToName || globalIdToName).get(factId)}`);
+                        return (idToName || globalIdToName).get(factId);
+                    }
+                    // console.log('No match found, returning raw ref');
+                    return ref.$ref;
+                }
+                return String(ref);
+            });
+            return parts.join(' → ');
+        } else {
+            // Single reference
+            const ref = refs[0];
+            if (ref && ref.$ref) {
+                const parts = ref.$ref.split('/');
+                const factId = parts[2];
+                const itemType = parts[3]; // "items" or "roles" etc.
+                const itemId = parts[4];
+
+                // console.log(`Processing single ref: factId=${factId}, itemType=${itemType}, itemId=${itemId}`);
+
+                let linkText = ref.$ref; // fallback
+
+                const effectiveIdToName = idToName || globalIdToName;
+
+                if (effectiveIdToName.has(factId)) {
+                    linkText = effectiveIdToName.get(factId);
+                }
+
+                // If there's a property/item reference, use the itemIdToName mapping
+                // Use global mapping as fallback if parameter is undefined
+                const effectiveItemIdToName = itemIdToName || globalItemIdToName;
+
+                if (itemId && itemType && effectiveItemIdToName && effectiveItemIdToName.has(itemId)) {
+                    const itemName = effectiveItemIdToName.get(itemId);
+                    linkText += ` → ${itemName}`;
+                }
+
+                if (idToName.has(factId)) {
+                    return `<a href="#${factId}">${linkText}</a>`;
+                }
+                return linkText;
+            }
+            return String(refs[0]);
+        }
+    }
+
+    function renderRelation(relation, idToName, itemIdToName) {
+        if (!relation || !relation.a || !relation.b) return 'Invalid relation';
+
+        const aName = relation.a.name?.nl || relation.a.name?.en || 'Unknown A';
+        const bName = relation.b.name?.nl || relation.b.name?.en || 'Unknown B';
+        const aCardinality = relation.a.cardinality || 'unknown';
+        const bCardinality = relation.b.cardinality || 'unknown';
+
+        // Create visual cardinality symbols
+        const getCardinalitySymbol = (card) => {
+            switch(card) {
+                case 'one': return '①';
+                case 'many': return '∞';
+                case 'zero': return '⊘';
+                default: return '?';
+            }
+        };
+
+        const getCardinalityArrow = (from, to) => {
+            if (from === 'one' && to === 'many') return '①——∞';
+            if (from === 'many' && to === 'one') return '∞——①';
+            if (from === 'one' && to === 'one') return '①——①';
+            if (from === 'many' && to === 'many') return '∞——∞';
+            return `${getCardinalitySymbol(from)}——${getCardinalitySymbol(to)}`;
+        };
+
+        let result = `<div class="relation-container">`;
+        result += `<div class="relation-diagram">`;
+        result += `<div class="relation-entity">${aName}</div>`;
+        result += `<div class="relation-arrow" style="font-family:monospace;font-size:16px;">${getCardinalityArrow(aCardinality, bCardinality)}</div>`;
+        result += `<div class="relation-entity">${bName}</div>`;
+        result += `</div>`;
+        result += `<div class="relation-details">`;
+        result += `<span style="font-family:monospace;">${getCardinalitySymbol(aCardinality)} ${aCardinality}</span> → <span style="font-family:monospace;">${getCardinalitySymbol(bCardinality)} ${bCardinality}</span>`;
+        if (relation.a.objectType?.$ref || relation.b.objectType?.$ref) {
+            result += '<br><em style="color:#6b7280;">Types:</em> ';
+            if (relation.a.objectType?.$ref) {
+                const aTypeId = relation.a.objectType.$ref.split('/')[2];
+                result += `${aName} (${idToName?.get(aTypeId) || 'Unknown'})`;
+            }
+            if (relation.b.objectType?.$ref) {
+                const bTypeId = relation.b.objectType.$ref.split('/')[2];
+                if (relation.a.objectType?.$ref) result += ' → ';
+                result += `${bName} (${idToName?.get(bTypeId) || 'Unknown'})`;
+            }
+        }
+        result += `</div>`;
+        result += `</div>`;
+
+        return result;
+    }
+
+    function getCurrentJsonData() {
+        try {
+            const text = input.value.trim();
+            if (!text) return null;
+            return JSON.parse(text);
+        } catch (e) {
+            return null;
+        }
+    }
+
+    function renderParameter(param, idToName) {
+        if (!param || typeof param !== 'object') return String(param);
+
+        if (param.parameter && param.parameter.$ref) {
+            const parts = param.parameter.$ref.split('/');
+            const factId = parts[2];
+
+            if (idToName.has(factId)) {
+                return `<span class="pill pill-param">PARAM</span> <a href="#${factId}">${idToName.get(factId)}</a>`;
+            }
+            return `<span class="pill pill-param">PARAM</span> ${param.parameter.$ref}`;
+        }
+
+        return `<code>${JSON.stringify(param)}</code>`;
+    }
+
+    function renderValue(valueObj) {
+        if (!valueObj || typeof valueObj !== 'object') return String(valueObj);
+
+        if (valueObj.value !== undefined) {
+            let result = `<span class="pill pill-value">VALUE</span> `;
+            result += `<strong>${valueObj.value}</strong>`;
+            if (valueObj.unit) {
+                result += ` <em>${valueObj.unit}</em>`;
+            }
+            return result;
+        }
+
+        return `<code>${JSON.stringify(valueObj)}</code>`;
+    }
+
+    function renderCondition(condition, idToName, itemIdToName) {
+        if (!condition || typeof condition !== 'object') return String(condition);
+
+        if (condition.type === 'comparison') {
+            let result = `<div style="margin-bottom:8px;">`;
+
+            if (condition.left && condition.right) {
+                const leftStr = Array.isArray(condition.left)
+                    ? renderReferenceChain(condition.left, idToName, itemIdToName)
+                    : JSON.stringify(condition.left);
+
+                let rightStr;
+                if (condition.right.parameter && condition.right.parameter.$ref) {
+                    rightStr = renderParameter(condition.right, idToName);
+                } else if (Array.isArray(condition.right)) {
+                    rightStr = renderReferenceChain(condition.right, idToName, itemIdToName);
+                } else if (condition.right.value !== undefined) {
+                    rightStr = renderValue(condition.right);
+                } else {
+                    rightStr = `<code>${JSON.stringify(condition.right)}</code>`;
+                }
+
+                // Infix notation: Left OPERATOR Right
+                result += `<div>${leftStr} <span class="pill pill-condition">${condition.operator.toUpperCase()}</span> ${rightStr}</div>`;
+            } else {
+                // Fallback for incomplete comparisons
+                result += `<div style="text-align:center;margin-bottom:8px;">`;
+                result += `<span style="background:#dc2626;color:white;padding:3px 8px;border-radius:15px;font-size:12px;font-weight:bold;">COMPARISON</span> `;
+                result += `<span style="background:#0369a1;color:white;padding:3px 8px;border-radius:15px;font-size:12px;font-weight:bold;">${condition.operator.toUpperCase()}</span>`;
+                result += `</div>`;
+            }
+            return result;
+        }
+
+        if (condition.type === 'allOf') {
+            let result = `<div style="margin-bottom:8px;">`;
+            result += `<span class="pill pill-logical">ALL OF</span>`;
+            result += `</div>`;
+
+            if (condition.conditions && Array.isArray(condition.conditions)) {
+                result += '<div><strong>Conditions:</strong></div><ul style="margin-top:4px;">';
+                condition.conditions.forEach(cond => {
+                    result += `<li style="margin-bottom:6px;"><div style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:4px;padding:6px;">${renderCondition(cond, idToName)}</div></li>`;
+                });
+                result += '</ul>';
+            }
+            return result;
+        }
+
+        if (condition.type === 'exists') {
+            let result = `<div style="margin-bottom:8px;">`;
+            result += `<span class="pill pill-exists">EXISTS</span>`;
+            result += `</div>`;
+
+            if (condition.characteristic && Array.isArray(condition.characteristic)) {
+                result += `<div><strong>Characteristic:</strong><br>${renderReferenceChain(condition.characteristic, idToName, itemIdToName)}</div>`;
+            }
+            return result;
+        }
+
+        if (condition.type === 'anyOf') {
+            let result = `<div style="margin-bottom:8px;">`;
+            result += `<span class="pill pill-logical">ANY OF</span>`;
+            result += `</div>`;
+
+            if (condition.conditions && Array.isArray(condition.conditions)) {
+                result += '<div><strong>Conditions:</strong></div><ul style="margin-top:4px;">';
+                condition.conditions.forEach(cond => {
+                    result += `<li style="margin-bottom:6px;"><div style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:4px;padding:6px;">${renderCondition(cond, idToName)}</div></li>`;
+                });
+                result += '</ul>';
+            }
+            return result;
+        }
+
+        if (condition.type === 'notExists') {
+            let result = `<div style="margin-bottom:8px;">`;
+            result += `<span class="pill pill-exists">NOT EXISTS</span>`;
+            result += `</div>`;
+
+            if (condition.characteristic && Array.isArray(condition.characteristic)) {
+                result += `<div><strong>Characteristic:</strong><br>${renderReferenceChain(condition.characteristic, idToName, itemIdToName)}</div>`;
+            }
+            return result;
+        }
+
+        if (condition.type === 'exactlyOneOf') {
+            let result = `<div style="margin-bottom:8px;">`;
+            result += `<span class="pill pill-logical">EXACTLY ONE OF</span>`;
+            result += `</div>`;
+
+            if (condition.conditions && Array.isArray(condition.conditions)) {
+                result += '<div><strong>Conditions:</strong></div><ul style="margin-top:4px;">';
+                condition.conditions.forEach(cond => {
+                    result += `<li style="margin-bottom:6px;"><div style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:4px;padding:6px;">${renderCondition(cond, idToName)}</div></li>`;
+                });
+                result += '</ul>';
+            }
+            return result;
+        }
+
+        // Default rendering for other condition types
+        return renderObj(condition, idToName, itemIdToName);
+    }
+
+    // Global mapping variables - accessible to all functions
+    let globalIdToName = new Map();
+    let globalItemIdToName = new Map();
+
+    function renderFacts(obj){
+        let result = '<h2>Facts</h2>';
+
+        // Reset and rebuild global mappings
+        globalIdToName = new Map();
+        globalItemIdToName = new Map();
+
+        // Map fact IDs to names
+        for (const [key, value] of Object.entries(obj)) {
+            globalIdToName.set(key, value.name.en);
+
+            // Also map all item/property IDs to names
+            if (value.items) {
+                for (const [itemKey, itemValue] of Object.entries(value.items)) {
+                    if (itemValue.name && itemValue.name.en) {
+                        globalItemIdToName.set(itemKey, itemValue.name.en);
+                    }
+                }
+            }
+        }
+
+        for (const [key, value] of Object.entries(obj)) {
+            const name = value.name.en;
+            let fact = `<a id="${key}"><h3 title="${key}">${name}</h3></a>`
+            fact += '<dl>'
+            for (const [itemKey, itemValue] of Object.entries(value.items)) {
+                let item = `<dt title="${itemKey}">${itemValue.name.en}</dt>`
+                item += '<dd>'
+
+                // Render all versions, not just the first one
+                for (let i = 0; i < itemValue.versions.length; i++) {
+                    const version = itemValue.versions[i];
+                    const versionLabel = version.validFrom ? `Valid from ${version.validFrom}` : `Version ${i + 1}`;
+
+                    if (i > 0) {
+                        item += `<hr style="margin: 8px 0; border: none; border-top: 1px solid #e5e7eb;">`;
+                    }
+
+                    // Highlight versions with expressions, targets, conditions, or relations prominently
+                    const hasExpression = version.expression;
+                    const hasTarget = version.target;
+                    const hasCondition = version.condition;
+                    const hasRelation = version.a && version.b;
+                    const isRule = hasExpression || hasTarget || hasCondition || hasRelation;
+
+                    if (isRule) {
+                        item += `<div style="background:#f0f9ff;border:1px solid #0ea5e9;border-radius:6px;padding:8px;margin:4px 0;">`;
+                        item += `<h5 style="margin:0 0 8px 0;color:#0369a1;font-weight:600;">${versionLabel}`;
+                        if (hasExpression) item += ` <span class="pill" style="background:#0ea5e9;">EXPRESSION</span>`;
+                        if (hasTarget) item += ` <span class="pill pill-exists">TARGET</span>`;
+                        if (hasCondition) item += ` <span class="pill pill-condition">CONDITION</span>`;
+                        if (hasRelation) item += ` <span class="pill pill-operator">RELATION</span>`;
+                        item += `</h5>`;
+                        if (hasRelation) {
+                            item += renderRelation(version, globalIdToName, globalItemIdToName);
+                        } else {
+                            item += renderObj(version, globalIdToName, globalItemIdToName);
+                        }
+                        item += `</div>`;
+                    } else {
+                        item += `<div style="margin:4px 0;">`;
+                        if (i > 0) {
+                            item += `<h5 style="margin:0 0 8px 0;color:#374151;font-weight:500;">${versionLabel}</h5>`;
+                        }
+                        item += renderObj(version, globalIdToName, globalItemIdToName);
+                        item += `</div>`;
+                    }
+                }
+
+                item+= '</dd>';
+                fact += item;
+            }
+            fact += '</dl>'
+            result += fact;
+        }
+        return result;
+    }
+
+    function appendHtml(el, str) {
+        let div = document.createElement('div');
+        div.innerHTML = str;
+        while (div.children.length > 0) {
+            el.appendChild(div.children[0]);
+        }
+    }
+
+    function viewNrml(){
+        const text = input.value.trim();
+        if (!text){ setStatus('Input empty', true); clearViewer(); return; }
+        try{
+            const parsed = JSON.parse(text);
+            out.innerHTML = '';
+            // out.appendChild();
+            appendHtml(out, renderFacts(parsed.facts))
+            setStatus('Rendered OK');
+        }catch(e){
+            setStatus('JSON parse error: ' + e.message, true);
+            out.innerHTML = '';
+        }
+    }
+
+    viewJsonBtn.addEventListener('click', viewJson);
+    viewNrmlBtn.addEventListener('click', viewNrml);
+
+    prettyBtn.addEventListener('click', ()=>{
+        const text = input.value.trim();
+        if (!text){ setStatus('Nothing to pretty-print', true); return; }
+        try{
+            const parsed = JSON.parse(text);
+            input.value = JSON.stringify(parsed, null, 2);
+            setStatus('Pretty-printed');
+        }catch(e){ setStatus('Cannot pretty-print: ' + e.message, true); }
+    });
+
+    clearBtn.addEventListener('click', ()=>{ input.value=''; clearViewer(); setStatus('Ready'); });
+
+    loadSampleSelect.addEventListener('change', (event)=>{
+        const selectedFile = event.target.value;
+        if (!selectedFile) return;
+
+        // url (required), options (optional)
+        fetch('../' + selectedFile, {method: 'get'})
+            .then(function(response) {
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                return response.json();
+            })
+            .then(function(data) {
+                input.value = JSON.stringify(data,null,2);
+                const fileName = selectedFile.split('/').pop().replace('.nrml.json', '');
+                setStatus(`Loaded ${fileName}`);
+            }).catch(function(err) {
+                setStatus('Error loading file: ' + err.message, true);
+            });
+    });
+
+    // Keyboard: Ctrl+Enter to view, Ctrl+Shift+P to pretty
+    input.addEventListener('keydown', (ev)=>{
+        if (ev.key === 'Enter' && (ev.ctrlKey || ev.metaKey)){
+            ev.preventDefault(); viewJson();
+        }
+        if (ev.key.toLowerCase() === 'p' && (ev.ctrlKey || ev.metaKey) && ev.shiftKey){
+            ev.preventDefault(); prettyBtn.click();
+        }
+    });
+
+    // No auto-load - let user choose
+</script>
+</body>
+</html>
