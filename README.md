@@ -156,7 +156,7 @@ import jsonschema
 with open('schema.json') as f:
     schema = json.load(f)
 
-with open('toka.nrml.json') as f:
+with open('rules/toka.nrml.json') as f:
     document = json.load(f)
 
 jsonschema.validate(document, schema)
@@ -203,7 +203,7 @@ npm install
 ./scripts/transform
 
 # Regelspraak transformatie  
-./scripts/transform transformations/regelspraak.xsl toka.nrml.json output.txt
+./scripts/transform transformations/regelspraak.xsl rules/toka.nrml.json output.txt
 
 # Custom bestanden met taal
 ./scripts/transform my.xsl input.json output.txt en
@@ -255,10 +255,10 @@ Beide transformaties ondersteunen Nederlands (`nl`) en Engels (`en`) via het cen
 
 ```bash
 # Nederlandse output (standaard)
-./scripts/transform transformations/regelspraak.xsl toka.nrml.json output-nl.txt nl
+./scripts/transform transformations/regelspraak.xsl rules/toka.nrml.json output-nl.txt nl
 
 # Engelse output  
-./scripts/transform transformations/regelspraak.xsl toka.nrml.json output-en.txt en
+./scripts/transform transformations/regelspraak.xsl rules/toka.nrml.json output-en.txt en
 ```
 
 ### Architectuur Principes
