@@ -204,10 +204,7 @@
             {
               "validFrom": "2018",
               "type": "numeric",
-              "subtype": "integer"
-            },
-            {
-              "validFrom": "2018",
+              "subtype": "integer",
               "target": [
                 {
                   "$ref": "#/facts/43d7495f-da13-4bbf-a485-676cbfe7cedc"
@@ -256,10 +253,7 @@
             {
               "validFrom": "2018",
               "type": "numeric",
-              "subtype": "integer"
-            },
-            {
-              "validFrom": "2018",
+              "subtype": "integer",
               "target": [
                 {
                   "$ref": "#/facts/43d7495f-da13-4bbf-a485-676cbfe7cedc"
@@ -456,10 +450,7 @@
             {
               "validFrom": "2018",
               "type": "numeric",
-              "subtype": "integer"
-            },
-            {
-              "validFrom": "2018",
+              "subtype": "integer",
               "target": [
                 {
                   "$ref": "#/facts/43d7495f-da13-4bbf-a485-676cbfe7cedc"
