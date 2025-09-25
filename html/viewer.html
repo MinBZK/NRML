@@ -408,7 +408,7 @@
     }
 
     function renderRelation(relation, idToName, itemIdToName) {
-        if (!relation || !relation.arguments[0]rguments || !Array.isArray(relation.arguments[0]rguments) || relation.arguments[0]rguments.length !== 2) return 'Invalid relation';
+        if (!relation || !relation.arguments || !Array.isArray(relation.arguments) || relation.arguments.length !== 2) return 'Invalid relation';
 
         const aName = relation.arguments[0].name?.nl || relation.arguments[0].name?.en || 'Unknown A';
         const bName = relation.arguments[1].name?.nl || relation.arguments[1].name?.en || 'Unknown B';
