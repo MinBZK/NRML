@@ -855,8 +855,8 @@
         <xsl:param name="comparison"/>
         <xsl:param name="is-direct-condition" select="'false'"/>
         <xsl:variable name="operator" select="$comparison/fn:string[@key='operator']"/>
-        <xsl:variable name="left" select="$comparison/fn:array[@key='arguments']/fn:array[1] | $comparison/fn:array[@key='arguments']/fn:map[1]"/>
-        <xsl:variable name="right" select="$comparison/fn:array[@key='arguments']/fn:array[2] | $comparison/fn:array[@key='arguments']/fn:map[2]"/>
+        <xsl:variable name="left" select="$comparison/fn:array[@key='arguments']/*[1]"/>
+        <xsl:variable name="right" select="$comparison/fn:array[@key='arguments']/*[2]"/>
         
         <xsl:call-template name="format-operand">
             <xsl:with-param name="operand" select="$left"/>
@@ -947,7 +947,7 @@
     <xsl:template name="format-logical">
         <xsl:param name="logical"/>
         <xsl:variable name="operator" select="$logical/fn:string[@key='operator']"/>
-        <xsl:variable name="operands" select="$logical/fn:array[@key='operands']"/>
+        <xsl:variable name="operands" select="$logical/fn:array[@key='arguments']"/>
         
         <xsl:for-each select="$operands/fn:map">
             <xsl:if test="position() > 1">
@@ -1029,8 +1029,8 @@
                 <!-- Look up the role's objectType to see if it points to an animated fact -->
                 <xsl:variable name="object-type-ref">
                     <xsl:for-each select="//fn:map[@key='facts']/fn:map[@key=$role-fact-uuid]/fn:map[@key='items']/fn:map/fn:array[@key='versions']/fn:map">
-                        <xsl:if test="fn:map[@key='b']/fn:string[@key='uuid'] = $role-uuid">
-                            <xsl:value-of select="fn:map[@key='b']/fn:map[@key='objectType']/fn:string[@key='$ref']"/>
+                        <xsl:if test="fn:array[@key='arguments']/*[2]/fn:string[@key='uuid'] = $role-uuid">
+                            <xsl:value-of select="fn:array[@key='arguments']/*[2]/fn:map[@key='objectType']/fn:string[@key='$ref']"/>
                         </xsl:if>
                     </xsl:for-each>
                 </xsl:variable>
@@ -1075,7 +1075,7 @@
             <xsl:if test="$target-is-animated = 'true'">
                 <!-- For now, use possessive for any role reference when we have animated target -->
                 <!-- This is a simplification - in a full implementation we'd check relationship ownership -->
-                <xsl:variable name="first-ref" select="$chain/fn:map[1]/fn:string[@key='$ref']"/>
+                <xsl:variable name="first-ref" select="($chain/fn:map[1]/fn:string[@key='$ref'])[1]"/>
                 <xsl:if test="contains($first-ref, '/roles/')">
                     <xsl:text>true</xsl:text>
                 </xsl:if>
@@ -1301,11 +1301,11 @@
                     <xsl:variable name="role-article">
                         <xsl:for-each select="//fn:map[@key='facts']/fn:map[@key=$fact-uuid]/fn:map[@key='items']/fn:map/fn:array[@key='versions']/fn:map">
                             <xsl:choose>
-                                <xsl:when test="fn:map[@key='a']/fn:string[@key='uuid'] = $role-uuid">
-                                    <xsl:value-of select="fn:map[@key='a']/fn:map[@key='article']/fn:string[@key=$language]"/>
+                                <xsl:when test="fn:array[@key='arguments']/*[1]/fn:string[@key='uuid'] = $role-uuid">
+                                    <xsl:value-of select="fn:array[@key='arguments']/*[1]/fn:map[@key='article']/fn:string[@key=$language]"/>
                                 </xsl:when>
-                                <xsl:when test="fn:map[@key='b']/fn:string[@key='uuid'] = $role-uuid">
-                                    <xsl:value-of select="fn:map[@key='b']/fn:map[@key='article']/fn:string[@key=$language]"/>
+                                <xsl:when test="fn:array[@key='arguments']/*[2]/fn:string[@key='uuid'] = $role-uuid">
+                                    <xsl:value-of select="fn:array[@key='arguments']/*[2]/fn:map[@key='article']/fn:string[@key=$language]"/>
                                 </xsl:when>
                             </xsl:choose>
                         </xsl:for-each>
@@ -1337,11 +1337,11 @@
                     <xsl:variable name="objecttype-ref">
                         <xsl:for-each select="//fn:map[@key='facts']/fn:map[@key=$fact-uuid]/fn:map[@key='items']/fn:map[@key=$item-uuid]/fn:array[@key='versions']/fn:map">
                             <xsl:choose>
-                                <xsl:when test="fn:map[@key='b']/fn:string[@key='uuid'] = $item-uuid">
-                                    <xsl:value-of select="fn:map[@key='b']/fn:map[@key='objectType']/fn:string[@key='$ref']"/>
+                                <xsl:when test="fn:array[@key='arguments']/*[2]/fn:string[@key='uuid'] = $item-uuid">
+                                    <xsl:value-of select="fn:array[@key='arguments']/*[2]/fn:map[@key='objectType']/fn:string[@key='$ref']"/>
                                 </xsl:when>
-                                <xsl:when test="fn:map[@key='a']/fn:string[@key='uuid'] = $item-uuid">
-                                    <xsl:value-of select="fn:map[@key='a']/fn:map[@key='objectType']/fn:string[@key='$ref']"/>
+                                <xsl:when test="fn:array[@key='arguments']/*[1]/fn:string[@key='uuid'] = $item-uuid">
+                                    <xsl:value-of select="fn:array[@key='arguments']/*[1]/fn:map[@key='objectType']/fn:string[@key='$ref']"/>
                                 </xsl:when>
                             </xsl:choose>
                         </xsl:for-each>
@@ -1540,23 +1540,23 @@
         <xsl:variable name="role-name">
             <xsl:for-each select="//fn:map[@key='facts']/fn:map[@key=$fact-uuid]/fn:map[@key='items']/fn:map/fn:array[@key='versions']/fn:map">
                 <xsl:choose>
-                    <xsl:when test="fn:map[@key='a']/fn:string[@key='uuid'] = $role-uuid">
+                    <xsl:when test="fn:array[@key='arguments']/*[1]/fn:string[@key='uuid'] = $role-uuid">
                         <xsl:choose>
                             <xsl:when test="$plural">
-                                <xsl:value-of select="fn:map[@key='a']/fn:map[@key='plural']/fn:string[@key=$language]"/>
+                                <xsl:value-of select="fn:array[@key='arguments']/*[1]/fn:map[@key='plural']/fn:string[@key=$language]"/>
                             </xsl:when>
                             <xsl:otherwise>
-                                <xsl:value-of select="fn:map[@key='a']/fn:map[@key='name']/fn:string[@key=$language]"/>
+                                <xsl:value-of select="fn:array[@key='arguments']/*[1]/fn:map[@key='name']/fn:string[@key=$language]"/>
                             </xsl:otherwise>
                         </xsl:choose>
                     </xsl:when>
-                    <xsl:when test="fn:map[@key='b']/fn:string[@key='uuid'] = $role-uuid">
+                    <xsl:when test="fn:array[@key='arguments']/*[2]/fn:string[@key='uuid'] = $role-uuid">
                         <xsl:choose>
                             <xsl:when test="$plural">
-                                <xsl:value-of select="fn:map[@key='b']/fn:map[@key='plural']/fn:string[@key=$language]"/>
+                                <xsl:value-of select="fn:array[@key='arguments']/*[2]/fn:map[@key='plural']/fn:string[@key=$language]"/>
                             </xsl:when>
                             <xsl:otherwise>
-                                <xsl:value-of select="fn:map[@key='b']/fn:map[@key='name']/fn:string[@key=$language]"/>
+                                <xsl:value-of select="fn:array[@key='arguments']/*[2]/fn:map[@key='name']/fn:string[@key=$language]"/>
                             </xsl:otherwise>
                         </xsl:choose>
                     </xsl:when>
@@ -1670,7 +1670,7 @@
     <!-- Format sum expression -->
     <xsl:template name="format-sum">
         <xsl:param name="sum"/>
-        <xsl:variable name="operands" select="$sum/fn:array[@key='operands']"/>
+        <xsl:variable name="operands" select="$sum/fn:array[@key='arguments']"/>
         
         <xsl:for-each select="$operands/fn:array | $operands/fn:map">
             <xsl:if test="position() > 1">
@@ -1793,7 +1793,7 @@
         <xsl:param name="parent-operator" select="''"/>
         
         <xsl:variable name="operator" select="$arithmetic/fn:string[@key='operator']"/>
-        <xsl:variable name="operands" select="$arithmetic/fn:array[@key='operands']"/>
+        <xsl:variable name="operands" select="$arithmetic/fn:array[@key='arguments']"/>
         
         <!-- Determine if we need parentheses based on operator precedence -->
         <xsl:variable name="needs-parens">
@@ -1991,28 +1991,29 @@
     <xsl:template name="resolve-path-with-article">
         <xsl:param name="path"/>
         <xsl:param name="capitalize" select="false()"/>
-        
+
+        <xsl:variable name="single-path" select="($path)[1]"/>
         <xsl:choose>
             <!-- Property reference -->
-            <xsl:when test="contains($path, '/properties/')">
+            <xsl:when test="contains($single-path, '/properties/')">
                 <xsl:call-template name="resolve-path">
-                    <xsl:with-param name="path" select="$path"/>
+                    <xsl:with-param name="path" select="$single-path"/>
                     <xsl:with-param name="with-article" select="true()"/>
                     <xsl:with-param name="capitalize" select="$capitalize"/>
                 </xsl:call-template>
             </xsl:when>
             <!-- Role reference -->
-            <xsl:when test="contains($path, '/roles/')">
+            <xsl:when test="contains($single-path, '/roles/')">
                 <xsl:call-template name="resolve-path">
-                    <xsl:with-param name="path" select="$path"/>
+                    <xsl:with-param name="path" select="$single-path"/>
                     <xsl:with-param name="with-article" select="true()"/>
                     <xsl:with-param name="capitalize" select="$capitalize"/>
                 </xsl:call-template>
             </xsl:when>
             <!-- Items reference (kinderbijslag uses /items/ instead of /roles/) -->
-            <xsl:when test="contains($path, '/items/')">
+            <xsl:when test="contains($single-path, '/items/')">
                 <xsl:call-template name="resolve-path">
-                    <xsl:with-param name="path" select="$path"/>
+                    <xsl:with-param name="path" select="$single-path"/>
                     <xsl:with-param name="with-article" select="true()"/>
                     <xsl:with-param name="capitalize" select="$capitalize"/>
                 </xsl:call-template>
@@ -2313,8 +2314,8 @@
                     <xsl:variable name="nested-conditions" select="fn:array[@key='conditions']"/>
                     <xsl:variable name="first-condition" select="$nested-conditions/fn:map[1]"/>
                     
-                    <!-- Use first condition's left operand for the subject -->
-                    <xsl:variable name="subject-operand" select="$first-condition/fn:array[@key='left'] | $first-condition/fn:map[@key='left']"/>
+                    <!-- Use first condition's first argument for the subject -->
+                    <xsl:variable name="subject-operand" select="$first-condition/fn:array[@key='arguments']/*[1]"/>
                     <xsl:call-template name="format-operand">
                         <xsl:with-param name="operand" select="$subject-operand"/>
                     </xsl:call-template>
@@ -2406,8 +2407,8 @@
     <!-- Format timeDuration function -->
     <xsl:template name="format-time-duration">
         <xsl:param name="timeDuration"/>
-        <xsl:variable name="from" select="$timeDuration/fn:array[@key='from']"/>
-        <xsl:variable name="to" select="$timeDuration/fn:array[@key='to']"/>
+        <xsl:variable name="from" select="$timeDuration/fn:array[@key='arguments']/*[1]"/>
+        <xsl:variable name="to" select="$timeDuration/fn:array[@key='arguments']/*[2]"/>
         <xsl:variable name="unit" select="$timeDuration/fn:string[@key='unit']"/>
         <xsl:variable name="whole" select="$timeDuration/fn:boolean[@key='whole']"/>
         
