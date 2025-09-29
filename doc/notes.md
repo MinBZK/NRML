@@ -109,3 +109,22 @@ To make it strict, the schema can enforce that certain operators have exactly 2 
   "maxContains": 2
 }
 ```
+
+## Expression target
+
+Most items have a reference to their dependencies, but in the case of an expression target this is inverted. 
+The target of an expression has a dependency on the expression, but it is referenced from the expression to the target. 
+
+The result is that 
+- Lookups are inverted for this specific relation
+- Multiple expressions could set the same target, causing a different execution order to yield different results 
+- Processing the expression sets the value of a different fact as a 'side effect'
+
+## Item type is inferred
+
+Item types are not stored as a property but inferred by the structure of the item. 
+This is possible, but the logic is complex and depends on a specific ordering of the checks when deciding the type. 
+There might be a future situation where different types can not be distinguished by their structure or the order 
+in which they need to be evaluated changes leading to significant refactoring.
+
+Adding the type would also allow an additional validation that the item confirms to the requirements of the type. 
