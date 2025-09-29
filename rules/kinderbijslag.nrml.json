@@ -37,32 +37,34 @@
           "versions": [
             {
               "validFrom": "2018",
-              "a": {
-                "uuid": "f226fee4-93e6-4dfc-910e-922183a6dc29",
-                "name": {
-                  "nl": "ouder",
-                  "en": "parent"
+              "arguments": [
+                {
+                  "uuid": "f226fee4-93e6-4dfc-910e-922183a6dc29",
+                  "name": {
+                    "nl": "ouder",
+                    "en": "parent"
+                  },
+                  "cardinality": "one",
+                  "objectType": {
+                    "$ref": "#/facts/43d7495f-da13-4bbf-a485-676cbfe7cedc"
+                  }
                 },
-                "cardinality": "one",
-                "objectType": {
-                  "$ref": "#/facts/43d7495f-da13-4bbf-a485-676cbfe7cedc"
+                {
+                  "uuid": "47b9bf9b-e998-421a-8725-3e2335c9c234",
+                  "name": {
+                    "nl": "kind",
+                    "en": "child"
+                  },
+                  "plural": {
+                    "nl": "kinderen",
+                    "en": "children"
+                  },
+                  "cardinality": "many",
+                  "objectType": {
+                    "$ref": "#/facts/01290a59-b6d1-4caa-9d51-f53e632ac36f"
+                  }
                 }
-              },
-              "b": {
-                "uuid": "47b9bf9b-e998-421a-8725-3e2335c9c234",
-                "name": {
-                  "nl": "kind",
-                  "en": "child"
-                },
-                "plural": {
-                  "nl": "kinderen",
-                  "en": "children"
-                },
-                "cardinality": "many",
-                "objectType": {
-                  "$ref": "#/facts/01290a59-b6d1-4caa-9d51-f53e632ac36f"
-                }
-              }
+              ]
             }
           ]
         }
@@ -154,7 +156,7 @@
                 }
               ],
               "value": {
-                "value": 250.50,
+                "value": 250.5,
                 "unit": "€"
               }
             }
@@ -224,17 +226,19 @@
                 "condition": {
                   "type": "comparison",
                   "operator": "lessThanOrEqual",
-                  "left": [
+                  "arguments": [
+                    [
+                      {
+                        "$ref": "#/facts/43d7495f-da13-4bbf-a485-676cbfe7cedc/items/47b9bf9b-e998-421a-8725-3e2335c9c234"
+                      },
+                      {
+                        "$ref": "#/facts/01290a59-b6d1-4caa-9d51-f53e632ac36f/items/0fe3c5a2-a33a-4a98-9abc-a98929783499"
+                      }
+                    ],
                     {
-                      "$ref": "#/facts/43d7495f-da13-4bbf-a485-676cbfe7cedc/items/47b9bf9b-e998-421a-8725-3e2335c9c234"
-                    },
-                    {
-                      "$ref": "#/facts/01290a59-b6d1-4caa-9d51-f53e632ac36f/items/0fe3c5a2-a33a-4a98-9abc-a98929783499"
+                      "value": 10
                     }
-                  ],
-                  "right": {
-                    "value": 10
-                  }
+                  ]
                 }
               }
             }
@@ -276,32 +280,36 @@
                     {
                       "type": "comparison",
                       "operator": "greaterThan",
-                      "left": [
+                      "arguments": [
+                        [
+                          {
+                            "$ref": "#/facts/43d7495f-da13-4bbf-a485-676cbfe7cedc/items/47b9bf9b-e998-421a-8725-3e2335c9c234"
+                          },
+                          {
+                            "$ref": "#/facts/01290a59-b6d1-4caa-9d51-f53e632ac36f/items/0fe3c5a2-a33a-4a98-9abc-a98929783499"
+                          }
+                        ],
                         {
-                          "$ref": "#/facts/43d7495f-da13-4bbf-a485-676cbfe7cedc/items/47b9bf9b-e998-421a-8725-3e2335c9c234"
-                        },
-                        {
-                          "$ref": "#/facts/01290a59-b6d1-4caa-9d51-f53e632ac36f/items/0fe3c5a2-a33a-4a98-9abc-a98929783499"
+                          "value": 10
                         }
-                      ],
-                      "right": {
-                        "value": 10
-                      }
+                      ]
                     },
                     {
                       "type": "comparison",
                       "operator": "lessThanOrEqual",
-                      "left": [
+                      "arguments": [
+                        [
+                          {
+                            "$ref": "#/facts/43d7495f-da13-4bbf-a485-676cbfe7cedc/items/47b9bf9b-e998-421a-8725-3e2335c9c234"
+                          },
+                          {
+                            "$ref": "#/facts/01290a59-b6d1-4caa-9d51-f53e632ac36f/items/0fe3c5a2-a33a-4a98-9abc-a98929783499"
+                          }
+                        ],
                         {
-                          "$ref": "#/facts/43d7495f-da13-4bbf-a485-676cbfe7cedc/items/47b9bf9b-e998-421a-8725-3e2335c9c234"
-                        },
-                        {
-                          "$ref": "#/facts/01290a59-b6d1-4caa-9d51-f53e632ac36f/items/0fe3c5a2-a33a-4a98-9abc-a98929783499"
+                          "value": 18
                         }
-                      ],
-                      "right": {
-                        "value": 18
-                      }
+                      ]
                     }
                   ]
                 }
@@ -339,11 +347,11 @@
               "expression": {
                 "type": "arithmetic",
                 "operator": "add",
-                "operands": [
+                "arguments": [
                   {
                     "type": "arithmetic",
                     "operator": "multiply",
-                    "operands": [
+                    "arguments": [
                       [
                         {
                           "$ref": "#/facts/43d7495f-da13-4bbf-a485-676cbfe7cedc"
@@ -362,7 +370,7 @@
                   {
                     "type": "arithmetic",
                     "operator": "multiply",
-                    "operands": [
+                    "arguments": [
                       [
                         {
                           "$ref": "#/facts/43d7495f-da13-4bbf-a485-676cbfe7cedc"
@@ -422,17 +430,19 @@
               "condition": {
                 "type": "comparison",
                 "operator": "greaterThan",
-                "left": [
+                "arguments": [
+                  [
+                    {
+                      "$ref": "#/facts/43d7495f-da13-4bbf-a485-676cbfe7cedc"
+                    },
+                    {
+                      "$ref": "#/facts/28b83711-2080-469f-be02-ae8f963affb9/items/f9bf5ac5-9112-4d6d-b857-cbc8283c683e"
+                    }
+                  ],
                   {
-                    "$ref": "#/facts/43d7495f-da13-4bbf-a485-676cbfe7cedc"
-                  },
-                  {
-                    "$ref": "#/facts/28b83711-2080-469f-be02-ae8f963affb9/items/f9bf5ac5-9112-4d6d-b857-cbc8283c683e"
+                    "value": 0
                   }
-                ],
-                "right": {
-                  "value": 0
-                }
+                ]
               }
             }
           ]
@@ -504,17 +514,19 @@
               "condition": {
                 "type": "comparison",
                 "operator": "greaterThan",
-                "left": [
+                "arguments": [
+                  [
+                    {
+                      "$ref": "#/facts/43d7495f-da13-4bbf-a485-676cbfe7cedc"
+                    },
+                    {
+                      "$ref": "#/facts/15830980-b159-4d51-88e2-db582a85895f/items/ded72b17-170c-405f-856b-d8a6119bec95"
+                    }
+                  ],
                   {
-                    "$ref": "#/facts/43d7495f-da13-4bbf-a485-676cbfe7cedc"
-                  },
-                  {
-                    "$ref": "#/facts/15830980-b159-4d51-88e2-db582a85895f/items/ded72b17-170c-405f-856b-d8a6119bec95"
+                    "value": 6
                   }
-                ],
-                "right": {
-                  "value": 6
-                }
+                ]
               }
             }
           ]
