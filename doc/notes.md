@@ -128,3 +128,40 @@ There might be a future situation where different types can not be distinguished
 in which they need to be evaluated changes leading to significant refactoring.
 
 Adding the type would also allow an additional validation that the item confirms to the requirements of the type. 
+
+## Binding data to facts
+
+We need a way to bind data to facts. We think we might need a separate binding definition, that is implementation 
+specific and might look something like this.
+
+`binding.js`:
+```js
+{
+  "0fe3c5a2-a33a-4a98-9abc-a98929783499": {
+    "external-requirement": {
+      "id": "urn:toeslagen:leeftijd:jr",
+      "arguments": {
+        "bsn": {
+          "$ref": "#/facts...."
+        }
+      }
+    }
+  }
+}
+```
+
+Which could then be used as follows:
+
+`inference.py`
+```python
+engine = NRMLEngine("kinderbijslag.nrml.json", "prod-binding.json")
+
+
+def leeftijd(bsn):
+    return 10
+
+
+engine.infer(
+    data_binding={"urn:toeslagen:leeftijd:jr": leeftijd}
+)
+```
