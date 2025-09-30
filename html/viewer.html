@@ -27,7 +27,8 @@
         /* JSON out styles */
         .node{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,monospace;font-size:13px;line-height:1.5}
         .node .key{color:#0f172a;font-weight:700;margin-right:6px}
-        .node .type-string{color:#b91c1c}
+        .node .type-ref{color: rgb(227 115 221)}
+        .node .type-string{color: #4CAF50}
         .node .type-number{color:#0b5cff}
         .node .type-boolean{color:#a16207}
         .node .type-null{color:#6b7280;font-style:italic}
@@ -103,6 +104,10 @@
     const status = document.getElementById('status');
     const out = document.getElementById('out');
 
+    // Global mapping variables - accessible to all functions
+    let globalIdToName = new Map();
+    let globalItemIdToName = new Map();
+
     function setStatus(msg, isError){
         status.textContent = msg;
         status.style.color = isError ? '#b91c1c' : '#374151';
@@ -113,7 +118,7 @@
         setStatus('Cleared');
     }
 
-    function renderJSONValue(value){
+    function renderJSONValue(value, key){
         const wrap = document.createElement('span');
         if (value === null){
             wrap.textContent = 'null';
@@ -122,6 +127,19 @@
         }
         const t = typeof value;
         if (t === 'string'){
+
+            if(value.startsWith("#/")){
+                // make link of ref with proper name
+                const refParts = value.split('/');
+                let factId = refParts[2];
+                let name = globalIdToName.get(factId);
+
+                const a = document.createElement('a');
+                a.href = '#'+factId;
+                a.textContent = `"${value}" (${name})`;
+                a.className = 'type-ref';
+                return a;
+            }
             wrap.textContent = '"' + value + '"';
             wrap.className = 'type-string';
             return wrap;
@@ -150,7 +168,7 @@
                 idx.className = 'key';
                 idx.textContent = i + ':';
                 row.appendChild(idx);
-                row.appendChild(renderJSONValue(v));
+                row.appendChild(renderJSONValue(v, i));
                 c.appendChild(row);
             });
             d.appendChild(c);
@@ -163,6 +181,7 @@
             const s = document.createElement('summary');
             s.innerHTML = '<span class="summary-line">{Object} (' + keys.length + ')</span>';
             d.appendChild(s);
+
             const c = document.createElement('div');
             c.className = 'children';
             keys.forEach(k=>{
@@ -170,8 +189,14 @@
                 const keySpan = document.createElement('span');
                 keySpan.className = 'key';
                 keySpan.textContent = k + ':';
+                if(key === 'facts') {
+                    // create anchor for this fact
+                    const a = document.createElement('a');
+                    a.id = k;
+                    row.appendChild(a);
+                }
                 row.appendChild(keySpan);
-                row.appendChild(renderJSONValue(value[k]));
+                row.appendChild(renderJSONValue(value[k], k));
                 c.appendChild(row);
             });
             d.appendChild(c);
@@ -186,10 +211,12 @@
         if (!text){ setStatus('Input empty', true); clearViewer(); return; }
         try{
             const parsed = JSON.parse(text);
+            prepareIdToNames(parsed.facts);
             out.innerHTML = '';
-            out.appendChild(renderJSONValue(parsed));
+            out.appendChild(renderJSONValue(parsed, null));
             setStatus('Rendered OK');
         }catch(e){
+            console.error(e);
             setStatus('JSON parse error: ' + e.message, true);
             out.innerHTML = '';
         }
@@ -605,19 +632,14 @@
         return renderObj(condition, idToName, itemIdToName);
     }
 
-    // Global mapping variables - accessible to all functions
-    let globalIdToName = new Map();
-    let globalItemIdToName = new Map();
 
-    function renderFacts(obj){
-        let result = '<h2>Facts</h2>';
-
+    function prepareIdToNames(facts){
         // Reset and rebuild global mappings
         globalIdToName = new Map();
         globalItemIdToName = new Map();
 
         // Map fact IDs to names
-        for (const [key, value] of Object.entries(obj)) {
+        for (const [key, value] of Object.entries(facts)) {
             globalIdToName.set(key, value.name.en);
 
             // Also map all item/property IDs to names
@@ -629,6 +651,12 @@
                 }
             }
         }
+    }
+
+    function renderFacts(obj){
+        let result = '<h2>Facts</h2>';
+
+        prepareIdToNames(obj);
 
         for (const [key, value] of Object.entries(obj)) {
             const name = value.name.en;
