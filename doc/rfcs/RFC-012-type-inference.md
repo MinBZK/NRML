@@ -1,69 +1,52 @@
 # RFC-012: Type Inference from Structure
 
-**Status:** Proposed
-**Date:** 2025-09-02
-**Authors:** Arvid and Anne
+**Status:** Proposed | **Date:** 2025-09-02 | **Authors:** Arvid and Anne
 
 ## Context
 
-NRML items (facts, properties, roles, etc.) have different **types**:
-- `fact`
-- `property`
-- `role`
-- `characteristic`
-- `rule`
-- `expression`
-- etc.
+NRML items (facts, properties, roles, characteristics, rules, expressions) have different types. Should types be **explicit** (stored as field) or **inferred** (derived from structure)?
 
-The question: Should item types be **explicit** (stored as a field) or **inferred** (derived from structure)?
+Currently NRML infers types:
+- Fact: appears in `facts` object
+- Characteristic: has `"type": "characteristic"` in version
+- Expression: has `operator` field
+- Rule: has `target` and `conditions` fields
 
-## Current Approach
+## Problem
 
-**NRML currently infers item types from structure, not from explicit type fields.**
+**Complex inference logic**: Determining type requires checking multiple conditions in specific order.
 
-A fact is identified as a "fact" because it appears in the `facts` object:
-```json
-{
-  "facts": {
-    "uuid-123": {
-      "name": "vlucht",
-      // No "type": "fact" field
-    }
-  }
-}
-```
+**Ambiguity**: What if item matches multiple patterns?
 
-A characteristic is identified by having `"type": "characteristic"` in its version:
-```json
-{
-  "uuid-456": {
-    "name": "onbelaste reis",
-    "versions": [
-      {
-        "type": "characteristic"  // ← Type is here, inside version
-      }
-    ]
-  }
-}
-```
+**Extensibility**: Adding new types requires updating inference logic everywhere.
 
-An expression is identified by having an `operator` field:
-```json
-{
-  "type": "arithmetic",
-  "operator": "plus",
-  "operands": [...]
-}
-```
+**Validation challenges**: Can't validate "all facts must have X" when which items are facts is inferred.
 
-## Problems with Current Approach
+## Decision
 
-### 1. Complex Inference Logic
+**Status: Under consideration**
 
-Determining type requires checking multiple conditions in a **specific order**:
+Three options being evaluated:
+
+### Option A: Add Explicit Type Field
+Every item has `"type"` at top level.
+- **Pro**: Clear, easy validation, self-documenting, extensible
+- **Con**: Redundant (location already implies type), more verbose
+
+### Option B: Keep Inference, Document Clearly
+Formalize inference rules and document them.
+- **Pro**: Less verbose, structural constraints enforce types
+- **Con**: Complex logic, order-dependent, hard to extend
+
+### Option C: Hybrid
+Explicit type for ambiguous cases, inferred for obvious ones.
+- **Pro**: Balance between verbosity and clarity
+- **Con**: Inconsistent rules—when to be explicit?
+
+## Current Inference Example
 
 ```python
-def infer_type(item):
+def infer_type(item, context):
     if 'operator' in item:
         return 'expression'
     elif 'target' in item and 'conditions' in item:
@@ -72,233 +55,23 @@ def infer_type(item):
         return 'characteristic'
     elif item in nrml['facts']:
         return 'fact'
-    elif item in fact['properties']:
-        return 'property'
-    else:
-        return 'unknown'
+    # Order matters!
 ```
-
-**Issue**: Order matters. If checks are reordered, results could change.
-
-### 2. Ambiguity
-
-What if an item matches multiple patterns?
-```json
-{
-  "operator": "plus",
-  "target": {"$ref": "..."},
-  "conditions": []
-}
-```
-
-Is this a rule or an expression? Both patterns match.
-
-### 3. Future Extensibility
-
-If we add new types, inference logic must be updated everywhere:
-- Parser
-- Validator
-- Transformers
-- Tools
-
-**Risk**: Different tools could infer types differently, leading to inconsistency.
-
-### 4. Validation Challenges
-
-Can't validate "all facts must have property X" because **which items are facts** is inferred, not explicit.
-
-## Decision
-
-**Status: Under consideration**
-
-Options being evaluated:
-
-### Option A: Add Explicit Type Field
-
-**Approach**: Every item has a `"type"` field at the top level
-
-```json
-{
-  "facts": {
-    "uuid-123": {
-      "type": "fact",
-      "name": "vlucht",
-      ...
-    }
-  }
-}
-```
-
-**Pros**:
-- Clear and unambiguous
-- Easy validation: "If type=fact, require name field"
-- Extensible: New types don't break existing logic
-- Self-documenting: Type is explicit in data
-
-**Cons**:
-- Redundant: `facts` object already implies these are facts
-- More verbose
-- Must keep type consistent with location
-
-### Option B: Keep Inference, Document Clearly
-
-**Approach**: Formalize inference rules and document them
-
-**Pros**:
-- Less verbose
-- Structural constraints enforce types
-- No redundancy
-
-**Cons**:
-- Complex inference logic
-- Order-dependent checking
-- Hard to extend
-
-### Option C: Hybrid
-
-**Approach**: Explicit type for ambiguous cases, inferred for obvious cases
-
-```json
-// Clear from context: inferred
-{
-  "facts": {
-    "uuid": {"name": "vlucht"}  // Obviously a fact
-  }
-}
-
-// Ambiguous: explicit
-{
-  "items": {
-    "uuid": {
-      "type": "characteristic",  // Needs explicit type
-      "name": "onbelaste reis"
-    }
-  }
-}
-```
-
-**Pros**: Balance between verbosity and clarity
-**Cons**: Inconsistent rules, when to be explicit?
-
-## Consequences
-
-### Option A (Explicit Type)
-
-**Positive**:
-- Validation is straightforward
-- No order-dependent logic
-- Types are self-documenting
-- Easier to extend
-
-**Negative**:
-- More verbose
-- Redundancy (type duplicates location)
-- Must maintain consistency
-
-**Example validation**:
-```json
-{
-  "if": {"properties": {"type": {"const": "fact"}}},
-  "then": {
-    "required": ["name", "versions"]
-  }
-}
-```
-
-### Option B (Keep Inference)
-
-**Positive**:
-- Concise
-- No redundancy
-- Structure implies type
-
-**Negative**:
-- Complex inference
-- Ambiguity risk
-- Hard to validate
-- Order-dependent
-
-**Example inference**:
-```python
-# Must check in this order!
-if in_facts_object(item): return 'fact'
-elif in_properties(item): return 'property'
-# etc.
-```
-
-## Use Cases
-
-### Parser Implementation
-
-**With explicit type**:
-```python
-def parse_item(item):
-    parser = PARSERS[item['type']]
-    return parser(item)
-```
-
-**With inference**:
-```python
-def parse_item(item, context):
-    item_type = infer_type(item, context)
-    parser = PARSERS[item_type]
-    return parser(item)
-```
-
-### Validation
-
-**With explicit type**:
-```json
-{
-  "allOf": [
-    {"if": {"properties": {"type": {"const": "fact"}}}, "then": {...}},
-    {"if": {"properties": {"type": {"const": "property"}}}, "then": {...}}
-  ]
-}
-```
-
-**With inference**:
-- Can't easily express in JSON Schema
-- Must validate programmatically
 
 ## Open Questions
 
-1. **Redundancy acceptable?** Is it okay to have type info duplicated (location + type field)?
+1. Is redundancy (type + location) acceptable for clarity?
+2. How to migrate existing files if we add explicit types?
+3. Is strong validation more important than conciseness?
+4. How to ensure all tools infer types identically?
 
-2. **Migration cost?** If we add explicit types, how to migrate existing files?
+## Alternatives Rejected
 
-3. **Validation priority?** Is strong validation more important than conciseness?
+- **Tags instead of types** `["fact", "versioned", "named"]`: Overkill for simple type system
+- **Schema variants**: Separate schema per type creates fragmentation
 
-4. **Tool consistency?** How to ensure all tools infer types identically?
-
-## Alternatives Considered
-
-### Tags Instead of Types
-
-**Approach**: Use tags to classify items
-```json
-{
-  "uuid": {
-    "tags": ["fact", "versioned", "named"]
-  }
-}
-```
-
-**Pros**: Flexible, multi-dimensional classification
-**Cons**: Overkill for simple type system
-
-### Schema Variants
-
-**Approach**: Different schema files for different item types
-
-**Pros**: Strong validation per type
-**Cons**: Fragmentation, hard to compose
-
-## Related RFCs
+## Related
 
 - RFC-004 (Variable Keys): Structure of NRML objects
 - RFC-011 (Expression Target): Type inference for expressions with targets
-
-## References
-
-- Notes on type inference: `doc/notes.md:123-131`
+- Notes: `doc/notes.md:123-131`

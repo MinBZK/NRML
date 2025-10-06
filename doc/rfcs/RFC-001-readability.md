@@ -1,114 +1,58 @@
 # RFC-001: Readability Goals and Format Choice
 
-**Status:** Accepted
-**Date:** 2025-09-02
-**Authors:** Wouter, Arvid and Anne
+**Status:** Accepted | **Date:** 2025-09-02 | **Authors:** Wouter, Arvid and Anne
 
 ## Context
 
-When designing a rule language format, there's a tension between human readability and machine processability. Different
-serialization formats (JSON, YAML, XML, custom DSLs) offer different tradeoffs. NRML core needs to establish its
-position on this spectrum.
+Tension between human readability and machine processability. Different serialization formats (JSON, YAML, XML, custom DSLs) offer different tradeoffs.
 
 ## Decision
 
 **The goal of NRML core is NOT to be human readable.**
 
-- NRML core uses **strict JSON** as its serialization format
-- We accept UUID identifiers that are not easy for humans to navigate
-- Human readability is achieved through **renderers/transformations** of NRML (e.g., Regelspraak, Gegevenspraak)
-- The core format prioritizes precision, parsability, and avoiding ambiguity
+- NRML core uses **strict JSON**
+- Accept UUID identifiers (not human-friendly)
+- Human readability via **transformations** (Regelspraak, Gegevenspraak)
+- Prioritize precision, parsability, no ambiguity
 
-## Rationale
+## Why
 
-### Why Not Human Readable Core?
+**Separation of concerns:**
+- Core optimizes for unambiguous semantics, programmatic manipulation, JSON Schema validation, efficient processing
+- Human-friendly views via domain-specific renderers, specialized editors, multiple presentation formats
+- UUIDs ensure global uniqueness, unambiguous references, no naming conflicts
 
-1. **Separation of Concerns**: Core representation should optimize for:
-    - Unambiguous semantics
-    - Easy programmatic manipulation
-    - Precise validation via JSON Schema
-    - Efficient processing by engines
+**JSON over YAML:**
+```yaml
+# YAML footguns:
+country: NO    # Boolean false in some parsers!
+country: "NO"  # String "NO"
+version: 1.0   # Number
+version: "1.0" # String
+```
 
-2. **Rendering Layer**: Human-friendly views are better served by:
-    - Domain-specific renderers (Regelspraak for Dutch rule text)
-    - Specialized editors with UUIDs resolved to names
-    - Multiple presentation formats for different audiences
+JSON has no implicit type coercion, simpler specification, better JSON Schema tooling, predictability.
 
-3. **UUIDs Are Acceptable**: While UUIDs are not human-friendly:
-    - They ensure global uniqueness
-    - They enable unambiguous references
-    - They prevent naming conflicts
-    - Tooling can resolve them to names when needed
+**Benefits:**
+- Unambiguous parsing
+- Precise validation via JSON Schema
+- Simple tooling (every language has robust JSON support)
+- Clear separation (core vs presentation)
 
-### Why JSON Over YAML?
+**Tradeoffs:**
+- Raw JSON verbose
+- Not human-friendly
+- Manual editing error-prone
+- **Mitigations**: Editors resolve UUIDs to names, renderers for review, JSON Schema validation
 
-We choose **strict JSON** over YAML because:
+## Alternatives Rejected
 
-1. **YAML Footguns**: YAML has notorious parsing issues:
-   ```yaml
-   # These are all different in YAML:
-   country: NO    # Boolean false in some parsers!
-   country: "NO"  # String "NO"
-   version: 1.0   # Number
-   version: "1.0" # String
-   ```
+- **YAML**: Footguns (Norway problem), ambiguous parsing
+- **Custom DSL**: Need custom parser, tooling from scratch
+- **XML**: Even more verbose, less ergonomic
+- **JSON5/JSONC**: Not standard, limited tool support
 
-2. **No Implicit Type Coercion**: JSON's explicit typing prevents:
-    - Accidental boolean conversion (Norway problem)
-    - Unexpected number/string coercion
-    - Locale-dependent parsing
+## Related
 
-3. **Simpler Specification**: JSON has one canonical spec; YAML has multiple versions with subtle differences
-
-4. **Better Tooling**: JSON Schema validation is more mature and widely supported
-
-5. **Predictability**: JSON's stricter syntax means fewer surprises
-
-## Consequences
-
-### Positive
-
-- **Unambiguous parsing**: No YAML-style gotchas
-- **Precise validation**: JSON Schema provides strong guarantees
-- **Simple tooling**: Every language has robust JSON support
-- **Clear separation**: Core format vs presentation layer
-- **UUID safety**: No naming conflicts across NRML files
-
-### Negative
-
-- **Raw JSON is verbose**: More characters than YAML or DSLs
-- **Not human-friendly**: UUIDs require tooling to understand
-- **Manual editing is hard**: Direct JSON editing is error-prone
-
-### Mitigations
-
-- **Editors/tooling**: Build tools that present UUIDs as resolved names
-- **Renderers**: Provide Regelspraak/Gegevenspraak transformations for review
-- **Validation**: JSON Schema catches errors that YAML might silently accept
-
-## Alternatives Considered
-
-### YAML
-
-**Pros**: More concise, less punctuation, human-friendly
-**Cons**: Footguns (Norway problem), ambiguous parsing, version fragmentation
-
-### Custom DSL
-
-**Pros**: Optimal syntax for domain, maximum readability
-**Cons**: Need custom parser, tooling ecosystem from scratch, harder validation
-
-### XML
-
-**Pros**: Mature validation (XSD), good transformation support (XSLT)
-**Cons**: Even more verbose than JSON, less ergonomic for modern tools
-
-### JSON5/JSONC
-
-**Pros**: Comments, trailing commas, less strict than JSON
-**Cons**: Not standard, limited tool support, loses JSON's simplicity
-
-## References
-
-- [Norway Problem in YAML](https://hitchdev.com/strictyaml/why/implicit-typing-removed/)
-- Notes on readability: `doc/notes.md:5-10`
+- [Norway Problem](https://hitchdev.com/strictyaml/why/implicit-typing-removed/)
+- Notes: `doc/notes.md:5-10`
