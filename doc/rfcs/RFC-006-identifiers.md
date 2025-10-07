@@ -1,6 +1,6 @@
 # RFC-006: UUIDs vs Content-Hash Identifiers
 
-**Status:** Accepted | **Date:** 2025-09-02 | **Authors:** Arvid and Anne
+**Status:** Accepted | **Date:** 2025-09-02 | **Authors:** Wouter, Arvid and Anne
 
 ## Context
 

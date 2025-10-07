@@ -1,6 +1,6 @@
 # RFC-004: Variable Keys vs Fixed Keys
 
-**Status:** Accepted | **Date:** 2025-09-02 | **Authors:** Arvid and Anne
+**Status:** Accepted | **Date:** 2025-09-02 | **Authors:** Wouter, Arvid and Anne
 
 ## Context
 

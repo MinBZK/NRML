@@ -1,12 +1,14 @@
 # RFC-012: Type Inference from Structure
 
-**Status:** Proposed | **Date:** 2025-09-02 | **Authors:** Arvid and Anne
+**Status:** Proposed | **Date:** 2025-09-02 | **Authors:** Tim, Arvid and Anne
 
 ## Context
 
-NRML items (facts, properties, roles, characteristics, rules, expressions) have different types. Should types be **explicit** (stored as field) or **inferred** (derived from structure)?
+NRML items (facts, properties, roles, characteristics, rules, expressions) have different types. Should types be
+**explicit** (stored as field) or **inferred** (derived from structure)?
 
 Currently NRML infers types:
+
 - Fact: appears in `facts` object
 - Characteristic: has `"type": "characteristic"` in version
 - Expression: has `operator` field
@@ -29,17 +31,23 @@ Currently NRML infers types:
 Three options being evaluated:
 
 ### Option A: Add Explicit Type Field
+
 Every item has `"type"` at top level.
+
 - **Pro**: Clear, easy validation, self-documenting, extensible
 - **Con**: Redundant (location already implies type), more verbose
 
 ### Option B: Keep Inference, Document Clearly
+
 Formalize inference rules and document them.
+
 - **Pro**: Less verbose, structural constraints enforce types
 - **Con**: Complex logic, order-dependent, hard to extend
 
 ### Option C: Hybrid
+
 Explicit type for ambiguous cases, inferred for obvious ones.
+
 - **Pro**: Balance between verbosity and clarity
 - **Con**: Inconsistent rules—when to be explicit?
 

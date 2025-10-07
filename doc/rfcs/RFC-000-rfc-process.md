@@ -1,6 +1,6 @@
 # RFC-000: RFC Process for NRML
 
-**Status:** Accepted | **Date:** 2025-10-06 | **Authors:** NRML Team
+**Status:** Accepted | **Date:** 2025-10-06 | **Authors:** Anne
 
 ## Context
 

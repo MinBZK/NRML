@@ -4,13 +4,15 @@
 
 ## Context
 
-NRML represents pure logic, but real systems need external data: database queries, API calls, legacy systems, user input. How to bind NRML facts to external sources without polluting the core rule model?
+NRML represents pure logic, but real systems need external data: database queries, API calls, legacy systems, user
+input. How to bind NRML facts to external sources without polluting the core rule model?
 
 ## Decision
 
 **Separate binding definitions map NRML facts to external data sources.**
 
 **NRML Core** (pure logic):
+
 ```json
 {
   "facts": {
@@ -27,13 +29,16 @@ NRML represents pure logic, but real systems need external data: database querie
 ```
 
 **Binding File** (implementation-specific):
+
 ```json
 {
   "leeftijd-uuid": {
     "external-requirement": {
       "id": "urn:toeslagen:leeftijd:jr",
       "arguments": {
-        "bsn": {"$ref": "#/facts/persoon-uuid/properties/bsn"}
+        "bsn": {
+          "$ref": "#/facts/persoon-uuid/properties/bsn"
+        }
       }
     }
   }
@@ -41,11 +46,14 @@ NRML represents pure logic, but real systems need external data: database querie
 ```
 
 **Engine Usage**:
+
 ```python
 engine = NRMLEngine("rules.nrml.json", "prod-binding.json")
 
+
 def fetch_age(bsn):
     return db.query("SELECT age FROM persons WHERE bsn = ?", bsn)
+
 
 engine.infer(data_binding={"urn:toeslagen:leeftijd:jr": fetch_age})
 ```
@@ -53,6 +61,7 @@ engine.infer(data_binding={"urn:toeslagen:leeftijd:jr": fetch_age})
 ## Why
 
 **Benefits:**
+
 - **Separation**: Logic separate from data access (no connection strings in NRML)
 - **Testability**: Easy mocking (test binding vs prod binding)
 - **Security**: Credentials outside of NRML files
@@ -60,11 +69,13 @@ engine.infer(data_binding={"urn:toeslagen:leeftijd:jr": fetch_age})
 - **Reusability**: Bindings can be environment-specific
 
 **Tradeoffs:**
+
 - Additional binding layer complexity
 - Must keep NRML and bindings synchronized
 - Need clear binding contract documentation
 
-**Mitigations**: Validation ensures all external requirements have bindings; type checking verifies argument compatibility.
+**Mitigations**: Validation ensures all external requirements have bindings; type checking verifies argument
+compatibility.
 
 ## Binding Types
 
@@ -74,6 +85,7 @@ engine.infer(data_binding={"urn:toeslagen:leeftijd:jr": fetch_age})
 **User input**: `urn:input:prompt` for interactive queries
 
 Multiple environments use different bindings:
+
 - Test: `urn:mock:leeftijd` → always returns 25
 - Prod: `urn:toeslagen:leeftijd:jr` → actual database query
 

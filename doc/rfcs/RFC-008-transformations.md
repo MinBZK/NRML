@@ -1,10 +1,11 @@
 # RFC-008: Formal Transformations with XSLT
 
-**Status:** Accepted | **Date:** 2025-09-02 | **Authors:** Arvid and Anne
+**Status:** Accepted | **Date:** 2025-09-02 | **Authors:** Wouter and Anne
 
 ## Context
 
-NRML is machine-oriented (RFC-001). To be useful for humans, it must transform to readable representations: Regelspraak (Dutch rule text), Gegevenspraak (data dictionary), documentation.
+NRML is machine-oriented (RFC-001). To be useful for humans, it must transform to readable representations:
+Regelspraak (Dutch rule text), Gegevenspraak (data dictionary), documentation.
 
 ## Decision
 
@@ -17,18 +18,21 @@ NRML is machine-oriented (RFC-001). To be useful for humans, it must transform t
 ## Why
 
 **Benefits:**
+
 - **Declarative**: Describes **what** to transform, not **how**
 - **Verifiable**: Formal semantics enable correctness reasoning
 - **Reusable**: Templates compose and can be overridden
 - **Standardized**: XSLT is W3C standard (25+ years, stable implementations)
 
 **XSLT specifically:**
+
 - **JSON support**: XSLT 3.0 handles JSON natively via `json-to-xml()`
 - **Mature ecosystem**: Fast processors (Saxon), debugging tools, extensive libraries
 - **Complex transformations**: Recursive templates, multi-pass, cross-references
 - **Multiple outputs**: Text, HTML, XML, JSON from single transformation
 
 **Current pipeline:**
+
 ```
 NRML JSON → json-to-xml → XSLT → Dutch text (Regelspraak)
 ```
@@ -36,6 +40,7 @@ NRML JSON → json-to-xml → XSLT → Dutch text (Regelspraak)
 Works well: complex grammar, article selection ("de"/"het"), reference chains, pluralization.
 
 **Tradeoffs:**
+
 - Learning curve (XSLT unfamiliar to many)
 - Verbosity compared to template languages
 - Limited libraries vs Python/JavaScript
@@ -49,12 +54,14 @@ Works well: complex grammar, article selection ("de"/"het"), reference chains, p
 **Planned**: Gegevenspraak transformation for data dictionary
 
 **Development**:
+
 ```bash
 ./scripts/transform transformations/regelspraak.xsl toka.nrml.json output.txt
 diff output.txt toka.regelspraak.groundtruth.txt
 ```
 
-**Testing**: Unit tests (individual templates), integration tests (full NRML), ground truth comparison, regression tests.
+**Testing**: Unit tests (individual templates), integration tests (full NRML), ground truth comparison, regression
+tests.
 
 ## Alternatives Rejected
 

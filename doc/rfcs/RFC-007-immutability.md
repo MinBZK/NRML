@@ -1,10 +1,11 @@
 # RFC-007: Immutability Constraints
 
-**Status:** Accepted | **Date:** 2025-09-02 | **Authors:** Arvid and Anne
+**Status:** Accepted | **Date:** 2025-09-02 | **Authors:** Wouter, Arvid and Anne
 
 ## Context
 
-Legal and regulatory rules must be auditable and reproducible. If we say "this rule applied on 2019-06-15," we must retrieve exactly what that rule was, not what it has since become.
+Legal and regulatory rules must be auditable and reproducible. If we say "this rule applied on 2019-06-15," we must
+retrieve exactly what that rule was, not what it has since become.
 
 ## Decision
 
@@ -13,11 +14,26 @@ Legal and regulatory rules must be auditable and reproducible. If we say "this r
 Once created, required fields cannot change. Any change to required fields creates a **new version** with **new UUID**.
 
 **Allowed**: Add new version
+
 ```json
 {
   "versions": [
-    {"id": "v1-uuid", "validFrom": "2018-01-01", "value": {"amount": 5.50, "unit": "€"}},
-    {"id": "v2-uuid", "validFrom": "2020-01-01", "value": {"amount": 6.00, "unit": "€"}}
+    {
+      "id": "v1-uuid",
+      "validFrom": "2018-01-01",
+      "value": {
+        "amount": 5.50,
+        "unit": "€"
+      }
+    },
+    {
+      "id": "v2-uuid",
+      "validFrom": "2020-01-01",
+      "value": {
+        "amount": 6.00,
+        "unit": "€"
+      }
+    }
   ]
 }
 ```
@@ -27,6 +43,7 @@ Once created, required fields cannot change. Any change to required fields creat
 ## Why
 
 **Benefits:**
+
 - **Auditability**: Historical state always retrievable
 - **Reference stability**: `{"$ref": "#/facts/..."}` has well-defined meaning
 - **Reproducibility**: Same rule + same date = same result (legal requirement)
@@ -34,17 +51,20 @@ Once created, required fields cannot change. Any change to required fields creat
 - **Alignment with legal sources**: Published laws are immutable (see RFC-005 Juriconnect)
 
 **What is immutable:**
+
 - Core semantics: `type`, `operator`, `conditions`
 - Values: `value`, `defaultValue`
 - Structure: `properties`, `roles`, `parameters`
 - Validity periods: `validFrom`, `validTo`
 
 **What is mutable:**
+
 - Documentation: `description`, `notes`
 - Extensions: Language-specific metadata (if in separate files)
 - Presentation: `displayOrder`, `grouping`
 
 **Entity vs Version UUIDs:**
+
 - Entity UUID stable across all versions: `a1b2c3d4-... = "belastingtarief" concept`
 - Version UUID unique per version: `v1-uuid = "belastingtarief as of 2018"`
 - References use entity UUID; engine resolves to appropriate version by date
@@ -52,6 +72,7 @@ Once created, required fields cannot change. Any change to required fields creat
 ## Consequences
 
 **Tradeoffs:**
+
 - File size grows (mitigated: archive old versions, compression)
 - Can't fix errors in published versions (mitigated: new version with `supersededBy` link)
 - Schema evolution challenging (mitigated: migration tools)
@@ -60,7 +81,8 @@ Once created, required fields cannot change. Any change to required fields creat
 
 **Validation**: Engines must check if version UUID exists and verify required fields match exactly.
 
-**Git integration**: Immutability is logical (NRML semantics), not physical (git allows rewrites). Validation tools should check commits don't violate immutability.
+**Git integration**: Immutability is logical (NRML semantics), not physical (git allows rewrites). Validation tools
+should check commits don't violate immutability.
 
 ## Open Questions
 

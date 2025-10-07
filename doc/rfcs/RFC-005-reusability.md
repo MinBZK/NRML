@@ -1,16 +1,18 @@
 # RFC-005: Cross-File Reusability with JSON References
 
-**Status:** Accepted | **Date:** 2025-09-02 | **Authors:** Wouter, Arvid, Tim and Anne
+**Status:** Proposed | **Date:** 2025-09-02 | **Authors:** Wouter, Arvid, Tim and Anne
 
 ## Context
 
-Rule systems share common definitions across regulations and domains (tax, benefits, licensing). Organizations need to maintain canonical definitions in one place and reference them.
+Rule systems share common definitions across regulations and domains (tax, benefits, licensing). Organizations need to
+maintain canonical definitions in one place and reference them.
 
 ## Decision
 
 **Use standard JSON Reference (`$ref`) with URLs for cross-file linking.**
 
 Supports:
+
 - **Intra-file**: `{"$ref": "#/facts/uuid"}`
 - **HTTPS**: `{"$ref": "https://nrml.gov.nl/person.json#/facts/uuid"}`
 - **Relative paths**: `{"$ref": "file://../common/defs.json#/facts/uuid"}`
@@ -19,6 +21,7 @@ Supports:
 ## Why
 
 **Benefits:**
+
 - **Standard**: JSON Reference widely understood (JSON Schema, OpenAPI, AsyncAPI)
 - **Uniform syntax**: Same `$ref` for local and remote references
 - **Precise targeting**: JSON Pointer drills down to specific elements
@@ -26,21 +29,26 @@ Supports:
 
 ## Juriconnect Integration
 
-[Juriconnect](https://standaarden.overheid.nl/juriconnect) is Dutch standard for referencing laws/regulations. NRML extends it to resolve to NRML-encoded rule definitions.
+[Juriconnect](https://standaarden.overheid.nl/juriconnect) is Dutch standard for referencing laws/regulations. NRML
+extends it to resolve to NRML-encoded rule definitions.
 
 **Resolution**:
+
 1. **Parse**: `juriconnect://bwb:BWBR0005416/artikel/6/inhoud/lid/2`
-   - Collection: `bwb` (Basis Wetten Bestand)
-   - Identifier: `BWBR0005416`
-   - Path: `/artikel/6/inhoud/lid/2`
+    - Collection: `bwb` (Basis Wetten Bestand)
+    - Identifier: `BWBR0005416`
+    - Path: `/artikel/6/inhoud/lid/2`
 
 2. **Resolve**: Map to `https://nrml.overheid.nl/bwb/BWBR0005416/artikel/6/inhoud/lid/2.nrml.json`
 
 3. **Navigate**: Apply JSON Pointer `#/facts/leeftijd-uuid`
 
 **Versioning**: Include effective date in URI:
+
 ```json
-{"$ref": "juriconnect://bwb:BWBR0005416:2024-01-01/artikel/6/inhoud/lid/2#/facts/..."}
+{
+  "$ref": "juriconnect://bwb:BWBR0005416:2024-01-01/artikel/6/inhoud/lid/2#/facts/..."
+}
 ```
 
 Aligns with NRML versioning (RFC-003).
@@ -52,6 +60,7 @@ Aligns with NRML versioning (RFC-003).
 ## Implementation
 
 **Resolution**:
+
 1. Parse `$ref` to extract URL and fragment
 2. Fetch referenced document (with caching)
 3. Apply JSON Pointer
@@ -60,9 +69,30 @@ Aligns with NRML versioning (RFC-003).
 
 **Security**: Allowlist trusted domains, sandboxed resolution, content validation.
 
+Minimal example to show how this could work in a python jsonref loader.
+
+```python
+import jsonref
+import json
+
+
+class SimpleCustomLoader:
+    def __call__(self, uri):
+        if uri.startswith('juriconnect://'):
+            return {"message": f"Loaded from {uri}"}
+
+        return {}
+
+doc = {"reference": {"$ref": "juriconnect://my-resource#/message"}}
+
+resolved = jsonref.loads(json.dumps(doc), loader=SimpleCustomLoader())
+print(resolved['reference']) 
+```
+
 ## Consequences
 
 **Tradeoffs:**
+
 - Network dependency for HTTPS (mitigated: caching, bundling)
 - Resolution complexity for multiple schemes
 - Versioning coordination across files (mitigated: version pinning)

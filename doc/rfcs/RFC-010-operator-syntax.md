@@ -4,7 +4,9 @@
 
 ## Context
 
-NRML expressions historically used inconsistent structures: `{operator, left, right}` for binary ops, `{operator, operands: [...]}` for n-ary, `{operator, from, to}` for ranges, etc. This created parser complexity, difficult schema validation, and brittle transformations.
+NRML expressions historically used inconsistent structures: `{operator, left, right}` for binary ops,
+`{operator, operands: [...]}` for n-ary, `{operator, from, to}` for ranges, etc. This created parser complexity,
+difficult schema validation, and brittle transformations.
 
 ## Decision
 
@@ -15,8 +17,12 @@ NRML expressions historically used inconsistent structures: `{operator, left, ri
   "type": "arithmetic",
   "operator": "plus",
   "operands": [
-    {"$ref": "#/facts/..."},
-    {"value": 5}
+    {
+      "$ref": "#/facts/..."
+    },
+    {
+      "value": 5
+    }
   ]
 }
 ```
@@ -26,6 +32,7 @@ Works for all cases: binary (`plus`), unary (`negate`), n-ary (`sum`), compariso
 ## Why
 
 **Benefits:**
+
 - **Simpler parsing**: Single code path for all operators
 - **Easy validation**: One schema pattern enforces all operators
 - **Consistent transformations**: XSLT templates work uniformly
@@ -33,19 +40,23 @@ Works for all cases: binary (`plus`), unary (`negate`), n-ary (`sum`), compariso
 - **Clear semantics**: Operator + operands is function application
 
 **Tradeoffs:**
+
 - More verbose than `{left, right}` (acceptable—JSON is inherently verbose)
 - Less semantic field names (mitigated with schema `description` fields)
 
 **Alternatives rejected:**
+
 - **Multiple syntaxes**: Parser complexity outweighs readability gains
 - **Prefix notation** `(op a b)`: Not idiomatic JSON
 - **Infix strings** `"A + B"`: Requires parser, not structured (see RFC-001)
 
 **Historical evolution:**
-Early NRML had 4 different styles (`{left, right}`, `{a, b}`, `{from, to}`, `{xs: [...]}`) which were unified into current form.
+Early NRML had 4 different styles (`{left, right}`, `{a, b}`, `{from, to}`, `{xs: [...]}`) which were unified into
+current form.
 
 **Schema-enforced arity:**
-Operators like `lessThan` require exactly 2 operands via JSON Schema conditional validation, while `sum` accepts variable-length arrays.
+Operators like `lessThan` require exactly 2 operands via JSON Schema conditional validation, while `sum` accepts
+variable-length arrays.
 
 **Operand types:**
 Literals (`{"value": 5}`), references (`{"$ref": "..."}`), nested expressions, or parameters.
@@ -53,16 +64,26 @@ Literals (`{"value": 5}`), references (`{"$ref": "..."}`), nested expressions, o
 ## Example
 
 Nested arithmetic `A - (B × C)`:
+
 ```json
 {
   "type": "arithmetic",
   "operator": "minus",
   "operands": [
-    {"$ref": "#/facts/A"},
+    {
+      "$ref": "#/facts/A"
+    },
     {
       "type": "arithmetic",
       "operator": "multiply",
-      "operands": [{"$ref": "#/facts/B"}, {"$ref": "#/facts/C"}]
+      "operands": [
+        {
+          "$ref": "#/facts/B"
+        },
+        {
+          "$ref": "#/facts/C"
+        }
+      ]
     }
   ]
 }

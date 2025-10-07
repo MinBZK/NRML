@@ -1,12 +1,14 @@
 # RFC-009: Initialization Without Processing Order
 
-**Status:** Proposed | **Date:** 2025-09-02 | **Authors:** Arvid and Anne
+**Status:** Proposed | **Date:** 2025-09-02 | **Authors:** Wouter and Anne
 
 ## Context
 
-Datalog is inherently order-independent (fixed-point semantics), but some systems need initialization: default values, accumulators, baseline state. How to handle initialization when there's no processing order?
+Datalog is inherently order-independent (fixed-point semantics), but some systems need initialization: default values,
+accumulators, baseline state. How to handle initialization when there's no processing order?
 
-**Problem example**: If a counter starts at 0 and a rule increments it, is the result 0, 1, or infinite? Depends on when initialization happens vs. when rules fire.
+**Problem example**: If a counter starts at 0 and a rule increments it, is the result 0, 1, or infinite? Depends on when
+initialization happens vs. when rules fire.
 
 ## Decision
 
@@ -17,33 +19,48 @@ NRML needs an initialization mechanism, but exact design not yet finalized.
 ## Options
 
 ### 1. Explicit Initialization Phase
+
 Separate `initialization` section evaluated before rules.
+
 - **Pro**: Clear separation, explicit semantics
 - **Con**: Breaks order-independence, two-phase evaluation
 
 ### 2. Default Values
+
 Facts have `defaultValue` used when no rule assigns a value.
+
 - **Pro**: Order-independent, fits Datalog model
 - **Con**: Need to distinguish "no value" from "value is 0"
 
 ### 3. Stratification
+
 Group rules into strata (layers) executed in order (stratum 0, then 1, etc.).
+
 - **Pro**: Theoretically sound (Datalog stratification), controlled ordering
 - **Con**: Breaks full order-independence, adds complexity
 
 ### 4. Monotonic Initialization
+
 Rules can check if fact is "uninitialized" and set it.
+
 - **Pro**: Fully declarative, order-independent
 - **Con**: Requires special "uninitialized" state
 
 ## Current Practice
 
 NRML uses initialization rules with empty conditions:
+
 ```json
 {
-  "target": [{"$ref": "#/facts/property-uuid"}],
+  "target": [
+    {
+      "$ref": "#/facts/property-uuid"
+    }
+  ],
   "conditions": [],
-  "expression": {"value": 0}
+  "expression": {
+    "value": 0
+  }
 }
 ```
 
@@ -51,7 +68,8 @@ NRML uses initialization rules with empty conditions:
 
 ## Theoretical Background
 
-**Datalog Stratification**: Rules grouped into strata, each evaluated to fixed point before next stratum. Ensures monotonicity with negation. NRML could adopt for initialization.
+**Datalog Stratification**: Rules grouped into strata, each evaluated to fixed point before next stratum. Ensures
+monotonicity with negation. NRML could adopt for initialization.
 
 **Closed World Assumption**: If fact not provable, it's false/undefined. Could provide natural defaults.
 

@@ -1,6 +1,6 @@
 # RFC-011: Expression Target Pattern (Inverted Dependencies)
 
-**Status:** Proposed | **Date:** 2025-09-02 | **Authors:** Arvid and Anne
+**Status:** Proposed | **Date:** 2025-09-02 | **Authors:** Tim and Anne
 
 ## Context
 
@@ -10,20 +10,28 @@ NRML has inverted pattern: target referenced **from** expression, but target **d
 
 ```json
 {
-  "expression": {...},
-  "target": {"$ref": "#/facts/some-fact"}  // Reference FROM expression TO target
+  "expression": {
+    ...
+  },
+  "target": {
+    "$ref": "#/facts/some-fact"
+  }
+  // Reference FROM expression TO target
 }
 ```
 
 ## Problem
 
 ### 1. Inverted Lookups
+
 To find "what rules compute fact X", must search all rules for `target: X` (backward lookup).
 
 ### 2. Multiple Writers
+
 Multiple expressions could target same fact → value depends on evaluation order.
 
 ### 3. Side Effects
+
 Setting target is side effect of evaluating expression → breaks referential transparency.
 
 ## Decision
@@ -35,7 +43,7 @@ Expression-target pattern remains, with constraints:
 ### Constraints
 
 1. **Single Writer Rule**: Each target has at most one rule (validation error otherwise)
-   - Exception: Rules with mutually exclusive conditions (stratification)
+    - Exception: Rules with mutually exclusive conditions (stratification)
 
 2. **Order Independence**: Must work regardless of evaluation order (fixed-point evaluation)
 
@@ -44,6 +52,7 @@ Expression-target pattern remains, with constraints:
 ## Why Keep It?
 
 **Natural expression**: Some computations naturally "set" values:
+
 ```
 "The total tax is computed as the sum of..."  → target ← expression
 ```
@@ -63,6 +72,7 @@ Expression-target pattern remains, with constraints:
 ## Implementation
 
 **Reverse index required**:
+
 ```python
 # Must scan all rules to build reverse index
 reverse_index = {}
