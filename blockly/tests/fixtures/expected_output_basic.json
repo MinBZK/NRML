@@ -1,0 +1,111 @@
+{
+  "$schema": "https://example.com/nrml-facts-schema.json",
+  "version": "1.0",
+  "language": "nl",
+  "facts": {
+    "fact-uuid-1": {
+      "name": {
+        "nl": "Constants"
+      },
+      "items": {
+        "item-uuid-1": {
+          "name": {
+            "nl": ""
+          },
+          "versions": [
+            {
+              "validFrom": "2025-10-16",
+              "type": "numeric",
+              "precision": 2
+            }
+          ]
+        },
+        "item-uuid-2": {
+          "name": {
+            "nl": ""
+          },
+          "versions": [
+            {
+              "validFrom": "2025-10-16",
+              "target": [
+                {
+                  "$ref": "#/facts/fact-uuid-1/items/item-uuid-1"
+                }
+              ],
+              "value": {
+                "value": 0.21
+              }
+            }
+          ]
+        },
+        "item-uuid-3": {
+          "name": {
+            "nl": ""
+          },
+          "versions": [
+            {
+              "validFrom": "2025-10-16",
+              "type": "numeric"
+            }
+          ]
+        },
+        "item-uuid-4": {
+          "name": {
+            "nl": ""
+          },
+          "versions": [
+            {
+              "validFrom": "2025-10-16",
+              "target": [
+                {
+                  "$ref": "#/facts/fact-uuid-1/items/item-uuid-3"
+                }
+              ],
+              "value": {
+                "value": 12
+              }
+            }
+          ]
+        }
+      }
+    },
+    "fact-uuid-2": {
+      "name": {
+        "nl": "Calculation"
+      },
+      "items": {
+        "item-uuid-5": {
+          "name": {
+            "nl": ""
+          },
+          "versions": [
+            {
+              "validFrom": "2025-10-16",
+              "target": [
+                {
+                  "$ref": "#/facts/fact-uuid-2/items/item-uuid-5"
+                }
+              ],
+              "expression": {
+                "type": "arithmetic",
+                "operator": "multiply",
+                "arguments": [
+                  [
+                    {
+                      "$ref": "#/facts/fact-uuid-1/items/item-uuid-3"
+                    }
+                  ],
+                  [
+                    {
+                      "$ref": "#/facts/fact-uuid-1/items/item-uuid-1"
+                    }
+                  ]
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "blocks": {
+    "languageVersion": 0,
+    "blocks": [
+      {
+        "type": "variables_set",
+        "id": "km_vergoeding_init",
+        "x": 50,
+        "y": 50,
+        "fields": {
+          "VAR": {
+            "id": "var_km_vergoeding"
+          }
+        },
+        "inputs": {
+          "VALUE": {
+            "block": {
+              "type": "math_number",
+              "id": "km_vergoeding_value",
+              "fields": {
+                "NUM": 0.21
+              }
+            }
+          }
+        },
+        "next": {
+          "block": {
+            "type": "variables_set",
+            "id": "afstand_init",
+            "fields": {
+              "VAR": {
+                "id": "var_afstand"
+              }
+            },
+            "inputs": {
+              "VALUE": {
+                "block": {
+                  "type": "math_number",
+                  "id": "afstand_value",
+                  "fields": {
+                    "NUM": 12
+                  }
+                }
+              }
+            },
+            "next": {
+              "block": {
+                "type": "variables_set",
+                "id": "result_calc",
+                "fields": {
+                  "VAR": {
+                    "id": "var_totaal_vergoeding"
+                  }
+                },
+                "inputs": {
+                  "VALUE": {
+                    "block": {
+                      "type": "math_arithmetic",
+                      "id": "multiply_operation",
+                      "fields": {
+                        "OP": "MULTIPLY"
+                      },
+                      "inputs": {
+                        "A": {
+                          "block": {
+                            "type": "variables_get",
+                            "id": "get_afstand",
+                            "fields": {
+                              "VAR": {
+                                "id": "var_afstand"
+                              }
+                            }
+                          }
+                        },
+                        "B": {
+                          "block": {
+                            "type": "variables_get",
+                            "id": "get_km_vergoeding",
+                            "fields": {
+                              "VAR": {
+                                "id": "var_km_vergoeding"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "variables": [
+    {
+      "name": "km_vergoeding",
+      "id": "var_km_vergoeding"
+    },
+    {
+      "name": "afstand",
+      "id": "var_afstand"
+    },
+    {
+      "name": "totaal_vergoeding",
+      "id": "var_totaal_vergoeding"
+    }
+  ]
+}

@@ -1,0 +1,723 @@
+{
+  "blocks": {
+    "languageVersion": 0,
+    "blocks": [
+      {
+        "type": "variables_set",
+        "id": "block-1",
+        "fields": {
+          "VAR": {
+            "id": "var-bedrag-per-jong-kind"
+          }
+        },
+        "inputs": {
+          "VALUE": {
+            "block": {
+              "type": "math_number",
+              "id": "block-2",
+              "fields": {
+                "NUM": 250.5
+              },
+              "extraState": {
+                "unit": "€",
+                "nrmlRef": "#/facts/28b83711-2080-469f-be02-ae8f963affb9/items/49922b15-650f-40e5-bc55-5b42f3cf1940"
+              }
+            }
+          }
+        },
+        "next": {
+          "block": {
+            "type": "variables_set",
+            "id": "block-3",
+            "fields": {
+              "VAR": {
+                "id": "var-bedrag-per-oud-kind"
+              }
+            },
+            "inputs": {
+              "VALUE": {
+                "block": {
+                  "type": "math_number",
+                  "id": "block-4",
+                  "fields": {
+                    "NUM": 300.75
+                  },
+                  "extraState": {
+                    "unit": "€",
+                    "nrmlRef": "#/facts/28b83711-2080-469f-be02-ae8f963affb9/items/3e06fe6f-adaa-40c1-822e-8a9fb3438250"
+                  }
+                }
+              }
+            },
+            "next": {
+              "block": {
+                "type": "variables_set",
+                "id": "block-5",
+                "fields": {
+                  "VAR": {
+                    "id": "var-aantal-jongere-kinderen"
+                  }
+                },
+                "inputs": {
+                  "VALUE": {
+                    "block": {
+                      "type": "aggregation_count",
+                      "id": "block-6",
+                      "extraState": {
+                        "aggregationType": "count",
+                        "nrmlRef": "#/facts/28b83711-2080-469f-be02-ae8f963affb9/items/1100dac1-6d75-498a-b5db-6b4faacf77b0",
+                        "expressionChain": [
+                          {
+                            "$ref": "#/facts/43d7495f-da13-4bbf-a485-676cbfe7cedc/items/47b9bf9b-e998-421a-8725-3e2335c9c234"
+                          }
+                        ]
+                      },
+                      "inputs": {
+                        "COLLECTION": {
+                          "block": {
+                            "type": "variables_get",
+                            "id": "block-7",
+                            "fields": {
+                              "VAR": {
+                                "id": "var-kinderen"
+                              }
+                            }
+                          }
+                        },
+                        "CONDITION": {
+                          "block": {
+                            "type": "logic_compare",
+                            "id": "block-8",
+                            "fields": {
+                              "OP": "LTE"
+                            },
+                            "inputs": {
+                              "A": {
+                                "block": {
+                                  "type": "property_access",
+                                  "id": "block-9",
+                                  "fields": {
+                                    "PROPERTY": "leeftijd"
+                                  },
+                                  "extraState": {
+                                    "nrmlRef": "#/facts/01290a59-b6d1-4caa-9d51-f53e632ac36f/items/0fe3c5a2-a33a-4a98-9abc-a98929783499",
+                                    "referenceChain": [
+                                      {
+                                        "$ref": "#/facts/43d7495f-da13-4bbf-a485-676cbfe7cedc/items/47b9bf9b-e998-421a-8725-3e2335c9c234"
+                                      },
+                                      {
+                                        "$ref": "#/facts/01290a59-b6d1-4caa-9d51-f53e632ac36f/items/0fe3c5a2-a33a-4a98-9abc-a98929783499"
+                                      }
+                                    ]
+                                  }
+                                }
+                              },
+                              "B": {
+                                "block": {
+                                  "type": "math_number",
+                                  "id": "block-10",
+                                  "fields": {
+                                    "NUM": 10
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "next": {
+                  "block": {
+                    "type": "variables_set",
+                    "id": "block-11",
+                    "fields": {
+                      "VAR": {
+                        "id": "var-aantal-oudere-kinderen"
+                      }
+                    },
+                    "inputs": {
+                      "VALUE": {
+                        "block": {
+                          "type": "aggregation_count",
+                          "id": "block-12",
+                          "extraState": {
+                            "aggregationType": "count",
+                            "nrmlRef": "#/facts/28b83711-2080-469f-be02-ae8f963affb9/items/067f3bb2-1f8b-47ef-bcdb-957a2b42c13e",
+                            "expressionChain": [
+                              {
+                                "$ref": "#/facts/43d7495f-da13-4bbf-a485-676cbfe7cedc/items/47b9bf9b-e998-421a-8725-3e2335c9c234"
+                              }
+                            ]
+                          },
+                          "inputs": {
+                            "COLLECTION": {
+                              "block": {
+                                "type": "variables_get",
+                                "id": "block-13",
+                                "fields": {
+                                  "VAR": {
+                                    "id": "var-kinderen"
+                                  }
+                                }
+                              }
+                            },
+                            "CONDITION": {
+                              "block": {
+                                "type": "logic_operation",
+                                "id": "block-14",
+                                "fields": {
+                                  "OP": "AND"
+                                },
+                                "extraState": {
+                                  "nrmlType": "allOf"
+                                },
+                                "inputs": {
+                                  "A": {
+                                    "block": {
+                                      "type": "logic_compare",
+                                      "id": "block-15",
+                                      "fields": {
+                                        "OP": "GT"
+                                      },
+                                      "inputs": {
+                                        "A": {
+                                          "block": {
+                                            "type": "property_access",
+                                            "id": "block-16",
+                                            "fields": {
+                                              "PROPERTY": "leeftijd"
+                                            },
+                                            "extraState": {
+                                              "nrmlRef": "#/facts/01290a59-b6d1-4caa-9d51-f53e632ac36f/items/0fe3c5a2-a33a-4a98-9abc-a98929783499",
+                                              "referenceChain": [
+                                                {
+                                                  "$ref": "#/facts/43d7495f-da13-4bbf-a485-676cbfe7cedc/items/47b9bf9b-e998-421a-8725-3e2335c9c234"
+                                                },
+                                                {
+                                                  "$ref": "#/facts/01290a59-b6d1-4caa-9d51-f53e632ac36f/items/0fe3c5a2-a33a-4a98-9abc-a98929783499"
+                                                }
+                                              ]
+                                            }
+                                          }
+                                        },
+                                        "B": {
+                                          "block": {
+                                            "type": "math_number",
+                                            "id": "block-17",
+                                            "fields": {
+                                              "NUM": 10
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "B": {
+                                    "block": {
+                                      "type": "logic_compare",
+                                      "id": "block-18",
+                                      "fields": {
+                                        "OP": "LTE"
+                                      },
+                                      "inputs": {
+                                        "A": {
+                                          "block": {
+                                            "type": "property_access",
+                                            "id": "block-19",
+                                            "fields": {
+                                              "PROPERTY": "leeftijd"
+                                            },
+                                            "extraState": {
+                                              "nrmlRef": "#/facts/01290a59-b6d1-4caa-9d51-f53e632ac36f/items/0fe3c5a2-a33a-4a98-9abc-a98929783499",
+                                              "referenceChain": [
+                                                {
+                                                  "$ref": "#/facts/43d7495f-da13-4bbf-a485-676cbfe7cedc/items/47b9bf9b-e998-421a-8725-3e2335c9c234"
+                                                },
+                                                {
+                                                  "$ref": "#/facts/01290a59-b6d1-4caa-9d51-f53e632ac36f/items/0fe3c5a2-a33a-4a98-9abc-a98929783499"
+                                                }
+                                              ]
+                                            }
+                                          }
+                                        },
+                                        "B": {
+                                          "block": {
+                                            "type": "math_number",
+                                            "id": "block-20",
+                                            "fields": {
+                                              "NUM": 18
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "next": {
+                      "block": {
+                        "type": "variables_set",
+                        "id": "block-21",
+                        "fields": {
+                          "VAR": {
+                            "id": "var-totaal-kinderbijslag-bedrag"
+                          }
+                        },
+                        "inputs": {
+                          "VALUE": {
+                            "block": {
+                              "type": "math_arithmetic",
+                              "id": "block-22",
+                              "fields": {
+                                "OP": "ADD"
+                              },
+                              "extraState": {
+                                "nrmlType": "arithmetic",
+                                "nrmlOperator": "add",
+                                "nrmlRef": "#/facts/28b83711-2080-469f-be02-ae8f963affb9/items/f9bf5ac5-9112-4d6d-b857-cbc8283c683e"
+                              },
+                              "inputs": {
+                                "A": {
+                                  "block": {
+                                    "type": "math_arithmetic",
+                                    "id": "block-23",
+                                    "fields": {
+                                      "OP": "MULTIPLY"
+                                    },
+                                    "extraState": {
+                                      "nrmlType": "arithmetic",
+                                      "nrmlOperator": "multiply"
+                                    },
+                                    "inputs": {
+                                      "A": {
+                                        "block": {
+                                          "type": "property_access",
+                                          "id": "block-24",
+                                          "fields": {
+                                            "PROPERTY": "aantal jongere kinderen"
+                                          },
+                                          "extraState": {
+                                            "nrmlRef": "#/facts/28b83711-2080-469f-be02-ae8f963affb9/items/1100dac1-6d75-498a-b5db-6b4faacf77b0",
+                                            "referenceChain": [
+                                              {
+                                                "$ref": "#/facts/43d7495f-da13-4bbf-a485-676cbfe7cedc"
+                                              },
+                                              {
+                                                "$ref": "#/facts/28b83711-2080-469f-be02-ae8f963affb9/items/1100dac1-6d75-498a-b5db-6b4faacf77b0"
+                                              }
+                                            ]
+                                          }
+                                        }
+                                      },
+                                      "B": {
+                                        "block": {
+                                          "type": "property_access",
+                                          "id": "block-25",
+                                          "fields": {
+                                            "PROPERTY": "bedrag per jong kind"
+                                          },
+                                          "extraState": {
+                                            "nrmlRef": "#/facts/28b83711-2080-469f-be02-ae8f963affb9/items/49922b15-650f-40e5-bc55-5b42f3cf1940",
+                                            "referenceChain": [
+                                              {
+                                                "$ref": "#/facts/28b83711-2080-469f-be02-ae8f963affb9/items/49922b15-650f-40e5-bc55-5b42f3cf1940"
+                                              }
+                                            ]
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "B": {
+                                  "block": {
+                                    "type": "math_arithmetic",
+                                    "id": "block-26",
+                                    "fields": {
+                                      "OP": "MULTIPLY"
+                                    },
+                                    "extraState": {
+                                      "nrmlType": "arithmetic",
+                                      "nrmlOperator": "multiply"
+                                    },
+                                    "inputs": {
+                                      "A": {
+                                        "block": {
+                                          "type": "property_access",
+                                          "id": "block-27",
+                                          "fields": {
+                                            "PROPERTY": "aantal oudere kinderen"
+                                          },
+                                          "extraState": {
+                                            "nrmlRef": "#/facts/28b83711-2080-469f-be02-ae8f963affb9/items/067f3bb2-1f8b-47ef-bcdb-957a2b42c13e",
+                                            "referenceChain": [
+                                              {
+                                                "$ref": "#/facts/43d7495f-da13-4bbf-a485-676cbfe7cedc"
+                                              },
+                                              {
+                                                "$ref": "#/facts/28b83711-2080-469f-be02-ae8f963affb9/items/067f3bb2-1f8b-47ef-bcdb-957a2b42c13e"
+                                              }
+                                            ]
+                                          }
+                                        }
+                                      },
+                                      "B": {
+                                        "block": {
+                                          "type": "property_access",
+                                          "id": "block-28",
+                                          "fields": {
+                                            "PROPERTY": "bedrag per oud kind"
+                                          },
+                                          "extraState": {
+                                            "nrmlRef": "#/facts/28b83711-2080-469f-be02-ae8f963affb9/items/3e06fe6f-adaa-40c1-822e-8a9fb3438250",
+                                            "referenceChain": [
+                                              {
+                                                "$ref": "#/facts/28b83711-2080-469f-be02-ae8f963affb9/items/3e06fe6f-adaa-40c1-822e-8a9fb3438250"
+                                              }
+                                            ]
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "next": {
+                          "block": {
+                            "type": "variables_set",
+                            "id": "block-29",
+                            "fields": {
+                              "VAR": {
+                                "id": "var-brief-versturen"
+                              }
+                            },
+                            "inputs": {
+                              "VALUE": {
+                                "block": {
+                                  "type": "conditional_value",
+                                  "id": "block-30",
+                                  "extraState": {
+                                    "nrmlRef": "#/facts/15830980-b159-4d51-88e2-db582a85895f/items/db91fdf3-8c8d-44a8-987d-02e8bffc39e5",
+                                    "nrmlType": "conditional_assignment"
+                                  },
+                                  "inputs": {
+                                    "CONDITION": {
+                                      "block": {
+                                        "type": "logic_compare",
+                                        "id": "block-31",
+                                        "fields": {
+                                          "OP": "GT"
+                                        },
+                                        "inputs": {
+                                          "A": {
+                                            "block": {
+                                              "type": "property_access",
+                                              "id": "block-32",
+                                              "fields": {
+                                                "PROPERTY": "totaal kinderbijslag bedrag"
+                                              },
+                                              "extraState": {
+                                                "nrmlRef": "#/facts/28b83711-2080-469f-be02-ae8f963affb9/items/f9bf5ac5-9112-4d6d-b857-cbc8283c683e",
+                                                "referenceChain": [
+                                                  {
+                                                    "$ref": "#/facts/43d7495f-da13-4bbf-a485-676cbfe7cedc"
+                                                  },
+                                                  {
+                                                    "$ref": "#/facts/28b83711-2080-469f-be02-ae8f963affb9/items/f9bf5ac5-9112-4d6d-b857-cbc8283c683e"
+                                                  }
+                                                ]
+                                              }
+                                            }
+                                          },
+                                          "B": {
+                                            "block": {
+                                              "type": "math_number",
+                                              "id": "block-33",
+                                              "fields": {
+                                                "NUM": 0
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "VALUE": {
+                                      "block": {
+                                        "type": "logic_boolean",
+                                        "id": "block-34",
+                                        "fields": {
+                                          "BOOL": "TRUE"
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "next": {
+                              "block": {
+                                "type": "variables_set",
+                                "id": "block-35",
+                                "fields": {
+                                  "VAR": {
+                                    "id": "var-aantal-kinderen"
+                                  }
+                                },
+                                "inputs": {
+                                  "VALUE": {
+                                    "block": {
+                                      "type": "aggregation_count",
+                                      "id": "block-36",
+                                      "extraState": {
+                                        "aggregationType": "count",
+                                        "nrmlRef": "#/facts/15830980-b159-4d51-88e2-db582a85895f/items/ded72b17-170c-405f-856b-d8a6119bec95",
+                                        "expressionChain": [
+                                          {
+                                            "$ref": "#/facts/43d7495f-da13-4bbf-a485-676cbfe7cedc/items/47b9bf9b-e998-421a-8725-3e2335c9c234"
+                                          }
+                                        ],
+                                        "default": {
+                                          "value": 0
+                                        }
+                                      },
+                                      "inputs": {
+                                        "COLLECTION": {
+                                          "block": {
+                                            "type": "variables_get",
+                                            "id": "block-37",
+                                            "fields": {
+                                              "VAR": {
+                                                "id": "var-kinderen"
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "next": {
+                                  "block": {
+                                    "type": "variables_set",
+                                    "id": "block-38",
+                                    "fields": {
+                                      "VAR": {
+                                        "id": "var-risico-alarm"
+                                      }
+                                    },
+                                    "inputs": {
+                                      "VALUE": {
+                                        "block": {
+                                          "type": "conditional_value",
+                                          "id": "block-39",
+                                          "extraState": {
+                                            "nrmlRef": "#/facts/15830980-b159-4d51-88e2-db582a85895f/items/4e15747a-9238-4462-82a5-548a03cc8c61",
+                                            "nrmlType": "conditional_assignment"
+                                          },
+                                          "inputs": {
+                                            "CONDITION": {
+                                              "block": {
+                                                "type": "logic_compare",
+                                                "id": "block-40",
+                                                "fields": {
+                                                  "OP": "GT"
+                                                },
+                                                "inputs": {
+                                                  "A": {
+                                                    "block": {
+                                                      "type": "property_access",
+                                                      "id": "block-41",
+                                                      "fields": {
+                                                        "PROPERTY": "aantal kinderen"
+                                                      },
+                                                      "extraState": {
+                                                        "nrmlRef": "#/facts/15830980-b159-4d51-88e2-db582a85895f/items/ded72b17-170c-405f-856b-d8a6119bec95",
+                                                        "referenceChain": [
+                                                          {
+                                                            "$ref": "#/facts/43d7495f-da13-4bbf-a485-676cbfe7cedc"
+                                                          },
+                                                          {
+                                                            "$ref": "#/facts/15830980-b159-4d51-88e2-db582a85895f/items/ded72b17-170c-405f-856b-d8a6119bec95"
+                                                          }
+                                                        ]
+                                                      }
+                                                    }
+                                                  },
+                                                  "B": {
+                                                    "block": {
+                                                      "type": "math_number",
+                                                      "id": "block-42",
+                                                      "fields": {
+                                                        "NUM": 6
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            },
+                                            "VALUE": {
+                                              "block": {
+                                                "type": "logic_boolean",
+                                                "id": "block-43",
+                                                "fields": {
+                                                  "BOOL": "TRUE"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "variables": [
+    {
+      "id": "var-bedrag-per-jong-kind",
+      "name": "bedrag_per_jong_kind",
+      "type": "decimal",
+      "unit": "€",
+      "precision": 2,
+      "nrmlRef": "#/facts/28b83711-2080-469f-be02-ae8f963affb9/items/49922b15-650f-40e5-bc55-5b42f3cf1940"
+    },
+    {
+      "id": "var-bedrag-per-oud-kind",
+      "name": "bedrag_per_oud_kind",
+      "type": "decimal",
+      "unit": "€",
+      "precision": 2,
+      "nrmlRef": "#/facts/28b83711-2080-469f-be02-ae8f963affb9/items/3e06fe6f-adaa-40c1-822e-8a9fb3438250"
+    },
+    {
+      "id": "var-aantal-jongere-kinderen",
+      "name": "aantal_jongere_kinderen",
+      "type": "integer",
+      "nrmlRef": "#/facts/28b83711-2080-469f-be02-ae8f963affb9/items/1100dac1-6d75-498a-b5db-6b4faacf77b0"
+    },
+    {
+      "id": "var-aantal-oudere-kinderen",
+      "name": "aantal_oudere_kinderen",
+      "type": "integer",
+      "nrmlRef": "#/facts/28b83711-2080-469f-be02-ae8f963affb9/items/067f3bb2-1f8b-47ef-bcdb-957a2b42c13e"
+    },
+    {
+      "id": "var-totaal-kinderbijslag-bedrag",
+      "name": "totaal_kinderbijslag_bedrag",
+      "type": "decimal",
+      "unit": "€",
+      "precision": 2,
+      "nrmlRef": "#/facts/28b83711-2080-469f-be02-ae8f963affb9/items/f9bf5ac5-9112-4d6d-b857-cbc8283c683e"
+    },
+    {
+      "id": "var-brief-versturen",
+      "name": "brief_versturen",
+      "type": "boolean",
+      "nrmlRef": "#/facts/15830980-b159-4d51-88e2-db582a85895f/items/db91fdf3-8c8d-44a8-987d-02e8bffc39e5"
+    },
+    {
+      "id": "var-aantal-kinderen",
+      "name": "aantal_kinderen",
+      "type": "integer",
+      "nrmlRef": "#/facts/15830980-b159-4d51-88e2-db582a85895f/items/ded72b17-170c-405f-856b-d8a6119bec95"
+    },
+    {
+      "id": "var-risico-alarm",
+      "name": "risico_alarm",
+      "type": "boolean",
+      "nrmlRef": "#/facts/15830980-b159-4d51-88e2-db582a85895f/items/4e15747a-9238-4462-82a5-548a03cc8c61"
+    },
+    {
+      "id": "var-kinderen",
+      "name": "kinderen",
+      "type": "input:list",
+      "itemType": "kind",
+      "nrmlRef": "#/facts/43d7495f-da13-4bbf-a485-676cbfe7cedc/items/47b9bf9b-e998-421a-8725-3e2335c9c234",
+      "properties": [
+        {
+          "name": "leeftijd",
+          "type": "integer",
+          "unit": "jaar",
+          "nrmlRef": "#/facts/01290a59-b6d1-4caa-9d51-f53e632ac36f/items/0fe3c5a2-a33a-4a98-9abc-a98929783499"
+        },
+        {
+          "name": "kinderbijslag_bedrag",
+          "type": "decimal",
+          "unit": "€",
+          "precision": 2,
+          "nrmlRef": "#/facts/01290a59-b6d1-4caa-9d51-f53e632ac36f/items/14b7e607-8eee-496d-a7d8-faeb0cdd5332"
+        }
+      ]
+    },
+    {
+      "id": "var-aanvrager",
+      "name": "aanvrager",
+      "type": "input:object",
+      "itemType": "aanvrager",
+      "nrmlRef": "#/facts/43d7495f-da13-4bbf-a485-676cbfe7cedc"
+    }
+  ],
+  "metadata": {
+    "nrmlSource": "rules/kinderbijslag.nrml.json",
+    "nrmlVersion": "1.0",
+    "language": "nl",
+    "description": "Kinderbijslag berekening volgens Nederlandse wetgeving",
+    "legalBasis": "Algemene Kinderbijslagwet",
+    "customBlocksRequired": [
+      "aggregation_count",
+      "property_access",
+      "conditional_value"
+    ],
+    "notes": {
+      "standardBlocks": [
+        "variables_set - Used for variable assignments",
+        "math_number - Used for numeric constants",
+        "math_arithmetic - Used for ADD and MULTIPLY operations",
+        "logic_compare - Used for GT, LTE comparisons",
+        "logic_boolean - Used for TRUE/FALSE values",
+        "logic_operation - Used for AND operations"
+      ],
+      "customBlocksNeeded": [
+        "aggregation_count - Needed for count aggregations with optional filters",
+        "property_access - Needed to access properties via NRML reference chains",
+        "conditional_value - Needed for conditional assignments (if condition then value)"
+      ],
+      "limitations": [
+        "Standard Blockly doesn't have built-in aggregation blocks (count, sum) with filter conditions",
+        "Standard Blockly doesn't natively handle multi-hop reference chains (role → property)",
+        "NRML's conditional assignment pattern (value with condition) needs custom block",
+        "Property access through reference chains requires custom implementation"
+      ],
+      "preservationStrategy": [
+        "All NRML references stored in extraState.nrmlRef fields",
+        "Reference chains stored in extraState.referenceChain arrays",
+        "NRML operators mapped to Blockly operators with extraState.nrmlOperator tracking",
+        "Variable metadata includes complete NRML type information",
+        "Custom blocks use extraState to preserve NRML-specific information"
+      ]
+    }
+  }
+}

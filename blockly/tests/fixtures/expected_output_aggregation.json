@@ -1,0 +1,100 @@
+{
+  "$schema": "https://example.com/nrml-facts-schema.json",
+  "version": "1.0",
+  "language": "nl",
+  "inputs": {
+    "kinderen": {
+      "type": {
+        "$ref": "#/facts/child"
+      },
+      "properties": {
+        "age": "#/facts/child/items/age"
+      }
+    },
+    "aanvrager": {
+      "type": {
+        "$ref": "#/facts/applicant"
+      }
+    }
+  },
+  "outputs": {
+    "young_children_count": {
+      "source": {
+        "$ref": "#/facts/fact-uuid-2/items/item-uuid-2"
+      }
+    }
+  },
+  "includes": [
+    {
+      "law": "kinderbijslag_maximum_leeftijd",
+      "output": "maximum_leeftijd",
+      "target": {
+        "$ref": "#/facts/fact-uuid-1/items/item-uuid-1"
+      }
+    }
+  ],
+  "facts": {
+    "fact-uuid-1": {
+      "name": {
+        "nl": "Verwijzingen"
+      },
+      "items": {
+        "item-uuid-1": {
+          "name": {
+            "nl": "maximum_leeftijd"
+          },
+          "versions": [
+            {
+              "validFrom": "2025-10-16",
+              "type": "numeric"
+            }
+          ]
+        }
+      }
+    },
+    "fact-uuid-2": {
+      "name": {
+        "nl": "berekend"
+      },
+      "items": {
+        "item-uuid-2": {
+          "name": {
+            "nl": "young_children_count"
+          },
+          "versions": [
+            {
+              "validFrom": "2025-10-16",
+              "target": [
+                {
+                  "$ref": "#/facts/fact-uuid-2/items/item-uuid-2"
+                }
+              ],
+              "expression": {
+                "type": "aggregation",
+                "function": "count",
+                "expression": [],
+                "condition": {
+                  "type": "comparison",
+                  "operator": "lessThanOrEqual",
+                  "arguments": [
+                    [
+                      {
+                        "$ref": "#/facts/child"
+                      },
+                      {
+                        "$ref": "#/facts/child/items/age"
+                      }
+                    ],
+                    {
+                      "$ref": "#/facts/fact-uuid-1/items/item-uuid-1"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

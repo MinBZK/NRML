@@ -1,0 +1,8 @@
+# Python requirements for Blockly to NRML converter
+
+# No external dependencies required for basic conversion
+# Python 3.8+ standard library is sufficient
+
+# Optional: For development and testing
+pytest>=7.0.0  # For unit tests
+black>=22.0.0  # Code formatting

@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>NRML Blockly Custom Blocks Demo</title>
+  <script src="https://unpkg.com/blockly/blockly.min.js"></script>
+  <script src="nrml_blocks.js"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      background-color: #4285f4;
+      color: white;
+      padding: 15px;
+      margin: 0;
+    }
+
+    .container {
+      display: flex;
+      height: calc(100vh - 60px);
+    }
+
+    #blocklyDiv {
+      flex: 1;
+      height: 100%;
+    }
+
+    .sidebar {
+      width: 350px;
+      padding: 20px;
+      background-color: #f5f5f5;
+      overflow-y: auto;
+      border-left: 1px solid #ddd;
+    }
+
+    .button-group {
+      margin-bottom: 20px;
+    }
+
+    button {
+      background-color: #4285f4;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      margin: 5px;
+      cursor: pointer;
+      border-radius: 3px;
+      font-size: 14px;
+    }
+
+    button:hover {
+      background-color: #357ae8;
+    }
+
+    button:active {
+      background-color: #2a5fc9;
+    }
+
+    #output {
+      background-color: white;
+      border: 1px solid #ddd;
+      padding: 10px;
+      border-radius: 3px;
+      font-family: monospace;
+      font-size: 12px;
+      white-space: pre-wrap;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
+    .info {
+      background-color: #e8f0fe;
+      padding: 10px;
+      border-radius: 3px;
+      margin-bottom: 15px;
+      font-size: 13px;
+    }
+
+    h2 {
+      font-size: 16px;
+      margin-top: 0;
+    }
+
+    .block-info {
+      background-color: white;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 3px;
+      border-left: 3px solid #4285f4;
+    }
+
+    .block-info h3 {
+      margin-top: 0;
+      font-size: 14px;
+      color: #4285f4;
+    }
+
+    .block-info p {
+      margin: 5px 0;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🧩 NRML Blockly Custom Blocks Demo</h1>
+
+  <div class="container">
+    <div id="blocklyDiv"></div>
+
+    <div class="sidebar">
+      <div class="info">
+        <strong>Quick Start:</strong>
+        <ol style="font-size: 12px; margin: 5px 0;">
+          <li>Click <strong>📥 Simple Example</strong> for basic demo</li>
+          <li>Click <strong>📚 Full Example</strong> for kinderbijslag rules</li>
+          <li>Or <strong>📂 Import JSON</strong> to load your own file</li>
+          <li>Edit blocks visually, then <strong>💾 Export</strong></li>
+        </ol>
+        <strong>Custom NRML Blocks:</strong>
+        <ul style="font-size: 12px; margin: 5px 0; margin-top: 10px;">
+          <li><strong>aggregation_count</strong> - Count with filter</li>
+          <li><strong>aggregation_sum</strong> - Sum with filter</li>
+          <li><strong>property_access</strong> - Multi-hop references</li>
+          <li><strong>conditional_value</strong> - Conditional assignment</li>
+        </ul>
+      </div>
+
+      <div class="button-group">
+        <button onclick="loadExample()">📥 Simple Example</button>
+        <button onclick="loadKinderbijslagExample()">📚 Full Example</button>
+        <button onclick="document.getElementById('fileInput').click()">📂 Import JSON</button>
+        <button onclick="showCode()">⚙️ Generate Code</button>
+        <button onclick="showJSON()">📄 Show JSON</button>
+        <button onclick="exportJSON()">💾 Export JSON</button>
+        <button onclick="toNRML()">🔄 To NRML</button>
+        <button onclick="clearWorkspace()">🗑️ Clear</button>
+      </div>
+
+      <!-- Hidden file input -->
+      <input type="file" id="fileInput" accept=".json" style="display: none;" onchange="loadJSONFile(event)">
+
+      <h2>Output:</h2>
+      <div id="output">Click a button to see output...</div>
+
+      <h2>Block Reference:</h2>
+
+      <div class="block-info">
+        <h3>aggregation_count</h3>
+        <p><strong>Purpose:</strong> Count items in collection matching condition</p>
+        <p><strong>Inputs:</strong> COLLECTION (array), CONDITION (boolean)</p>
+        <p><strong>Output:</strong> Number</p>
+      </div>
+
+      <div class="block-info">
+        <h3>aggregation_sum</h3>
+        <p><strong>Purpose:</strong> Sum property values matching condition</p>
+        <p><strong>Inputs:</strong> COLLECTION (array), PROPERTY, CONDITION (boolean)</p>
+        <p><strong>Output:</strong> Number</p>
+      </div>
+
+      <div class="block-info">
+        <h3>property_access</h3>
+        <p><strong>Purpose:</strong> Access property via NRML reference chain</p>
+        <p><strong>Inputs:</strong> PROPERTY (field), OBJECT</p>
+        <p><strong>Output:</strong> Any (depends on property type)</p>
+      </div>
+
+      <div class="block-info">
+        <h3>conditional_value</h3>
+        <p><strong>Purpose:</strong> Return value only if condition true</p>
+        <p><strong>Inputs:</strong> VALUE, CONDITION (boolean)</p>
+        <p><strong>Output:</strong> Any or undefined</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Blockly Toolbox -->
+  <xml id="toolbox" style="display: none">
+    <category name="Variables" colour="330" custom="VARIABLE"></category>
+
+    <category name="Logic" colour="210">
+      <block type="controls_if"></block>
+      <block type="logic_compare">
+        <field name="OP">LTE</field>
+      </block>
+      <block type="logic_operation">
+        <field name="OP">AND</field>
+      </block>
+      <block type="logic_boolean"></block>
+    </category>
+
+    <category name="Math" colour="230">
+      <block type="math_number">
+        <field name="NUM">0</field>
+      </block>
+      <block type="math_arithmetic">
+        <field name="OP">ADD</field>
+      </block>
+    </category>
+
+    <category name="NRML: Aggregation" colour="260">
+      <block type="aggregation_count">
+        <value name="COLLECTION">
+          <shadow type="variables_get">
+            <field name="VAR">kinderen</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="aggregation_sum">
+        <value name="COLLECTION">
+          <shadow type="variables_get">
+            <field name="VAR">items</field>
+          </shadow>
+        </value>
+      </block>
+    </category>
+
+    <category name="NRML: Properties" colour="160">
+      <block type="property_access">
+        <field name="PROPERTY">leeftijd</field>
+      </block>
+      <block type="property_access_direct">
+        <field name="PROPERTY">bedrag</field>
+      </block>
+    </category>
+
+    <category name="NRML: Conditions" colour="210">
+      <block type="conditional_value">
+        <value name="VALUE">
+          <shadow type="logic_boolean">
+            <field name="BOOL">TRUE</field>
+          </shadow>
+        </value>
+      </block>
+    </category>
+
+    <category name="Loops" colour="120">
+      <block type="controls_forEach"></block>
+    </category>
+  </xml>
+
+  <script>
+    // Initialize Blockly workspace
+    const workspace = Blockly.inject('blocklyDiv', {
+      toolbox: document.getElementById('toolbox'),
+      scrollbars: true,
+      trashcan: true,
+      zoom: {
+        controls: true,
+        wheel: true,
+        startScale: 0.9,
+        maxScale: 3,
+        minScale: 0.3,
+        scaleSpeed: 1.2
+      },
+      grid: {
+        spacing: 20,
+        length: 3,
+        colour: '#ccc',
+        snap: true
+      }
+    });
+
+    // Verify custom blocks are registered
+    const requiredBlocks = ['aggregation_count', 'aggregation_sum', 'property_access', 'property_access_direct', 'conditional_value'];
+    const missingBlocks = requiredBlocks.filter(type => !Blockly.Blocks[type]);
+
+    if (missingBlocks.length > 0) {
+      console.warn('⚠️ Missing custom blocks:', missingBlocks);
+      console.warn('Make sure nrml_blocks.js is loaded properly');
+    } else {
+      console.log('✅ All custom blocks registered:', requiredBlocks);
+    }
+
+    // Create variables for examples
+    workspace.createVariable('kinderen', null, 'var-kinderen');
+    workspace.createVariable('kind', null, 'var-kind');
+    workspace.createVariable('aantal_jongere_kinderen', null, 'var-aantal-jongere-kinderen');
+
+    // Load example blocks
+    function loadExample() {
+      clearWorkspace();
+
+      // Create a simple example: count children <= 10 years old
+      const setBlock = workspace.newBlock('variables_set');
+      setBlock.setFieldValue('aantal_jongere_kinderen', 'VAR');
+
+      const countBlock = workspace.newBlock('aggregation_count');
+      countBlock.extraState = {
+        aggregationType: 'count',
+        nrmlRef: '#/facts/28b83711-2080-469f-be02-ae8f963affb9/items/1100dac1-6d75-498a-b5db-6b4faacf77b0',
+        expressionChain: [
+          {"$ref": "#/facts/43d7495f-da13-4bbf-a485-676cbfe7cedc/items/47b9bf9b-e998-421a-8725-3e2335c9c234"}
+        ],
+        default: {value: 0}
+      };
+
+      const varGetBlock = workspace.newBlock('variables_get');
+      varGetBlock.setFieldValue('kinderen', 'VAR');
+
+      const compareBlock = workspace.newBlock('logic_compare');
+      compareBlock.setFieldValue('LTE', 'OP');
+
+      const propertyBlock = workspace.newBlock('property_access_direct');
+      propertyBlock.setFieldValue('leeftijd', 'PROPERTY');
+      propertyBlock.extraState = {
+        nrmlRef: '#/facts/01290a59-b6d1-4caa-9d51-f53e632ac36f/items/0fe3c5a2-a33a-4a98-9abc-a98929783499',
+        referenceChain: [
+          {"$ref": "#/facts/43d7495f-da13-4bbf-a485-676cbfe7cedc/items/47b9bf9b-e998-421a-8725-3e2335c9c234"},
+          {"$ref": "#/facts/01290a59-b6d1-4caa-9d51-f53e632ac36f/items/0fe3c5a2-a33a-4a98-9abc-a98929783499"}
+        ],
+        propertyType: 'integer',
+        unit: 'jaar'
+      };
+
+      const numBlock = workspace.newBlock('math_number');
+      numBlock.setFieldValue(10, 'NUM');
+
+      // Initialize all blocks first
+      setBlock.initSvg();
+      countBlock.initSvg();
+      varGetBlock.initSvg();
+      compareBlock.initSvg();
+      propertyBlock.initSvg();
+      numBlock.initSvg();
+
+      // Connect blocks
+      compareBlock.getInput('A').connection.connect(propertyBlock.outputConnection);
+      compareBlock.getInput('B').connection.connect(numBlock.outputConnection);
+      countBlock.getInput('CONDITION').connection.connect(compareBlock.outputConnection);
+      countBlock.getInput('COLLECTION').connection.connect(varGetBlock.outputConnection);
+      setBlock.getInput('VALUE').connection.connect(countBlock.outputConnection);
+
+      // Position and render all blocks
+      setBlock.moveBy(20, 20);
+      setBlock.render();
+      countBlock.render();
+      varGetBlock.render();
+      compareBlock.render();
+      propertyBlock.render();
+      numBlock.render();
+
+      document.getElementById('output').textContent = '✅ Example loaded!\n\nThis example counts children aged 10 or younger using the aggregation_count custom block.';
+    }
+
+    // Generate JavaScript code
+    function showCode() {
+      const code = Blockly.JavaScript.workspaceToCode(workspace);
+      document.getElementById('output').textContent = '// Generated JavaScript:\n\n' + code;
+    }
+
+    // Show Blockly JSON
+    function showJSON() {
+      const json = Blockly.serialization.workspaces.save(workspace);
+      document.getElementById('output').textContent = '// Blockly JSON:\n\n' + JSON.stringify(json, null, 2);
+    }
+
+    // Export Blockly JSON as file
+    function exportJSON() {
+      try {
+        const json = Blockly.serialization.workspaces.save(workspace);
+
+        // Create full export structure
+        const exportData = {
+          blocks: json,
+          variables: workspace.getAllVariables().map(v => ({
+            id: v.getId(),
+            name: v.name,
+            type: v.type
+          })),
+          metadata: {
+            exportedAt: new Date().toISOString(),
+            blockCount: workspace.getAllBlocks(false).length,
+            variableCount: workspace.getAllVariables().length,
+            description: 'Blockly workspace export'
+          }
+        };
+
+        const jsonString = JSON.stringify(exportData, null, 2);
+        const blob = new Blob([jsonString], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `blockly_workspace_${Date.now()}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+
+        document.getElementById('output').textContent =
+          `✅ Exported successfully!\n\n` +
+          `Filename: ${a.download}\n` +
+          `Blocks: ${exportData.metadata.blockCount}\n` +
+          `Variables: ${exportData.metadata.variableCount}`;
+
+      } catch (error) {
+        document.getElementById('output').textContent = '❌ Error exporting:\n\n' + error.message;
+      }
+    }
+
+    // Convert to NRML
+    function toNRML() {
+      try {
+        const nrml = blocklyToNRML(workspace);
+        document.getElementById('output').textContent = '// NRML JSON:\n\n' + JSON.stringify(nrml, null, 2);
+      } catch(error) {
+        document.getElementById('output').textContent = '❌ Error converting to NRML:\n\n' + error.message;
+      }
+    }
+
+    // Clear workspace
+    function clearWorkspace() {
+      workspace.clear();
+      document.getElementById('output').textContent = '🗑️ Workspace cleared.';
+    }
+
+    // Load JSON file from upload
+    function loadJSONFile(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      document.getElementById('output').textContent = '⏳ Loading file...';
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const jsonText = e.target.result;
+          const data = JSON.parse(jsonText);
+
+          console.log('📄 Loaded JSON structure:', data);
+
+          // Check if it's Blockly JSON format
+          if (data.blocks) {
+            loadBlocklyJSON(data);
+          } else {
+            document.getElementById('output').textContent =
+              '❌ Invalid format: Missing "blocks" property\n\n' +
+              'Expected structure:\n' +
+              '{\n' +
+              '  "blocks": { "languageVersion": 0, "blocks": [...] },\n' +
+              '  "variables": [...]\n' +
+              '}';
+          }
+        } catch (error) {
+          document.getElementById('output').textContent =
+            '❌ Error parsing JSON:\n\n' +
+            error.message + '\n\n' +
+            (error.stack || '');
+          console.error('Parse error:', error);
+        }
+      };
+
+      reader.onerror = function(error) {
+        document.getElementById('output').textContent = '❌ Error reading file:\n\n' + error;
+        console.error('File read error:', error);
+      };
+
+      reader.readAsText(file);
+
+      // Reset file input so the same file can be loaded again
+      event.target.value = '';
+    }
+
+    // Load Blockly JSON into workspace
+    function loadBlocklyJSON(data) {
+      try {
+        console.log('🔄 Loading Blockly JSON...');
+        console.log('Data structure:', {
+          hasBlocks: !!data.blocks,
+          hasVariables: !!data.variables,
+          hasMetadata: !!data.metadata,
+          blocksType: typeof data.blocks,
+          blocksKeys: data.blocks ? Object.keys(data.blocks) : []
+        });
+
+        // Clear workspace first
+        workspace.clear();
+
+        // Prepare the data for Blockly serialization
+        // Blockly expects: { blocks: {...}, variables: [...] }
+        // Variables need to be in format: [{name: "x", id: "id"}]
+        const variables = (data.variables || []).map(v => ({
+          name: v.name,
+          id: v.id,
+          type: v.type || ''
+        }));
+
+        const serializationData = {
+          blocks: data.blocks,
+          variables: variables
+        };
+
+        console.log('Prepared serialization data:', {
+          blocksCount: data.blocks?.blocks?.length || 0,
+          variablesCount: variables.length,
+          variables: variables
+        });
+
+        // Verify all block types exist before loading
+        if (data.blocks && data.blocks.blocks) {
+          const blockTypes = new Set();
+          const collectBlockTypes = (blocks) => {
+            blocks.forEach(block => {
+              blockTypes.add(block.type);
+              if (block.inputs) {
+                Object.values(block.inputs).forEach(input => {
+                  if (input.block) {
+                    collectBlockTypes([input.block]);
+                  }
+                });
+              }
+              if (block.next && block.next.block) {
+                collectBlockTypes([block.next.block]);
+              }
+            });
+          };
+          collectBlockTypes(data.blocks.blocks);
+
+          const missingTypes = Array.from(blockTypes).filter(type => !Blockly.Blocks[type]);
+          if (missingTypes.length > 0) {
+            console.warn('⚠️ Missing block types:', missingTypes);
+            console.warn('These blocks will not render correctly');
+          }
+        }
+
+        // Disable events during load for better performance
+        Blockly.Events.disable();
+
+        try {
+          // Load everything at once using Blockly's serialization API
+          Blockly.serialization.workspaces.load(serializationData, workspace);
+          console.log('✅ Blockly serialization complete');
+        } catch (loadError) {
+          console.error('❌ Blockly.serialization.workspaces.load() failed:', loadError);
+          throw loadError;
+        } finally {
+          Blockly.Events.enable();
+        }
+
+        // Count blocks
+        const blockCount = workspace.getAllBlocks(false).length;
+        const variableCount = workspace.getAllVariables().length;
+
+        console.log(`✅ Loaded ${blockCount} blocks and ${variableCount} variables`);
+
+        document.getElementById('output').textContent =
+          `✅ Loaded successfully!\n\n` +
+          `Blocks: ${blockCount}\n` +
+          `Variables: ${variableCount}\n\n` +
+          `Source: ${data.metadata?.description || 'Unknown'}`;
+
+      } catch (error) {
+        document.getElementById('output').textContent =
+          '❌ Error loading Blockly JSON:\n\n' +
+          error.message + '\n\n' +
+          'Stack: ' + error.stack;
+        console.error('❌ Load error:', error);
+        console.error('Failed data:', data);
+      }
+    }
+
+    // Load kinderbijslag example from fixture file
+    async function loadKinderbijslagExample() {
+      try {
+        const response = await fetch('../tests/fixtures/kinderbijslag_blockly.json');
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        loadBlocklyJSON(data);
+      } catch (error) {
+        document.getElementById('output').textContent =
+          '❌ Could not load kinderbijslag example:\n\n' +
+          error.message + '\n\n' +
+          'Try using the Import JSON button to load the file manually.';
+      }
+    }
+
+    // Auto-save to localStorage
+    workspace.addChangeListener(function(event) {
+      if (event.type !== Blockly.Events.UI) {
+        const json = Blockly.serialization.workspaces.save(workspace);
+        localStorage.setItem('nrmlBlocklyWorkspace', JSON.stringify(json));
+      }
+    });
+
+    // Load from localStorage on startup
+    window.addEventListener('load', function() {
+      const saved = localStorage.getItem('nrmlBlocklyWorkspace');
+      if (saved) {
+        try {
+          const json = JSON.parse(saved);
+          Blockly.serialization.workspaces.load(json, workspace);
+          console.log('Loaded saved workspace');
+        } catch(e) {
+          console.error('Failed to load saved workspace:', e);
+        }
+      }
+    });
+
+    console.log('✅ NRML Blockly Demo loaded!');
+    console.log('Custom blocks registered:', ['aggregation_count', 'aggregation_sum', 'property_access', 'conditional_value']);
+  </script>
+</body>
+</html>

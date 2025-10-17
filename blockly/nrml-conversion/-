@@ -1,0 +1,100 @@
+{
+  "$schema": "https://example.com/nrml-facts-schema.json",
+  "version": "1.0",
+  "language": "nl",
+  "facts": {
+    "1452415a-c339-44c9-a7f5-cebaa75608e0": {
+      "name": {
+        "nl": "Constants"
+      },
+      "items": {
+        "11dd3488-ea79-4176-8ea8-a15498901d1a": {
+          "name": {
+            "nl": ""
+          },
+          "reference-key": "km_vergoeding",
+          "versions": [
+            {
+              "validFrom": "2025-10-16",
+              "type": "numeric",
+              "precision": 2
+            },
+            {
+              "validFrom": "2025-10-16",
+              "target": [
+                {
+                  "$ref": "#/facts/1452415a-c339-44c9-a7f5-cebaa75608e0/items/11dd3488-ea79-4176-8ea8-a15498901d1a"
+                }
+              ],
+              "value": {
+                "value": 0.21
+              }
+            }
+          ]
+        },
+        "6f229081-4522-4743-a49f-534a433d2a62": {
+          "name": {
+            "nl": ""
+          },
+          "reference-key": "afstand",
+          "versions": [
+            {
+              "validFrom": "2025-10-16",
+              "type": "numeric"
+            },
+            {
+              "validFrom": "2025-10-16",
+              "target": [
+                {
+                  "$ref": "#/facts/1452415a-c339-44c9-a7f5-cebaa75608e0/items/6f229081-4522-4743-a49f-534a433d2a62"
+                }
+              ],
+              "value": {
+                "value": 12
+              }
+            }
+          ]
+        }
+      }
+    },
+    "6980a403-ac1d-4dab-9388-facd7a82c76a": {
+      "name": {
+        "nl": "Calculation"
+      },
+      "items": {
+        "9e73cf38-c59d-4bfd-a3bd-9e079576cb37": {
+          "name": {
+            "nl": ""
+          },
+          "reference-key": "totaal_vergoeding",
+          "versions": [
+            {
+              "validFrom": "2025-10-16",
+              "target": [
+                {
+                  "$ref": "#/facts/6980a403-ac1d-4dab-9388-facd7a82c76a/items/9e73cf38-c59d-4bfd-a3bd-9e079576cb37"
+                }
+              ],
+              "expression": {
+                "type": "arithmetic",
+                "operator": "multiply",
+                "arguments": [
+                  [
+                    {
+                      "$ref": "#/facts/1452415a-c339-44c9-a7f5-cebaa75608e0/items/6f229081-4522-4743-a49f-534a433d2a62"
+                    }
+                  ],
+                  [
+                    {
+                      "$ref": "#/facts/1452415a-c339-44c9-a7f5-cebaa75608e0/items/11dd3488-ea79-4176-8ea8-a15498901d1a"
+                    }
+                  ]
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

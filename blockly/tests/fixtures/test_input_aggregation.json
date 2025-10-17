@@ -1,0 +1,199 @@
+{
+  "blocks": {
+    "languageVersion": 0,
+    "blocks": [
+      {
+        "type": "variables_set",
+        "id": "block-1",
+        "fields": {
+          "VAR": {
+            "id": "var-max-leeftijd"
+          }
+        },
+        "inputs": {
+          "VALUE": {
+            "block": {
+              "type": "math_number",
+              "id": "block-2",
+              "fields": {
+                "NUM": 18
+              }
+            }
+          }
+        },
+        "next": {
+          "block": {
+            "type": "variables_set",
+            "id": "block-3",
+            "fields": {
+              "VAR": {
+                "id": "var-young-children-count"
+              }
+            },
+            "inputs": {
+              "VALUE": {
+                "block": {
+                  "type": "math_number",
+                  "id": "block-4",
+                  "fields": {
+                    "NUM": 0
+                  }
+                }
+              }
+            },
+            "next": {
+              "block": {
+                "type": "controls_forEach",
+                "id": "block-5",
+                "fields": {
+                  "VAR": {
+                    "id": "var-kind"
+                  }
+                },
+                "inputs": {
+                  "LIST": {
+                    "block": {
+                      "type": "variables_get",
+                      "id": "block-6",
+                      "fields": {
+                        "VAR": {
+                          "id": "var-kinderen"
+                        }
+                      }
+                    }
+                  },
+                  "DO": {
+                    "block": {
+                      "type": "controls_if",
+                      "id": "block-7",
+                      "inputs": {
+                        "IF0": {
+                          "block": {
+                            "type": "logic_compare",
+                            "id": "block-8",
+                            "fields": {
+                              "OP": "LTE"
+                            },
+                            "inputs": {
+                              "A": {
+                                "block": {
+                                  "type": "variables_get",
+                                  "id": "block-9",
+                                  "fields": {
+                                    "VAR": {
+                                      "id": "var-kind"
+                                    },
+                                    "PROPERTY": "age"
+                                  },
+                                  "extraState": {
+                                    "propertyAccess": "age"
+                                  }
+                                }
+                              },
+                              "B": {
+                                "block": {
+                                  "type": "variables_get",
+                                  "id": "block-10",
+                                  "fields": {
+                                    "VAR": {
+                                      "id": "var-max-leeftijd"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "DO0": {
+                          "block": {
+                            "type": "variables_set",
+                            "id": "block-11",
+                            "fields": {
+                              "VAR": {
+                                "id": "var-young-children-count"
+                              }
+                            },
+                            "inputs": {
+                              "VALUE": {
+                                "block": {
+                                  "type": "math_arithmetic",
+                                  "id": "block-12",
+                                  "fields": {
+                                    "OP": "ADD"
+                                  },
+                                  "inputs": {
+                                    "A": {
+                                      "block": {
+                                        "type": "variables_get",
+                                        "id": "block-13",
+                                        "fields": {
+                                          "VAR": {
+                                            "id": "var-young-children-count"
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "B": {
+                                      "block": {
+                                        "type": "math_number",
+                                        "id": "block-14",
+                                        "fields": {
+                                          "NUM": 1
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "variables": [
+    {
+      "id": "var-max-leeftijd",
+      "name": "max_leeftijd",
+      "type": "include:kinderbijslag_maximum_leeftijd.maximum_leeftijd"
+    },
+    {
+      "id": "var-young-children-count",
+      "name": "young_children_count",
+      "type": "count",
+      "collection": "kinderen",
+      "filter": {
+        "property": "age",
+        "operator": "<=",
+        "value": "max_leeftijd"
+      }
+    },
+    {
+      "id": "var-kind",
+      "name": "kind",
+      "type": "iterator",
+      "itemType": "child"
+    },
+    {
+      "id": "var-kinderen",
+      "name": "kinderen",
+      "type": "input:list",
+      "itemType": "child",
+      "properties": ["age"]
+    },
+    {
+      "id": "var-aanvrager",
+      "name": "aanvrager",
+      "type": "input:object",
+      "itemType": "applicant"
+    }
+  ]
+}
